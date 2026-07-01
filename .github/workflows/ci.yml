@@ -1,0 +1,40 @@
+name: CI
+
+# Mechanical enforcement of the CLAUDE.md rules: lint + the pipeline/gap-index
+# logic tests must pass on every PR and every push to main. Branch protection on
+# `main` (require this check + a review, block direct pushes) is configured
+# separately in GitHub → Settings → Branches.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    name: lint + tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff
+
+      - name: Lint (ruff)
+        run: ruff check src/ tests/
+
+      - name: Pipeline + gap-index tests (synthetic fixtures)
+        # These are module-run assertion tests (not yet pytest-style); they build
+        # tiny synthetic sources, run the full pipeline, and assert 33-borough shape,
+        # the census/IoD/inactivity readers, and the D-012 held-out proof.
+        run: |
+          python -m tests.test_run
+          python -m tests.test_analysis
