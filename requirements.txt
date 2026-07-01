@@ -4,3 +4,8 @@ scikit-learn
 matplotlib
 jupyter
 requests
+# geospatial — point-in-polygon borough assignment (install via conda-forge on macOS)
+geopandas
+shapely
+# excel — IoD2025 File 10 is an .xlsx workbook (build_iod reads it)
+openpyxl
