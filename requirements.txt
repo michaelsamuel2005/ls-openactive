@@ -4,6 +4,8 @@ scikit-learn
 matplotlib
 jupyter
 requests
+# stats — partial correlation, OLS inference, Moran's I (src/incremental_validity.py)
+scipy
 # geospatial — point-in-polygon borough assignment (install via conda-forge on macOS)
 geopandas
 shapely

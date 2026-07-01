@@ -1,7 +1,9 @@
 # Spec — Incremental-validity check for the activity-gap index
 
-**Status:** specified, not yet implemented. **Owner:** WS2 (Michael), with the
-evaluation/validation lead (Fahmi). **Relates to:** D-012 (held-out validation).
+**Status:** **IMPLEMENTED 2026-07-01** — `src/incremental_validity.py` (OLS/partial-
+correlation/Moran's I verified against scikit-learn + statsmodels in
+`tests/test_incremental_validity.py`); result recorded as **D-013**. **Owner:** WS2
+(Michael), with the evaluation/validation lead (Fahmi). **Relates to:** D-012.
 
 ## The question this answers
 The held-out validation gives **Spearman(gap, inactivity) = +0.459** (non-City,

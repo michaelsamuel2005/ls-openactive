@@ -71,3 +71,28 @@ per the unit's AI-use rules.
   (non-City, n=32), proven non-circular. Refines D-011's validation clause and
   updates Proposal §§6–8 (v4). Next step: the incremental-validity check
   (`docs/incremental-validity-spec.md`).
+
+## D-013 · Incremental validity — the gap is "more than deprivation relabelled" (rank-based) *(finding, 2026-07-01)*
+- **Question:** does the *provision* layer add predictive signal for held-out adult
+  inactivity **beyond need alone**? (The sharpest examiner challenge to the gap index.)
+- **Method:** on the 32 non-City boroughs — partial Spearman (provision & gap vs
+  inactivity, controlling need); nested OLS (need vs need+provision); Moran's I on the
+  residuals. Stats implemented in `src/incremental_validity.py`, verified against
+  scikit-learn + statsmodels. Spec: `docs/incremental-validity-spec.md`.
+- **Result:**
+  - **Rank-based (primary, robust at n=32):** partial ρ(provision, inactivity | need) =
+    **−0.498 (p=0.004)**; partial ρ(gap, inactivity | need) = **+0.363 (p=0.045)**;
+    provision ⟂ need (ρ=−0.05); gap·ι (+0.46) > need·ι (+0.30); R²(gap)=0.24 > R²(need)=0.18.
+  - **Parametric (linear OLS):** ΔR² = **+0.070**, nested-F **p=0.110** (marginal); provision
+    coefficient 95% CI includes 0. The Spearman≫Pearson gap for provision (−0.49 vs −0.31)
+    indicates a **monotonic-but-nonlinear** provision–inactivity relationship that linear
+    OLS under-captures.
+  - **Spatial:** Moran's I on residuals = +0.08 (z=+0.94, p=0.35) → little residual spatial
+    autocorrelation; the finding is not a spatial artefact.
+- **Verdict (honest, calibrated):** provision carries **independent, significant signal**
+  by the rank-based test — the gap is more than deprivation relabelled — **but** the
+  linear-parametric test is only marginal at n=32. Report both; lead with effect sizes and
+  the nonlinearity, not a single p-value. **No causal / individual-level claim** (borough-
+  level, observational).
+- **Follow-ups (not blocking):** a nonlinearity-aware model (e.g. rank/spline on provision);
+  a spatial-error model if a larger indicator set inflates residual autocorrelation.
