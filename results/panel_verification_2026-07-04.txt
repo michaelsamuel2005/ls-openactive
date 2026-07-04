@@ -1,0 +1,59 @@
+PANEL INDEPENDENT VERIFICATION — sandbox execution audit
+Date: 2026-07-04 | Method: fresh implementations (no repo imports), run in an
+isolated Linux sandbox (pandas 2.3.3, scipy 1.15.3, shapely; no geopandas)
+against the mounted repository data. Third verification method after (1) the
+repo pipeline and (2) line-anchored grep counts.
+
+A. DATASET PROVENANCE — all confirmed
+- session_series_raw_2026-06-30.json: 1,585 items, all opensessions.io URLs,
+  modified range ends 2026-06-30. IS Open Sessions, correct vintage.
+- IoD File 10 v2: Notes+IMD+9 domain sheets, LAD-2024-coded headers (2025 vintage).
+- inactivity_la.csv: Fingertips indicator 93015, "Percentage of physically
+  inactive adults", periods to 2024/25.
+- lad_2021_bgc.geojson: LAD21CD, 374 UK LADs, exactly 33 E09 (E09000001-33), EPSG:4326.
+- Census: all six ts tables present.
+
+B. OPEN SESSIONS — all exact
+London (n=494): free 217 (43.93%), paid 277, missing 0; paid median GBP 10.00,
+mean 10.55; venues 264 raw = 264 normalised, 252 coord-distinct; access-info
+112 (22.7%); 0 duplicate ids; 100% coords in London bbox; no negative prices
+(max GBP 240 — course-style outlier, medians unaffected).
+National (n=1,585): free 659 (41.6%); paid median GBP 8.00 (n=920); venues 989.
+NEW: JSON<->CSV consistency — 494/494 London ids present in raw feed; price
+agreement 100.00%. The London CSV is a faithful subset of the raw harvest.
+
+C. EVENT HARVEST (Wesley output.csv) — all exact
+UK 464,392; London-32 136,520; City 0; free 8,646 / 1,395; venues 527 UK /
+128 London; price-known 47.2% / 44.5%; free-share price-known 3.94% / 2.30%;
+paid min-price median 6.80 / 6.70; duration mean 56.6 median 60.0;
+borough mean 4,266.25; top-5 Hackney/Camden/Newham/Enfield/Hillingdon.
+NEW: 107 duplicate ids (214 rows, 78 in London) are CROSS-FEED ID COLLISIONS
+(0/107 share venue+borough) — id alone is not a unique key; naive dedup would
+wrongly delete real events; all headline figures shift <0.06% either way.
+Harvest fix-list: composite (feed,id) key. Event dates span 2023-02-11 to
+2027-03-25 — time window must be stated in any intensity claim.
+
+D. RAW -> FEATURES — all exact (max |diff|)
+IoD avg score: 0.0 (range 9.532-31.795, max Hackney). Census econ-inactive:
+6e-17; population: 0. Inactivity: 8e-17 (all 2024/25; range 13.9-30.8%, max
+Hillingdon). Sessions per borough via OWN shapely point-in-polygon: 0 unmatched,
+sum 494, ZERO diff vs report and features.
+
+E. ANALYTICAL CORE — all exact
+need/provision/gap z reconstruction from documented formulas: max diff 4.4e-16.
+Sensitivity 0.976 / 0.952. rho(gap,inact)=0.4586 p=0.0083; Fisher CI
+[0.131, 0.696]; partials -0.4979 (p=0.0044) / +0.3631 (p=0.0447); nested OLS
+R2 0.1806->0.2510, dR2 0.0704, F 2.7247, p 0.1096. Moran's I with an
+INDEPENDENTLY BUILT queen adjacency (shapely intersects): I=0.0807, z=0.9366,
+p=0.3490, mean neighbours 3.9 — identical. Quadrants 9/9/7/7 + City NA.
+NEW: bootstrap CI for rho (5,000 resamples, seed 42): [0.097, 0.705], median
+0.460 — corroborates the Fisher CI; slightly wider lower bound (expected at
+n=32); both exclude zero. NOTE: this bootstrap exists only as audit code —
+commit a script before citing it in any deliverable.
+
+F. MANIFEST SWEEP: 26/26 rows in results/metrics.csv verified, 0 failures.
+
+VERDICT: no data errors, no computational errors, no provenance mismatches
+found anywhere. Every published number reproduces exactly under independent
+reimplementation. Open items are process ones (see docs/full_audit_2026-07-03.md
+and docs/unit-rules.md), not correctness ones.
