@@ -1,7 +1,10 @@
 # Group report skeleton — Closing the Activity Gap
 **Purpose:** the load-bearing scaffold for the 60% group written report. The logical thread is designed in from the start so results flow into a structure rather than being assembled in an August panic (the exemplar's merit-capping failure was precisely a missing thread). Every section states its job in the thread, what feeds it, its owner, and its status.
-**Rules of use:** no number enters this report unless it traces to `results/metrics.csv` or a committed results file · British English · Harvard referencing from `docs/references.bib` only · terminology per the glossary (Appendix A of the hand-off / §Glossary here) · team always alphabetical: Clarence, Fahmi, Michael, Wesley.
-**[CONFIRM before drafting]:** word/page limit and required format from the 2025/26 unit spec; hand-in date (working: 4 September 2026).
+**Rules of use:** no number enters this report unless it traces to `results/metrics.csv` or a committed results file · British English · referencing from `docs/references.bib` only, style **[CONFIRM: Harvard per decision log vs IEEE per handbook example/LaTeX template — must be flawless either way]** · terminology per the glossary · team always alphabetical: Clarence, Fahmi, Michael, Wesley · every chapter opens with a 2–3 line intro and closes with a summary (handbook convention).
+**CONFIRMED by the handbook (see `docs/unit-rules.md` — binding):** submission **1pm Friday 4 September 2026 via Blackboard** · report **max 30 pages** (first chapter → last chapter; appendices/references excluded) · **5 marks deducted per page over** · **LaTeX template provided, LaTeX recommended — obtain before drafting** · presentation 15 min live on Teams, late-Aug window, all members contribute · **Dalila reviews exactly ONE full draft, needs ≥14 days and a pre-agreed date → target draft to her ~10–14 August**.
+
+**Page budget (30 total — enforced, adjust only by trading between sections):**
+Intro 2 · Literature 4 · Data & data quality 4.5 · Methodology 4 · Results (equity) 6 · Prototype 3.5 · Dashboard 2.5 · Discussion 2 · Limitations 1.5 · Conclusions 1.5 ≈ 31.5 → trim ~1.5 by moving detail tables to appendices (excluded from the count — the engineering/reproducibility material lives there at zero page cost).
 
 ---
 
@@ -103,8 +106,16 @@ Repo structure · branch→PR→review→squash workflow (with evidence: PR hist
 4. §6/§7 prose follows the WS3/WS4 builds — the builds are the critical path, start immediately.
 5. §1, §8, §10, §0 last, once the thread's endpoints are fixed.
 
+## HARD DATES (handbook-derived — the spine of the calendar)
+- **~10–14 Aug:** full draft to Dalila (agree the exact date with her NOW; ≥14 days before feedback is needed; one draft only).
+- **Week of 24 Aug onward:** final-presentation window (15 min, Teams) — book the slot early; prep overlaps the polish phase.
+- **1pm Fri 4 Sep:** portfolio submission via Blackboard (report + reflective accounts).
+- Working backwards: WS3/WS4 feature-complete by ~early August, or the draft goes to Dalila with placeholders in its LO4 sections — plan to avoid that.
+
 ## STANDING RISKS FOR THE REPORT
-- LO4 unbuilt (highest marks-risk — mitigate by starting WS3 spec this week).
-- Word-limit unknown ([CONFIRM]) — sections above sized proportionally, not absolutely.
-- Supervisor sign-off still pending on D-009/D-010/D-011 + D-014 reframe — take this skeleton and the audit to Dalila.
+- LO4 unbuilt (highest marks-risk — mitigate by starting WS3 spec this week; team availability reduced by reassessments is a compounding factor, raise with Dalila).
+- **30-page ceiling with a 5-marks-per-page penalty** — the budget above is enforced at every draft build; appendices are the pressure valve.
+- Referencing style unresolved (Harvard vs IEEE/template) — zero-error requirement either way.
+- Supervisor sign-off still pending on D-009/D-010/D-011 + D-014 reframe — take this skeleton, the audit, and `docs/unit-rules.md` queries to Dalila.
 - Four-eyes pass (Fahmi) required before any §5 number is typeset.
+- **Reflective-account inputs are accruing NOW:** every member needs a weekly log and visible repo activity (handbook mandates a GitHub-activity visualisation per member — a member without commits has nothing to show).
