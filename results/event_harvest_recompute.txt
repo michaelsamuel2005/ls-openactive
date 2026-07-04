@@ -1,0 +1,42 @@
+verify_event_harvest | 2026-07-03T18:13:22+00:00 | commit abdb44f | input output.csv | harvest date: TBC (ask Wesley)
+rows: 464392  columns: ['id', 'name', 'startDate', 'endDate', 'duration', 'remainingCapacity', 'maximumCapacity', 'amenities', 'adultPrice', 'adultAgeRestriction', 'juniorPrice', 'juniorAgeRestriction', 'venue', 'latitude', 'longitude', 'borough']
+
+===== PHASE 1 — reproduce Wesley's printed numbers (his definitions)
+  OK   UK events: got 464392  expected 464392
+  OK   London-32 events: got 136520  expected 136520
+  OK   UK free (his defn): got 8646  expected 8646
+  OK   London-32 free: got 1395  expected 1395
+  OK   UK venues: got 527  expected 527
+  OK   London-32 venues: got 128  expected 128
+  OK   UK unique names: got 17110  expected 17110
+  OK   UK unique exact coord positions: got 523  expected 523
+  OK   borough mean: got 4266.25  expected 4266.25
+  OK   borough std: got 4603.650430943098  expected 4603.650431
+  OK   borough q25: got 1165.0  expected 1165.0
+  OK   borough median: got 3211.5  expected 3211.5
+  OK   borough q75: got 5594.25  expected 5594.25
+  OK   borough max: got 20644  expected 20644
+  OK   top5 boroughs: got ['Hackney', 'Camden', 'Newham', 'Enfield', 'Hillingdon']  expected ['Hackney', 'Camden', 'Newham', 'Enfield', 'Hillingdon']
+  OK   locations/borough mean: got 4.266666666666667  expected 4.266667
+  OK   boroughs with coords (n): got 30  expected 30
+
+PHASE 1 VERDICT: FILE MATCHES the sent notebook run — Wesley's arithmetic verified.
+
+===== PHASE 2 — corrected statistics (project definitions)
+City of London events (excluded by Wesley's list): 0
+London-33 events (City included): 136520
+
+[UK] n=464392  price-known=219361 (47.2%)  free=8646
+[UK] free share: all-rows 1.86%  |  price-known 3.94%
+[UK] paid min-price: median £6.80  mean £7.31  (n=210715)
+[UK] paid ADULT price: median £6.90  mean £7.61  (n=205203)
+
+[London-33] n=136520  price-known=60742 (44.5%)  free=1395
+[London-33] free share: all-rows 1.02%  |  price-known 2.30%
+[London-33] paid min-price: median £6.70  mean £7.36  (n=59347)
+[London-33] paid ADULT price: median £6.70  mean £7.60  (n=56941)
+
+duration (minutes): mean 56.6  median 60.0  (n=464392)
+London-33 events/borough: mean 4137.0  median 3177.0  zero-event boroughs: ['Bexley', 'Haringey', 'City of London']
+
+Wrote 9 event_harvest rows -> results/metrics.csv

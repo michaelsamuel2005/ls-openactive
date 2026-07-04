@@ -1,0 +1,61 @@
+verify_open_sessions | 2026-07-03T15:53:38+00:00 | commit abdb44f
+
+----- LONDON — london_sessions_2026-06-30.csv (FROZEN SNAPSHOT) -----
+n series                          : 494
+free (price==0)                   : 217
+paid (price>0)                    : 277
+price missing                     : 0
+FREE SHARE (denom = all rows)     : 0.4393  = 43.9%
+free share (denom = price known)  : 0.4393  = 43.9%
+PAID price median (price>0 only)  : £10.00   (n=277)
+PAID price mean   (price>0 only)  : £10.55
+  [contaminated, zeros included]  : median £4.00 / mean £5.92   <- describe()-style; NOT 'typical paid price'
+venues: raw location_name nunique : 264
+venues: normalised nunique        : 264
+venues: distinct coord pairs (5dp): 252
+stored is_free vs recomputed      : 0 mismatches
+completeness pct_price_present   : 100.0%
+completeness pct_coords_present  : 100.0%
+completeness pct_access_info_true: 22.7%
+completeness pct_capacity_present: 1.4%
+
+borough-sum identity: sum(sessions_per_borough)=494 vs n=494  -> OK
+
+----- NATIONAL — session_series_raw_2026-06-30.json (all Open Sessions publishers) -----
+n series                          : 1585
+free (price==0)                   : 659
+paid (price>0)                    : 920
+price missing                     : 6
+FREE SHARE (denom = all rows)     : 0.4158  = 41.6%
+free share (denom = price known)  : 0.4174  = 41.7%
+PAID price median (price>0 only)  : £8.00   (n=920)
+PAID price mean   (price>0 only)  : £9.47
+  [contaminated, zeros included]  : median £4.50 / mean £5.52   <- describe()-style; NOT 'typical paid price'
+venues: raw location_name nunique : 989
+venues: normalised nunique        : 989
+venues: distinct coord pairs (5dp): 954
+completeness pct_price_present   : 99.6%
+completeness pct_coords_present  : 99.9%
+
+HYPOTHESIS CHECK: was '41.6% free' the NATIONAL rate?  national pct_free_all = 41.6%  (London = 43.9%)
+
+----- DRIFT CHECK — london_sessions_2026-07-03.csv (not authoritative) -----
+n series                          : 497
+free (price==0)                   : 217
+paid (price>0)                    : 280
+price missing                     : 0
+FREE SHARE (denom = all rows)     : 0.4366  = 43.7%
+free share (denom = price known)  : 0.4366  = 43.7%
+PAID price median (price>0 only)  : £10.00   (n=280)
+PAID price mean   (price>0 only)  : £10.54
+  [contaminated, zeros included]  : median £4.00 / mean £5.94   <- describe()-style; NOT 'typical paid price'
+venues: raw location_name nunique : 265
+venues: normalised nunique        : 265
+venues: distinct coord pairs (5dp): 253
+stored is_free vs recomputed      : 0 mismatches
+completeness pct_price_present   : 100.0%
+completeness pct_coords_present  : 100.0%
+completeness pct_access_info_true: 22.7%
+completeness pct_capacity_present: 1.4%
+
+Wrote 17 open_sessions rows -> results/metrics.csv
