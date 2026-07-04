@@ -96,3 +96,58 @@ per the unit's AI-use rules.
   level, observational).
 - **Follow-ups (not blocking):** a nonlinearity-aware model (e.g. rank/spline on provision);
   a spatial-error model if a larger indicator set inflates residual autocorrelation.
+- **Precision note (2026-07-03):** code-traceable inference added
+  (`spearman_inference()`, audit M1): gap–inactivity ρ=0.459, **95% CI [0.131, 0.696]**,
+  t=2.83, p=0.0083, n=32. Orthogonality: the "ρ=−0.05" above is the **Spearman** (−0.047);
+  the **Pearson is −0.111** — an informal "Pearson −0.05" that circulated in the hand-off
+  was incorrect and is superseded.
+
+## D-014 · Two-lens provision — REFRAMED (2026-07-03) *(supersedes the gated proposal)*
+- **Original proposal:** measure provision as availability (`sessions_per_10k`, primary)
+  AND intensity (`events_per_10k`), gated on Wesley reconciling event-harvest
+  inconsistencies.
+- **What the audit found** (`docs/event_harvest_audit.md`): the event harvest covers only
+  the 37 ScheduledSession feeds — **Open Sessions publishes none**, so the event data is a
+  **different provider universe** (commercial/institutional operators), not an intensity
+  view of Open Sessions. All §11 contradictions resolved as scope/definition artefacts
+  (527 venues = UK; 128 = London; 1.02% free = all-rows denominator over a 55%-price-unknown
+  population; 2.30% on price-known rows).
+- **Decision:** `events_per_10k` from that harvest is **not** an Open Sessions intensity
+  lens and is never presented as one. Options going forward: (a) treat the event harvest as
+  a third, commercial-universe provision layer under D-011 separation discipline (after the
+  §3 defect fixes and a controlled re-harvest); (b) harvest Open Sessions' own events feed
+  (`opensessions.io/api/rpde/events`) for a true same-universe intensity lens.
+- **Status:** reframed; supervisor sign-off pending (with D-009/D-010/D-011).
+
+## D-015 · Phase-gate: WS2 frozen at the validated milestone (2026-07-03)
+- **Decision:** the analytical core is frozen as validated (gap index + held-out
+  validation + incremental validity). Permitted bounded extensions only: bootstrap CIs,
+  a second *distinct* held-out outcome, Active Places corroboration when acquired,
+  conditional E2SFCA. Effort pivots to the deployment layer (LO4) and the report (60%).
+- **Rationale:** further WS2 deepening = low marginal marks + scope-creep risk (the
+  exemplar's failure mode was polishing a strong component while the heavy one lagged).
+- **Status:** PROPOSED (panel recommendation; operative in practice) — confirm with team
+  and supervisor.
+
+## D-016 · Metrics-manifest verification protocol (2026-07-03)
+- **Decision:** every headline number lives as a row in **`results/metrics.csv`**
+  (metric_id, value, **population**, unit, vintage, source, definition, script,
+  results file, commit, timestamp, corroboration, verified-by). Scripts own metric-id
+  prefixes and replace only their own rows. **No number enters a deliverable unless it
+  traces to a manifest row.** Non-trivial statistics get dual-method verification.
+- **Rationale:** the 41.6%/£4.80 episode — numbers circulating without population labels
+  or provenance — was the project's demonstrated failure mode.
+- **Status:** ADOPTED and implemented (`src/verify_open_sessions.py`,
+  `src/verify_event_harvest.py`; 26 manifest rows, all dual-verified 2026-07-03).
+
+## Correction record (2026-07-03) — superseded figures *(full detail: `docs/open_sessions_data_note.md`, `docs/event_harvest_audit.md`)*
+| Old figure | Correct, labelled figure |
+|---|---|
+| "41.6% free" (implied London) | London **43.9%** (217/494); national 41.6% (659/1,585) |
+| "£4.80 typical paid price" | London paid median **£10.00** (n=277); national £8.00 |
+| "~254–264 venues" | **264** distinct London venue names (252 mapped positions) |
+| "~1,605 national series" | **1,585** (2026-06-30 snapshot) |
+| "527 venues" in London context | 527 = **UK**; London = **128** (event harvest) |
+| "1.02% events free" | **2.30%** of price-known London events (44.5% price-known) |
+| "Pearson −0.05" (orthogonality) | **−0.111** (Spearman −0.047) |
+| Field-completeness block as London | national-scoped; London: price 100%, coords 100%, access-info 22.7%, capacity 1.4% |
