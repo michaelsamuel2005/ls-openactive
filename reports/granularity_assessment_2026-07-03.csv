@@ -1,0 +1,4 @@
+harvest_date,level,n_areas,n_populated,n_empty,pct_zero,median,mean,max,sessions_placed,top1_share_%,top5_share_%,gini
+2026-07-03,Borough (LAD),33,32,1,3.0,7.0,15.06,82,497,16.5,55.7,0.583
+2026-07-03,MSOA,1002,187,815,81.3,0.0,0.5,47,497,9.5,27.0,0.91
+2026-07-03,LSOA,4994,222,4772,95.6,0.0,0.1,47,497,9.5,25.4,0.977
