@@ -1,0 +1,28 @@
+metric,value,detail
+n_boroughs,32,non-City boroughs
+spearman_need_vs_inact,0.301,correlation
+spearman_provision_vs_inact,-0.4883,correlation
+spearman_gap_vs_inact,0.4586,correlation
+spearman_provision_vs_need,-0.0466,correlation
+pearson_need_vs_inact,0.425,correlation
+pearson_gap_vs_inact,0.4936,correlation
+pearson_provision_vs_inact,-0.311,correlation
+pearson_provision_vs_need,-0.1114,correlation
+partial_provision_given_need_r,-0.4979,partial Spearman (p=0.0044)
+partial_gap_given_need_r,0.3631,partial Spearman (p=0.0447)
+spearman_gap_vs_inact_ci95,"[0.131, 0.696]","Fisher-z 95% CI; t=2.83, p=0.0083, n=32 (audit M1)"
+spearman_provision_vs_inact_ci95,"[-0.715, -0.168]","Fisher-z 95% CI; t=-3.06, p=0.0046, n=32 (audit M1)"
+R2_M1_need,0.1806,inactivity ~ need
+R2_M2_need_provision,0.251,inactivity ~ need + provision
+delta_R2,0.0704,incremental R² from provision
+delta_adj_R2,0.046,incremental adjusted R²
+nested_F,2.7247,"df=(1,29)"
+nested_F_p,0.1096,provision improves the model?
+provision_beta,-0.0127,M2 standardized coef
+provision_beta_ci,"[-0.028, 0.003]",95% CI
+provision_beta_p,0.1096,expect negative
+R2_single_need,0.1806,inactivity ~ need only
+R2_single_gap,0.2437,inactivity ~ gap only
+morans_I_residuals,0.0807,"E[I]=-0.0323, mean nbrs=3.9"
+morans_I_z,0.9366,p=0.3490 (normal approx.)
+verdict,True,"Provision ADDS independent signal beyond need — the gap is more than deprivation relabelled (rank-based: partial ρ(provision, inactivity | need) = -0.498 (p=0.004); gap·ι +0.46 > need·ι +0.30). Parametric: ΔR²=+0.070, nested-F p=0.110 — weaker (marginal at n=32)."
