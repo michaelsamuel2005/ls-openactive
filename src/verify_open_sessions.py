@@ -32,7 +32,6 @@ from __future__ import annotations
 
 import csv
 import json
-import statistics
 import subprocess
 import sys
 from datetime import datetime, timezone
