@@ -119,13 +119,22 @@ def build_provision(df: pd.DataFrame, scale_mask=None) -> pd.Series:
 
 # ----------------------------------------------------------------- typology
 def quadrant(need_z: pd.Series, prov_z: pd.Series) -> pd.Series:
-    nh = need_z > need_z.median()
-    ph = prov_z > prov_z.median()
-    out = pd.Series(index=need_z.index, dtype="object")
-    out[nh & ~ph] = "priority"               # high need, low provision
-    out[nh & ph] = "high_need_served"
-    out[~nh & ~ph] = "low_low"
-    out[~nh & ph] = "well_served"
+    """Need×provision typology.
+
+    Boroughs with an undefined score (e.g. City of London's NaN provision) get
+    <NA>, never a category — NaN comparisons previously collapsed to False and
+    mislabelled City as 'low_low' (audit Mo1). Both medians are computed on the
+    fully-scored rows only, so the thresholds share one population basis with
+    each other (and, in practice, with the non-City z-parameters) (audit Mo4).
+    """
+    valid = need_z.notna() & prov_z.notna()
+    nh = need_z > need_z[valid].median()
+    ph = prov_z > prov_z[valid].median()
+    out = pd.Series(pd.NA, index=need_z.index, dtype="object")
+    out[valid & nh & ~ph] = "priority"       # high need, low provision
+    out[valid & nh & ph] = "high_need_served"
+    out[valid & ~nh & ~ph] = "low_low"
+    out[valid & ~nh & ph] = "well_served"
     return out
 
 
@@ -145,8 +154,12 @@ def run(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     out["provision_score_z"] = prov
     out["gap_index_z"] = gap
     out["gap_index_rank"] = gap.rank(ascending=False, method="min").astype("Int64")
-    # rank/percentile-based version (robustness): need percentile minus provision percentile
-    out["gap_pct_based"] = need.rank(pct=True) - prov.rank(pct=True)
+    # rank/percentile-based version (robustness): need percentile minus provision
+    # percentile, both over the SAME fully-scored rows — previously need ranked
+    # all 33 while provision ranked 32, mixing denominators (audit Mo3)
+    scored = need.notna() & prov.notna()
+    out["gap_pct_based"] = (need.where(scored).rank(pct=True)
+                            - prov.where(scored).rank(pct=True))
     out["gap_quadrant"] = quadrant(need, prov)
     out["is_city_of_london"] = df["is_city_of_london"].values
 

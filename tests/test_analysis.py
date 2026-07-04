@@ -83,6 +83,19 @@ def main():
     assert ((base_gap - pert_gap).abs() < 1e-9).all(), \
         "reversing inactivity changed the gap index — it is leaking into need (D-012 violated)"
 
+    # ---- audit Mo1: undefined provision must yield <NA>, never a quadrant ----
+    # (On real data City of London has NaN provision; NaN comparisons previously
+    # collapsed to False and mislabelled it 'low_low'.)
+    nanprov = make_features()
+    nanprov.loc[nanprov["lad_code"] == "E09000001", "sessions_per_10k"] = float("nan")
+    out_n, _ = run(nanprov)
+    bn = out_n.set_index("lad_code")
+    assert pd.isna(bn.loc["E09000001", "gap_quadrant"]), \
+        f"NaN provision must give NA quadrant, got {bn.loc['E09000001', 'gap_quadrant']!r}"
+    assert pd.isna(bn.loc["E09000001", "gap_pct_based"]), "NaN provision must give NA pct-gap"
+    # fully-scored boroughs keep categorical quadrants
+    assert bn.loc["E09000008", "gap_quadrant"] == "priority"
+
     print("\nALL ASSERTIONS PASSED ✓")
 
 

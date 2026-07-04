@@ -22,6 +22,7 @@ from src.incremental_validity import (
     ols,
     partial_spearman,
     run,
+    spearman_inference,
 )
 
 
@@ -132,6 +133,26 @@ def test_end_to_end_verdict():
     assert res_n["verdict"]["provision_adds_signal_rankbased"] is False, res_n["verdict"]
 
 
+def test_spearman_inference_matches_scipy():
+    """audit M1: the CI/t/p for the headline validation ρ must be code-traceable
+    and agree with an independent implementation."""
+    from scipy import stats as st
+    need, prov, third = _orthogonal_design(32)          # n matches the real analysis
+    y = 1.0 * need - 1.5 * prov + 0.3 * third
+
+    d = spearman_inference(prov, y)
+    ref = st.spearmanr(prov, y)
+    assert abs(d["r"] - float(ref.statistic)) < 1e-12, (d["r"], ref.statistic)
+    assert abs(d["p"] - float(ref.pvalue)) < 1e-9, (d["p"], ref.pvalue)   # same t-approx
+    assert d["n"] == 32
+    # CI sanity: contains the point estimate; respects the Fisher-z identity
+    assert d["ci_low"] < d["r"] < d["ci_high"]
+    z, se = np.arctanh(d["r"]), 1 / np.sqrt(32 - 3)
+    zc = float(st.norm.ppf(0.975))
+    assert abs(d["ci_low"] - np.tanh(z - zc * se)) < 1e-12
+    assert abs(d["ci_high"] - np.tanh(z + zc * se)) < 1e-12
+
+
 def test_morans_i_direction():
     n = 12
     W = np.zeros((n, n))
@@ -152,6 +173,7 @@ def main():
     test_provision_adds_signal_when_it_should()
     test_provision_adds_nothing_when_it_should_not()
     test_end_to_end_verdict()
+    test_spearman_inference_matches_scipy()
     test_morans_i_direction()
     print("ALL ASSERTIONS PASSED ✓")
 

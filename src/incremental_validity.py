@@ -67,6 +67,32 @@ def spearman(x, y) -> float:
     return float(stats.spearmanr(x, y).statistic)
 
 
+def spearman_inference(x, y) -> dict:
+    """Bivariate Spearman with a t-test p-value (df = n-2) and a Fisher-z 95% CI.
+
+    Added per audit M1: the CI/t/p for the headline validation coefficient
+    (gap vs held-out inactivity) previously circulated without a code source.
+    The t-approximation matches scipy.spearmanr's p-value (asserted in tests);
+    the CI uses the Fisher transformation with se = 1/sqrt(n-3). At n=32 both
+    are approximations — report alongside the planned bootstrap, not instead.
+    """
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    n = len(x)
+    r = spearman(x, y)
+    if abs(r) < 1 and n > 2:
+        t = r * np.sqrt((n - 2) / (1 - r**2))
+        p = float(2 * stats.t.sf(abs(t), n - 2))
+    else:
+        t, p = np.inf, 0.0
+    z = np.arctanh(r)
+    se = 1.0 / np.sqrt(n - 3)
+    zc = float(stats.norm.ppf(0.975))
+    return {"r": float(r), "t": float(t), "p": p, "n": int(n),
+            "ci_low": float(np.tanh(z - zc * se)),
+            "ci_high": float(np.tanh(z + zc * se))}
+
+
 def ols(X, y, names: list[str]) -> dict:
     """Ordinary least squares with an intercept, from first principles (numpy).
 
@@ -175,6 +201,15 @@ def run(features: pd.DataFrame, gap: pd.DataFrame, boundaries=None) -> dict:
         "spearman_provision_vs_need": spearman(prov, need),
         "pearson_need_vs_inact": float(np.corrcoef(need, y)[0, 1]),
         "pearson_gap_vs_inact": float(np.corrcoef(gapz, y)[0, 1]),
+        # audit M1: these two previously appeared in documents with no code source
+        "pearson_provision_vs_inact": float(np.corrcoef(prov, y)[0, 1]),
+        "pearson_provision_vs_need": float(np.corrcoef(prov, need)[0, 1]),
+    }
+
+    # ---- 1b. inference for the headline validation coefficients (audit M1) ----
+    inference = {
+        "gap_vs_inact": spearman_inference(gapz, y),
+        "provision_vs_inact": spearman_inference(prov, y),
     }
 
     # ---- 2. partial correlations (the primary, robust test) ----
@@ -229,8 +264,8 @@ def run(features: pd.DataFrame, gap: pd.DataFrame, boundaries=None) -> dict:
         "headline": _headline(adds, pgn, models, biv),
     }
 
-    return {"n": n, "bivariate": biv, "partial": partial, "models": models,
-            "moran": moran, "verdict": verdict}
+    return {"n": n, "bivariate": biv, "inference": inference, "partial": partial,
+            "models": models, "moran": moran, "verdict": verdict}
 
 
 def _headline(adds: bool, pgn: dict, models: dict, biv: dict) -> str:
@@ -254,6 +289,10 @@ def to_rows(res: dict) -> pd.DataFrame:
         rows.append((k, round(v, 4), "correlation"))
     for name, d in res["partial"].items():
         rows.append((f"partial_{name}_r", round(d["r"], 4), f"partial Spearman (p={d['p']:.4f})"))
+    for name, d in res.get("inference", {}).items():
+        rows.append((f"spearman_{name}_ci95",
+                     f"[{d['ci_low']:.3f}, {d['ci_high']:.3f}]",
+                     f"Fisher-z 95% CI; t={d['t']:.2f}, p={d['p']:.4f}, n={d['n']} (audit M1)"))
     m = res["models"]
     rows += [
         ("R2_M1_need", round(m["M1_need"]["r2"], 4), "inactivity ~ need"),
