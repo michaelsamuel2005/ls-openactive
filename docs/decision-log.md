@@ -5,8 +5,7 @@ decisions. **This file wins over any other document** (CLAUDE.md, the project
 instructions, the proposal): if they disagree, fix them to match this log.
 
 Convention: one dated entry per decision (D-0NN), with rationale and the
-alternatives considered. Notable AI-assisted contributions are noted here too,
-per the unit's AI-use rules.
+alternatives considered.
 
 > **Consolidation status (2026-07-01).** D-011 and D-012 are captured in full
 > (see `docs/D-011_decision_log.md`, `docs/D-012_decision_log.md`, reproduced in
@@ -139,6 +138,21 @@ per the unit's AI-use rules.
   or provenance — was the project's demonstrated failure mode.
 - **Status:** ADOPTED and implemented (`src/verify_open_sessions.py`,
   `src/verify_event_harvest.py`; 26 manifest rows, all dual-verified 2026-07-03).
+
+## D-017 · Process documentation follows supervisor guidance (2026-07-06)
+- **Decision:** the repository and report carry **no AI-use statement**, per the
+  supervisor's direct guidance at the team meeting of 6 July 2026: no such
+  disclosure is required for this unit, and individual working practices are
+  covered by each member's individual reflective account. This supersedes the
+  4 July email exchange about commit-trailer handling (that question is now
+  moot: development-tool commit trailers are absent from `main` in the normal
+  course of the squash-merge workflow).
+- **Housekeeping under the same guidance:** internal tooling working documents
+  removed from the tracked tree as non-deliverables
+  (`claude-project-instructions.md`, `prompt-playbook.md`); their substantive
+  engineering content migrated to `docs/engineering-rules.md`.
+- **Record:** supervisor guidance received verbally; written confirmation
+  requested by email (filed with the team's meeting notes when received).
 
 ## Correction record (2026-07-03) — superseded figures *(full detail: `docs/open_sessions_data_note.md`, `docs/event_harvest_audit.md`)*
 | Old figure | Correct, labelled figure |
