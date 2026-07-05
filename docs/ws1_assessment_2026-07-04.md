@@ -44,6 +44,21 @@ Checksums (first 16 hex): london_sessions `886812f924d92136` · raw JSON `5873b0
 5. **Schema validation — [CLOSED 2026-07-05].** Dependency-free `src/pipeline/schema.py` (declared schemas for the four artefacts; presence/kind/nullability/range/uniqueness/set/prefix/row-count/cross-column checks incl. the gap identity and rank-permutation invariants), wired into `run_pipeline`, `run_analysis` and the WS3 exporter, engine-tested (`tests/test_schema.py`), and **all four real artefacts conform (45 checks green)**.
 6. Two-page-cost blemishes fixed en route: the free-share phrasing (H1) and the granularity vintage — both would have been examiner catches.
 
+## 3b. Gate review for WS3 kickoff (2026-07-06, tip f335938) — regression sweep on the restored lineage
+
+| Check | Result |
+|---|---|
+| Test suite (all six modules) | PASS |
+| Lint (full `src/` + `tests/`) | clean |
+| Frozen-artefact integrity vs 4-July SHA-256 baseline (sessions CSV, raw JSON, event file, gap index) | **byte-stable, all four** |
+| `borough_features.csv` | changed as intended only (PTAL added; 33/33 populated, 1.28–7.97) |
+| Schema conformance (four real artefacts, current code) | 45 checks OK |
+| Metrics manifest | 31 rows; all headline spot-checks exact |
+| Byte-identical harvest reproduction (current code, frozen raw) | **re-proven** |
+| CI on PR #5 | green at 6e43e80; re-run on f335938 (docs-only) to be confirmed via `gh pr checks` |
+
+**GATE DECISION: OPEN for WS3.** Everything the recommender consumes is frozen, verified, schema-enforced, and reproducible: `ws3_sessions_enriched.csv` (494 rows, equity signals joined, conformant), the gap index (validated, ρ=0.459 CI [0.13, 0.70]), and the interface specification with its evaluation contract. **Explicit exclusions — open WS1 items that do NOT feed WS3 and do not gate it:** Active Places (registration pending; corroboration layer), the event-harvest re-run (Wesley; commercial-universe layer, not a WS3 input), the event-harvest vintage date (labelling), and PR #5's peer review (gates the *merge*, not Clarence's start — he branches from this lineage and rebases trivially after merge).
+
 ## 4. Calibrated verdict
 
 **What can be said with evidence:** WS1's data is the right data (provenance proven), correctly processed (independent recomputation exact), honestly audited (limitations named, tested, and design-consequential), and now statistically substantiated where it makes comparative claims. No data, computational, or provenance error is known to exist in it. Its verification regime is unusually rigorous for Master's group work.
