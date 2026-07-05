@@ -41,7 +41,7 @@ Definitions: free = price exactly 0; missing price is counted **not free** (audi
 
 ## 4. New substantive observations (for the report, with caveats)
 
-1. **London's free share (43.9%) is slightly higher than the national platform rate (41.6%)** — the mislabel was conservative, but the two must never be interchanged.
+1. **London's free share (43.9%) is numerically higher than the rest-of-national rate (40.5%), but the difference is NOT statistically significant** (two-proportion z = 1.28, p = 0.20 — `src/ws1_stats.py`, H1). Report it descriptively only; never as a London-vs-national contrast. The population labels still must never be interchanged.
 2. **London's paid sessions are dearer than the platform-wide figure** (median £10.00 vs £8.00).
 3. **Accessibility information is markedly scarcer on London series** (22.7% vs 43.7% national). Caveat: this measures *published* accessibility information, not actual accessibility — publisher practice, not provision quality, may drive it.
 4. **Live-feed drift is real but small:** today's harvest (2026-07-03) has 497 London series (+3), free share 43.7%, paid median unchanged (£10.00). All reported analysis stays pinned to the frozen 2026-06-30 snapshot.

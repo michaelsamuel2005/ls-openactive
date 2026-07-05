@@ -1,0 +1,7 @@
+ws1_stats | 2026-07-05T14:15:23+00:00 | commit f6fda78
+H1 free share London 217/494 vs rest 442/1091: z=1.28, p=0.2015 -> NOT significant
+H2 paid price medians £10.00 (London) vs £7.00 (rest): U=116392, p=1.17e-13, rank-biserial=-0.307
+H3 access-info 22.7% (London) vs 53.2% (rest): z=-11.34, p=8.67e-30
+H4 chi-square vs population-proportional: chi2=882, df=31, p=1.93e-165; Gini(sessions per 10k)=0.583
+
+Wrote 5 ws1.* rows -> results/metrics.csv
