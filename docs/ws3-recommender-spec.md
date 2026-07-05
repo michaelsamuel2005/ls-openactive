@@ -44,7 +44,7 @@ All inputs derive from the **2026-06-30 frozen snapshot** and the validated WS2 
 **3.3 Equity term (this is where WS2 plugs in):**
 `equity_i = w_a·affordable_i + w_c·access_info_i + w_u·underserved_i`, where `affordable = is_free or price ≤ threshold`, `access_info = has_access_info`, and **`underserved` = the session's borough's `gap_index_z` min-max scaled to [0,1] over the 32 scored boroughs** (alternative: binary `is_priority_borough` — implement both, report both). Weights equal by default; document any change in the decision log.
 
-**3.4 Ranking:** `score = α·relevance + (1−α)·equity`, both components min-max scaled to [0,1] first (document the scaling). **α ∈ {0, 0.25, 0.5, 0.75, 1.0}** reported everywhere — the α-sweep IS the headline exhibit (the relevance–equity trade-off made visible).
+**3.4 Ranking:** `score = α·relevance + (1−α)·equity`, both components min-max scaled to [0,1] first. **Scaling scope (fixed here so behaviour is well-defined):** `equity` is query-independent → scaled ONCE over the full 494-row catalogue; `relevance` is query-dependent → scaled per query over the post-filter candidate set (if all candidates tie, define relevance ≡ 0.5 and note it in the trace). **Tie-breaking:** primary by score; at the sweep endpoints break ties lexicographically by the zero-weighted component (at α=1: relevance, then equity, then `id`; at α=0: equity, then relevance, then `id`) — this preserves Pareto-optimality at the endpoints (see P1); `id` remains the final, total-order tie-break everywhere. **α ∈ {0, 0.25, 0.5, 0.75, 1.0}** reported everywhere — the α-sweep IS the headline exhibit (the relevance–equity trade-off made visible).
 
 **3.5 Output:** top-k (default k=10) with a per-item trace: which filters passed, relevance, equity components, final score, borough + quadrant. Transparency is a feature — the report will show a worked example.
 
@@ -77,14 +77,14 @@ The α-sweep alone compares the system with itself; exceptional evaluation situa
 - **E1:** priority-borough share@k increases monotonically as α decreases.
 - **E2:** affordable share@k increases as α decreases.
 - **E3:** relevance cost grows smoothly with (1−α); we characterise the curve and make **no** claim about an "acceptable" threshold — that is London Sport's policy choice, not ours.
-- **E4:** catalogue coverage across the persona set does not decrease under equity re-ranking (if it does, we report and explain it).
+- **E4:** catalogue coverage across the persona set at each α < 1 is at least its value at α = 1 (if not, we report and explain it).
 Recording expectations before implementation is the pre-registration logic: it prevents metric-shopping after the fact and converts surprises into honest findings.
 
 ### 5d. Formal properties of the ranker (analysis for the report — prose, not code; Michael/Fahmi can draft)
 Determinism buys analysability — state and prove the small propositions:
-- **P1 (Pareto optimality):** for each α, the top-k list maximises α·Σrelevance + (1−α)·Σequity over all k-subsets, so every swept list is Pareto-optimal w.r.t. (Σrelevance, Σequity); the α-sweep traces the linear-scalarisation frontier. *(Two-line proof from the linearity of the score.)*
-- **P2 (endpoint bounds):** α=1 maximises list relevance; α=0 maximises list equity; all other lists lie between — the sweep's envelope bounds the attainable trade-off.
-- **P3 (stability):** identical inputs give identical outputs; ties broken by a total order on `id`. No run-to-run variance to explain away.
+- **P1 (Pareto optimality):** the top-k list by score maximises α·Σrelevance + (1−α)·Σequity over all k-subsets (exchange argument). For **α ∈ (0,1)** — strictly positive weights — this makes every swept list Pareto-optimal w.r.t. (Σrelevance, Σequity). At the endpoints α∈{0,1} the zero-weighted objective admits dominated ties; the **lexicographic endpoint tie-break (§3.4) restores full Pareto-optimality there**. Standard caveat, stated: linear scalarisation reaches the *supported* (convex-hull) points of the frontier; non-supported Pareto-optimal lists, if any, are not visited — the sweep bounds, not exhausts, the frontier.
+- **P2 (monotone traversal):** as α increases, the optimal list's Σrelevance is non-decreasing and its Σequity is non-increasing *(three-line proof: write the two optimality inequalities for α₁ < α₂ and add them)*. So the endpoints bound the attainable trade-off, and the sweep moves monotonically between them — the theoretical backbone of expectations E1/E2 (noting those concern per-list *shares*, which are related but not identical to Σequity; divergence would itself be reportable).
+- **P3 (stability):** identical inputs give identical outputs; the tie-break in §3.4 is a total order. No run-to-run variance to explain away.
 Half a page in the report that converts "simple method" into "analysable method" — the intellectual dividend of refusing a black box.
 
 ## 6. Engineering requirements
