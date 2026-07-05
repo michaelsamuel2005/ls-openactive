@@ -49,7 +49,11 @@
 4. Record here: download date, file checksums (`shasum -a 256`), extract vintage.
 5. Rerun `python -m src.run_pipeline` — facilities columns populate; schema validation must stay green.
 
-### 8. TfL PTAL — public-transport accessibility (conditional E2SFCA weighting; D-010/D-011) [RUNBOOK READY — one download outstanding]
+### 8. TfL PTAL — public-transport accessibility (conditional E2SFCA weighting; D-010/D-011) — **ACQUIRED 2026-07-05**
+- **File:** `data/raw/ptal/2015  PTALs Grid Values 280515.xlsx` (sheet Query1: ID, X, Y, AI2015, PTAL2015; 159,451 grid points, 100 m) · xlsx sha256 `1d9fea39a5cf25ee` · zip md5 verified `92c5810fd33a12ed04da285b16655976` against the Datastore API record · **OGL v2** · vintage **2015** (state it wherever used).
+- **Verified on ingest:** X/Y are EPSG:27700 (503k–562k / 156k–201k); PTAL2015 grades exactly match `PTAL_GRADE_MAP`; borough means computed 33/33, range 1.28 (Havering) → 7.97 (City of London) — correct face validity for London's transit geography. `AI2015` (continuous access index) retained as the preferred weight if E2SFCA activates.
+- Config points at the workbook (`PTAL_COLS = X/Y/PTAL2015`); reader handles xlsx.
+- Original runbook (for reproduction):
 - **Dataset located and verified via the Datastore API** (2026-07-05): TfL "Public Transport Accessibility Levels", **2015 grid** (100 m squares; the openly downloadable vintage — the config's `ptal_2023` name was aspirational; 2015 is usable for the *conditional* E2SFCA weighting with the vintage stated). **Licence: OGL v2** (per the dataset API — note v2, not v3).
 - **Acquire (sandbox egress blocked for bulk files — run on a team machine):**
   ```bash

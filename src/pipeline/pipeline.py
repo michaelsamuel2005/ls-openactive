@@ -350,7 +350,8 @@ def build_ptal(spine, boundaries) -> pd.DataFrame:
     if p is None or boundaries is None:
         return base.assign(mean_ptal=pd.NA)
     pc = C.PTAL_COLS
-    df = pd.read_csv(p)
+    df = (pd.read_excel(p) if str(p).lower().endswith((".xlsx", ".xls"))
+          else pd.read_csv(p))
     df["_grade_num"] = df[pc["grade"]].astype(str).map(C.PTAL_GRADE_MAP)
     df = df.dropna(subset=["_grade_num"])
     df = _assign_to_borough(df, pc["lon"], pc["lat"], C.PTAL_CRS, boundaries).dropna(subset=["lad_code"])

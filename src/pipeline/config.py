@@ -26,7 +26,7 @@ PATHS = {
     "ap_sites":      RAW / "active_places" / "sites.csv",
     "ap_facilities": RAW / "active_places" / "facilities.csv",
     "inactivity":    RAW / "active_lives" / "inactivity_la.csv",        # from Fingertips/Active Lives
-    "ptal":          RAW / "ptal" / "ptal_2023_grid.csv",               # grid points or centroids
+    "ptal":          RAW / "ptal" / "2015  PTALs Grid Values 280515.xlsx",  # TfL 2015 100m grid (see docs/data-sources.md §8)
     "output":        PROCESSED / "borough_features.csv",
 }
 
@@ -98,8 +98,10 @@ INACTIVITY_COLS = {"lad": "Area Code", "value": "Value",
                    "ci_lower": "Lower CI 95.0 limit", "ci_upper": "Upper CI 95.0 limit"}
 
 # ---------------------------------------------------------------- PTAL
-PTAL_COLS = {"lon": "x", "lat": "y", "grade": "PTAL"}
-PTAL_CRS = "EPSG:27700"   # London PTAL grid is usually British National Grid
+# TfL 2015 grid workbook columns: X/Y = BNG Easting/Northing; PTAL2015 = grade
+# bands; AI2015 = continuous access index (kept available for E2SFCA later).
+PTAL_COLS = {"lon": "X", "lat": "Y", "grade": "PTAL2015"}
+PTAL_CRS = "EPSG:27700"   # verified: X 503k–562k, Y 156k–201k (British National Grid)
 # PTAL grades are bands (0,1a,1b,2,...,6b). Map to a numeric scale for averaging:
 PTAL_GRADE_MAP = {"0": 0, "1a": 1, "1b": 2, "2": 3, "3": 4,
                   "4": 5, "5": 6, "6a": 7, "6b": 8}

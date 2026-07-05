@@ -165,6 +165,8 @@ def point_config(d: pathlib.Path):
         (cdir / f"census2021-{t}-ltla.csv").write_text((d / f"{t}.csv").read_text())
     C.PATHS["census_dir"] = cdir
     C.PTAL_CRS = "EPSG:4326"          # fixtures use lon/lat for PTAL too
+    C.PTAL_COLS = {"lon": "x", "lat": "y", "grade": "PTAL"}   # fixture headers
+                                       # (real config targets the TfL 2015 workbook)
 
 
 def main():
