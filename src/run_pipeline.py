@@ -7,10 +7,12 @@ Usage (from repo root, env active):
 import sys
 from src.pipeline import config as C
 from src.pipeline.pipeline import build_features
+from src.pipeline.schema import BOROUGH_FEATURES, validate
 
 
 def main() -> int:
     df = build_features()
+    validate(df, BOROUGH_FEATURES, "borough_features")   # raises on violation
 
     C.PATHS["output"].parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(C.PATHS["output"], index=False)

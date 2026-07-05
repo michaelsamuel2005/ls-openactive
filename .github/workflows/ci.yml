@@ -1,9 +1,10 @@
 name: CI
 
-# Mechanical enforcement of the CLAUDE.md rules: lint + the pipeline/gap-index
-# logic tests must pass on every PR and every push to main. Branch protection on
-# `main` (require this check + a review, block direct pushes) is configured
-# separately in GitHub → Settings → Branches.
+# Mechanical enforcement of the team's engineering rules
+# (docs/engineering-rules.md): lint + the pipeline/gap-index logic tests must
+# pass on every PR and every push to main. Branch protection on `main` (require
+# this check + a review, block direct pushes) is configured separately in
+# GitHub → Settings → Branches.
 
 on:
   push:
@@ -39,3 +40,6 @@ jobs:
           python -m tests.test_run
           python -m tests.test_analysis
           python -m tests.test_incremental_validity
+          python -m tests.test_export_ws3
+          python -m tests.test_schema
+          python -m tests.test_harvest

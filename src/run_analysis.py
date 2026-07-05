@@ -23,6 +23,9 @@ def main() -> int:
     df = pd.read_csv(features)
     out, report = run(df)
 
+    from src.pipeline.schema import GAP_INDEX, validate
+    validate(out, GAP_INDEX, "borough_gap_index")        # raises on violation
+
     dest = C.PROCESSED / "borough_gap_index.csv"
     dest.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(dest, index=False)
