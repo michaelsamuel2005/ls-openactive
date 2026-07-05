@@ -7,14 +7,31 @@ instructions, the proposal): if they disagree, fix them to match this log.
 Convention: one dated entry per decision (D-0NN), with rationale and the
 alternatives considered.
 
-> **Consolidation status (2026-07-01).** D-011 and D-012 are captured in full
-> (see `docs/D-011_decision_log.md`, `docs/D-012_decision_log.md`, reproduced in
-> summary below). **D-007–D-010 are summarised here from verified cross-
-> references** (the proposal §§6–7, D-011's relationships block, and the settled
-> state observed in code) — their **original full logs still need migrating into
-> this file**; until then, treat the summaries as authoritative on the *decision*
-> but incomplete on rationale/alternatives. This consolidation closes the
-> version-drift that arose from the logs living scattered in Downloads.
+> **Consolidation status (updated 2026-07-06).** D-011 and D-012 are captured in
+> full (see `docs/D-011_decision_log.md`, `docs/D-012_decision_log.md`,
+> summarised below). D-007–D-010 are summarised from verified cross-references.
+> **The founding decision log (16 June 2026, eleven entries) has been recovered
+> from PR #3's branch and preserved verbatim in `docs/decisions-founding.md`** —
+> consolidation is now complete; nothing remains scattered.
+
+## Founding decisions (2026-06-16) — status map
+The founding log used unpadded IDs (D1–D11); the post-audit series below
+restarted at zero-padded D-007, so the two series are distinct labels (founding
+"D7" ≠ "D-007"). Full founding texts: `docs/decisions-founding.md`.
+
+| Founding | Decision | Current status |
+|---|---|---|
+| D1 | Equity-led visual-analytics direction | Adopted (the framework) |
+| D2 | Small-area (LSOA/MSOA) granularity | **Superseded by D-008** (borough, audit-forced) |
+| D3 | Two projections + one validated clustering | **Superseded by D-010** (quadrants primary; PCA descriptive-only) |
+| D4 | Bayesian imputation | **Superseded by D-010** (no imputation; missingness is a finding) |
+| D5 | Honest evaluation, no accuracy claims | Adopted — standing, unbroken |
+| D6 | Data sources & access strategy | Refined by **D-009/D-011** (Open Sessions primary; layers never merged) |
+| D7 | Audit-first sequencing | Adopted — executed (the audit produced D-008/D-010) |
+| D8 | Deliverables aligned to assessment | Adopted — confirmed by the 2025/26 handbook (`docs/unit-rules.md`) |
+| D9 | Theory-grounded dashboard first-class | Adopted — WS4, build pending |
+| D10 | Branch → PR → review, protected `main` | Adopted — CI + protection now mechanical |
+| D11 | Forecasting = need-side stretch only | Standing (stretch tier) |
 
 ---
 
