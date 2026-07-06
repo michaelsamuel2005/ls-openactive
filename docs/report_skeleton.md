@@ -37,6 +37,13 @@ Thread in miniature: problem → data reality → gap index + validation → too
 **Job in thread:** what the data IS, and the audit that gates everything above it. This section carries the "thin, concentrated, under-published" finding and the borough decision — the report's first substantive result, not a chores list.
 **Content:** sources table with vintages and licences (Open Sessions 2026-06-30 frozen snapshot · IoD2025 File 10 v2 · Census 2021 · Active Lives 2024/25 via Fingertips 93015 · boundaries LAD 2021; CC-BY attribution) · Open Sessions correctly described (nationwide platform; London subset: 494 series, 264 venues, 43.9% free, paid median £10.00) · granularity audit (LSOA 95.5% / MSOA 81.2% empty → D-008 borough) · missingness stances (no imputation, D-010; `is_free` for MNAR price) · coverage bias as the defining limitation · the event-harvest universe finding (commercial feeds ≈99% paid; 2.30% free of price-known) with its audit story · the number-verification protocol (metrics manifest, D-016) presented as methodology.
 **Feeds:** `docs/open_sessions_data_note.md`, `docs/event_harvest_audit.md`, `results/metrics.csv`, granularity/completeness reports, WS1 audit outputs.
+**Top-band devices (bind the drafting — arrangement, not machinery):**
+1. **Findings→decisions arrangement.** Structure the chapter so every audit finding is paired with the design decision it forced (granularity evidence → D-008; missingness character → D-010; population mislabels → D-016 manifest; universe discovery → D-014 reframe). A data chapter that shows evidence *causing* design reads as research; a checklist reads as housekeeping.
+2. **Framework framing:** map the audit onto Wang & Strong's (1996) data-quality dimensions (intrinsic/contextual/representational/accessibility) in one table — theorises the assessment [TODO-VERIFY ref].
+3. **Quantified verification statement + spectrum position:** one paragraph stating the regime as a measurable property — every reported number manifest-traced with population/unit/vintage; dual/triple-method agreement on headline figures; byte-identical scripted regeneration of the frozen snapshot; 45 schema checks on artefacts; checksummed sources — locating the project at the full-replication end of Peng's (2011) reproducibility spectrum [TODO-VERIFY], WITH the honest caveat (traceability and error-catching, not certainty).
+4. **Threats-to-validity subsection** (construct / internal / external / conclusion), each threat concrete and paired with its mitigation — formalises the examiner-proofing.
+5. **Cross-universe triangulation of coverage bias:** use the already-verified commercial-layer contrasts (disjoint publisher universes; access-info 22.7% vs 53.2%, p≈9e-30; ~99% paid vs 43.9% free) to give the lower-bound caveat *evidence* rather than assertion — definitions stated (series ≠ events; contrast of universes, never a like-for-like ratio).
+6. **Licence/attribution box** (CC-BY 4.0 + OGL v2/v3) and one line on data availability to examiners on request (per handbook).
 **Owner:** Wesley (draft), Michael (verification narrative). **Status:** ~70% of content exists in repo docs — needs assembly and prose. **LO3, LO5; brief outputs 1–2.**
 
 ### 4. Methodology (WS2 design)
@@ -55,6 +62,13 @@ Thread in miniature: problem → data reality → gap index + validation → too
 6. The geography narrative: gap over-calls deprived-but-active inner boroughs, under-calls car-dependent outer ones; Hillingdon as genuine corroboration — *why ρ is 0.46, not 0.9, and why that is more informative*.
 7. Affordability/universe finding (free provision lives in the community layer).
 Every figure regenerated from committed code; caption cites script + results file.
+**Top-band devices (bind the drafting):**
+1. **Robustness-first headline:** lead with the **stable priority set** (the seven boroughs top-ranked under every weighting) before any single ranking — sensitivity as the headline, not the appendix.
+2. **A "how to read these numbers" box** opening the chapter: n=32, rank-based tests primary (justified), CIs lead p-values, City excluded and why. Then apply it without exception — every coefficient carries its interval (Fisher-z, corroborated by the seeded bootstrap — commit `src/bootstrap_ci.py` first so it's citable).
+3. **The corrections narrative, deliberately included:** one paragraph on what the process caught — the affluent-borough artefact washed out by adding deprivation; the free-share mislabel found and corrected; our own "slightly higher" claim retracted after a two-proportion test (p=0.20). Framed as the verification system working, this is authenticity evidence markers rarely see.
+4. **Negative results stay visible:** the marginal nested-F (p=0.11) reported beside the significant partial (p=0.004) with the non-linearity reading — never buried.
+5. **Caption discipline:** every figure caption carries one line of task-and-encoding rationale (Munzner framing) — ties the visual-analytics promise into §5 and previews WS4.
+6. **Traceability appendix:** a page-free appendix table mapping every number in §5 prose → `metric_id`/script/results file (the D-016 contract made visible to the examiner).
 **Feeds:** `borough_gap_index.csv`, `reports/incremental_validity.csv`, `results/metrics.csv`, hand-off §7 narrative (now verified).
 **Owner:** Michael (draft), Fahmi (four-eyes re-derivation of every number before submission). **Status:** analysis DONE and frozen (WS2); prose not started. **LO3; brief output 2.**
 
