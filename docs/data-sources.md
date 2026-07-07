@@ -11,7 +11,7 @@
 - **Endpoint:** `https://opensessions.io/api/rpde/session-series` · **Licence: CC-BY 4.0.**
 - **Frozen analysis snapshot:** `data/raw/session_series_raw_2026-06-30.json` — 1,585 live series · sha256 `5873b002ccfbcd69` · harvested 2026-06-30 by the RPDE walk now scripted in `src/harvest_open_sessions.py` (offline rebuild reproduces the processed CSV **byte-identically**).
 - **Processed:** `data/processed/london_sessions_2026-06-30.csv` — 494 London series · sha256 `886812f924d92136`.
-- Other snapshots on disk (NOT authoritative): 2026-06-27 (`6b769acbbeda09a1`, first audit run), 2026-07-03 (`bc4d702b2992307c`, drift check: 497 London).
+- Other snapshots on disk (NOT authoritative): 2026-06-27 (`6b769acbbeda09a1`, first audit run), 2026-07-03 (`bc4d702b2992307c`, drift check: 497 London), 2026-07-07 (raw `30e6629945be91ca`, processed `6e349a9f1b646904` — **live-mode proof run**, supervised: 37 pages, 16,534 tombstones processed, 1,581 national live / 494 London / 215 free / 261 venues; closes WS1 examiner finding F8). Seven-day drift vs frozen: net −4 national; London count coincidentally equal at 494 with changed composition (−2 free, −3 venues) — churn evidence for the report's "point-in-time snapshot" caveat.
 
 ### 2. English Indices of Deprivation 2025 — File 10 v2 (need input; D-007)
 - **Publisher:** MHCLG. Published 30 Oct 2025; **LAD summary files reissued as v2 on 17 Nov 2025** (ONS lookup correction) — v2 is mandatory.
@@ -40,14 +40,13 @@
 - **File:** `data/external/wesley/output.csv` · sha256 `320357c093fc7a17` · 464,392 events · harvest run by Wesley, **date TBC (outstanding ask)** · licences: CC-BY 4.0 per publisher — **verify per-feed licences before publishing derived outputs**.
 - **Status:** verified against Wesley's notebook exactly; usable only with the §3 defect list fixed (composite feed+id key, UAT/pentest exclusion, full offer parsing) and its time window stated (events span 2023-02→2027-03).
 
-## Pending acquisition (runbooks — assign before use)
-
-### 7. Sport England Active Places — facilities (corroboration layer; D-011) [TO ACQUIRE]
-1. Register at Active Places Power (`https://www.activeplacespower.com/`) — free account; open-data downloads (CSV) available under **OGL v3.0** after registration.
-2. Download the **Sites** and **Facilities** CSV extracts (national; the pipeline filters to London).
-3. Place at `data/raw/active_places/sites.csv` and `data/raw/active_places/facilities.csv` (paths already in `config.py`; `build_facilities` ingests them unchanged).
-4. Record here: download date, file checksums (`shasum -a 256`), extract vintage.
-5. Rerun `python -m src.run_pipeline` — facilities columns populate; schema validation must stay green.
+### 7. Sport England Active Places — facilities (corroboration layer; D-011) — **ACQUIRED 2026-07-07**
+- **Route:** registered download from Active Places Power (`https://www.activeplacespower.com/`) — the full-database CSV bundle (`activeplacescsvs.zip`). The Hub's machine-readable DCAT catalogue (`/api/feed/dcat-us/1.1.json`) returns an **empty dataset array** — registration is the only working route; reproduce via the UI, not an API.
+- **Extract vintage:** data version **2026-07-07 03:30:36**, CSVs created 2026-07-07 04:34 (per `information.txt`, retained alongside the data) · **Licence:** `https://www.activeplacespower.com/pages/license` — "Contains data Copyright Sport England" (acknowledge verbatim on outputs; note this is Sport England's own licence page, not a bare OGL v3.0 as the pre-acquisition runbook assumed).
+- **Files at `data/raw/active_places/`:** `facilities.csv` 124,839 rows · sha256 `00eb9ffd7ef7a2e2` · `sites.csv` 43,469 rows (pandas-parsed; raw line count is higher — notes fields contain embedded newlines) · sha256 `42d331ee46aa90aa` · `facilitytype.csv` (code→name lookup shipped in the extract, read by the pipeline) · sha256 `46ab7c02ddcaab8b` · `information.txt` `06296203272c1cd2`.
+- **Ingest rules are D-018** (decision log): operational-only (status code 3; decode verified against the text-labelled Hub export, identical 124,839 rows), community use = 'Public Access', type decode via the shipped lookup with the 'Grass Pitches' exact-safe needle. `sites.csv` is NOT read by the pipeline (n_sites derives from facility-file site ids, audit F6); retained for provenance and the LA-code cross-check.
+- **Verified on ingest (2026-07-07):** London = **10,070 operational facilities · 3,553 sites** (point-in-polygon and site-LA-code routes **identical**); grass 3,235 · halls 1,505 · health&fitness 1,160 · pools 534; community-use share ~0.79; all 33 boroughs populated; schema green. City per-10k is a denominator artefact — see D-018 caveat.
+- Unused duplicates from the same download session (ArcGIS Hub "GIS" exports of Sites/Facilities, text-labelled): used ONCE to verify the status-code decode, then not retained in `data/raw/` — the registered bundle is canonical.
 
 ### 8. TfL PTAL — public-transport accessibility (conditional E2SFCA weighting; D-010/D-011) — **ACQUIRED 2026-07-05**
 - **File:** `data/raw/ptal/2015  PTALs Grid Values 280515.xlsx` (sheet Query1: ID, X, Y, AI2015, PTAL2015; 159,451 grid points, 100 m) · xlsx sha256 `1d9fea39a5cf25ee` · zip md5 verified `92c5810fd33a12ed04da285b16655976` against the Datastore API record · **OGL v2** · vintage **2015** (state it wherever used).
