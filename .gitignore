@@ -24,3 +24,4 @@ data/processed/*
 .cache/
 data/
 .claude/
+CLAUDE.md
