@@ -45,14 +45,23 @@ def main() -> int:
     print(f"  stable priority set (top under EVERY weighting): {report['stable_priority_boroughs']}")
 
     print("\n— Validation by triangulation (Spearman of gap vs independent signals) —")
+
+    def _sp(col: str) -> str:
+        """rho with p and n (D3-1: a rho never prints without its p)."""
+        from scipy import stats
+        m = out.merge(df[["lad_code", col]], on="lad_code")
+        m = m[~m["is_city_of_london"].astype(bool)].dropna(subset=["gap_index_z", col])
+        r, p = stats.spearmanr(m["gap_index_z"], m[col])
+        return f"rho={r:+.3f}  p={p:.4f}  n={len(m)}"
+
     if report["validation_spearman"]:
-        for s, r in report["validation_spearman"].items():
-            print(f"  gap vs {s:24s} {r}   (expect positive: bigger gaps where need is higher)")
+        for s in report["validation_spearman"]:
+            print(f"  gap vs {s:24s} {_sp(s)}   (expect positive: bigger gaps where need is higher)")
     else:
         print("  (no validation signals present in the feature table yet)")
     if report["facility_corroboration"]:
-        r = report["facility_corroboration"]["spearman_gap_vs_facilities"]
-        print(f"  gap vs facilities_per_10k     {r}   (expect negative: thin sessions AND thin facilities)")
+        print(f"  gap vs facilities_per_10k      {_sp('facilities_per_10k')}   "
+              "(expect negative; directional corroboration — cite WITH the p)")
 
     print("\nNote: z-scores standardised on non-City boroughs"
           if report["city_excluded_from_scaling"] else "")

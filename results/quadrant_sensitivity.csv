@@ -1,0 +1,34 @@
+lad_code,lad_name,gap_quadrant,need_margin_z,provision_margin_z,n_switches,n_combos,alternate_quadrants
+E09000010,Enfield,priority,1.6154,-0.1282,5,24,high_need_served
+E09000002,Barking and Dagenham,priority,1.0361,-0.3013,0,24,
+E09000012,Hackney,priority,1.069,-0.1714,5,24,high_need_served
+E09000030,Tower Hamlets,priority,0.5828,-0.3993,0,24,
+E09000025,Newham,priority,0.6535,-0.2886,0,24,
+E09000033,Westminster,priority,0.7364,-0.0561,10,24,high_need_served
+E09000007,Camden,high_need_served,0.9089,0.1295,5,24,priority
+E09000008,Croydon,priority,0.1711,-0.3852,5,24,low_low
+E09000020,Kensington and Chelsea,priority,0.0845,-0.2956,10,24,low_low
+E09000017,Hillingdon,low_low,-0.2831,-0.5621,0,24,
+E09000014,Haringey,high_need_served,1.0707,0.877,0,24,
+E09000009,Ealing,high_need_served,0.2284,0.0606,13,24,low_low;priority;well_served
+E09000016,Havering,priority,0.0342,-0.0909,16,24,high_need_served;low_low;well_served
+E09000031,Waltham Forest,low_low,-0.2161,-0.2857,5,24,priority
+E09000004,Bexley,low_low,-0.3284,-0.2419,5,24,well_served
+E09000018,Hounslow,well_served,-0.0342,0.2936,10,24,high_need_served
+E09000026,Redbridge,low_low,-0.5744,-0.0982,10,24,well_served
+E09000029,Sutton,low_low,-1.0089,-0.523,0,24,
+E09000003,Barnet,well_served,-0.4235,0.0784,10,24,low_low
+E09000022,Lambeth,low_low,-0.8441,-0.328,0,24,
+E09000015,Harrow,low_low,-0.7575,-0.1749,5,24,well_served
+E09000005,Brent,high_need_served,0.8214,1.53,0,24,
+E09000023,Lewisham,high_need_served,0.098,0.9901,10,24,well_served
+E09000028,Southwark,well_served,-0.5261,0.4264,0,24,
+E09000013,Hammersmith and Fulham,well_served,-0.7267,0.4333,0,24,
+E09000006,Bromley,well_served,-0.9638,0.3086,0,24,
+E09000021,Kingston upon Thames,well_served,-1.7922,0.0561,10,24,low_low
+E09000019,Islington,high_need_served,1.1442,3.2872,0,24,
+E09000011,Greenwich,high_need_served,0.1582,2.943,5,24,well_served
+E09000032,Wandsworth,well_served,-2.4799,0.8396,0,24,
+E09000027,Richmond upon Thames,well_served,-2.2027,1.8161,0,24,
+E09000024,Merton,well_served,-1.8575,2.6782,0,24,
+E09000001,City of London,,-2.9386,,0,24,

@@ -25,6 +25,7 @@ PATHS = {
     "sessions":      PROCESSED / "london_sessions_2026-06-30.csv",     # FROZEN 2026-06-30 snapshot (494 rows) — do not repoint without a decision-log entry
     "ap_sites":      RAW / "active_places" / "sites.csv",
     "ap_facilities": RAW / "active_places" / "facilities.csv",
+    "ap_facility_types": RAW / "active_places" / "facilitytype.csv",  # code->name lookup shipped in the extract
     "inactivity":    RAW / "active_lives" / "inactivity_la.csv",        # from Fingertips/Active Lives
     "ptal":          RAW / "ptal" / "2015  PTALs Grid Values 280515.xlsx",  # TfL 2015 100m grid (see docs/data-sources.md §8)
     "output":        PROCESSED / "borough_features.csv",
@@ -34,6 +35,12 @@ PATHS = {
 # London = 33 local authorities. Their LAD codes are E09000001..E09000033.
 LONDON_LAD_PREFIX = "E09"
 PER_CAPITA_BASE = 10_000          # rates expressed "per 10,000 residents"
+
+# ---------------------------------------------------------------- randomness
+# THE single seed for any stochastic step (project rule: seeds live here and
+# nowhere else). Currently used only by the validation bootstrap in
+# src/ws2_metrics.py; the pipeline itself is deterministic.
+RANDOM_SEED = 42
 
 # Column names inside the ONS lookup (check your file's header).
 LOOKUP_COLS = {"lsoa": "LSOA21CD", "lad": "LAD22CD", "lad_name": "LAD22NM"}
@@ -78,15 +85,39 @@ SESSIONS_COLS = {"lon": "longitude", "lat": "latitude",
                  "venue": "location_name", "access": "has_access_info"}
 SESSIONS_CRS = "EPSG:4326"
 
-AP_SITE_COLS = {"lon": "Lon", "lat": "Lat", "site_id": "SiteID"}
-AP_FAC_COLS = {"lon": "Lon", "lat": "Lat", "site_id": "SiteID",
-               "type": "FacilityType", "community": "CommunityUse"}
-AP_CRS = "EPSG:4326"
-# Facility types to count as their own columns (substring match on the type field):
+# Verified against the real 2026-07-07 Active Places extract (registered download).
+# sites.csv is NOT read by the pipeline (audit F6/F7) — dict kept as documentation.
+AP_SITE_COLS = {"lon": "long", "lat": "lat", "site_id": "Site ID"}
+AP_FAC_COLS = {"lon": "Longitude", "lat": "Latitude", "site_id": "Site ID",
+               "type": "Facility Type", "community": "Accessibility Type Group (Text)",
+               "status": "Operational Status"}
+AP_CRS = "EPSG:4326"   # verified: Latitude 49.9–55.8, Longitude −6.4–1.8 (WGS84)
+
+# 'Facility Type' arrives as a NUMERIC CODE; the extract ships its own lookup
+# (facilitytype.csv: 'Facility Type ID' -> 'Facility Type Name') which
+# build_facilities merges before matching. PATHS["ap_facility_types"] points at it.
+#
+# 'Operational Status' is also coded. Decode VERIFIED 2026-07-07 by exact
+# count-match against the text-labelled ArcGIS Hub export of the same vintage
+# (124,839 rows in both):
+#   1=Planned  2=Under Construction  3=Operational  4=Temporarily Closed
+#   5=Closed   7=No Grass Pitches Currently Marked Out  8=Not Known
+# Only code 3 counts as current provision (excluding 4/5/7 removes ~21% of rows
+# nationally that are not currently usable). Decision-log entry required if changed.
+AP_OPERATIONAL_KEEP = {3}
+
+# Community-use flag: 'Accessibility Type Group (Text)' ∈ {Public Access, Private,
+# Not Known}. Values (lower-cased) counting as community-accessible:
+AP_COMMUNITY_TRUE = {"public access"}
+
+# Facility types to count as their own columns — substring match on the DECODED
+# type name. NOTE 'Grass Pitches' (plural, verbatim from the lookup): the
+# singular 'Grass Pitch' would also match 'Artificial Grass Pitch' (a separate
+# type, ID 8) — verified hazard, do not "simplify" the needle.
 AP_FAC_TYPES = {
     "n_fac_sports_halls":   ["Sports Hall"],
     "n_fac_swimming_pools": ["Swimming Pool"],
-    "n_fac_grass_pitches":  ["Grass Pitch"],
+    "n_fac_grass_pitches":  ["Grass Pitches"],
     "n_fac_health_fitness": ["Health and Fitness"],
 }
 

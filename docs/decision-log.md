@@ -45,7 +45,9 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 ## D-008 · Unit of analysis = London borough (LAD), n=33 *(summary — migrate full text)*
 - **Decision:** The unit of analysis is the **borough / local authority
   district** (32 boroughs + City of London = 33). Settled by the WS1 audit:
-  ~95.5% of LSOAs and ~81.2% of MSOAs carry zero sessions, so neighbourhood-level
+  ~95.5% of LSOAs and ~81.2% of MSOAs carry zero sessions *(as measured at the
+  time; superseded → 95.6% / 81.4% on the frozen 06-30 snapshot — see the
+  correction record below)*, so neighbourhood-level
   analysis is not viable.
 - **Status:** Decided (not a candidate). The whole pipeline is borough-keyed.
 
@@ -155,6 +157,12 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   or provenance — was the project's demonstrated failure mode.
 - **Status:** ADOPTED and implemented (`src/verify_open_sessions.py`,
   `src/verify_event_harvest.py`; 26 manifest rows, all dual-verified 2026-07-03).
+  **Extended 2026-07-07:** WS2 inferential statistics now have manifest rows —
+  `src/ws2_metrics.py` owns the `ws2.*` prefix (validation ρ/p/n, Fisher CI,
+  **seeded bootstrap CI [0.112, 0.696]** (B=5,000, seed=config.RANDOM_SEED —
+  the citable bootstrap; the unscripted audit figure [0.097, 0.705] is
+  superseded and must not be cited), D-013 set, facilities corroboration with
+  its p, weighting sensitivity, quadrant threshold stability per B2-3).
 
 ## D-017 · Process documentation follows supervisor guidance (2026-07-06)
 - **Decision:** the repository and report carry **no AI-use statement**, per the
@@ -170,6 +178,42 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   engineering content migrated to `docs/engineering-rules.md`.
 - **Record:** supervisor guidance received verbally; written confirmation
   requested by email (filed with the team's meeting notes when received).
+
+## D-018 · Active Places ingest rules (2026-07-07)
+- **Context:** Sport England Active Places acquired 2026-07-07 (registered
+  download; extract version 2026-07-07 03:30; closes WS1 examiner finding F3).
+  Real headers/encodings differ from the pre-acquisition assumptions in
+  `config.py`, which was adapted; three choices in that adaptation are
+  methodological and are fixed here.
+- **Decision 1 — operational-only counting.** `Operational Status` arrives as a
+  numeric code; only **code 3 = Operational** counts as provision
+  (`AP_OPERATIONAL_KEEP`). Decode verified by exact count-match (124,839 rows)
+  against the text-labelled ArcGIS Hub export of the same vintage:
+  1 Planned · 2 Under Construction · 3 Operational · 4 Temporarily Closed ·
+  5 Closed · 7 No Grass Pitches Currently Marked Out · 8 Not Known. Excluded
+  codes are ~21% of the national file; counting them would inflate provision.
+  *Alternative rejected:* including 4 (temporarily closed, n=659 national) —
+  not currently usable, and no reopen-date field to bound the closure.
+- **Decision 2 — community use = 'Public Access'.** The assumed `CommunityUse`
+  boolean does not exist; the export's `Accessibility Type Group (Text)` is
+  {Public Access, Private, Not Known}. `pct_community_use` = share with
+  **Public Access** (`AP_COMMUNITY_TRUE`). 'Not Known' counts as not-community
+  (conservative; 100 rows nationally, immaterial).
+- **Decision 3 — type decode + exact-safe needles.** `Facility Type` is coded;
+  decoded via the lookup **shipped inside the extract** (`facilitytype.csv`),
+  not a hand-maintained map. Needle changed 'Grass Pitch' → **'Grass Pitches'**:
+  the singular substring also matches 'Artificial Grass Pitch' (a distinct
+  type, ID 8) — hazard verified and now asserted in `tests/test_run.py`.
+- **Verification:** borough assignment cross-checked by two independent routes —
+  pipeline point-in-polygon vs the sites file's `Local Authority Code` — giving
+  **identical** London results: 10,070 operational facilities · 3,553 sites ·
+  grass 3,235 · halls 1,505 · health&fitness 1,160 · pools 534. Face validity:
+  Bromley/Barnet/Hillingdon lead; City of London 96. Schema green (27 checks);
+  synthetic fixtures now mirror the real coded shape incl. status decoys.
+- **Caveat carried forward:** City of London `facilities_per_10k` (111.8) is a
+  resident-denominator artefact — exclude from any standardisation exactly as
+  its session rate is (D-012 practice). And per D-011, facilities remain a
+  separate corroboration layer: never merged with sessions.
 
 ## Correction record (2026-07-03) — superseded figures *(full detail: `docs/open_sessions_data_note.md`, `docs/event_harvest_audit.md`)*
 | Old figure | Correct, labelled figure |
