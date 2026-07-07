@@ -245,7 +245,7 @@ def build_sessions(spine, boundaries) -> pd.DataFrame:
     p = _exists("sessions")
     base = spine[["lad_code"]].copy()
     if p is None or boundaries is None:
-        for c in ["n_sessions", "n_venues", "pct_sessions_free", "median_price",
+        for c in ["n_sessions", "n_venues", "pct_sessions_free", "median_price_paid",
                   "activity_diversity", "pct_sessions_access_info"]:
             base[c] = pd.NA
         return base
@@ -253,14 +253,26 @@ def build_sessions(spine, boundaries) -> pd.DataFrame:
     df = pd.read_csv(p)
     df = _assign_to_borough(df, s["lon"], s["lat"], C.SESSIONS_CRS, boundaries)
     df = df.dropna(subset=["lad_code"])
-    df["_free"] = pd.to_numeric(df[s["price"]], errors="coerce").fillna(-1).eq(0)
+    price_num = pd.to_numeric(df[s["price"]], errors="coerce")
+    # Free-status: the harvester already writes is_free (missing price counted
+    # NOT free — the audited definition); reuse it as the single source of
+    # truth. Recompute only as a fallback for inputs without the column.
+    if "is_free" in df.columns:
+        df["_free"] = df["is_free"].astype(str).str.strip().str.lower().isin(["true", "1"])
+    else:
+        df["_free"] = price_num.fillna(-1).eq(0)
+    # Paid-only price (audit F1): median over price > 0 rows ONLY. The old
+    # `median_price` mixed £0 sessions into the median — the exact
+    # zeros-contamination this project corrected elsewhere. NaN is legitimate
+    # for boroughs whose published sessions are all free.
+    df["_paid_price"] = price_num.where(price_num > 0)
     df["_acc"] = df[s["access"]].astype(str).str.lower().isin(["1", "true", "yes"])
     g = df.groupby("lad_code")
     feat = pd.DataFrame({
         "n_sessions": g.size(),
         "n_venues": g[s["venue"]].nunique(),
         "pct_sessions_free": g["_free"].mean(),
-        "median_price": g[s["price"]].apply(lambda x: pd.to_numeric(x, errors="coerce").median()),
+        "median_price_paid": g["_paid_price"].median(),
         "activity_diversity": g[s["activity"]].nunique(),
         "pct_sessions_access_info": g["_acc"].mean(),
     })
@@ -270,7 +282,8 @@ def build_sessions(spine, boundaries) -> pd.DataFrame:
 # ============================================================ facilities (Active Places)
 def build_facilities(spine, boundaries) -> pd.DataFrame:
     base = spine[["lad_code"]].copy()
-    _, pf = _exists("ap_sites"), _exists("ap_facilities")   # _exists warns if ap_sites is missing
+    pf = _exists("ap_facilities")   # sites.csv is not read: n_sites derives
+                                    # from the facilities file's site ids (audit F6)
     if pf is None or boundaries is None:
         for c in ["n_sites", "n_facilities", "pct_community_use", *C.AP_FAC_TYPES]:
             base[c] = pd.NA

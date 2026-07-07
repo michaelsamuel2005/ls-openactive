@@ -22,7 +22,7 @@ PATHS = {
     "boundaries":    RAW / "boundaries" / "lad_2021_bgc.geojson",   # ONS LAD polygons (UK; filtered to E09)
     "census_dir":    RAW / "census2021",     # holds tsXXX/census2021-tsXXX-ltla.csv
     "iod_la":        RAW / "iod2025" / "File_10_-_IoD2025_Local_Authority_District_Summaries__lower-tier__v2.xlsx",
-    "sessions":      PROCESSED / "london_sessions_2026-06-30.csv",     # your harvested ~494 rows (latest)
+    "sessions":      PROCESSED / "london_sessions_2026-06-30.csv",     # FROZEN 2026-06-30 snapshot (494 rows) — do not repoint without a decision-log entry
     "ap_sites":      RAW / "active_places" / "sites.csv",
     "ap_facilities": RAW / "active_places" / "facilities.csv",
     "inactivity":    RAW / "active_lives" / "inactivity_la.csv",        # from Fingertips/Active Lives

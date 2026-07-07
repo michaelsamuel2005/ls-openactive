@@ -15,7 +15,7 @@
 
 ### 2. English Indices of Deprivation 2025 — File 10 v2 (need input; D-007)
 - **Publisher:** MHCLG. Published 30 Oct 2025; **LAD summary files reissued as v2 on 17 Nov 2025** (ONS lookup correction) — v2 is mandatory.
-- **Landing page:** `https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025` (exact asset URL: retrieve from the landing page; filename below is the identity check).
+- **Landing page:** `https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025` · **Direct asset (pinned 2026-07-08, verified against the live page):** `https://assets.publishing.service.gov.uk/media/6917412ebc34c86ce4e6e7fc/File_10_-_IoD2025_Local_Authority_District_Summaries__lower-tier__v2.xlsx`. The page's own update history confirms the D-007 rationale: Files 10/11/14 reissued as v2 on 17 Nov 2025 after an ONS LSOA→LAD lookup correction — "Please ensure you are using the updated 'v2'".
 - **File:** `data/raw/iod2025/File_10_-_IoD2025_Local_Authority_District_Summaries__lower-tier__v2.xlsx` · sha256 `6c38a2fd3998e0ca` · retrieved 2026-07-01 · **OGL v3.0**.
 - **Used:** IMD sheet, `IMD - Average score` + `Rank of average score` (auto-detected by `build_iod`); join on LAD code (2024-coded headers, E09 filter). *Average score* choice (not average rank) is deliberate — justify in the report (Hackney #1 on score; Newham would lead on rank).
 
@@ -67,6 +67,7 @@
 - PTAL is used ONLY if E2SFCA is activated — acquisition is cheap insurance, not a commitment.
 
 ## Superseded / unused artefacts (on disk, retained for audit trail)
+- **`reports/` holds three artefact generations** (2026-06-27, 2026-06-30, 2026-07-03). **The 2026-06-30 set is canonical** — it matches the frozen snapshot (granularity: LSOA 95.6% / MSOA 81.4% empty; the 06-27 figures 95.5/81.2 are superseded working numbers). Cite only the 06-30 files in the report.
 - `data/external/iod2025_imd_lsoa_2025-06-27.csv` (`b1b716aa2e476449`) — IoD **File 7** LSOA-level, acquired pre-D-007; superseded by File 10 v2 LAD summaries; unused by the pipeline.
 - `data/external/SOURCES.md` (`5760cbc148a8cad3`) — planning-era provenance file this register replaces.
 

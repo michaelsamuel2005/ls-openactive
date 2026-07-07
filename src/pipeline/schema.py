@@ -129,6 +129,9 @@ BOROUGH_FEATURES = Schema(
         Col("imd_avg_score", "numeric", min=0, max=60),
         Col("n_sessions", "numeric", min=0),
         Col("sessions_per_10k", "numeric", min=0),
+        Col("mean_ptal", "numeric", min=0, max=8),
+        Col("median_price_paid", "numeric", min=0.01),   # paid-only by construction;
+                                                          # a 0 here = zeros contamination
         Col("is_city_of_london", "bool", nullable=False),
     ],
     checks=[
