@@ -49,6 +49,7 @@ All inputs derive from the **2026-06-30 frozen snapshot** and the validated WS2 
 **3.5 Output:** top-k (default k=10) with a per-item trace: which filters passed, relevance, equity components, final score, borough + quadrant. Transparency is a feature — the report will show a worked example.
 
 ## 4. Personas (transparent, illustrative — never "users")
+**Pool policy (see E5):** personas are anchored in reality, including thin-provision reality; small candidate pools are measured and reported as findings, never engineered away. At sign-off, only construction artefacts may be corrected (e.g. activity strings that don't exist verbatim in the catalogue's 79 values).
 6–10 documented synthetic personas spanning the constraint space (e.g., low-income parent in a priority borough, free-only; wheelchair user needing access info; older adult, low-intensity preferences, outer borough; time-poor shift worker — noting the time-filter gap). Personas stress-test behaviour and illustrate the α trade-off. They are labelled illustrative in every output. Final set agreed by Clarence + Fahmi, committed as `docs/ws3-personas.md`.
 
 ## 5. Evaluation contract (Fahmi — design finalised BEFORE the build fixes behaviour)
@@ -78,6 +79,7 @@ The α-sweep alone compares the system with itself; exceptional evaluation situa
 - **E2:** affordable share@k increases as α decreases.
 - **E3:** relevance cost grows smoothly with (1−α); we characterise the curve and make **no** claim about an "acceptable" threshold — that is London Sport's policy choice, not ours.
 - **E4:** catalogue coverage across the persona set at each α < 1 is at least its value at α = 1 (if not, we report and explain it).
+- **E5 (added 2026-07-07, pre-harness, on sanity-CLI evidence):** realistic personas anchored in thin-provision geographies will yield candidate pools smaller than k (observed pre-harness: 4–7 candidates for four of eight draft personas; Croydon's pool is its *entire* published catalogue). This is treated as a **finding that converges with the WS2 gap analysis**, not an evaluation defect: personas are NOT widened to manufacture comfortable pools (only string/construction artefacts may be corrected at sign-off). The system must degrade transparently — return the sessions that exist with an explanatory note, never pad, never silently relax a hard filter (asserted by test). **Pool size (n_candidates) is reported beside every metric**; where pool < k, per-list metrics are computed over the returned items with the shortfall stated.
 Recording expectations before implementation is the pre-registration logic: it prevents metric-shopping after the fact and converts surprises into honest findings.
 
 ### 5d. Formal properties of the ranker (analysis for the report — prose, not code; Michael/Fahmi can draft)
