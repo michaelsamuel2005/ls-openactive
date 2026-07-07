@@ -132,6 +132,15 @@ BOROUGH_FEATURES = Schema(
         Col("mean_ptal", "numeric", min=0, max=8),
         Col("median_price_paid", "numeric", min=0.01),   # paid-only by construction;
                                                           # a 0 here = zeros contamination
+        # Active Places corroboration layer (D-011) — operational facilities only
+        Col("n_facilities", "numeric", min=0),
+        Col("n_sites", "numeric", min=0),
+        Col("facilities_per_10k", "numeric", min=0),
+        Col("pct_community_use", "numeric", min=0.0, max=1.0),
+        Col("n_fac_sports_halls", "numeric", min=0),
+        Col("n_fac_swimming_pools", "numeric", min=0),
+        Col("n_fac_grass_pitches", "numeric", min=0),
+        Col("n_fac_health_fitness", "numeric", min=0),
         Col("is_city_of_london", "bool", nullable=False),
     ],
     checks=[

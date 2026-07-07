@@ -112,16 +112,37 @@ def make_fixtures(d: pathlib.Path):
                          "location_name": f"V{i}{j%2}", "has_access_info": j % 2 == 0})
     pd.DataFrame(rows).to_csv(d / "sessions.csv", index=False)
 
-    # Active Places facilities
+    # Active Places facilities — mirrors the REAL 2026-07-07 extract shape:
+    # coded 'Facility Type' (decoded via the shipped lookup), coded
+    # 'Operational Status' (only 3=Operational is provision), text accessibility.
     frows = []
     for i, n in enumerate([2, 5, 3]):
         x, y = _pt(i)
         for j in range(n):
-            frows.append({"SiteID": f"S{i}{j//2}", "Lon": x, "Lat": y,
-                          "FacilityType": ["Sports Hall", "Swimming Pool", "Grass Pitch"][j % 3],
-                          "CommunityUse": j % 2 == 0})
+            frows.append({"Site ID": f"S{i}{j//2}", "Longitude": x, "Latitude": y,
+                          "Facility Type": [6, 7, 5][j % 3],   # Sports Hall / Swimming Pool / Grass Pitches
+                          "Operational Status": 3,
+                          "Accessibility Type Group (Text)":
+                              "Public Access" if j % 2 == 0 else "Private"})
+    x0, y0 = _pt(0)
+    frows += [
+        # operational AGP in borough 1: counts in n_facilities but must NOT be
+        # counted as a grass pitch ('Grass Pitches' vs 'Artificial Grass Pitch'
+        # substring hazard — see the config.AP_FAC_TYPES note)
+        {"Site ID": "S0X", "Longitude": x0, "Latitude": y0, "Facility Type": 8,
+         "Operational Status": 3, "Accessibility Type Group (Text)": "Public Access"},
+        # non-operational decoys (closed=5, no-pitch-marked=7): excluded from ALL counts
+        {"Site ID": "S0Y", "Longitude": x0, "Latitude": y0, "Facility Type": 5,
+         "Operational Status": 5, "Accessibility Type Group (Text)": "Public Access"},
+        {"Site ID": "S0Z", "Longitude": x0, "Latitude": y0, "Facility Type": 5,
+         "Operational Status": 7, "Accessibility Type Group (Text)": "Public Access"},
+    ]
     pd.DataFrame(frows).to_csv(d / "fac.csv", index=False)
-    pd.DataFrame([{"SiteID": "S00", "Lon": 0.05, "Lat": 51.55}]).to_csv(d / "sites.csv", index=False)
+    pd.DataFrame({"Facility Type ID": [5, 6, 7, 8],
+                  "Facility Type Name": ["Grass Pitches", "Sports Hall", "Swimming Pool",
+                                         "Artificial Grass Pitch"]}
+                 ).to_csv(d / "factypes.csv", index=False)
+    pd.DataFrame([{"Site ID": "S00", "long": 0.05, "lat": 51.55}]).to_csv(d / "sites.csv", index=False)
 
     # inactivity: OHID Fingertips look-alike — spaced headers, three Sex breakdowns,
     # two time periods. Reader must keep Sex='Persons' and the LATEST period.
@@ -155,6 +176,7 @@ def point_config(d: pathlib.Path):
         "lookup": d / "lookup.csv", "boundaries": d / "bnd.geojson",
         "iod_la": d / "iod.xlsx", "sessions": d / "sessions.csv",
         "ap_sites": d / "sites.csv", "ap_facilities": d / "fac.csv",
+        "ap_facility_types": d / "factypes.csv",
         "inactivity": d / "inact.csv", "ptal": d / "ptal.csv",
         "output": d / "out.csv",
     })
@@ -208,8 +230,16 @@ def main():
         assert abs(df.loc[1, "pct_sessions_free"] - 0.5) < 1e-9
         # per-capita: 3/10000*10000 = 3.0
         assert abs(df.loc[0, "sessions_per_10k"] - 3.0) < 1e-9
-        # facilities 2/5/3
-        assert df["n_facilities"].tolist() == [2, 5, 3]
+        # facilities: 2+1 operational in borough 1 (AGP counts; closed/unmarked
+        # decoys excluded), 5, 3. A failing status filter would give [5, 5, 3].
+        assert df["n_facilities"].tolist() == [3, 5, 3], df["n_facilities"].tolist()
+        # type decode via lookup: halls j%3==0 → 1/2/1
+        assert df["n_fac_sports_halls"].tolist() == [1, 2, 1], df["n_fac_sports_halls"].tolist()
+        # AGP hazard: borough 1 has ZERO grass pitches (its type-8 AGP must not
+        # match the 'Grass Pitches' needle); boroughs 2/3 each have one (j=2)
+        assert df["n_fac_grass_pitches"].tolist() == [0, 1, 1], df["n_fac_grass_pitches"].tolist()
+        # community share borough 1: Public, Private, Public(AGP) → 2/3
+        assert abs(df.loc[0, "pct_community_use"] - 2 / 3) < 1e-9
         # inactivity converted to proportion
         assert abs(df.loc[0, "pct_inactive_adults"] - 0.22) < 1e-9
         # PTAL: '6b'->8, '3'->4, '4'->5

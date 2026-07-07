@@ -289,15 +289,36 @@ def build_facilities(spine, boundaries) -> pd.DataFrame:
             base[c] = pd.NA
         return base
     fc = C.AP_FAC_COLS
-    fac = pd.read_csv(pf)
+    fac = pd.read_csv(pf, low_memory=False)
+
+    # Operational filter (decode verified in config.py): only currently-usable
+    # facilities count as provision. Closed/planned/unmarked rows are ~21% of
+    # the national file — counting them would inflate every provision figure.
+    n_all = len(fac)
+    fac = fac[pd.to_numeric(fac[fc["status"]], errors="coerce").isin(C.AP_OPERATIONAL_KEEP)]
+    print(f"[facilities] operational filter: kept {len(fac)}/{n_all} rows "
+          f"(status in {sorted(C.AP_OPERATIONAL_KEEP)})")
+
+    # Decode the coded 'Facility Type' via the lookup shipped in the extract.
+    # Fallback: raw values as strings (keeps synthetic fixtures / any future
+    # text-typed export working unchanged).
+    fac["_type_name"] = fac[fc["type"]].astype(str)
+    lut_path = _exists("ap_facility_types")
+    if lut_path is not None:
+        lut = pd.read_csv(lut_path)
+        code2name = dict(zip(lut["Facility Type ID"].astype(str),
+                             lut["Facility Type Name"].astype(str)))
+        fac["_type_name"] = fac[fc["type"]].astype(str).map(code2name).fillna(fac["_type_name"])
+
     fac = _assign_to_borough(fac, fc["lon"], fc["lat"], C.AP_CRS, boundaries).dropna(subset=["lad_code"])
-    fac["_comm"] = fac[fc["community"]].astype(str).str.lower().isin(["1", "true", "yes"])
+    fac["_comm"] = (fac[fc["community"]].astype(str).str.strip().str.lower()
+                    .isin(C.AP_COMMUNITY_TRUE))
     g = fac.groupby("lad_code")
     feat = pd.DataFrame({"n_facilities": g.size(),
                          "n_sites": g[fc["site_id"]].nunique(),
                          "pct_community_use": g["_comm"].mean()})
     for col, needles in C.AP_FAC_TYPES.items():
-        mask = fac[fc["type"]].astype(str).apply(lambda v: any(n.lower() in v.lower() for n in needles))
+        mask = fac["_type_name"].apply(lambda v: any(n.lower() in v.lower() for n in needles))
         feat[col] = fac[mask].groupby("lad_code").size()
     feat = feat.fillna({c: 0 for c in C.AP_FAC_TYPES})
     return base.merge(feat, on="lad_code", how="left")
