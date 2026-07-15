@@ -376,7 +376,73 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
     Halo, Serco Leisure); one Bookteq site 404. **Legend is the least reliable platform
     in this sample.** These are publication-process defects, logged with status.
 
+- **CENSUS EVIDENCE — supersedes the 20-site stratified figures above (run 2026-07-15,
+  `--per-catalogue 88 --pages 2 --tag census`; `results/census_field_presence.csv`,
+  `results/census_endpoint_log.csv`).** Full coverage of the declared frame:
+  **`attempted ÷ declared` = 173/173 = 100.0%**, 4 catalogues, **124 distinct publishers**,
+  969 endpoints, **217,743 items**, 6,622 field-presence rows.
+
+  - **The primary ablation is confirmed at scale.** `superEvent` on `ScheduledSession`:
+    **18,935/18,935 = 100.0%** — a 12× larger denominator than the pilot's 1,533, still
+    exactly universal. (`Slot`: **0/92,359 = 0.0%**. The 17.0% all-kinds aggregate is the
+    same trap as the pilot's 27.2%; **the per-kind denominator is the only honest one.**)
+  - Join integrity: **15,512/18,935 = 81.9%** of sampled `superEvent` targets resolve to a
+    parent harvested on the same pages (page-1/2 alignment is not guaranteed, so this is a
+    floor, not a rate).
+  - **Capacity revised DOWN: 1,329 bytes/item → ~10.5 GB** to retain all 7.9M items raw
+    (pilot estimated ~14.0 GB from a smaller, session-heavier sample). Not a constraint.
+  - **Endpoint failures: 52 of 969 = 5.4%** — 30× HTTP 403, 13× HTTP 500, 7× HTTP 404,
+    1 timeout, 1 dataset site serving no parseable JSON-LD. **14 of 173 declared sites
+    (8.1%) could not be read at all.** A declared-but-unreadable site is a publication
+    defect and must never silently become "zero opportunities".
+
+- **AMENDMENT — the headline claim above is TOO STRONG and is corrected here.**
+  The pilot's framing, *"field availability is a property of the booking platform, not of
+  the publisher"*, does not survive the census in that form. **Field availability is a
+  property of `platform × feed kind`.** Three corrections, all material:
+
+  1. **Bookteq was mischaracterised.** Its **79 publishers serve `FacilityUse`/`Slot`
+     only — no session feeds at all.** The pilot's "Bookteq publishes neither `category`
+     nor `activity`" was not publisher negligence and not even a platform vocabulary
+     choice: `category` and `activity` are **session** concepts, and Bookteq is a
+     **facility-booking** platform. Reading that as a data-quality defect was an error of
+     denominator, and it would have produced a repair recommendation aimed at a
+     non-existent problem.
+  2. **`offers` inverts between the two models.** For sessions it sits on the
+     `SessionSeries` **parent**; for facilities it sits on the **`Slot` child** —
+     **77/77 Bookteq, 25/25 LeisureCloud, 2/2 Legend, 1/1 singular: unanimous.** The same
+     field has an opposite structural home depending on the model. Any consumer that
+     assumes "descriptive fields live on the parent" silently loses all facility pricing.
+  3. **Per-kind, the platform signal is strong but not total.** On `SessionSeries`
+     (publishers with the field present / publishers serving the kind):
+
+     | Platform | `category` | `activity` | `offers` | `organizer` | `location` |
+     |---|---|---|---|---|---|
+     | LeisureCloud | **28/28** | **0/28** | 27/28 | 25/28 | 28/28 |
+     | singular | 2/6 | **6/6** | 5/6 | 6/6 | 6/6 |
+     | Legend | **0/3** | **0/3** | 3/3 | 3/3 | 0/3 |
+     | Bookteq | *serves no session feeds* | — | — | — | — |
+
+     **The pilot's core dichotomy holds and strengthens**: LeisureCloud is `category`
+     28/28 and `activity` **0/28** (pilot: 5/5 and 0/5); singular is `activity` 6/6.
+     A publisher's `category`/`activity` vocabulary is fully predicted by its platform on
+     LeisureCloud and Legend. But `offers` and `organizer` **split within** LeisureCloud
+     (27/28, 25/28), and `category` splits within singular (2/6) — so the platform sets
+     what is **possible**, and publisher behaviour still varies inside that envelope.
+     Legend's `activity` is **8/8 on `FacilityUse` but 0/3 on `SessionSeries`** — the
+     clearest single proof that platform alone is not the unit of explanation.
+
+  **Corrected framing (supersedes the "Consequence" paragraph below):** *the booking
+  platform determines which fields a publisher **can** expose for a **given feed kind**,
+  and that ceiling — not publisher diligence — is the first-order determinant of which
+  discovery questions are answerable where. Within the ceiling, publisher variation is
+  real and second-order.* This is weaker than the pilot's claim and better evidenced.
+  The four-vocabulary-regimes finding survives **for session feeds**; it must not be
+  asserted across feed kinds.
+
 - **Consequence — the branch this opens, and it is not the binary first assumed.**
+  *(Written on the pilot evidence; read subject to the AMENDMENT above, which narrows
+  claim 2 from "platform" to "platform × feed kind" and withdraws the Bookteq example.)*
   The stratified evidence shows **both** mechanisms operating, and they compose:
   1. **Instrument-side (confirmed).** Our extraction discarded `category`, `superEvent`
      and structured `offers` **where the platform published them on every record**
@@ -428,3 +494,120 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 
 - **Status: PROPOSED 2026-07-15.** Supersedes nothing yet; D-020 remains PROPOSED and
   its corpus premise is amended by this entry. No document may claim adoption.
+
+---
+
+## D-022 · Brief provenance established; no further partner elicitation (2026-07-15) — **PROPOSED**
+
+- **Decision (proposed).** The London Sport 1 requirement set is **fixed and enumerable**,
+  and consists of exactly two primary artefacts. All alignment claims must cite them
+  directly. `docs/brief-traceability.md` is the mapping of record.
+
+- **The primary sources (verified 2026-07-15 by direct extraction, not transcription).**
+  - **P1 —** `LS machine learning projects_29-05-2026.pdf`, pp.16–19 (brief) and pp.22–24
+    (output framework). London Sport's own "Let's Move London" deck. Verified
+    partner-authored: PDF metadata `author: Josef Baines` — named in this project's records
+    as **J. Baines, Insight Manager, London Sport** — `creator: Microsoft PowerPoint for
+    Microsoft 365`, `creationDate: 2026-06-03`, 25 pages, real embedded text layer.
+  - **P2 —** the numbered challenge listing headed **"1. London Sport 1"**, read directly
+    as an image. **Sole source of the label "London Sport 1"; the deck never uses it.**
+  - **P1 and P2 are NOT interchangeable.** They differ in wording (e.g. P1 p.18 "New
+    solutions **required to** improve…" vs P2 "the system **requires** new solutions
+    **that** improve…"). Every quotation must name which one it quotes.
+
+- **Why this entry exists.** Until today the project's alignment rested on an **AI
+  paraphrase** — `CODEX_FINAL_ADVERSARIAL_HANDOFF.md` §2.1, headed *"Brief as supplied in
+  the conversation"*. Prior text searches missed P1 because the deck renders the brief as
+  slide bullets while searches used the listing's prose, so **absence of grep hits was
+  mistaken for absence of the artefact**. Recorded as a method lesson: a failed search
+  licenses no conclusion about existence.
+
+- **Finding — the partner is misquoted inside quotation marks.** P1 p.19 and P2 both read
+  "…recommendations tailored **specifically** to London's diverse communities."
+  `Closing_the_Activity_Gap_Project_Proposal.pdf` p.1 and `Updatedprojectproposal.pdf` p.3
+  render it, **within quote marks**, as "tailored to London's diverse communities". The
+  dropped word is the one that makes targeting — and therefore the equity lens — a
+  requirement. **Fix required in every proposal artefact before submission.**
+
+- **Constraint of record: no further partner elicitation is available.** P1 and P2 are the
+  complete statement of requirements. There will be no clarification of ambiguous clauses,
+  no scope negotiation, and no acceptance criteria beyond the brief's own words.
+  **Consequences:** (1) every ambiguity is closed by *documented interpretation*, marked
+  **[INTERPRETATION]** in `docs/brief-traceability.md`, and defended in the report — never
+  by assumption presented as fact; (2) "the partner didn't specify" is **not available** as
+  a defence for an unmet clause, because the clauses are fixed and enumerated; (3) the
+  traceability matrix is the **alignment ceiling** — quote, interpret, deliver, evidence,
+  limit — and is fully within the team's control.
+  > **UNVERIFIED — team must supply before ratification.** The *reason* elicitation is
+  > unavailable (unit rule / partner availability / team decision) and its *date* are not
+  > recorded anywhere. This entry asserts the constraint as stated by the team. **Do not
+  > ratify this bullet until the reason and date are written down.**
+
+- **Open risk (blocks reliance).** **Neither primary is in this repository.** P1 sits in one
+  member's `~/Downloads`; P2 exists only inside a zip. No one cloning this repo can check a
+  single quotation against its source — the same bus-factor defect recorded against
+  `src/recommender/`, and a direct failure against output type **O8** ("Instructions needed
+  to reproduce the analysis"). **Action:** obtain permission to commit P1, or record a
+  citable reference to it.
+
+- **Status: PROPOSED 2026-07-15.**
+
+---
+
+## D-023 · Answerability pivot — rejected alternatives and thresholds (2026-07-15) — **PROPOSED**
+
+- **Decision (proposed).** Reframe the project's central question from *"where is provision
+  unequal?"* to *"which discovery questions are answerable, where, and why not?"* Read
+  against P1, this is not a departure from the brief: the output framework (P1 p.22) names
+  **"DATA QUALITY AND SUITABILITY ASSESSMENT"** as a required output type, itemising
+  "Completeness of the data", "Missing or inconsistent fields", "Issues with data
+  granularity", "Any assumptions made", "Limitations in using the data for modelling or
+  forecasting", and "Areas where findings should be treated with caution". **D-021 is that
+  output.** **[INTERPRETATION]** — this is the team's reading of O3's scope, not a partner
+  statement of intent.
+
+- **What forced it (evidence, not preference).** D-021: the legacy corpus discarded the
+  fields the analysis needed, and the census established that the ecosystem publishes them
+  — 173/173 declared sites, 124 publishers, `superEvent` 18,935/18,935 = 100.0% on
+  `ScheduledSession`. The original question was **unanswerable with the instrument in hand**,
+  and the instrument's defects were themselves the more interesting finding.
+
+- **Alternatives considered and rejected** (required by P1 p.22, output type
+  **"METHODOLOGY EXPLANATION" → "What alternatives were considered"**):
+
+  | Alternative | Rejected because |
+  |---|---|
+  | **Continue the equity-of-provision study on the 7-07 corpus** | The corpus cannot distinguish ecosystem defect from extraction defect, and no raw was retained, so the ambiguity is unresolvable retrospectively (D-021). Any finding would be uninterpretable. |
+  | **Re-harvest and resume the original equity study unchanged** | Possible, but the deployed OpenActive Data Intelligence Platform (verified live 14–15 Jul 2026: 7.9M opportunities, 175 publishers, 74% of LAs, ODI-stewarded, daily refresh) already provides borough choropleths and per-publisher quality reporting. A borough per-capita/deprivation dashboard is **occupied**, so it is not a defensible novelty claim. |
+  | **Build another activity finder / recommender** | London Sport already operates **Get Active** (an OpenActive-powered finder) and **Open Sessions** (a publishing product). Occupied. |
+  | **Generic publisher quality scorecard** | Occupied by the deployed DIP's per-publisher data-quality section, which already separates core-detail completeness from extra-detail content quality. |
+  | **Taxonomy / free-text naming standardisation** | Motivation retired by D-021: the "naming chaos" was measured on a projection that had discarded a `category` field LeisureCloud publishes on 28/28 `SessionSeries` publishers. The coverage arithmetic stands; its interpretation does not. |
+  | **Equity re-ranker (α·relevance + (1−α)·equity)** | No interaction ground truth exists, so no accuracy claim is possible and the α-sweep evaluates nothing external. Retired in favour of the three-state demonstrator, whose outcomes (false suppression / false assurance) are measurable against an adjudicated sample. |
+  | **Keep both the equity study and the answerability study ("two universes")** | Overruled by team direction: one primary dataset (OpenActive), one architecture. Splitting the evidence base halves the depth available to each within a 60-credit envelope. |
+
+- **Thresholds and their rationale.** Recorded to satisfy P1 p.22 ("Any assumptions made"):
+  - **Per-kind denominators are mandatory.** Any field-presence or prevalence rate must be
+    reported per `kind`, never pooled. Rationale: two pooling errors have already produced
+    false headlines — `superEvent` at 17.0% all-kinds vs the true 100.0% on
+    `ScheduledSession` / 0.0% on `Slot`; and pooling `FacilityUse` with `SessionSeries`
+    parents, which made Bookteq's **facility-only** catalogue (79 publishers, no session
+    feeds) look like a publisher quality defect. **Both were caught internally and are
+    recorded rather than hidden.**
+  - **A field counts as "available" for a publisher at `presence_rate > 0`** on a parent
+    feed of the relevant kind. Rationale: this is a *capability* test (does the platform
+    ever expose this field for this publisher?), deliberately generous, because the claim
+    being tested is about **ceilings**, not diligence. A stricter threshold would conflate
+    capability with completeness.
+  - **`attempted ÷ declared` must be reported at catalogue, site and feed level.** "100% of
+    the feeds we tried" is not coverage. The census reports **173/173 = 100.0% of declared**
+    — which is *not* 100% of existing: publishers outside the four catalogues are invisible
+    by construction.
+  - **Failed reads never become zeroes.** 52/969 endpoints (5.4%) and 14/173 sites (8.1%)
+    failed; each carries a status.
+  > **UNVERIFIED / to establish.** The thresholds for the three-state demonstrator — what
+  > counts as a *determinate match* vs *indeterminate candidate*, and the adjudication rule
+  > for the sample — are **not yet set** and must be pre-registered **before** the corpus is
+  > examined for them, or the result is unfalsifiable. Do not ratify this bullet as complete.
+
+- **Status: PROPOSED 2026-07-15.** Depends on D-021 and D-022. If D-021 is rejected, this
+  entry falls with it.

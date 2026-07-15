@@ -26,11 +26,17 @@ Q4 THE BIG ONE  Do parents carry the fields the CSV lacks (category/activity, of
 
 WHAT IT WRITES
 --------------
-data/raw/pilot_<UTC>/            raw JSON pages, exactly as served (immutable)
-results/pilot_endpoint_log.csv   one row per endpoint: attempted/declared, status, timing
-results/pilot_field_presence.csv one row per (publisher, kind, field): presence rate
+data/raw/<tag>_<UTC>/             raw JSON pages, exactly as served (immutable)
+results/<tag>_endpoint_log.csv    one row per endpoint: attempted/declared, status, timing
+results/<tag>_field_presence.csv  one row per (publisher, kind, field): presence rate
 
-Run:  python -m src.harvest_pilot --sites 6 --pages 1
+`--tag` keeps each run's evidence separate. It defaults to "pilot", which is the
+20-site stratified run D-021 cites; a wider run MUST pass a different tag rather than
+overwrite that record, because a decision entry whose evidence has been clobbered is
+an unresolvable citation.
+
+Run:  python -m src.harvest_pilot --per-catalogue 5 --pages 1
+      python -m src.harvest_pilot --per-catalogue 88 --pages 2 --tag census   # all 173 sites
 """
 
 from __future__ import annotations
@@ -144,14 +150,17 @@ def main() -> None:
     ap.add_argument("--per-catalogue", type=int, default=5,
                     help="dataset sites sampled PER CATALOGUE (stratified, not first-N)")
     ap.add_argument("--pages", type=int, default=1, help="RPDE pages per feed")
+    ap.add_argument("--tag", default="pilot",
+                    help="names this run's artefacts; use a fresh tag to avoid "
+                         "overwriting a run an adopted decision entry cites")
     args = ap.parse_args()
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    raw_dir = Path(f"data/raw/pilot_{stamp}")
+    raw_dir = Path(f"data/raw/{args.tag}_{stamp}")
     raw_dir.mkdir(parents=True, exist_ok=True)
     Path("results").mkdir(exist_ok=True)
 
-    print(f"harvest_pilot | UTC {stamp} | raw -> {raw_dir}")
+    print(f"harvest_pilot | UTC {stamp} | tag={args.tag} | raw -> {raw_dir}")
     by_cat, endpoint_log = discover_sites()
     declared_sites = sum(len(v) for v in by_cat.values())
 
@@ -233,12 +242,12 @@ def main() -> None:
                     break
                 time.sleep(PAUSE_S)
 
-    with open("results/pilot_endpoint_log.csv", "w", newline="") as f:
+    with open(f"results/{args.tag}_endpoint_log.csv", "w", newline="") as f:
         cols = ["level", "url", "status", "seconds", "platform", "publisher", "kind", "declared"]
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         w.writerows(endpoint_log)
-    with open("results/pilot_field_presence.csv", "w", newline="") as f:
+    with open(f"results/{args.tag}_field_presence.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["platform", "publisher", "kind", "field",
                                           "presence_rate", "n_items"])
         w.writeheader()
@@ -257,7 +266,7 @@ def main() -> None:
     print(f"  Q3 capacity    : {raw_bytes/max(1,raw_items):,.0f} bytes/item raw; "
           f"{raw_bytes/1e6:.1f} MB for {raw_items:,} items "
           f"-> ~{raw_bytes/max(1,raw_items)*7.9e6/1e9:.1f} GB to retain 7.9M items")
-    print("  Q4 fields      : see results/pilot_field_presence.csv "
+    print(f"  Q4 fields      : see results/{args.tag}_field_presence.csv "
           "(parent presence of category/activity/offers/organizer = the headline)")
     print(f"  endpoints      : {len(endpoint_log)} logged; statuses "
           f"{ {s: sum(1 for e in endpoint_log if e['status']==s) for s in {e['status'] for e in endpoint_log}} }")
