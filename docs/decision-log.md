@@ -630,7 +630,8 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 - **Decision (proposed).** Reframe the project's central question from *"where is provision
   unequal?"* to *"which discovery questions are answerable, where, and why not?"* Read
   against P1, this is not a departure from the brief: the output framework (P1 p.22) names
-  **"DATA QUALITY AND SUITABILITY ASSESSMENT"** as a required output type, itemising
+  **"DATA QUALITY AND SUITABILITY ASSESSMENT"** as an output type under
+  **"SUGGESTED OUTPUTS"** — *suggested*, **not** required (see the correction at D-026) — itemising
   "Completeness of the data", "Missing or inconsistent fields", "Issues with data
   granularity", "Any assumptions made", "Limitations in using the data for modelling or
   forecasting", and "Areas where findings should be treated with caution". **D-021 is that
@@ -841,3 +842,107 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 - **Status: PROPOSED 2026-07-15.** Gate status: **Check 1 PASSED · Check 2
   PASSED-PENDING-REPRODUCTION · Check 3 NOT STARTED** (no `state: deleted` handling exists;
   current-state reconstruction is unbuilt).
+
+---
+
+## D-026 · Adversarial audit — six defects found in today's own work, corrected here (2026-07-15) — **PROPOSED**
+
+- **Why this entry exists.** An adversarial audit was run against everything produced on
+  2026-07-15, explicitly tasked to attack this project's own reasoning. It found **six real
+  defects**, every one verified independently before correction. They are recorded here in
+  full rather than quietly fixed, because the pattern matters more than any single item:
+  **the honesty was real but unevenly applied, and it thinned at exactly the points where the
+  project's reputation was at stake.**
+
+- **1. THE BRIEF WAS MISQUOTED — "required" is not the partner's word.** ❗
+  - **Verified against P1:** p.19 reads "**Required outputs:**" and lists **five** — none about
+    data quality. pp.22–24 are headed "**OUTPUT FRAMEWORK**", columns "**OUTPUT TYPE /
+    SUGGESTED OUTPUTS**". The word *required* appears **nowhere** on pp.22–24.
+  - **The error:** D-023, D-024, `docs/v7-one-pager.md` and `docs/brief-traceability.md` all
+    called the nine output types **"required"**, and built on it the claim that *"the pivot is
+    the brief's own required output"*. **O3 is SUGGESTED, not required.**
+  - **Why it is serious, not a typo.** The word is load-bearing twice — for the pivot's
+    central alignment argument and for D-024's licensing rationale — and it was inserted **in
+    the self-serving direction**, by the very document (`brief-traceability.md` §0.2) that
+    convicts the project's proposals of dropping "specifically" from partner text. **The same
+    offence, committed while prosecuting it.**
+  - **Corrected** in all four locations to "suggested". **The pivot's real defence does not
+    need the inflation**: it was forced by instrument failure, it is honestly evidenced, and it
+    maps closely onto O3's *suggested* contents. That argument stands on its own.
+
+- **2. A FALSE LICENCE CLAIM, IN THE PUBLIC REPO.** ❗
+  `ATTRIBUTION.md` §2.1 asserted *"No data from unreadable sites is redistributed here."*
+  **False, and falsified by an artefact in the same commit (b584451):** publisher **`Halo`**
+  returned **HTTP 403** on its dataset site — licence unknown — yet contributes **14 derived
+  rows** to `results/census_field_presence.csv`, published publicly. Cause:
+  `verify_licences.py` reads the *dataset site*; `harvest_pilot.py` reads the *feed
+  endpoints*; a site can 403 on one and serve on the other. **This was the single assertion in
+  that file with external legal consequence, in the document written to fix exactly this
+  defect.** Corrected to disclose it; **resolution deferred to the team** (drop the rows /
+  re-read the site / use the RPDE envelope's own `license`).
+
+- **3. THE HEADLINE FIGURES WERE NOT TRACEABLE (K6 fires after all).** ❗
+  `217,743 items`, `18,935/18,935`, `0/92,359`, `17.0%`, `1,329 bytes/item`, `~10.5 GB` exist
+  in **no committed artefact** — they were printed to stdout, and `*.log` is gitignored
+  (`.gitignore:23`), so no run log was kept. Worse, they are **not derivable** from the CSVs
+  cited as their source: summing `n_items` over the `ScheduledSession`/`superEvent` rows gives
+  **27,484, not 18,935**. Cause (benign, now fixed): `harvest_pilot.py` wrote
+  `n_items = len(items)` — **including RPDE tombstones** — beside a `presence_rate` computed
+  over `len(payloads)`. **An examiner reconciling the project's strongest number gets 27,484,
+  concludes it is inflated, and stops reading.**
+  - **Fixed:** `field_presence()` now returns its denominator; the CSV carries
+    **`n_payloads`** (the true denominator) **and** `n_items`, plus `feed_url` and `page`.
+  - **K6 status corrected AGAIN — it FIRES.** It was withdrawn earlier today on the grounds
+    that the scripts' only third-party import is declared. **That reasoning was sound but
+    answered the wrong question**: K6 asks whether a non-author can reproduce the *headline
+    figures*, not whether the code imports cleanly. They could not. **The withdrawal is itself
+    withdrawn.**
+
+- **4. THE REPLACEMENT INSTRUMENT WAS SILENTLY LOSING RAW.** ❗
+  **752 COMPLETE feed pages were fetched; 708 `.json` files exist on disk. 44 pages were
+  silently overwritten** — under a code comment reading *"immutable raw, exactly as served"*.
+  Cause: the filename was `{publisher}_{kind}_{page}`, which collides when a publisher
+  declares several feeds of one kind, and **catastrophically when a dataset site publishes no
+  `publisher.name` at all** (32 pages from unnamed publishers all collided into
+  `_<kind>_<pg>.json`).
+  **This is the same defect class — undisclosed harvest-time data loss — that D-021 retired an
+  entire corpus over, reproduced in the instrument built to replace it, and disclosed nowhere.**
+  - **Fixed:** filenames are now keyed by a **page-URL digest**; collisions get a `_dup`
+    suffix, are counted, and are reported in the run output. **Pages lost: 0 (was 44.)**
+    Re-simulated against the census endpoint log: 752 pages → 742 distinct names + 10 suffixed
+    = **752 retained**. (Real collision observed: **Chelmsford City Sports declares the same
+    feed URL twice.**)
+  - **The census artefacts already committed were produced by the OLD code and are therefore
+    missing 44 raw pages.** The CSVs are unaffected (they were written from the in-memory
+    pages, not re-read from disk), but **the raw archive is incomplete and must be
+    re-harvested before it is treated as the retained-raw record.** Disclosed, not hidden.
+
+- **5. A KILL RULE BROKE ITS OWN RULE.** `docs/v7-one-pager.md` K1 cited *"census, 173/173
+  declared sites, 124 publishers"* against a **`ScheduledSession`-only** measurement — which
+  only **30 publishers on 2 platforms** (LeisureCloud, singular) serve at all. **That is the
+  exact pooling error the D-021 amendment was written to catch, committed inside the rule that
+  forbids pooling.** Corrected.
+
+- **6. A DOCUMENT INSTRUCTED THE ONE ACT FOUR OTHERS FORBID.**
+  `brief-traceability.md` §6 said *"get P1 into the repo"* — contradicting D-022, D-024,
+  `ATTRIBUTION.md` §3 and its own §0.1. Aggravating: `.gitignore` had **no `*.pdf` rule**,
+  `README.md:112` recommends `git add .`, and **an untracked PDF sits at the repo root right
+  now**. Corrected, and **`*.pdf` added to `.gitignore` as a mechanical safety rail** — the
+  rule must not depend on remembering it.
+
+- **Findings the audit raised that were themselves FALSE, and are rejected** (recorded so they
+  are not re-litigated): that `src/verify_licences.py`, `results/licence_audit.csv`, `LICENSE`
+  and `ATTRIBUTION.md` were never committed — **all four are at HEAD in b584451**; the lenses
+  read the tree before that commit landed. The K6 conclusion survives, but on **entirely
+  different grounds** (item 3), not on that premise.
+
+- **The scoping error nobody had flagged.** **D-022 treats the partner brief as the sole
+  acceptance authority. It is not — the examiner is, and the examiner is not London Sport.**
+  Nothing in any document produced today traces to the **SEMTM0044 marking criteria** or to
+  **4 September**, seven weeks out, with the analysis corpus just retired and WS3/WS4 unbuilt.
+  Declared in July by the team, that is a defensible scoping position; discovered in September
+  by the examiner, it is not. **Open — the team must resolve.**
+
+- **Status: PROPOSED 2026-07-15.** Corrections 1, 2, 5 and 6 are applied to the documents;
+  3 and 4 are applied to `src/harvest_pilot.py` but **the committed census raw remains
+  incomplete until re-harvested**.

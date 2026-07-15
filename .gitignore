@@ -25,3 +25,7 @@ data/processed/*
 data/
 .claude/
 CLAUDE.md
+
+# Partner materials must never be committed (D-022/D-024): this repo is PUBLIC.
+# London Sport's brief is licensed to us for use, not redistribution.
+*.pdf

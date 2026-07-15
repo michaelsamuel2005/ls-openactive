@@ -37,8 +37,25 @@ canonical catalogue collection and read the `license` field declared by every da
 
 - **162 of 162 readable dataset sites declare `https://creativecommons.org/licenses/by/4.0/` — 100.0%, unanimous.**
 - **11 of 173 declared sites were unreadable** (HTTP errors / no parseable JSON-LD), so their
-  licences are **unknown, not assumed**. No data from unreadable sites is redistributed here.
+  licences are **unknown, not assumed**.
 - Full audit: **`results/licence_audit.csv`** (one row per declared site).
+
+> ⚠️ **CORRECTION (2026-07-15) — an earlier version of this section claimed "No data from
+> unreadable sites is redistributed here." That was FALSE**, and falsified by an artefact in
+> the same commit. **One publisher — `Halo` — returned HTTP 403 on its dataset site (so its
+> licence is unknown) yet contributes 14 derived rows to `results/census_field_presence.csv`,
+> published in this public repository.** The cause: `src/verify_licences.py` reads the
+> *dataset site*, while `src/harvest_pilot.py` reads the *feed endpoints* — a site can 403 on
+> one and serve on the other, so the two runs disagree about who was readable.
+>
+> **Status: unresolved, disclosed rather than papered over.** This is the one assertion in
+> this file with external legal consequence, in the document written to fix exactly this
+> class of defect, and it did not hold. **Team decision required — options:** (a) drop Halo's
+> 14 rows from published artefacts; (b) re-read Halo's site to establish its licence; or
+> (c) rely on the **RPDE envelope's own `license` field**, which every feed page carries and
+> which neither run has yet used — the strongest option, because it attributes at the level
+> of the data actually redistributed rather than at site level. **Until resolved, Halo's rows
+> are redistributed without a verified licence.** Tracked as **D-026**.
 
 This discharges the open ask recorded at `docs/data-sources.md` — *"verify per-feed licences
 before publishing derived outputs"*.

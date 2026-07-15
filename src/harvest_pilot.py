@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 import sys
@@ -137,12 +138,21 @@ def site_feeds(site_url: str) -> tuple[dict, list[dict], str]:
     return meta, body.get("distribution", []), "COMPLETE"
 
 
-def field_presence(items: list[dict]) -> dict:
-    """Presence rate of each lost field across the `data` payloads on one page."""
+def field_presence(items: list[dict]) -> tuple[dict, int]:
+    """Presence rate of each lost field across the `data` payloads on one page.
+
+    Returns (rates, n_payloads). `n_payloads` is the DENOMINATOR the rates are over, and
+    it is returned rather than inferred because it is NOT `len(items)`: an RPDE page also
+    carries `state: deleted` tombstones, which have no `data` and cannot be scored. Writing
+    `len(items)` beside a rate computed over `len(payloads)` makes the rate unreconcilable
+    from the artefact — the defect corrected in D-026.
+    """
     payloads = [i["data"] for i in items if isinstance(i.get("data"), dict)]
     if not payloads:
-        return {}
-    return {f: sum(1 for d in payloads if d.get(f) is not None) / len(payloads) for f in LOST_FIELDS}
+        return {}, 0
+    rates = {f: sum(1 for d in payloads if d.get(f) is not None) / len(payloads)
+             for f in LOST_FIELDS}
+    return rates, len(payloads)
 
 
 def main() -> None:
@@ -176,6 +186,7 @@ def main() -> None:
           f"{len(selected)/max(1,declared_sites):.1%}  (stratified across catalogues)")
 
     presence_rows: list[dict] = []
+    collisions: list[dict] = []
     child_super, child_total, raw_bytes, raw_items = 0, 0, 0, 0
     parent_ids: set[str] = set()
     child_super_targets: list[str] = []
@@ -209,16 +220,35 @@ def main() -> None:
 
                 items = body.get("items", [])
                 blob = json.dumps(body)
-                fname = re.sub(r"[^A-Za-z0-9]+", "_", f"{meta.get('publisher')}_{kind}_{pg}")[:120]
-                (raw_dir / f"{fname}.json").write_text(blob)  # immutable raw, exactly as served
+                # The filename MUST be unique per (feed, page), not per (publisher, kind, page):
+                # a publisher can declare several feeds of one kind, and some dataset sites
+                # publish no `publisher.name` at all — both collide, and a collision silently
+                # OVERWRITES retained raw. That is the same undisclosed harvest-time data loss
+                # that retired the legacy corpus (D-021), so it cannot be tolerated in the
+                # replacement instrument. The URL digest disambiguates. See D-026.
+                page_key = hashlib.sha1(page_url.encode()).hexdigest()[:8]
+                stem = re.sub(r"[^A-Za-z0-9]+", "_",
+                              f"{meta.get('publisher') or 'UNNAMED'}_{kind}")[:100]
+                out = raw_dir / f"{stem}_{page_key}_p{pg}.json"
+                # Belt and braces: RPDE `next` cursors make page URLs unique in practice, but
+                # a site CAN declare the same contentUrl in two distributions (observed:
+                # Chelmsford City Sports). Never overwrite; suffix and record it instead.
+                dup = 0
+                while out.exists():
+                    dup += 1
+                    out = raw_dir / f"{stem}_{page_key}_p{pg}_dup{dup}.json"
+                if dup:
+                    collisions.append({"file": out.name, "feed_url": url, "page_url": page_url})
+                out.write_text(blob)  # immutable raw, exactly as served
                 raw_bytes += len(blob.encode())
                 raw_items += len(items)
 
-                pres = field_presence(items)
+                pres, n_payloads = field_presence(items)
                 for f, rate in pres.items():
                     presence_rows.append({"platform": platform, "publisher": meta.get("publisher"),
                                           "kind": kind, "field": f, "presence_rate": round(rate, 4),
-                                          "n_items": len(items)})
+                                          "n_payloads": n_payloads, "n_items": len(items),
+                                          "feed_url": url, "page": pg})
                 if kind in PARENT_KINDS:
                     for i in items:
                         if isinstance(i.get("data"), dict) and i["data"].get("@id"):
@@ -249,7 +279,8 @@ def main() -> None:
         w.writerows(endpoint_log)
     with open(f"results/{args.tag}_field_presence.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["platform", "publisher", "kind", "field",
-                                          "presence_rate", "n_items"])
+                                          "presence_rate", "n_payloads", "n_items",
+                                          "feed_url", "page"])
         w.writeheader()
         w.writerows(presence_rows)
 
@@ -268,6 +299,9 @@ def main() -> None:
           f"-> ~{raw_bytes/max(1,raw_items)*7.9e6/1e9:.1f} GB to retain 7.9M items")
     print(f"  Q4 fields      : see results/{args.tag}_field_presence.csv "
           "(parent presence of category/activity/offers/organizer = the headline)")
+    print(f"  raw retained   : {raw_items:,} items across "
+          f"{len(list(raw_dir.glob('*.json')))} files; filename collisions handled: {len(collisions)} "
+          f"(0 pages lost — collisions are suffixed, never overwritten)")
     print(f"  endpoints      : {len(endpoint_log)} logged; statuses "
           f"{ {s: sum(1 for e in endpoint_log if e['status']==s) for s in {e['status'] for e in endpoint_log}} }")
     print("=" * 72)

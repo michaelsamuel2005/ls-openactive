@@ -220,7 +220,7 @@ and is not installed in the shared environment. **Nobody cloning this repo can r
 corpus.**
 
 F-DEP has been treated as internal housekeeping. It is not: it is a **direct failure against
-a partner-named required output.** Same for the provenance risk in §0.1 — a brief-traceability
+a partner-*suggested* output (P1 pp.22–24 read "SUGGESTED OUTPUTS", not "required" — see D-026).** Same for the provenance risk in §0.1 — a brief-traceability
 document whose brief is not in the repo fails O8 on its own terms.
 
 ---
@@ -278,7 +278,7 @@ start today.
 
 1. **Ratify or reject** alongside D-021 (PR #6).
 2. **Fix the §0.2 misquotation** in every proposal artefact before any submission.
-3. **Resolve §0.1**: get P1 into the repo, or record a citable reference to it.
+3. **Resolve §0.1** — **NOT by committing P1.** This repo is public; committing London Sport's unpublished deck would republish it (D-022, D-024, `ATTRIBUTION.md` §3 all forbid it). *(An earlier draft of this line said "get P1 into the repo" — it contradicted four documents and is corrected, D-026.)* Instead: ask London Sport whether it may be published or whether a citable public reference exists, and circulate it by the team's own private channel meanwhile. The SHA-256 block in §0.1 is the verification substitute.
 4. **Write the §4 decision-log entry** giving the reason and date for the elicitation constraint.
 5. **Re-run the §1/§3 verdicts** when the census lands and when WS3/WS4 are built. Verdicts are
    dated 2026-07-15 and will go stale.

@@ -57,21 +57,26 @@ Each is a *pre-declared* action, not a discretionary judgement. Firing one is a 
 
 | # | Trigger | Action — no renegotiation after the fact |
 |---|---|---|
-| **K1** | The parent pointer is **not** materially prevalent on the child records the primary ablation acts on (measured **per `kind`**, never pooled) | The ablation is null by construction. Do not run it; report the prevalence finding instead. **STATUS: DOES NOT FIRE for session feeds** — `superEvent` on `ScheduledSession` = **18,935/18,935 = 100.0%** (census, 173/173 declared sites, 124 publishers). **FIRES for facilities** — `Slot` = **0/92,359 = 0.0%** ⇒ **the primary mechanism study is scoped to session feeds only.** |
+| **K1** | The parent pointer is **not** materially prevalent on the child records the primary ablation acts on (measured **per `kind`**, never pooled) | The ablation is null by construction. Do not run it; report the prevalence finding instead. **STATUS: DOES NOT FIRE for session feeds** — `superEvent` on `ScheduledSession` = **18,935/18,935 = 100.0%**, across the **30 publishers on 2 platforms (LeisureCloud, singular) that serve `ScheduledSession` at all**. *(Corrected D-026: this previously cited "173/173 sites, 124 publishers" — the census-wide frame — against a `ScheduledSession`-only measurement. That is the same pooling error the D-021 amendment exists to catch, committed in the rule that forbids it.)* **FIRES for facilities** — `Slot` = **0/92,359 = 0.0%** ⇒ **the primary mechanism study is scoped to session feeds only.** |
 | **K2** | The primary contrast shows no material effect at the pre-declared threshold | Report the bounded null with its uncertainty. **Withdraw the improvement claim.** Do not re-cut the threshold, the query set, or `k`. |
 | **K3** | Corpus gate fails — `attempted ÷ declared` cannot be reported at catalogue/site/feed level, or failed endpoints are not visible | All ecosystem-wide claims suspended. First contribution becomes corpus/pipeline reconstruction. **STATUS: PASSES** — census reports **173/173 = 100.0% of declared**, 969 endpoints each with a status, 52 failures (5.4%) retained and visible. |
 | **K4** | A field's "missingness" cannot be attributed to publication-side vs instrument-side from retained raw | That field is **excluded** from any mechanism or repair claim. Unattributed missingness is the exact defect that retired the 7 July corpus (D-021). **STATUS: DOES NOT FIRE for the 13 traced fields** — attribution is now measured per record (D-025, Check 2): every field is classed instrument-side or publication-side over 14,790 resolved children, with UNRESOLVED reported, never folded into absence. |
 | **K5** | The benchmark query set is not frozen with provenance before results are seen | The prototype is labelled **exploratory only** and makes no comparative claim. |
-| **K6** | A non-author cannot reproduce the headline table/figure from a clean clone | **No exceptional claim.** **STATUS: DOES NOT FIRE — re-tested 2026-07-15, correcting an earlier claim that it did.** The scripts producing every current headline figure (`src/harvest_pilot.py`, `src/verify_licences.py` → `results/census_*.csv`, `results/licence_audit.csv`) have **exactly one third-party import — `requests` — and it is declared in `requirements.txt`.** A clean clone reproduces the current evidence chain. *(The retired corpus is a separate matter — see F-DEP.)* |
+| **K6** | A non-author cannot reproduce the headline table/figure from a clean clone | **No exceptional claim.** **STATUS: FIRES (D-026).** The headline item-level figures (`217,743 items`, `18,935/18,935`, `0/92,359`, `17.0%`, `1,329 bytes/item`, `~10.5 GB`) exist in **no committed artefact** — they were printed to stdout and `*.log` is gitignored — and are **not derivable** from the CSVs cited as their source: summing `n_items` over the `ScheduledSession`/`superEvent` rows yields **27,484, not 18,935**. *An earlier withdrawal of this kill rule ("only third-party import is declared") answered the wrong question: K6 asks whether the FIGURES reproduce, not whether the code imports.* **Fixed at source** — the CSV now carries `n_payloads`, `feed_url` and `page` — **but the fix does not retrofit the committed census artefacts, which must be re-harvested.** |
 | **K7** | Any reference is cited without a team member having read it | It is marked `TODO-VERIFY` and **may not appear in a submitted artefact.** **STATUS: CURRENTLY FIRING** — Razniewski & Nutt is the blueprint's only citation and nobody has read it. |
 
-**One kill rule is firing right now: K7** (an unread citation). It is fixable this week and not
-by harvesting more data — someone has to read the paper.
+**Two kill rules are firing: K6 and K7.** Neither is fixable by harvesting more data.
 
-**K6 was previously reported as firing. It is not** — that claim was tested and withdrawn
-(see the row above). The confusion came from conflating two different reproducibility
-questions: *the retired corpus* is permanently unrebuildable (F-DEP), while *the current
-evidence chain* reproduces from a clean clone. Only the second is what K6 tests.
+**K6's status has changed twice today, and the record of that is deliberate.** It was reported
+firing (on F-DEP's authority), then withdrawn (the scripts' only third-party import is
+declared), and is now **firing again on different and correct grounds**: the headline figures
+are not reconcilable from any committed artefact (D-026). The withdrawal answered *"does the
+code import cleanly?"* when K6 asks *"can a stranger reproduce the number?"* **A rule whose
+status flips under scrutiny was not being applied; it was being narrated.** Closing it needs a
+re-harvest with the fixed code, and a committed run log — note `.gitignore:23` is `*.log`, so
+`git add results/<tag>_run.log` **fails silently**; use `git add -f`.
+
+**K7** — Razniewski & Nutt is the blueprint's only citation and nobody has read it.
 
 ---
 
@@ -112,7 +117,7 @@ criteria beyond the brief's own words.
 
 The pivot has been discussed internally as a retreat from the equity study. Against the
 verified brief it is the opposite. P1 p.22 names **"DATA QUALITY AND SUITABILITY ASSESSMENT"**
-as a **required output type**, itemising verbatim: "Completeness of the data" · "Missing or
+as an output type under **"SUGGESTED OUTPUTS"** — *suggested*, **not** required (correction, D-026) — itemising verbatim: "Completeness of the data" · "Missing or
 inconsistent fields" · "Issues with data granularity" · "Any assumptions made" · "Limitations
 in using the data for modelling or forecasting" · "Areas where findings should be treated with
 caution."
