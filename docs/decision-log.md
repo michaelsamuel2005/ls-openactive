@@ -752,3 +752,92 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 - **Status: PROPOSED 2026-07-15.** The visibility correction and attribution are **compliance,
   not preference** — if the repo stays public they are required regardless of ratification.
   The licence *choice* (MIT + CC-BY-4.0) is the part open to team amendment.
+
+---
+
+## D-025 · Check 2 PASSED — instrument-side loss and publication-side absence separated and quantified (2026-07-15) — **PROPOSED**
+
+- **What this settles.** D-021 retired the legacy corpus because it **could not distinguish an
+  ecosystem defect from an extraction defect**, and — no raw retained — never would. The
+  census retained raw, so the distinction is now **decidable per record, per field**. This is
+  the blueprint's **Check 2 (field lineage)**, and it passes. It is also the evidential core
+  of the whole pivot: the instrument/publication decomposition stops being an argument and
+  becomes a measurement.
+
+- **Method (`src/trace_lineage.py`, ruff clean).** For every captured `ScheduledSession`
+  child, resolve `superEvent` to the `SessionSeries` parent captured in the same snapshot,
+  then classify each field: **ON_CHILD** · **INHERITABLE** (absent on child, present on
+  parent → *a child-only extraction destroys it — **instrument-side***) · **SOURCE_ABSENT**
+  (absent on both → *the ecosystem does not publish it — **publication-side***) ·
+  **UNRESOLVED** (parent not in snapshot → **nothing concluded**).
+
+- **Scale.** 21,152 parents indexed · 18,213 children traced · **14,790 resolved = 81.2%**.
+  All rates below are over **resolved children only** — the honest denominator. **UNRESOLVED
+  is never folded into absence**; it is a property of *our snapshot* (2 RPDE pages/feed, and
+  parent/child pages are not aligned), not of the ecosystem. Folding it in would manufacture
+  precisely the false missingness that retired the legacy corpus.
+
+- **INSTRUMENT-SIDE — fields a child-only extraction destroys, that the ecosystem publishes:**
+
+  | Field | Inheritable | Rate |
+  |---|---|---|
+  | `location` | 14,790/14,790 | **100.0%** |
+  | `name` | 14,788/14,790 | **100.0%** |
+  | `eventSchedule` | 14,759/14,790 | 99.8% |
+  | `category` | 14,345/14,790 | 97.0% |
+  | `url` | 12,872/14,790 | 87.0% |
+  | `offers` | 11,915/14,790 | 80.6% |
+  | `attendeeInstructions` | 10,105/14,790 | 68.3% |
+  | `organizer` | 7,852/14,790 | 53.1% |
+  | `genderRestriction` | 7,716/14,790 | 52.2% |
+
+  **`location` is 100.0% inheritable with 0 source-absent.** Not one child carries its own
+  `location`; every one is on the parent. A child-only pipeline loses **all** geography — and
+  geography is the field a borough-level equity analysis is built on.
+
+- **PUBLICATION-SIDE — fields the ecosystem genuinely does not publish here:**
+
+  | Field | Source-absent | Rate |
+  |---|---|---|
+  | `level` | 14,790/14,790 | **100.0%** |
+  | `ageRange` | 14,644/14,790 | 99.0% |
+  | `description` | 14,353/14,790 | 97.0% |
+  | `activity` | 14,345/14,790 | 97.0% |
+
+  **`level` is absent on every single resolved record — 14,790/14,790.** No better pipeline
+  recovers it. A searcher asking *"is this suitable for a beginner?"* is **unanswerable in
+  100% of cases**, and `ageRange` nearly so at 99.0%. These are not data-quality defects to
+  be repaired; they are **hard limits on which discovery questions can be asked at all**, and
+  they are the direct empirical warrant for the three-state design: *indeterminate* is the
+  only honest verdict, and both a closed-world filter (false suppression) and a permissive one
+  (false assurance) would lie.
+
+- **Both mechanisms are real, and now quantified rather than asserted.** `category` is 97.0%
+  **instrument-side** while `activity` is 97.0% **publication-side** — near-perfect
+  complements, exactly as the census's platform×kind finding predicts (LeisureCloud dominates
+  the sample and publishes `category`, not `activity`). The corrected D-021 framing survives
+  an independent test at record level.
+
+- **New finding — the legacy corpus's geography came from a `beta:` field.** The legacy CSV
+  carried `venue`/`latitude`/`longitude` despite `location` being 0% on children. The route
+  was **`beta:sportsActivityLocation`, present on 14,345/14,790 = 97.0% of children** — a
+  **beta-namespaced, explicitly provisional** field. The retired corpus's only geography, on
+  which every borough assignment and the entire gap index rested, depended on a field the
+  specification marks as unstable. **This is independent of, and additional to, the reasons in
+  D-021**, and strengthens rather than softens the retirement.
+
+- **Reproducibility (the blueprint's actual pass condition).** Check 2 passes *"only when
+  extraction loss is separated from source absence **and a second team member can reproduce
+  every sampled trace**"*. The first is done. For the second, `results/lineage_sample.csv`
+  emits **50 individual traces** (child `@id`, parent `@id`, fields on each, and the
+  inheritable/source-absent verdict), each hand-checkable against `data/raw/census_*/` **with
+  no code**. **The second half of this gate is not ours to close — a teammate must actually do
+  it.** Until then Check 2 is **PASSED-PENDING-REPRODUCTION**, not passed.
+
+- **Verification.** Every figure above was recomputed by a second, independent traversal of
+  the raw pages and matched exactly (`location` 0/14,790/0 · `level` 0/0/14,790 · `category`
+  0/14,345/445 · `activity` 0/445/14,345).
+
+- **Status: PROPOSED 2026-07-15.** Gate status: **Check 1 PASSED · Check 2
+  PASSED-PENDING-REPRODUCTION · Check 3 NOT STARTED** (no `state: deleted` handling exists;
+  current-state reconstruction is unbuilt).

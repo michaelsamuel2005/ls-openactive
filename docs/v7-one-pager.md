@@ -30,6 +30,13 @@ framing — is retained as **motivation only**, not as a description of what thi
 | **RQ2** | **Discovery determinability.** Across a prespecified benchmark of London searches, what proportion return enough determinate matches, only indeterminate candidates, or no observed listed match? | A profile over a frozen query set — never an intrinsic property of London or of OpenActive. |
 | **RQ3** | **Mechanism and repair.** How much do parent resolution and selected secondary mechanisms change determinable discovery coverage, for which constraints, and at what coverage/error cost? | Named mechanisms materially do / do not change defined outputs. |
 
+**RQ1 now has a measured answer** (D-025, Check 2): across 14,790 resolved children, the
+acquisition/extraction loss that "constrains discovery" is quantified per field —
+`location` **100.0%** and `category` **97.0%** are published-but-destroyed by child-only
+extraction (**instrument-side**), while `level` **100.0%** and `activity` **97.0%** are
+never published at all (**publication-side**). Both mechanisms are real, complementary, and
+now measured rather than argued.
+
 **No fourth RQ.** The prototype is an experimental surface for RQ3, not another research programme.
 
 ## Falsifiable central proposition
@@ -53,7 +60,7 @@ Each is a *pre-declared* action, not a discretionary judgement. Firing one is a 
 | **K1** | The parent pointer is **not** materially prevalent on the child records the primary ablation acts on (measured **per `kind`**, never pooled) | The ablation is null by construction. Do not run it; report the prevalence finding instead. **STATUS: DOES NOT FIRE for session feeds** — `superEvent` on `ScheduledSession` = **18,935/18,935 = 100.0%** (census, 173/173 declared sites, 124 publishers). **FIRES for facilities** — `Slot` = **0/92,359 = 0.0%** ⇒ **the primary mechanism study is scoped to session feeds only.** |
 | **K2** | The primary contrast shows no material effect at the pre-declared threshold | Report the bounded null with its uncertainty. **Withdraw the improvement claim.** Do not re-cut the threshold, the query set, or `k`. |
 | **K3** | Corpus gate fails — `attempted ÷ declared` cannot be reported at catalogue/site/feed level, or failed endpoints are not visible | All ecosystem-wide claims suspended. First contribution becomes corpus/pipeline reconstruction. **STATUS: PASSES** — census reports **173/173 = 100.0% of declared**, 969 endpoints each with a status, 52 failures (5.4%) retained and visible. |
-| **K4** | A field's "missingness" cannot be attributed to publication-side vs instrument-side from retained raw | That field is **excluded** from any mechanism or repair claim. Unattributed missingness is the exact defect that retired the 7 July corpus (D-021). |
+| **K4** | A field's "missingness" cannot be attributed to publication-side vs instrument-side from retained raw | That field is **excluded** from any mechanism or repair claim. Unattributed missingness is the exact defect that retired the 7 July corpus (D-021). **STATUS: DOES NOT FIRE for the 13 traced fields** — attribution is now measured per record (D-025, Check 2): every field is classed instrument-side or publication-side over 14,790 resolved children, with UNRESOLVED reported, never folded into absence. |
 | **K5** | The benchmark query set is not frozen with provenance before results are seen | The prototype is labelled **exploratory only** and makes no comparative claim. |
 | **K6** | A non-author cannot reproduce the headline table/figure from a clean clone | **No exceptional claim.** **STATUS: DOES NOT FIRE — re-tested 2026-07-15, correcting an earlier claim that it did.** The scripts producing every current headline figure (`src/harvest_pilot.py`, `src/verify_licences.py` → `results/census_*.csv`, `results/licence_audit.csv`) have **exactly one third-party import — `requests` — and it is declared in `requirements.txt`.** A clean clone reproduces the current evidence chain. *(The retired corpus is a separate matter — see F-DEP.)* |
 | **K7** | Any reference is cited without a team member having read it | It is marked `TODO-VERIFY` and **may not appear in a submitted artefact.** **STATUS: CURRENTLY FIRING** — Razniewski & Nutt is the blueprint's only citation and nobody has read it. |

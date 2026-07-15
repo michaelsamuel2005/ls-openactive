@@ -129,6 +129,25 @@ For a stratified sample, trace activity, name, organiser, location, time, price,
 
 Pass only on the new raw-retaining corpus, when extraction loss is separated from source absence and a second team member can reproduce every sampled trace.
 
+> **STATUS: PASSED-PENDING-REPRODUCTION (2026-07-15).** `src/trace_lineage.py` →
+> `results/lineage_trace.csv`, `results/lineage_sample.csv`. Full result: **D-025**.
+> 21,152 parents indexed · 18,213 children traced · **14,790 resolved (81.2%)**; all rates
+> over resolved children only, with UNRESOLVED never folded into absence.
+>
+> **Extraction loss vs source absence is separated — the first half of this gate is met.**
+> *Instrument-side* (published, destroyed by child-only extraction): `location`
+> **100.0%**, `name` 100.0%, `eventSchedule` 99.8%, `category` 97.0%, `url` 87.0%,
+> `offers` 80.6%. *Publication-side* (not published at all): `level` **100.0%**,
+> `ageRange` 99.0%, `description` 97.0%, `activity` 97.0%.
+>
+> **`level` is absent on 14,790/14,790 records** — no pipeline recovers it, so
+> "beginner-friendly?" is unanswerable in 100% of cases. This is the empirical warrant for
+> three-state discovery, not an assumption.
+>
+> **The second half is NOT ours to close.** `results/lineage_sample.csv` emits 50 traces
+> hand-checkable against `data/raw/census_*/` with no code — but a **second team member must
+> actually reproduce them**. Until then this gate is **not passed**.
+
 ### Check 3 — current-state pipeline
 
 Demonstrate updates, deletions, feed-pair joins, partial read/error handling, recurrence/schedule semantics, London geography and common observation horizon.
