@@ -1,0 +1,78 @@
+level,url,status,seconds,platform,publisher,kind,declared
+collection,https://openactive.io/data-catalogs/data-catalog-collection.jsonld,COMPLETE,0.19,,,,
+catalogue,https://opendata.leisurecloud.live/api/datacatalog,COMPLETE,0.11,,,,31
+catalogue,https://openactivedatacatalog.legendonlineservices.co.uk/api/DataCatalog,COMPLETE,0.16,,,,31
+catalogue,https://openactive.io/data-catalogs/singular.jsonld,COMPLETE,0.19,,,,23
+catalogue,https://app.bookteq.com/api/openactive/catalogue,COMPLETE,0.56,,,,88
+site,https://activehartlepool.gs-signature.cloud/OpenActive/,COMPLETE,,opendata.leisurecloud.live,Active Hartlepool,,5
+feed,https://opendata.leisurecloud.live/api/feeds/HartlepoolBoroughCouncil-live-course-instance,COMPLETE,0.09,opendata.leisurecloud.live,Active Hartlepool,CourseInstance,
+feed,https://opendata.leisurecloud.live/api/feeds/HartlepoolBoroughCouncil-live-session-series,COMPLETE,0.12,opendata.leisurecloud.live,Active Hartlepool,SessionSeries,
+feed,https://opendata.leisurecloud.live/api/feeds/HartlepoolBoroughCouncil-live-scheduled-sessions,COMPLETE,0.1,opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,
+feed,https://opendata.leisurecloud.live/api/feeds/HartlepoolBoroughCouncil-live-facility-uses,COMPLETE,0.11,opendata.leisurecloud.live,Active Hartlepool,FacilityUse,
+feed,https://opendata.leisurecloud.live/api/feeds/HartlepoolBoroughCouncil-live-slots,COMPLETE,0.12,opendata.leisurecloud.live,Active Hartlepool,Slot,
+site,https://activeleeds-oa.leisurecloud.net/OpenActive/,COMPLETE,,opendata.leisurecloud.live,Active Leeds,,5
+feed,https://opendata.leisurecloud.live/api/feeds/ActiveLeeds-live-course-instance,COMPLETE,0.12,opendata.leisurecloud.live,Active Leeds,CourseInstance,
+feed,https://opendata.leisurecloud.live/api/feeds/ActiveLeeds-live-session-series,COMPLETE,0.11,opendata.leisurecloud.live,Active Leeds,SessionSeries,
+feed,https://opendata.leisurecloud.live/api/feeds/ActiveLeeds-live-scheduled-sessions,COMPLETE,0.09,opendata.leisurecloud.live,Active Leeds,ScheduledSession,
+feed,https://opendata.leisurecloud.live/api/feeds/ActiveLeeds-live-facility-uses,COMPLETE,0.1,opendata.leisurecloud.live,Active Leeds,FacilityUse,
+feed,https://opendata.leisurecloud.live/api/feeds/ActiveLeeds-live-slots,COMPLETE,0.1,opendata.leisurecloud.live,Active Leeds,Slot,
+site,https://bccleisure.gs-signature.cloud/OpenActive/,COMPLETE,,opendata.leisurecloud.live,Birmingham City Council,,5
+feed,https://opendata.leisurecloud.live/api/feeds/BirminghamCityCouncil-live-course-instance,COMPLETE,0.09,opendata.leisurecloud.live,Birmingham City Council,CourseInstance,
+feed,https://opendata.leisurecloud.live/api/feeds/BirminghamCityCouncil-live-session-series,COMPLETE,0.13,opendata.leisurecloud.live,Birmingham City Council,SessionSeries,
+feed,https://opendata.leisurecloud.live/api/feeds/BirminghamCityCouncil-live-scheduled-sessions,COMPLETE,0.09,opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,
+feed,https://opendata.leisurecloud.live/api/feeds/BirminghamCityCouncil-live-facility-uses,COMPLETE,0.1,opendata.leisurecloud.live,Birmingham City Council,FacilityUse,
+feed,https://opendata.leisurecloud.live/api/feeds/BirminghamCityCouncil-live-slots,COMPLETE,0.09,opendata.leisurecloud.live,Birmingham City Council,Slot,
+site,https://bewellwigan.gs-signature.cloud/OpenActive/,COMPLETE,,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,,5
+feed,https://opendata.leisurecloud.live/api/feeds/WiganLeisureandCultureTrust-live-course-instance,COMPLETE,0.11,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,
+feed,https://opendata.leisurecloud.live/api/feeds/WiganLeisureandCultureTrust-live-session-series,COMPLETE,0.11,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,
+feed,https://opendata.leisurecloud.live/api/feeds/WiganLeisureandCultureTrust-live-scheduled-sessions,ERROR_HTTP_404,0.1,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,ScheduledSession,
+feed,https://opendata.leisurecloud.live/api/feeds/WiganLeisureandCultureTrust-live-facility-uses,COMPLETE,0.1,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,
+feed,https://opendata.leisurecloud.live/api/feeds/WiganLeisureandCultureTrust-live-slots,COMPLETE,0.09,opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,
+site,https://brimhamsactive.gs-signature.cloud/OpenActive/,COMPLETE,,opendata.leisurecloud.live,Brimhams Active,,5
+feed,https://opendata.leisurecloud.live/api/feeds/BrimhamsActive-live-course-instance,COMPLETE,0.11,opendata.leisurecloud.live,Brimhams Active,CourseInstance,
+feed,https://opendata.leisurecloud.live/api/feeds/BrimhamsActive-live-session-series,COMPLETE,0.12,opendata.leisurecloud.live,Brimhams Active,SessionSeries,
+feed,https://opendata.leisurecloud.live/api/feeds/BrimhamsActive-live-scheduled-sessions,COMPLETE,0.1,opendata.leisurecloud.live,Brimhams Active,ScheduledSession,
+feed,https://opendata.leisurecloud.live/api/feeds/BrimhamsActive-live-facility-uses,COMPLETE,0.09,opendata.leisurecloud.live,Brimhams Active,FacilityUse,
+feed,https://opendata.leisurecloud.live/api/feeds/BrimhamsActive-live-slots,COMPLETE,0.1,opendata.leisurecloud.live,Brimhams Active,Slot,
+site,https://halo-openactive.legendonlineservices.co.uk/OpenActive,COMPLETE,,openactivedatacatalog.legendonlineservices.co.uk,Halo,,3
+feed,https://halo-openactive.legendonlineservices.co.uk/api/sessions,COMPLETE,1.44,openactivedatacatalog.legendonlineservices.co.uk,Halo,SessionSeries,
+feed,https://halo-openactive.legendonlineservices.co.uk/api/facility-uses,ERROR_HTTP_403,0.08,openactivedatacatalog.legendonlineservices.co.uk,Halo,FacilityUse,
+feed,https://halo-openactive.legendonlineservices.co.uk/api/facility-uses/events,COMPLETE,1.82,openactivedatacatalog.legendonlineservices.co.uk,Halo,Slot,
+site,https://blackburnwithdarwen-openactive.legendonlineservices.co.uk/OpenActive,COMPLETE,,openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,,3
+feed,https://blackburnwithdarwen-openactive.legendonlineservices.co.uk/api/sessions,COMPLETE,0.2,openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,SessionSeries,
+feed,https://blackburnwithdarwen-openactive.legendonlineservices.co.uk/api/facility-uses,COMPLETE,0.17,openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,
+feed,https://blackburnwithdarwen-openactive.legendonlineservices.co.uk/api/facility-uses/events,COMPLETE,0.2,openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,Slot,
+site,https://lifeleisure-openactive.legendonlineservices.co.uk/OpenActive,COMPLETE,,openactivedatacatalog.legendonlineservices.co.uk,,,3
+feed,https://lifeleisure-openactive.legendonlineservices.co.uk/api/sessions,ERROR_HTTP_500,0.12,openactivedatacatalog.legendonlineservices.co.uk,,SessionSeries,
+feed,https://lifeleisure-openactive.legendonlineservices.co.uk/api/facility-uses,ERROR_HTTP_500,0.09,openactivedatacatalog.legendonlineservices.co.uk,,FacilityUse,
+feed,https://lifeleisure-openactive.legendonlineservices.co.uk/api/facility-uses/events,ERROR_HTTP_500,0.07,openactivedatacatalog.legendonlineservices.co.uk,,Slot,
+site,https://gll-openactive.legendonlineservices.co.uk/OpenActive,ERROR_HTTP_403,,openactivedatacatalog.legendonlineservices.co.uk,,,0
+site,https://serco-openactive.legendonlineservices.co.uk/OpenActive,COMPLETE,,openactivedatacatalog.legendonlineservices.co.uk,Serco Leisure,,3
+feed,https://serco-openactive.legendonlineservices.co.uk/api/sessions,COMPLETE,0.27,openactivedatacatalog.legendonlineservices.co.uk,Serco Leisure,SessionSeries,
+feed,https://serco-openactive.legendonlineservices.co.uk/api/facility-uses,ERROR_HTTP_403,0.15,openactivedatacatalog.legendonlineservices.co.uk,Serco Leisure,FacilityUse,
+feed,https://serco-openactive.legendonlineservices.co.uk/api/facility-uses/events,COMPLETE,0.88,openactivedatacatalog.legendonlineservices.co.uk,Serco Leisure,Slot,
+site,http://data.better.org.uk/,COMPLETE,,openactive.io,GLL,,1
+site,https://better-admin.org.uk/api/openactive/better,COMPLETE,,openactive.io,Better,,4
+feed,https://better-admin.org.uk/api/openactive/better/session-series,COMPLETE,1.5,openactive.io,Better,SessionSeries,
+feed,https://better-admin.org.uk/api/openactive/better/scheduled-sessions,COMPLETE,3.54,openactive.io,Better,ScheduledSession,
+feed,https://better-admin.org.uk/api/openactive/better/facility-uses,COMPLETE,1.36,openactive.io,Better,FacilityUse,
+feed,https://better-admin.org.uk/api/openactive/better/slots,COMPLETE,3.07,openactive.io,Better,Slot,
+site,https://data.bookwhen.com/,COMPLETE,,openactive.io,Bookwhen,,4
+feed,https://bookwhen.com/api/openactive/courseinstances,COMPLETE,0.75,openactive.io,Bookwhen,CourseInstance,
+feed,https://bookwhen.com/api/openactive/scheduledsessions,COMPLETE,2.46,openactive.io,Bookwhen,ScheduledSession,
+feed,https://bookwhen.com/api/openactive/sessionseries,COMPLETE,5.85,openactive.io,Bookwhen,SessionSeries,
+site,http://data.letsride.co.uk/,COMPLETE,,openactive.io,British Cycling,,1
+site,http://data.britishorienteering.org.uk/,COMPLETE,,openactive.io,British Orienteering,,1
+site,https://actihire.bookteq.com/api/open-active,COMPLETE,,app.bookteq.com,Actihire,,2
+feed,https://actihire.bookteq.com/api/open-active/facility-uses,COMPLETE,7.8,app.bookteq.com,Actihire,FacilityUse,
+feed,https://actihire.bookteq.com/api/open-active/slots,COMPLETE,2.21,app.bookteq.com,Actihire,Slot,
+site,https://ajnstadium.bookteq.com/api/open-active,COMPLETE,,app.bookteq.com,Brea Avalon LLP,,2
+feed,https://ajnstadium.bookteq.com/api/open-active/facility-uses,COMPLETE,0.77,app.bookteq.com,Brea Avalon LLP,FacilityUse,
+feed,https://ajnstadium.bookteq.com/api/open-active/slots,COMPLETE,1.13,app.bookteq.com,Brea Avalon LLP,Slot,
+site,https://ajsports.bookteq.com/api/open-active,COMPLETE,,app.bookteq.com,Playfinder,,2
+feed,https://ajsports.bookteq.com/api/open-active/facility-uses,COMPLETE,0.69,app.bookteq.com,Playfinder,FacilityUse,
+feed,https://ajsports.bookteq.com/api/open-active/slots,COMPLETE,0.5,app.bookteq.com,Playfinder,Slot,
+site,https://anemoslimited.bookteq.com/api/open-active,ERROR_HTTP_404,,app.bookteq.com,,,0
+site,https://appleby.bookteq.com/api/open-active,COMPLETE,,app.bookteq.com,Appleby Frodingham Sports Club,,2
+feed,https://appleby.bookteq.com/api/open-active/facility-uses,COMPLETE,0.84,app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,
+feed,https://appleby.bookteq.com/api/open-active/slots,COMPLETE,0.94,app.bookteq.com,Appleby Frodingham Sports Club,Slot,

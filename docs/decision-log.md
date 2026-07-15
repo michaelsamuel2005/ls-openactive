@@ -215,6 +215,31 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   its session rate is (D-012 practice). And per D-011, facilities remain a
   separate corroboration layer: never merged with sessions.
 
+## D-019 · Event-layer snapshot succession (2026-07-07) — **PROPOSED, pending team + verification rework**
+- **Proposal:** adopt Wesley's **2026-07-07 harvest** (`data/raw/dataset_2026-07-07.csv`,
+  549,169 events, sha `7542ed60329c9c06`, `notebooks/load_dataset.ipynb`) as the
+  canonical event layer, superseding `data/external/wesley/output.csv` (464,392
+  events, harvest date **TBC** — the last open WS1 finding, F2, which this
+  succession closes by replacement: the successor has full provenance).
+- **Why:** known harvest date; structured adult/junior offers; richer schema;
+  the audit's offer-parsing defect fixed at source. Same borough-robust /
+  sub-borough-fragile shape (30/33 boroughs, 87.6% MSOA / 97.5% LSOA empty) —
+  which **corroborates and does not re-open D-008** (different population:
+  events, not the Open Sessions provision series).
+- **Known defects carried, documented in the notebook:** harvest-time
+  completeness filtering (retained-subset completeness only); no provider
+  column → 128 cross-feed id collisions (next harvest: feed column + composite
+  key); 2023-02→2027-04 window.
+- **Adoption gate:** (1) team sign-off; (2) `verify_event_harvest.py`
+  re-pointed at the new file with freshly derived dual-method expectations and
+  regenerated `event_harvest.*` manifest rows (current rows describe the old
+  file and stay labelled as such until then); (3) Fahmi four-eyes on the new
+  numbers. Until all three: old file remains the cited artefact, new file is
+  documented but not quoted in deliverables.
+- **Attribution:** harvest & notebook Wesley; review, defect fixes (boundary
+  column vintage, frozen-snapshot path, dual-denominator free share,
+  events-vs-series labelling) and integration Michael.
+
 ## Correction record (2026-07-03) — superseded figures *(full detail: `docs/open_sessions_data_note.md`, `docs/event_harvest_audit.md`)*
 | Old figure | Correct, labelled figure |
 |---|---|
@@ -226,3 +251,180 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 | "1.02% events free" | **2.30%** of price-known London events (44.5% price-known) |
 | "Pearson −0.05" (orthogonality) | **−0.111** (Spearman −0.047) |
 | Field-completeness block as London | national-scoped; London: price 100%, coords 100%, access-info 22.7%, capacity 1.4% |
+
+## D-020 · Harvest-primary architecture (2026-07-14) — **PROPOSED**, pending two gates
+
+- **Decision (proposed).** The OpenActive **event harvest** becomes the single PRIMARY
+  dataset. Canonical vintage: `data/raw/dataset_2026-07-07.csv` (549,169 events,
+  15-column schema — no `endDate`, ISO-8601 durations), adopted under D-019's gate;
+  the predecessor June extraction (`data/external/wesley/output.csv`, harvest date
+  unrecorded — open finding **F2**, register item 2.3) is retained as the exploratory
+  evidence base, with every June-derived figure vintage-tagged. Every methodology,
+  measure and product surface stems from the harvest; externals are confined to
+  complementary roles (IoD2025 + Census 2021 = need inputs; Active Lives 2024/25 =
+  the single held-out validator per D-012; Active Places = corroborant + separate
+  accessibility display; Open Sessions = one pre-banded corroboration row; PTAL +
+  ONS boundaries = context/backbone). All two-universe machinery is removed.
+- **Pre-registration (binding before the point-in-polygon rebuild).** Endpoint
+  selection after exploration is acknowledged: the run's product is a
+  **frozen-specification estimate on corrected geometry**; the out-of-sample tier is
+  cross-snapshot agreement (committed via the weekly cadence), with national
+  LAD replication as gated stretch. Primary endpoint: Spearman
+  ρ(harvest-native gap — the z-based (log1p) construction, covered-only — and
+  Active Lives inactivity 2024/25, Fingertips extract retrieved 2026-07-01,
+  exact table and version pinned at the freeze) > 0, with both variables
+  rank-transformed, Clifford–Richardson effective *n* computed on the ranks
+  over the covered-borough adjacency, and a Fisher-z CI at n_eff. The
+  rank-percentile gap dual and the hours companion live in the specification
+  curve only (no promotion rule; the headline venues measure is the sole
+  endpoint input);
+  pre-declared secondary: partial ρ(provision, inactivity | need) < 0; interpretation
+  pre-committed for all four primary×secondary outcomes; falsification clause;
+  three-tier coverage protocol defined on venues (threshold ratified with this entry) with a venue-based recovery rule; new-rows-only sensitivity;
+  minimum detectable effect stated across the effective-n band (80% power:
+  ρ ≈ 0.49 / 0.54 / 0.59 at n_eff 30 / 25 / 20; validator-side Moran's I =
+  0.274 on the covered adjacency, `prereg.validator_morans_i_covered30`, so
+  n_eff materially below 30 is expected and the falsification branch is live);
+  pre-committed expectation: the middle cell — primary passes, secondary
+  inconclusive — a modest validated targeting layer; specification-curve list
+  enumerated at freeze.
+- **Alternatives considered.** (i) *Open Sessions remains primary* (D-009 status
+  quo) — rejected: 494 London series cannot carry the project's weight, and the
+  brief names the national platform whose bulk the harvest carries. (ii) *Dual-feed
+  split-role* (the unratified v4 draft: 494-series = catalogue, harvest = breadth
+  layer) — rejected by team directive; two-universe machinery removed. (iii) *Hybrid
+  retaining the validated session-layer analysis as evidential spine* — not chosen
+  as headline (its −0.49 partial belongs to a demoted feed); retained only as a
+  single pre-banded corroboration row.
+- **Gates.** (1) Supervisor's written confirmation; (2) team ratification of this
+  entry. **On ratification only:** D-009 gains a dated supersession pointer
+  (annotated, never rewritten — the D-008 convention); CLAUDE.md's settled-decisions
+  block is reconciled; the binding sequence engages (written confirmation →
+  D-020 → reference verification, Clifford–Richardson first → pre-registration
+  freeze → point-in-polygon rebuild → the single frozen-spec run).
+- **Evidence base.** June-extraction exploratory statistics (`event_harvest.*`
+  rows; vintage-tagged); snapshot verification rows `harvest0707.*` in
+  `results/metrics.csv` (script `src/verify_snapshot_0707.py`, stated bbox
+  51.28–51.70°N / −0.55–0.30°E). Prior-sight inventory: point-in-polygon
+  event-density surfaces exist in `notebooks/load_dataset.ipynb` (192,032 London
+  events, 30/33 boroughs); **never computed by anyone:** venue counts under
+  point-in-polygon, the harvest-native gap, or any correlation with the validator —
+  the pre-registered endpoint remains unseen.
+- **Status: PROPOSED 2026-07-14.** No other document claims adoption.
+
+## D-021 · Legacy event corpus retired; instrument-side branch opened on evidence (2026-07-15) — **PROPOSED**
+
+- **Decision (proposed).** The legacy event corpus — `data/raw/dataset_2026-07-07.csv`
+  (549,169 rows, 15 columns) and its predecessor `data/external/wesley/output.csv`
+  (464,392 rows, 16 columns, harvest date unrecorded — open finding **F2**) — is
+  **retired as the analysis corpus** and reclassified as **historical/motivating
+  evidence only**. **Every diagnostic derived from it is suspended**: publication
+  horizon, semantic duplication, price/capacity missingness, taxonomy coverage,
+  venue counts, borough coverage, and the exploratory gap/validation figures. None
+  may be cited in the report except as superseded history with this entry attached.
+
+- **Why (verified 2026-07-15, not inferred).** Direct column inspection: **both files
+  lack** `@id`, `superEvent`, `organizer`, activity/`category` vocabulary,
+  publisher/feed identity, RPDE `modified`/`state`, and any retained raw JSON-LD.
+  No raw was kept for this corpus (the only `session_series_raw_*.json` files belong
+  to the separate, audited Open Sessions harvester). Consequently the corpus cannot
+  distinguish an ecosystem defect from an extraction defect, and — because no raw
+  was retained — **that ambiguity is not resolvable retrospectively**.
+
+- **The evidence that settles it (`src/harvest_pilot.py`, 2026-07-15).** A direct,
+  plain-HTTP read of the canonical catalogue → dataset sites → RPDE feeds, deliberately
+  **not** using the `openactive` client (see F-DEP), found on a first sample of six
+  LeisureCloud-platform publishers (7,624 items, 41 endpoints, all CC-BY 4.0):
+  - **`category` present on 100% of `SessionSeries` parents at 6/6 publishers**;
+    `offers` present as structured `Offer` objects (identifier/name/description/
+    acceptedPaymentMethod) at 5/6 — **both absent from our CSV**, which retained only
+    a flattened `adultPrice` number and no activity field at all.
+  - **`superEvent` present on 100% of `ScheduledSession` children**; children carry
+    *only* dates, capacity and the parent pointer. All descriptive fields live on the
+    parent. Our extraction kept children and discarded the pointer.
+  - `eventSchedule`, `attendeeInstructions`, RPDE `state` — published, and absent from
+    our CSV.
+  - Capacity: ~2,090 bytes/item raw → **~16.5 GB to retain all 7.9M items**; not a
+    constraint.
+  - A real publication defect was logged in passing: **Wigan's declared
+    `ScheduledSession` feed returns HTTP 404**.
+  - **Confound identified and corrected in the same session:** those six publishers all
+    run on **one booking platform (LeisureCloud)**, because first-N sampling of a
+    concatenated catalogue list is platform-biased. The pilot now **stratifies across
+    all four catalogues**. **The stratified rates below supersede the figures above;
+    the six-publisher figures must not be cited.**
+
+- **Stratified evidence (supersedes the above; run 2026-07-15, 20 sites across all four
+  catalogues, `attempted ÷ declared` = 20/173 = 11.6%, 77 endpoints, 12,890 items;
+  `results/pilot_field_presence.csv`, `results/pilot_endpoint_log.csv`).**
+  **Field availability is a property of the booking platform, not of the publisher** —
+  near-deterministic between platforms, near-zero variance within them:
+
+  | Platform (catalogue) | `category` on parents | `activity` (Activity List URI) |
+  |---|---|---|
+  | LeisureCloud (5 publishers) | **100%** (all five) | **0%** (all five) |
+  | singular (Better; Bookwhen) | 0%; 53% | **100%** (both) |
+  | Legend (BwD Leisure) | 0% | **100%** |
+  | Bookteq (3 publishers) | 0% | 0% |
+
+  - `superEvent` on `ScheduledSession`: **1,533/1,533 = 100.0%** — the primary ablation
+    exists universally. (`Slot`: 0/4,106 — a different child type; the 27.2% all-kinds
+    aggregate is a trap and the per-kind denominator is the honest one.)
+  - Capacity: **~1,772 bytes/item → ~14.0 GB** to retain all 7.9M items raw.
+  - **Endpoint failures: 8 of 77** — Wigan `ScheduledSession` HTTP 404; three Legend
+    HTTP 500 (SessionSeries, FacilityUse, Slot); three HTTP 403 (Legend sites incl.
+    Halo, Serco Leisure); one Bookteq site 404. **Legend is the least reliable platform
+    in this sample.** These are publication-process defects, logged with status.
+
+- **Consequence — the branch this opens, and it is not the binary first assumed.**
+  The stratified evidence shows **both** mechanisms operating, and they compose:
+  1. **Instrument-side (confirmed).** Our extraction discarded `category`, `superEvent`
+     and structured `offers` **where the platform published them on every record**
+     (LeisureCloud). For that platform the "missingness" was self-inflicted.
+  2. **Publication-side (confirmed, and this is the stronger finding).** The ecosystem
+     is **not one vocabulary regime but four**. A consumer joining these feeds receives
+     `category` from one platform, Activity List URIs from another, and neither from a
+     third — so **any cross-platform activity analysis compares incommensurable fields**.
+     The deployed Intelligence Platform reports "785 activities" across exactly this
+     heterogeneity.
+  The defensible framing is therefore neither "publishers are negligent" nor "our
+  pipeline was bad", but: **field availability in OpenActive is determined by
+  booking-platform software, and that determines which discovery questions can be
+  answered where.** This is mechanistically explanatory, evidenced, brief-aligned, and
+  not occupied by any incumbent tool. The title, aim and RQ framing change accordingly;
+  pre-declared here rather than discovered later.
+  - **Specifically retired:** the taxonomy contribution's motivation. The "free-text
+    naming chaos" (5,636 London clusters; 86.1% top-100 dictionary coverage;
+    "standardisation degrading as the feed grows") was measured on a projection that
+    **discarded a `category` field LeisureCloud publishes on every record**. The
+    coverage figures stand as arithmetic; their interpretation does not.
+  - **Not retired — reframed and strengthened:** the vocabulary question is real, and
+    it is a *platform* question. `activity` (the controlled Activity List URI) is
+    published by singular and Legend at 100% and by LeisureCloud and Bookteq at 0%;
+    `category` is the mirror image. Whether that dichotomy holds beyond 11 publishers
+    is the first thing the full harvest must measure.
+
+- **Alternatives considered.** (i) *Repair the legacy corpus retrospectively* —
+  impossible: RPDE is a change feed; the 7 July parent state is unrecoverable and no
+  raw was kept. (ii) *Proceed on the legacy corpus with caveats* — rejected: every
+  headline would be uninterpretable between two causes. (iii) *Re-harvest* — adopted;
+  a fresh, raw-retaining, paired-feed observation vintage is now **Deliverable 1**.
+
+- **Consequences for the plan.** The frozen observation date **moves** (the new vintage
+  is the analysis corpus; 7 July becomes history). The primary ablation
+  (child-only vs parent-resolved) must draw **both arms from the same new vintage**.
+  Wesley's harvest design changes: paired feeds, raw JSON-LD retained, per-endpoint
+  status, `attempted ÷ declared` at catalogue/site/feed level, platform stratification.
+  D-019's snapshot-succession question is **moot** for analysis (both candidate
+  snapshots are retired) but F2 remains open for citing the legacy figures as history.
+
+- **F-DEP (new finding, logged here).** The `openactive` PyPI client produced the entire
+  legacy corpus (`notebooks/load_dataset.ipynb` does `import openactive`) but is
+  **declared in neither `requirements.txt` nor `environment.yml`** and is not installed
+  in the shared environment. The corpus is therefore not rebuildable by anyone cloning
+  this repository. The client also self-describes as *"experimental"* and advises against
+  use *"for critical pipelines"*. Any future use must be pinned, declared, and its
+  join/delete/pagination behaviour independently verified against the raw feeds.
+
+- **Status: PROPOSED 2026-07-15.** Supersedes nothing yet; D-020 remains PROPOSED and
+  its corpus premise is amended by this entry. No document may claim adoption.

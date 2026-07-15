@@ -39,6 +39,28 @@
 - **Route:** catalogue collection `https://openactive.io/data-catalogs/data-catalog-collection.jsonld` → 37 ScheduledSession feeds (Open Sessions publishes none — different provider universe; see `docs/event_harvest_audit.md`).
 - **File:** `data/external/wesley/output.csv` · sha256 `320357c093fc7a17` · 464,392 events · harvest run by Wesley, **date TBC (outstanding ask)** · licences: CC-BY 4.0 per publisher — **verify per-feed licences before publishing derived outputs**.
 - **Status:** verified against Wesley's notebook exactly; usable only with the §3 defect list fixed (composite feed+id key, UAT/pentest exclusion, full offer parsing) and its time window stated (events span 2023-02→2027-03).
+- **Successor snapshot (2026-07-07) — RETIRED as analysis corpus by D-021 (2026-07-15).**
+  Historical/motivating evidence only; every diagnostic derived from it is suspended.
+  Reason (verified): child-only `ScheduledSession` extraction with no `superEvent`,
+  `@id`, `organizer`, `category`, publisher/feed identity, RPDE `modified`/`state`, and
+  no retained raw JSON-LD — so ecosystem defects cannot be separated from extraction
+  defects, and no raw exists to resolve it retrospectively. Deliverable 1 is a fresh
+  raw-retaining paired-feed vintage. Details below retained as the historical record:
+- **(historical, superseded) Successor snapshot (2026-07-07, candidate canonical — D-019 PROPOSED):**
+  `data/raw/dataset_2026-07-07.csv` · **549,169 events** · sha256 `7542ed60329c9c06` ·
+  harvested **2026-07-07** by Wesley via the `openactive` client
+  (`notebooks/load_dataset.ipynb`, Section 1 — outputs preserved as the run record;
+  reviewed and integrated by Michael). Fixes vs the TBC-dated file: **known harvest
+  date**, structured adult/junior offer parsing, richer schema (capacity, duration,
+  day-of-week, amenities). Remaining defects, documented in the notebook header:
+  **harvest-time completeness filtering** (records missing venue/geo/offers/name are
+  dropped — completeness figures describe the retained subset), **no provider column**
+  (128 duplicate ids, cross-feed, unresolvable in-file), window 2023-02→2027-04.
+  London (boundary filter): **192,032 events, 30/33 boroughs, 9.1% empty at borough /
+  87.6% MSOA / 97.5% LSOA** — independently recomputed, matches the notebook.
+  Free share: 1.54% of all rows / **3.12% of price-known** (48.4% priced) — always
+  cite the pair. Not yet canonical: becomes so only when D-019 is adopted and
+  `verify_event_harvest` is re-pointed with fresh dual-method expectations.
 
 ### 7. Sport England Active Places — facilities (corroboration layer; D-011) — **ACQUIRED 2026-07-07**
 - **Route:** registered download from Active Places Power (`https://www.activeplacespower.com/`) — the full-database CSV bundle (`activeplacescsvs.zip`). The Hub's machine-readable DCAT catalogue (`/api/feed/dcat-us/1.1.json`) returns an **empty dataset array** — registration is the only working route; reproduce via the UI, not an API.

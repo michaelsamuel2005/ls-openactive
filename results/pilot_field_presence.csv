@@ -1,0 +1,435 @@
+platform,publisher,kind,field,presence_rate,n_items
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,activity,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,category,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,organizer,0.662,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,offers,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,location,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,name,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,description,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,eventSchedule,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,ageRange,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,genderRestriction,0.662,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,level,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,url,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,attendeeInstructions,0.886,500
+opendata.leisurecloud.live,Active Hartlepool,SessionSeries,superEvent,0.338,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,activity,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,category,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,organizer,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,offers,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,location,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,name,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,description,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,eventSchedule,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,ageRange,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,genderRestriction,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,level,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,url,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Active Hartlepool,ScheduledSession,superEvent,1.0,500
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,activity,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,category,1.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,organizer,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,offers,1.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,location,1.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,name,1.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,description,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,eventSchedule,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,ageRange,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,genderRestriction,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,level,0.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,url,1.0,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,attendeeInstructions,0.5161,31
+opendata.leisurecloud.live,Active Hartlepool,FacilityUse,superEvent,0.0,31
+opendata.leisurecloud.live,Active Leeds,SessionSeries,activity,0.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,category,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,organizer,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,offers,0.998,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,location,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,name,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,description,0.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,eventSchedule,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,ageRange,0.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,genderRestriction,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,level,0.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,url,1.0,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,attendeeInstructions,0.836,500
+opendata.leisurecloud.live,Active Leeds,SessionSeries,superEvent,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,activity,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,category,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,organizer,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,offers,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,location,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,name,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,description,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,eventSchedule,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,ageRange,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,genderRestriction,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,level,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,url,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Active Leeds,ScheduledSession,superEvent,1.0,500
+opendata.leisurecloud.live,Active Leeds,FacilityUse,activity,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,category,1.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,organizer,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,offers,1.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,location,1.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,name,1.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,description,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,eventSchedule,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,ageRange,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,genderRestriction,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,level,0.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,url,1.0,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,attendeeInstructions,0.4625,80
+opendata.leisurecloud.live,Active Leeds,FacilityUse,superEvent,0.0,80
+opendata.leisurecloud.live,Active Leeds,Slot,activity,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,category,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,organizer,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,offers,1.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,location,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,name,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,description,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,eventSchedule,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,ageRange,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,genderRestriction,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,level,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,url,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Active Leeds,Slot,superEvent,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,activity,0.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,category,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,organizer,0.6271,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,offers,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,location,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,name,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,description,0.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,eventSchedule,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,ageRange,0.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,genderRestriction,0.6271,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,level,0.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,url,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,attendeeInstructions,1.0,126
+opendata.leisurecloud.live,Birmingham City Council,SessionSeries,superEvent,0.3729,126
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,activity,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,category,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,organizer,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,offers,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,location,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,name,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,description,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,eventSchedule,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,ageRange,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,genderRestriction,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,level,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,url,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,attendeeInstructions,0.0,303
+opendata.leisurecloud.live,Birmingham City Council,ScheduledSession,superEvent,1.0,303
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,activity,0.7,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,category,1.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,organizer,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,offers,1.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,location,1.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,name,1.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,description,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,eventSchedule,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,ageRange,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,genderRestriction,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,level,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,url,1.0,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,attendeeInstructions,0.9,10
+opendata.leisurecloud.live,Birmingham City Council,FacilityUse,superEvent,0.0,10
+opendata.leisurecloud.live,Birmingham City Council,Slot,activity,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,category,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,organizer,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,offers,1.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,location,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,name,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,description,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,eventSchedule,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,ageRange,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,genderRestriction,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,level,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,url,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Birmingham City Council,Slot,superEvent,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,activity,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,category,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,organizer,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,offers,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,location,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,name,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,description,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,eventSchedule,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,ageRange,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,genderRestriction,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,level,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,url,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,attendeeInstructions,1.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,CourseInstance,superEvent,0.0,1
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,activity,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,category,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,organizer,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,offers,0.998,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,location,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,name,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,description,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,eventSchedule,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,ageRange,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,genderRestriction,0.998,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,level,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,url,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,attendeeInstructions,0.966,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,SessionSeries,superEvent,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,activity,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,category,1.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,organizer,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,offers,1.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,location,1.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,name,1.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,description,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,eventSchedule,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,ageRange,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,genderRestriction,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,level,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,url,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,attendeeInstructions,0.1379,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,FacilityUse,superEvent,0.0,58
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,activity,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,category,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,organizer,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,offers,1.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,location,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,name,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,description,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,eventSchedule,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,ageRange,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,genderRestriction,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,level,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,url,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Wigan Leisure and Culture Trust,Slot,superEvent,0.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,activity,0.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,category,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,organizer,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,offers,0.992,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,location,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,name,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,description,0.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,eventSchedule,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,ageRange,0.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,genderRestriction,0.992,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,level,0.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,url,1.0,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,attendeeInstructions,0.764,500
+opendata.leisurecloud.live,Brimhams Active,SessionSeries,superEvent,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,activity,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,category,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,organizer,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,offers,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,location,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,name,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,description,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,eventSchedule,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,ageRange,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,genderRestriction,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,level,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,url,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Brimhams Active,ScheduledSession,superEvent,1.0,500
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,activity,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,category,1.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,organizer,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,offers,1.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,location,1.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,name,1.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,description,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,eventSchedule,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,ageRange,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,genderRestriction,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,level,0.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,url,1.0,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,attendeeInstructions,0.4444,9
+opendata.leisurecloud.live,Brimhams Active,FacilityUse,superEvent,0.0,9
+opendata.leisurecloud.live,Brimhams Active,Slot,activity,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,category,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,organizer,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,offers,1.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,location,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,name,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,description,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,eventSchedule,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,ageRange,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,genderRestriction,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,level,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,url,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,attendeeInstructions,0.0,500
+opendata.leisurecloud.live,Brimhams Active,Slot,superEvent,0.0,500
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,activity,1.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,category,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,organizer,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,offers,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,location,1.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,name,1.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,description,0.0714,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,eventSchedule,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,ageRange,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,genderRestriction,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,level,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,url,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,attendeeInstructions,0.0,14
+openactivedatacatalog.legendonlineservices.co.uk,BwD Leisure,FacilityUse,superEvent,0.0,14
+openactive.io,Better,SessionSeries,activity,1.0,500
+openactive.io,Better,SessionSeries,category,0.0,500
+openactive.io,Better,SessionSeries,organizer,1.0,500
+openactive.io,Better,SessionSeries,offers,0.92,500
+openactive.io,Better,SessionSeries,location,1.0,500
+openactive.io,Better,SessionSeries,name,1.0,500
+openactive.io,Better,SessionSeries,description,0.936,500
+openactive.io,Better,SessionSeries,eventSchedule,1.0,500
+openactive.io,Better,SessionSeries,ageRange,0.28,500
+openactive.io,Better,SessionSeries,genderRestriction,1.0,500
+openactive.io,Better,SessionSeries,level,0.132,500
+openactive.io,Better,SessionSeries,url,1.0,500
+openactive.io,Better,SessionSeries,attendeeInstructions,0.002,500
+openactive.io,Better,SessionSeries,superEvent,0.0,500
+openactive.io,Better,ScheduledSession,activity,0.0,500
+openactive.io,Better,ScheduledSession,category,0.0,500
+openactive.io,Better,ScheduledSession,organizer,0.0,500
+openactive.io,Better,ScheduledSession,offers,0.984,500
+openactive.io,Better,ScheduledSession,location,0.0,500
+openactive.io,Better,ScheduledSession,name,0.0,500
+openactive.io,Better,ScheduledSession,description,0.0,500
+openactive.io,Better,ScheduledSession,eventSchedule,0.0,500
+openactive.io,Better,ScheduledSession,ageRange,0.0,500
+openactive.io,Better,ScheduledSession,genderRestriction,0.0,500
+openactive.io,Better,ScheduledSession,level,0.0,500
+openactive.io,Better,ScheduledSession,url,1.0,500
+openactive.io,Better,ScheduledSession,attendeeInstructions,0.0,500
+openactive.io,Better,ScheduledSession,superEvent,1.0,500
+openactive.io,Better,FacilityUse,activity,0.0,500
+openactive.io,Better,FacilityUse,category,0.0,500
+openactive.io,Better,FacilityUse,organizer,0.0,500
+openactive.io,Better,FacilityUse,offers,0.0,500
+openactive.io,Better,FacilityUse,location,1.0,500
+openactive.io,Better,FacilityUse,name,1.0,500
+openactive.io,Better,FacilityUse,description,0.814,500
+openactive.io,Better,FacilityUse,eventSchedule,0.0,500
+openactive.io,Better,FacilityUse,ageRange,0.0,500
+openactive.io,Better,FacilityUse,genderRestriction,0.0,500
+openactive.io,Better,FacilityUse,level,0.0,500
+openactive.io,Better,FacilityUse,url,1.0,500
+openactive.io,Better,FacilityUse,attendeeInstructions,0.0,500
+openactive.io,Better,FacilityUse,superEvent,0.0,500
+openactive.io,Better,Slot,activity,0.0,500
+openactive.io,Better,Slot,category,0.0,500
+openactive.io,Better,Slot,organizer,0.0,500
+openactive.io,Better,Slot,offers,1.0,500
+openactive.io,Better,Slot,location,0.0,500
+openactive.io,Better,Slot,name,0.0,500
+openactive.io,Better,Slot,description,0.0,500
+openactive.io,Better,Slot,eventSchedule,0.0,500
+openactive.io,Better,Slot,ageRange,0.0,500
+openactive.io,Better,Slot,genderRestriction,0.0,500
+openactive.io,Better,Slot,level,0.0,500
+openactive.io,Better,Slot,url,0.978,500
+openactive.io,Better,Slot,attendeeInstructions,0.0,500
+openactive.io,Better,Slot,superEvent,0.0,500
+openactive.io,Bookwhen,SessionSeries,activity,1.0,50
+openactive.io,Bookwhen,SessionSeries,category,0.5294,50
+openactive.io,Bookwhen,SessionSeries,organizer,1.0,50
+openactive.io,Bookwhen,SessionSeries,offers,0.0,50
+openactive.io,Bookwhen,SessionSeries,location,0.4118,50
+openactive.io,Bookwhen,SessionSeries,name,1.0,50
+openactive.io,Bookwhen,SessionSeries,description,0.9412,50
+openactive.io,Bookwhen,SessionSeries,eventSchedule,1.0,50
+openactive.io,Bookwhen,SessionSeries,ageRange,0.0,50
+openactive.io,Bookwhen,SessionSeries,genderRestriction,1.0,50
+openactive.io,Bookwhen,SessionSeries,level,0.4118,50
+openactive.io,Bookwhen,SessionSeries,url,1.0,50
+openactive.io,Bookwhen,SessionSeries,attendeeInstructions,0.5882,50
+openactive.io,Bookwhen,SessionSeries,superEvent,0.0,50
+app.bookteq.com,Actihire,FacilityUse,activity,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,category,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,organizer,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,offers,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,location,1.0,1000
+app.bookteq.com,Actihire,FacilityUse,name,1.0,1000
+app.bookteq.com,Actihire,FacilityUse,description,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,eventSchedule,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,ageRange,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,genderRestriction,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,level,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,url,1.0,1000
+app.bookteq.com,Actihire,FacilityUse,attendeeInstructions,0.0,1000
+app.bookteq.com,Actihire,FacilityUse,superEvent,0.0,1000
+app.bookteq.com,Actihire,Slot,activity,0.0,1000
+app.bookteq.com,Actihire,Slot,category,0.0,1000
+app.bookteq.com,Actihire,Slot,organizer,0.0,1000
+app.bookteq.com,Actihire,Slot,offers,1.0,1000
+app.bookteq.com,Actihire,Slot,location,0.0,1000
+app.bookteq.com,Actihire,Slot,name,0.0,1000
+app.bookteq.com,Actihire,Slot,description,0.0,1000
+app.bookteq.com,Actihire,Slot,eventSchedule,0.0,1000
+app.bookteq.com,Actihire,Slot,ageRange,0.0,1000
+app.bookteq.com,Actihire,Slot,genderRestriction,0.0,1000
+app.bookteq.com,Actihire,Slot,level,0.0,1000
+app.bookteq.com,Actihire,Slot,url,0.0,1000
+app.bookteq.com,Actihire,Slot,attendeeInstructions,0.0,1000
+app.bookteq.com,Actihire,Slot,superEvent,0.0,1000
+app.bookteq.com,Brea Avalon LLP,FacilityUse,activity,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,category,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,organizer,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,offers,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,location,1.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,name,1.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,description,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,eventSchedule,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,ageRange,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,genderRestriction,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,level,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,url,1.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,attendeeInstructions,0.0,14
+app.bookteq.com,Brea Avalon LLP,FacilityUse,superEvent,0.0,14
+app.bookteq.com,Brea Avalon LLP,Slot,activity,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,category,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,organizer,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,offers,1.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,location,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,name,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,description,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,eventSchedule,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,ageRange,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,genderRestriction,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,level,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,url,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,attendeeInstructions,0.0,972
+app.bookteq.com,Brea Avalon LLP,Slot,superEvent,0.0,972
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,activity,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,category,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,organizer,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,offers,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,location,1.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,name,1.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,description,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,eventSchedule,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,ageRange,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,genderRestriction,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,level,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,url,1.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,attendeeInstructions,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,FacilityUse,superEvent,0.0,22
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,activity,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,category,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,organizer,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,offers,1.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,location,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,name,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,description,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,eventSchedule,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,ageRange,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,genderRestriction,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,level,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,url,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,attendeeInstructions,0.0,1000
+app.bookteq.com,Appleby Frodingham Sports Club,Slot,superEvent,0.0,1000

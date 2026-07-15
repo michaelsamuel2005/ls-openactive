@@ -1,0 +1,268 @@
+"""Harvest pilot — does the source data carry what the legacy CSV lost?
+
+WHY THIS EXISTS
+---------------
+The legacy event corpus (`data/raw/dataset_2026-07-07.csv`, 15 flat columns) has no
+`@id`, `superEvent`, organiser, activity/category vocabulary, publisher/feed identity,
+RPDE `modified`/`state`, and no retained raw JSON-LD. Every diagnostic computed on it
+(horizon, duplication, price/capacity missingness, taxonomy coverage) is therefore
+ambiguous: the defect may belong to the OpenActive ecosystem (a *publication-process*
+effect) or to our own extraction (an *instrument-side* effect). This pilot walks the
+canonical catalogue and reads the raw RPDE feeds directly to find out which.
+
+It deliberately does NOT use the `openactive` PyPI client. That client is the prime
+suspect for the field loss and self-describes as "experimental" and not for use "for
+critical pipelines"; inspecting the feeds through it would be asking the suspect to
+testify. Plain HTTP answers "what does the ecosystem actually publish?" uncontaminated.
+(The client remains an *undeclared* dependency of the legacy corpus — see F-DEP.)
+
+WHAT IT ANSWERS
+---------------
+Q1 joins        Do `superEvent` pointers on children resolve to parents we harvested?
+Q2 prevalence   What share of children carry `superEvent`? (Does the primary ablation exist?)
+Q3 capacity     Bytes per raw item -> can a full raw-retaining harvest fit on disk?
+Q4 THE BIG ONE  Do parents carry the fields the CSV lacks (category/activity, offers,
+                organizer, location, eventSchedule)? Publication-side or instrument-side?
+
+WHAT IT WRITES
+--------------
+data/raw/pilot_<UTC>/            raw JSON pages, exactly as served (immutable)
+results/pilot_endpoint_log.csv   one row per endpoint: attempted/declared, status, timing
+results/pilot_field_presence.csv one row per (publisher, kind, field): presence rate
+
+Run:  python -m src.harvest_pilot --sites 6 --pages 1
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import re
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import requests
+
+CATALOGUE_COLLECTION = "https://openactive.io/data-catalogs/data-catalog-collection.jsonld"
+UA = {"User-Agent": "UoB-SEMTM0044-research-pilot/0.1 (academic; MSc group project)"}
+TIMEOUT = 45
+PAUSE_S = 1.0  # be a polite consumer: one request per second per host
+
+# The fields the legacy CSV lost. Presence of these on the *parent* is the headline test.
+LOST_FIELDS = [
+    "activity", "category", "organizer", "offers", "location",
+    "name", "description", "eventSchedule", "ageRange", "genderRestriction",
+    "level", "url", "attendeeInstructions", "superEvent",
+]
+PARENT_KINDS = {"SessionSeries", "CourseInstance", "FacilityUse"}
+CHILD_KINDS = {"ScheduledSession", "Slot"}
+
+
+def get(url: str) -> tuple[object, str, float]:
+    """Fetch a URL. Returns (parsed-or-text, status, elapsed_seconds).
+
+    Status mirrors the OpenActive client's vocabulary so the two are comparable:
+    COMPLETE (200 + parsed), ERROR (bad status / unparseable), TIMEOUT.
+    """
+    t0 = time.time()
+    try:
+        r = requests.get(url, headers=UA, timeout=TIMEOUT)
+        dt = time.time() - t0
+        if r.status_code != 200:
+            return None, f"ERROR_HTTP_{r.status_code}", dt
+        try:
+            return r.json(), "COMPLETE", dt
+        except ValueError:
+            return r.text, "COMPLETE_HTML", dt
+    except requests.Timeout:
+        return None, "TIMEOUT", time.time() - t0
+    except requests.RequestException as e:
+        return None, f"ERROR_{type(e).__name__}", time.time() - t0
+
+
+def discover_sites() -> tuple[dict[str, list[str]], list[dict]]:
+    """Walk collection -> catalogues -> dataset sites.
+
+    Returns sites grouped BY CATALOGUE, not a flat list. This matters: each catalogue
+    is a different booking platform (LeisureCloud, Legend, Bookteq, singular), and
+    field-publishing behaviour is plausibly a property of the *platform's software*
+    rather than of the ecosystem. Sampling the first N of a concatenated list would
+    confound the two. Callers must stratify.
+    """
+    log: list[dict] = []
+    col, status, dt = get(CATALOGUE_COLLECTION)
+    log.append({"level": "collection", "url": CATALOGUE_COLLECTION, "status": status, "seconds": round(dt, 2)})
+    if status != "COMPLETE":
+        return {}, log
+
+    catalogues = col.get("hasPart", [])
+    by_cat: dict[str, list[str]] = {}
+    for cat_url in catalogues:
+        cat, status, dt = get(cat_url)
+        found = cat.get("dataset", []) if status == "COMPLETE" else []
+        log.append({"level": "catalogue", "url": cat_url, "status": status,
+                    "seconds": round(dt, 2), "declared": len(found)})
+        by_cat[cat_url] = found
+        time.sleep(PAUSE_S)
+    return by_cat, log
+
+
+def site_feeds(site_url: str) -> tuple[dict, list[dict], str]:
+    """Extract publisher metadata and feed distributions from a dataset site."""
+    body, status, _ = get(site_url)
+    if status not in ("COMPLETE", "COMPLETE_HTML"):
+        return {}, [], status
+    if isinstance(body, str):  # HTML page with embedded JSON-LD
+        m = re.search(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', body, re.S)
+        if not m:
+            return {}, [], "ERROR_NO_JSONLD"
+        try:
+            body = json.loads(m.group(1))
+        except ValueError:
+            return {}, [], "ERROR_BAD_JSONLD"
+    meta = {
+        "publisher": (body.get("publisher") or {}).get("name"),
+        "license": body.get("license"),
+        "dataset_name": body.get("name"),
+    }
+    return meta, body.get("distribution", []), "COMPLETE"
+
+
+def field_presence(items: list[dict]) -> dict:
+    """Presence rate of each lost field across the `data` payloads on one page."""
+    payloads = [i["data"] for i in items if isinstance(i.get("data"), dict)]
+    if not payloads:
+        return {}
+    return {f: sum(1 for d in payloads if d.get(f) is not None) / len(payloads) for f in LOST_FIELDS}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--per-catalogue", type=int, default=5,
+                    help="dataset sites sampled PER CATALOGUE (stratified, not first-N)")
+    ap.add_argument("--pages", type=int, default=1, help="RPDE pages per feed")
+    args = ap.parse_args()
+
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    raw_dir = Path(f"data/raw/pilot_{stamp}")
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    Path("results").mkdir(exist_ok=True)
+
+    print(f"harvest_pilot | UTC {stamp} | raw -> {raw_dir}")
+    by_cat, endpoint_log = discover_sites()
+    declared_sites = sum(len(v) for v in by_cat.values())
+
+    # STRATIFIED selection: N per catalogue/platform, so the platform is not confounded
+    # with the ecosystem. Deterministic (first N per catalogue) for reproducibility.
+    selected: list[tuple[str, str]] = []
+    print(f"  catalogues declared: {len(by_cat)} | dataset sites declared: {declared_sites}")
+    for cat_url, site_list in by_cat.items():
+        take = site_list[: args.per_catalogue]
+        selected.extend((cat_url, s) for s in take)
+        print(f"    {cat_url.split('/')[2]:52s} declared={len(site_list):4d} selected={len(take)}")
+    print(f"  attempted/declared = {len(selected)}/{declared_sites} = "
+          f"{len(selected)/max(1,declared_sites):.1%}  (stratified across catalogues)")
+
+    presence_rows: list[dict] = []
+    child_super, child_total, raw_bytes, raw_items = 0, 0, 0, 0
+    parent_ids: set[str] = set()
+    child_super_targets: list[str] = []
+    by_kind_total: dict[str, int] = {}
+    by_kind_super: dict[str, int] = {}
+
+    for cat_url, site in selected:
+        platform = cat_url.split("/")[2]
+        meta, dists, status = site_feeds(site)
+        endpoint_log.append({"level": "site", "url": site, "status": status, "platform": platform,
+                             "publisher": meta.get("publisher"), "declared": len(dists)})
+        print(f"\n  [{platform.split('.')[0][:18]:18s}] {meta.get('publisher') or site}  "
+              f"[{status}]  feeds={len(dists)}")
+        time.sleep(PAUSE_S)
+        if status != "COMPLETE":
+            continue
+
+        for dist in dists:
+            kind = dist.get("name") or dist.get("additionalType", "").split("/")[-1]
+            url = dist.get("contentUrl")
+            if not url or kind not in (PARENT_KINDS | CHILD_KINDS):
+                continue
+            page_url = url
+            for pg in range(args.pages):
+                body, status, dt = get(page_url)
+                endpoint_log.append({"level": "feed", "url": page_url, "status": status, "platform": platform,
+                                     "seconds": round(dt, 2), "publisher": meta.get("publisher"), "kind": kind})
+                if status != "COMPLETE":
+                    print(f"      {kind:16s} [{status}]")
+                    break
+
+                items = body.get("items", [])
+                blob = json.dumps(body)
+                fname = re.sub(r"[^A-Za-z0-9]+", "_", f"{meta.get('publisher')}_{kind}_{pg}")[:120]
+                (raw_dir / f"{fname}.json").write_text(blob)  # immutable raw, exactly as served
+                raw_bytes += len(blob.encode())
+                raw_items += len(items)
+
+                pres = field_presence(items)
+                for f, rate in pres.items():
+                    presence_rows.append({"platform": platform, "publisher": meta.get("publisher"),
+                                          "kind": kind, "field": f, "presence_rate": round(rate, 4),
+                                          "n_items": len(items)})
+                if kind in PARENT_KINDS:
+                    for i in items:
+                        if isinstance(i.get("data"), dict) and i["data"].get("@id"):
+                            parent_ids.add(i["data"]["@id"])
+                if kind in CHILD_KINDS:
+                    for i in items:
+                        d = i.get("data")
+                        if isinstance(d, dict):
+                            child_total += 1
+                            by_kind_total[kind] = by_kind_total.get(kind, 0) + 1
+                            se = d.get("superEvent")
+                            if se:
+                                child_super += 1
+                                by_kind_super[kind] = by_kind_super.get(kind, 0) + 1
+                                child_super_targets.append(se if isinstance(se, str) else se.get("@id", ""))
+                key = {f: f"{pres.get(f,0):.0%}" for f in ("category", "activity", "offers", "organizer", "superEvent")}
+                print(f"      {kind:16s} [{status}] items={len(items):4d}  {key}")
+
+                page_url = body.get("next")
+                if not page_url or page_url == url:
+                    break
+                time.sleep(PAUSE_S)
+
+    with open("results/pilot_endpoint_log.csv", "w", newline="") as f:
+        cols = ["level", "url", "status", "seconds", "platform", "publisher", "kind", "declared"]
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(endpoint_log)
+    with open("results/pilot_field_presence.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["platform", "publisher", "kind", "field",
+                                          "presence_rate", "n_items"])
+        w.writeheader()
+        w.writerows(presence_rows)
+
+    resolvable = sum(1 for t in child_super_targets if t in parent_ids)
+    print("\n" + "=" * 72)
+    print("PILOT FINDINGS")
+    print(f"  Q1 joins       : {resolvable}/{len(child_super_targets)} sampled superEvent targets resolve "
+          f"to parents harvested on page 1 (low is expected: page 1 of each feed is not aligned)")
+    print(f"  Q2 prevalence  : {child_super}/{child_total} child records carry superEvent "
+          f"= {child_super/max(1,child_total):.1%} (all child kinds)")
+    for k in sorted(by_kind_total):
+        print(f"                   {k:18s} {by_kind_super.get(k,0):5d}/{by_kind_total[k]:5d} "
+              f"= {by_kind_super.get(k,0)/max(1,by_kind_total[k]):6.1%}  <- per-kind is the honest denominator")
+    print(f"  Q3 capacity    : {raw_bytes/max(1,raw_items):,.0f} bytes/item raw; "
+          f"{raw_bytes/1e6:.1f} MB for {raw_items:,} items "
+          f"-> ~{raw_bytes/max(1,raw_items)*7.9e6/1e9:.1f} GB to retain 7.9M items")
+    print("  Q4 fields      : see results/pilot_field_presence.csv "
+          "(parent presence of category/activity/offers/organizer = the headline)")
+    print(f"  endpoints      : {len(endpoint_log)} logged; statuses "
+          f"{ {s: sum(1 for e in endpoint_log if e['status']==s) for s in {e['status'] for e in endpoint_log}} }")
+    print("=" * 72)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
