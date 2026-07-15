@@ -395,8 +395,13 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   - Capacity: **~1,772 bytes/item → ~14.0 GB** to retain all 7.9M items raw.
   - **Endpoint failures: 8 of 77** — Wigan `ScheduledSession` HTTP 404; three Legend
     HTTP 500 (SessionSeries, FacilityUse, Slot); three HTTP 403 (Legend sites incl.
-    Halo, Serco Leisure); one Bookteq site 404. **Legend is the least reliable platform
-    in this sample.** These are publication-process defects, logged with status.
+    Halo, Serco Leisure); one Bookteq site 404. ~~**Legend is the least reliable platform
+    in this sample.**~~ **WITHDRAWN (D-029):** census2 showed **all five recovering sites were
+    Legend 403s that cleared on retry** — that is **rate-limiting, i.e. a measurement of our own
+    request pattern**, not Legend's reliability. Single-attempt endpoint logs cannot separate
+    transient from structural failure; the persistent rate is **9/174 (5.2%)**, not 14/173
+    (8.1%). Retry-and-classify is now a harvest requirement.
+    The remaining failures are publication-process defects, logged with status.
 
 - **CENSUS EVIDENCE — supersedes the 20-site stratified figures above (run 2026-07-15,
   `--per-catalogue 88 --pages 2 --tag census`; `results/census_field_presence.csv`,
@@ -1043,12 +1048,232 @@ this repository holds in several specific ways, and two of their criticisms land
   parent/child shape) are robust to this; **prevalence rates may not be.** UNTESTED — carry as
   a live threat to validity until measured.
 
-- **Adopted, subject to ratification:** the S0/S1/S2 model; the outcome-neutral title; the five
-  gates; the alignment acceptance test; the London-scope prohibition; lifting the Razniewski &
-  Nutt TODO-VERIFY. **Action:** replace `docs/execution-blueprint.md` with `(2)`, **re-applying
-  the five fixes from D-024's predecessor work** (the vacuous §14 gate condition, the prevalence
-  gate, the capacity plan, the instrument-side outcome branch) which `(2)` does not carry, and
-  merge the external traceability matrix's acceptance test and R2/London rows into the repo's
-  verbatim-cited version.
+- **5. CORRECTION — `(2)` carries ALL FIVE local fixes, and carries them better.** An earlier
+  draft of this entry said `(2)` "does not carry" them and ordered them re-applied. **Wrong** —
+  that conclusion came from grepping for *this repo's own wording* rather than reading `(2)`.
+  It has **Check 4 "mechanism eligibility and prevalence"**, **Check 5 "capacity and
+  resumability"**, **§6 "Predeclared outcome branches"**, a corrected **§14** corpus gate, and
+  **Razniewski verified** (better than a TODO-VERIFY). **Nothing was re-applied; `(2)` is
+  installed verbatim** with measured status annotations only, and `diff` confirms **nothing
+  removed**.
+
+  **Two of `(2)`'s rulings land against this repository and are accepted:**
+  - **Check 5:** *"The earlier approximate `bytes/item × 7.9m` calculation is a pilot estimate,
+    not a capacity decision. It excludes some database, index, log, duplicate-response,
+    temporary and backup costs."* → **D-021's "capacity is not a constraint and must stop being
+    cited as a risk" is RETIRED.** It was an overclaim from one extrapolation.
+  - **§16:** *"Stop treating missing fields as publisher faults until parent lineage is
+    checked."* → this is **exactly the D-025 error** (D-026), written down in the blueprint
+    before the repo made it.
+  - **§12 partially closes the examiner gap** this repo flagged: it maps evidence to **LO1–LO5**
+    and states honestly that *"No one can guarantee an 'exceptional' band until the actual rubric
+    is obtained."* The **mark-band/4-September gap remains open.**
+
+- **Adopted and APPLIED (2026-07-15):** the S0/S1/S2 model; the outcome-neutral title; the five
+  gates; lifting the Razniewski & Nutt TODO-VERIFY (**K7 closed**). `docs/execution-blueprint.md`
+  now holds `(2)` verbatim + status annotations. **Merged into `docs/brief-traceability.md`:**
+  the **alignment acceptance test** (§5b — *two of five conditions currently pass; alignment does
+  not pass*), the **London-scope prohibition** (§5a), and the **R2 boundary rule** (*"no prior
+  work found" is bounded by the search, never "nobody has done this"*).
+
+- **What the acceptance test immediately exposes.** Condition 3 — *"London is present in the
+  final query evidence, not merely the introduction"* — **FAILS**, and no amount of harvesting
+  closes it. Every figure this project holds is **national**; there is no London query benchmark.
+  The census sampled Wigan, BwD Leisure and Chelmsford. **This is the sharpest open gap in the
+  project and it was invisible until the external draft supplied the rule.**
 
 - **Status: PROPOSED 2026-07-15.**
+
+---
+
+## D-028 · Wesley's v2 assessed: what is adopted, what conflicts, and the architecture question the team must settle (2026-07-15) — **PROPOSED**
+
+`Closing_the_Activity_Gap_Proposal_v2.docx` (Wesley, 2026-07-15 16:06) was assessed against
+this repository's evidence and its adopted decisions. **It is substantial work containing
+material this repository lacks.** It also proposes an architecture the pivot would retire.
+**Both are PROPOSED. Neither is decided. This entry does not settle it.**
+
+### 1. ADOPTED from Wesley — implemented today
+
+- **Per-feed licence register (`src/feed_licence_register.py`).** His rule — *"redistribution
+  or republication is limited to feeds whose licences permit it, and per-feed attribution is
+  carried on published outputs"* — is **correct and fixes a live defect of ours**.
+  `src/verify_licences.py` reads the **dataset site**; that is why `Halo` could return HTTP 403
+  on its licence while **14 of its derived rows were published in this public repo**
+  (D-026 item 2). Site-level attribution cannot govern feed-level redistribution.
+  **Implemented with zero new network requests**: every RPDE page envelope carries its own
+  `license`, and the raw was retained. *A question nobody asked at harvest time, answerable
+  now, **only because the raw was kept** — D-021's argument, demonstrated rather than asserted.*
+- **Declared feeds may never be skipped silently (`src/harvest_pilot.py`).** His scope includes
+  **`Event` (one-off)**, which our kind filter would have dropped **without a log line** —
+  making the feed-level `attempted ÷ declared` that Check 1 demands quietly wrong. Skips now
+  emit `SKIPPED_KIND_<kind>` to the endpoint log. **A skip is a decision and belongs in the
+  ledger** — the same principle as the filename-collision defect (D-026 item 4).
+- **London-scoping discipline** — already adopted at `docs/brief-traceability.md` §5a via the
+  external draft. Wesley's formulation is the *operational* one and is better: *"the
+  out-of-London remainder is a by-product of the same harvest, costs nothing extra to retain,
+  and is used for one purpose only — the LAD-level robustness check."*
+
+### 2. ADOPTED IN PRINCIPLE — Wesley's to build, and the only Check 3 material in existence
+
+**Check 3 (current-state pipeline) has no implementation anywhere in this repo.** Wesley's v2
+is the only specification of it, and it is more detailed than anything we hold:
+
+> RPDE paged chronological exchange · **updated and deleted records** · **parent–child
+> reconciliation** (`SessionSeries`↔`ScheduledSession`, `FacilityUse`↔`Slot`) · **64-bit
+> modified timestamps** · rate-limit etiquette: **sleep on empty pages, weekly resync cap,
+> 429 handling, 404-purge** · normalise to one schema · map activity names to the **OpenActive
+> Activity List (SKOS)** · validate coordinates · **de-duplicate across providers by entity
+> resolution** on (activity, venue/coordinates, time, organiser), since aggregators and
+> multi-route publishing create cross-feed duplicates.
+
+**This is not optional**: D-025 measured **8,372 `state: deleted` tombstones against 18,213
+`updated` items — 31.5% of all `ScheduledSession` items are deletions.** A consumer ignoring
+them over-counts sessions by roughly a third.
+
+- **Continuous harvesting from week one**, to *"accrue a longitudinal record the live feeds do
+  not otherwise provide"*. **Adopted, and it answers a threat we logged and could not close**
+  (D-027 item 4): RPDE is ordered by `modified` and `next` walks forward, so our two-page
+  census read the **oldest end** of every feed. Continuous capture is the only way to obtain a
+  current-state series; no single snapshot fixes it.
+- **Active Places as an independent coverage benchmark** — *"used to estimate publishing
+  coverage independently of OpenActive itself."* Strong: it measures the ecosystem's own
+  selectivity against a source outside it, turning our coverage caveat into a measurable
+  quantity. D-011/D-018 already have the facilities layer; this gives it a second purpose.
+
+### 3. CONFLICTS WITH ALREADY-ADOPTED DECISIONS — must be fixed whichever architecture wins
+
+These are **not** architecture questions. They contradict decisions already adopted:
+
+| Wesley v2 | Conflict |
+|---|---|
+| *"English Indices of Deprivation **2019**"* | **D-007 (adopted)** mandates **IoD2025**, File 10 v2, and says explicitly *"Not IoD2019."* |
+| *"Analysis is intended at small-area level (~4,800 LSOAs / ~980 MSOAs)… the WS1 audit fixes the feasible unit"* | **D-008 (adopted)** already settled this at **borough level**. The audit **has run**: LSOA **~95.6%** and MSOA **~81.4%** carry zero sessions. It is not pending. |
+| *"Bayesian small-area estimation… models provision with uncertainty rather than forcing a coarser unit"* | Modelling around the emptiness D-008 measured. **D-010** right-sized methods for n≈33 and dropped this class. |
+| *"All work is the team's own under the unit's **AI-use rules**"* | **D-017 (adopted)**: the repository and report carry **no AI-use statement**, per the supervisor's direct guidance. |
+
+### 4. FIGURES REFUTED BY MEASUREMENT — fix regardless
+
+| Wesley v2 | Measured |
+|---|---|
+| *"roughly seventy publishers"* | **123** publishers with data; **144** named across **173** declared sites (`results/census_field_presence.csv`, `results/licence_audit.csv`) |
+| *"over two million structured activity opportunities"* | **7.9 million** — the deployed OpenActive Data Intelligence Platform, verified live 14–15 Jul 2026 |
+| *"CC-BY 4.0 is common; some CC0 / OGL"* | **162/162 readable dataset sites declare CC-BY 4.0 — unanimous. Zero CC0. Zero OGL.** (`results/licence_audit.csv`) The per-feed register is still right; **this premise for it is not.** |
+| *"Events (one-off)"* in scope | No `Event` distribution observed on any sampled site; the census saw five kinds only. **Not disproven ecosystem-wide — but not in evidence.** His scope nonetheless exposed our silent-skip bug. |
+
+### 5. WHERE WESLEY IS RIGHT AND THIS REPOSITORY IS NOT
+
+- He reached the **publication-side mechanism independently, by reasoning**: *"what OpenActive
+  publishes about a place is not a neutral census of provision but a patchwork shaped by who
+  chooses, and is equipped, to publish."* The census measured the same thing.
+- He **fixed the v1 scoping error** — one publisher's feed (Open Sessions) standing in for the
+  ecosystem — before we did.
+- His **London discipline is better than ours.** `brief-traceability.md` §5b condition 3
+  (*"London is present in the final query evidence, not merely the introduction"*) **FAILS** for
+  this repository: every figure we hold is national (Wigan, BwD Leisure, Chelmsford). Wesley's
+  v2 does not have that defect.
+
+### 6. THE DECISION THE TEAM MUST MAKE — this entry does NOT make it
+
+**Two architectures are on the table and nobody has arbitrated:**
+- **Wesley v2:** whole-ecosystem equity-of-provision — gap index, E2SFCA, small-area estimation,
+  equity-aware discovery.
+- **The pivot (D-020/D-021/D-023):** determinable discovery — corpus retired on evidence,
+  three-stage S0/S1/S2 attribution, thin three-state demonstrator.
+
+**Status of record:** every pivot entry is **PROPOSED**. **PR #6 has been open since 09:45 UTC
+2026-07-15 with zero reviews and zero comments**, with Wesley, Clarence and Fahmi all requested
+as reviewers. **Wesley is not working against a decision — there is no decision.** His v2 is a
+competing proposal made in good faith and in parallel.
+
+> **Governance finding, recorded because it is uncomfortable and true.** `git log --all` returns
+> **one author**. In a single day this repository retired a 549,169-row corpus, changed the
+> title, rewrote the research questions, adopted an external architecture and set the licence —
+> on one member's judgement, with every entry honestly marked PROPOSED but none ratified. The
+> team notes record a bus-factor finding against `src/recommender/`. **The same finding points
+> harder at this branch.** Ratification is not administrative here; it is the difference between
+> a documented method and one person's opinion.
+
+**A straight "the pivot wins" would discard real work** — the London rule, the per-feed licence
+register and the entire Check 3 specification all come from Wesley's v2 and survive either way.
+
+- **Status: PROPOSED 2026-07-15.** Items in §1 are implemented; §2 is adopted in principle and
+  unbuilt; §3 and §4 require correction **whichever architecture the team ratifies**; §6 is for
+  the team, not for this entry.
+
+---
+
+## D-029 · Census2: the platform dichotomy REPLICATES exactly; three claims corrected (2026-07-15) — **PROPOSED**
+
+A second full census (`--tag census2`, 14:56 UTC) was run with the D-026-fixed code, five hours
+after the first (09:53 UTC). It is an **independent replication at a different vintage**, and it
+is the strongest evidence this project has produced — **and it retracts three of our claims.**
+
+### 1. REPLICATION — every rate identical, on grown denominators
+
+| `SessionSeries` | census 09:53 | census2 14:56 | |
+|---|---|---|---|
+| LeisureCloud · `category` | 28/28 = **100.0%** | 29/29 = **100.0%** | identical |
+| LeisureCloud · `activity` | 0/28 = **0.0%** | 0/29 = **0.0%** | identical |
+| singular · `category` | 2/6 = **33.3%** | 2/6 = **33.3%** | identical |
+| singular · `activity` | 6/6 = **100.0%** | 6/6 = **100.0%** | identical |
+| Legend · `category` | 0/3 = **0.0%** | 0/6 = **0.0%** | identical |
+| Legend · `activity` | 0/3 = **0.0%** | 0/6 = **0.0%** | identical |
+
+**Every rate is identical to one decimal place.** The denominators *grew* — new publishers
+appeared, and three more Legend publishers served `SessionSeries` — and **the rates did not
+move**. `superEvent` on `ScheduledSession` replicated at **18,690/18,690 = 100.0%**
+(census: 18,935/18,935); `Slot` at **0/94,028 = 0.0%**. Capacity replicated: **1,347 bytes/item
+→ ~10.6 GB** (census: 1,329 → ~10.5).
+
+**This is what the pilot's 11-publisher hypothesis needed and never had: a rate that survives an
+independent harvest.** It is no longer a hypothesis.
+
+### 2. CORRECTION — "173/173 = 100% of declared" was true at 09:53 and is ALREADY FALSE
+
+**The declared frame is dynamic. It grew from 173 to 174 sites in five hours** (LeisureCloud
+31 → 32); publishers with data went 123 → 125. **Any coverage claim is a claim about an
+instant and must carry a timestamp.** "100% of declared" without one is false by the time it
+is read. This also *strengthens* Wesley's continuous-harvesting proposal (D-028): a frame that
+moves hourly cannot be characterised by any single snapshot.
+
+### 3. RETRACTION — "Legend is the least reliable platform in this sample" (D-021) is WITHDRAWN
+
+D-021 concluded that from 8 endpoint failures. Census2 refutes it:
+
+- **Sites failing: 14 (census) → 16 (census2). But only 9 are PERSISTENT.** Five recovered;
+  seven are new.
+- **All five recovered sites are Legend, and all five were HTTP 403s that cleared on retry.**
+- **A 403 that clears on retry is rate-limiting, not a publication defect.** We were measuring
+  **our own request pattern against Legend's rate limiter**, and reporting it as Legend's
+  reliability.
+
+**Consequences:** (a) the D-021 sentence is withdrawn; (b) the honest structural rate is **9 of
+174 sites (5.2%) persistently unreadable**, not 14 of 173 (8.1%) — that figure conflated
+transient and structural failure; (c) **any endpoint-failure claim requires ≥2 attempts at
+different times**, and the harvester's single-attempt design cannot distinguish the two.
+**Retry-and-classify is now a harvest requirement**, and it aligns with Wesley's specified
+rate-limit etiquette (D-028 §2: sleep on empty pages, weekly resync cap, 429 handling).
+
+### 4. The D-026 fixes are verified in production
+
+- **Filename collisions: 0 pages lost.** 767 files retained, **8 collisions suffixed** and
+  reported. The census archive lost **44 pages silently**; census2 lost none.
+- **K6 CLOSED.** `results/census2_summary.csv` carries **every headline figure as a committed
+  artefact**, each with its denominator and a note — including the trap that `raw.items`
+  *includes tombstones* while `presence_rate` does not. The figures no longer live in stdout,
+  and an examiner reconciling them now gets the right answer. *(K6 was: "a non-author cannot
+  reproduce the headline table/figure from a clean clone.")*
+
+### 5. What census2 does NOT fix
+
+- It is still **2 pages per feed, from the `modified`-ascending end** of every change feed —
+  the oldest records (D-027 item 4). Structural claims replicate; **prevalence over the full
+  corpus remains unmeasured.** Only continuous capture (D-028) addresses this.
+- **`level` / `ageRange` / `activity` source-absence and the lineage rates (D-025) were computed
+  on the LOSSY census archive** and have **not** been recomputed on census2. They should be.
+- **174 sites is 100% of *declared*, never of *existing*** — publishers outside the four
+  catalogues remain invisible by construction.
+
+- **Status: PROPOSED 2026-07-15.** Supersedes D-021's endpoint-reliability claim and its
+  "173/173" framing; the platform×kind finding is **confirmed by replication** and strengthened.

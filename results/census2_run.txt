@@ -1,0 +1,1163 @@
+harvest_pilot | UTC 20260715T145612Z | tag=census2 | raw -> data/raw/census2_20260715T145612Z
+  catalogues declared: 4 | dataset sites declared: 174
+    opendata.leisurecloud.live                           declared=  32 selected=32
+    openactivedatacatalog.legendonlineservices.co.uk     declared=  31 selected=31
+    openactive.io                                        declared=  23 selected=23
+    app.bookteq.com                                      declared=  88 selected=88
+  attempted/declared = 174/174 = 100.0%  (stratified across catalogues)
+
+  [opendata          ] Active Hartlepool  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '66%', 'superEvent': '34%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  31  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Active Leeds  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  80  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Birmingham City Council  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 126  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '63%', 'superEvent': '37%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 307  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  10  {'category': '100%', 'activity': '70%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Wigan Leisure and Culture Trust  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   1  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   1  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [ERROR_HTTP_404]
+      FacilityUse      [COMPLETE] items=  58  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Brimhams Active  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 435  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   9  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Castlepoint  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '0%', 'organizer': '4%', 'superEvent': '96%'}
+      SessionSeries    [COMPLETE] items= 257  {'category': '100%', 'activity': '0%', 'offers': '6%', 'organizer': '27%', 'superEvent': '73%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   6  {'category': '100%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Chelmsford City Sports  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   2  {'category': '100%', 'activity': '0%', 'offers': '50%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '43%', 'superEvent': '57%'}
+      SessionSeries    [COMPLETE] items= 281  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '48%', 'superEvent': '52%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  56  {'category': '100%', 'activity': '54%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Chelmsford City Sports  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   2  {'category': '100%', 'activity': '0%', 'offers': '50%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '43%', 'superEvent': '57%'}
+      SessionSeries    [COMPLETE] items= 281  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '48%', 'superEvent': '52%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  56  {'category': '100%', 'activity': '54%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Pembrokeshire Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '80%', 'organizer': '12%', 'superEvent': '88%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '85%', 'organizer': '51%', 'superEvent': '49%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  65  {'category': '100%', 'activity': '26%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Conwy  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '0%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '0%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  30  {'category': '100%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Everyone Active  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '97%', 'organizer': '0%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items= 500  {'category': '100%', 'activity': '100%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 499  {'category': '100%', 'activity': '100%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Lampton Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '93%', 'organizer': '4%', 'superEvent': '96%'}
+      SessionSeries    [COMPLETE] items= 214  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '48%', 'superEvent': '52%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  32  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] LED Community Leisure Ltd  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   4  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   3  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '0%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items= 161  {'category': '100%', 'activity': '75%', 'offers': '98%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Leisure SK  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=  27  {'category': '100%', 'activity': '0%', 'offers': '96%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   1  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Colchester Leisure World  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '97%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 449  {'category': '100%', 'activity': '0%', 'offers': '87%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  50  {'category': '100%', 'activity': '0%', 'offers': '54%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Liberty Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 432  {'category': '100%', 'activity': '0%', 'offers': '96%', 'organizer': '20%', 'superEvent': '80%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  31  {'category': '100%', 'activity': '42%', 'offers': '61%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Oldham Community Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 133  {'category': '100%', 'activity': '0%', 'offers': '89%', 'organizer': '2%', 'superEvent': '98%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   6  {'category': '100%', 'activity': '100%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Huntingdonshire District Council  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 480  {'category': '100%', 'activity': '0%', 'offers': '96%', 'organizer': '22%', 'superEvent': '78%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  91  {'category': '100%', 'activity': '75%', 'offers': '93%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Oxford University  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=  53  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '88%', 'superEvent': '12%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=  67  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  50  {'category': '100%', 'activity': '48%', 'offers': '98%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Places Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   3  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '2%', 'superEvent': '98%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '34%', 'superEvent': '66%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items= 500  {'category': '100%', 'activity': '55%', 'offers': '99%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 271  {'category': '100%', 'activity': '55%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Plymouth Active  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '88%', 'organizer': '14%', 'superEvent': '86%'}
+      SessionSeries    [COMPLETE] items= 145  {'category': '100%', 'activity': '0%', 'offers': '91%', 'organizer': '27%', 'superEvent': '73%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  23  {'category': '100%', 'activity': '0%', 'offers': '82%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Rivers Fitness  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '48%', 'superEvent': '52%'}
+      SessionSeries    [COMPLETE] items=  82  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '80%', 'superEvent': '20%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  12  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Redbridge Sports Centre  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  41  {'category': '100%', 'activity': '0%', 'offers': '46%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Southwark Council  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   4  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   9  {'category': '100%', 'activity': '11%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Tonbridge and Malling Leisure Trust  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Be Well - London Borough of Tower Hamlets  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '98%', 'organizer': '6%', 'superEvent': '94%'}
+      SessionSeries    [COMPLETE] items= 430  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '12%', 'superEvent': '88%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  15  {'category': '100%', 'activity': '93%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Trafford Community Leisure Trust  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 331  {'category': '100%', 'activity': '0%', 'offers': '99%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [ERROR_HTTP_404]
+      FacilityUse      [COMPLETE] items=  41  {'category': '100%', 'activity': '0%', 'offers': '83%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Vision Redbridge  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 122  {'category': '100%', 'activity': '0%', 'offers': '97%', 'organizer': '63%', 'superEvent': '37%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 186  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Wellington College  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 161  {'category': '100%', 'activity': '0%', 'offers': '1%', 'organizer': '6%', 'superEvent': '94%'}
+      SessionSeries    [COMPLETE] items=   1  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 379  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   6  {'category': '100%', 'activity': '17%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] West Wight Sports and Community  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 156  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [ERROR_HTTP_404]
+      FacilityUse      [COMPLETE] items=   6  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] WV Active  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 294  {'category': '100%', 'activity': '0%', 'offers': '96%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 175  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  50  {'category': '100%', 'activity': '0%', 'offers': '92%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [opendata          ] Your Leisure  [COMPLETE]  feeds=5
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 401  {'category': '100%', 'activity': '0%', 'offers': '100%', 'organizer': '97%', 'superEvent': '3%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  38  {'category': '100%', 'activity': '5%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] Halo  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  95  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] BwD Leisure  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  14  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [ERROR_HTTP_403]
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://lifeleisure-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_500]
+      FacilityUse      [ERROR_HTTP_500]
+      Slot             [ERROR_HTTP_403]
+
+  [openactivedatacata] https://gll-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] Serco Leisure  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_403]
+      FacilityUse      [COMPLETE] items= 100  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  32  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://pentest-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [ERROR_HTTP_403]
+
+  [openactivedatacata] https://tameside-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://lancaster-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://jubileehall-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_500]
+      FacilityUse      [ERROR_HTTP_500]
+      Slot             [ERROR_HTTP_403]
+
+  [openactivedatacata] Parkwood Leisure Ltd, its subsidiaries and partner organisations  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 100  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   2  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://lincsinspire-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_500]
+      FacilityUse      [ERROR_HTTP_403]
+      Slot             [ERROR_HTTP_500]
+
+  [openactivedatacata] https://sllandinspireall-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] ANGUSalive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [ERROR_HTTP_403]
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] Derby Active  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   9  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://lsbuactive-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] Loughborough University  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_403]
+      FacilityUse      [COMPLETE] items=   7  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://hcandl-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://activenottingham-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://tendringcouncil-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://aliveleisure-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://salfordcommunityleisure-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [ERROR_HTTP_403]
+      Slot             [ERROR_HTTP_403]
+
+  [openactivedatacata] https://leisurefocus-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=  21  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://bridportleisure-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_500]
+      FacilityUse      [ERROR_HTTP_500]
+      Slot             [ERROR_HTTP_500]
+
+  [openactivedatacata] https://horizonlc-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [ERROR_HTTP_403]
+      FacilityUse      [COMPLETE] items=  11  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] Barrow Park Leisure Centre  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=   7  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://boltonarena-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] Active Luton  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [ERROR_HTTP_403]
+      FacilityUse      [ERROR_HTTP_403]
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://strouddistrictcouncil-openactive.legendonlineservices.co.uk/OpenActive  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [ERROR_HTTP_403]
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] University of Bristol  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '100%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  12  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactivedatacata] https://horizon-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactivedatacata] https://celticleisure-openactive.legendonlineservices.co.uk/OpenActive  [ERROR_HTTP_403]  feeds=0
+
+  [openactive        ] GLL  [COMPLETE]  feeds=1
+
+  [openactive        ] Better  [COMPLETE]  feeds=4
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '100%', 'offers': '92%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '100%', 'offers': '98%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '98%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '91%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] Bookwhen  [COMPLETE]  feeds=4
+      CourseInstance   [COMPLETE] items=  50  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      CourseInstance   [COMPLETE] items=  50  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=  50  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items=  50  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=  50  {'category': '53%', 'activity': '100%', 'offers': '0%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=  50  {'category': '12%', 'activity': '100%', 'offers': '0%', 'organizer': '100%', 'superEvent': '0%'}
+
+  [openactive        ] British Cycling  [COMPLETE]  feeds=1
+
+  [openactive        ] British Orienteering  [COMPLETE]  feeds=1
+
+  [openactive        ] British Triathlon  [COMPLETE]  feeds=1
+
+  [openactive        ] England Netball  [COMPLETE]  feeds=1
+
+  [openactive        ] GO Mammoth  [COMPLETE]  feeds=1
+
+  [openactive        ] Lawn Tennis Association  [COMPLETE]  feeds=1
+
+  [openactive        ] Good Gym  [COMPLETE]  feeds=1
+
+  [openactive        ] Open Sessions  [COMPLETE]  feeds=2
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] Our Parks  [COMPLETE]  feeds=1
+
+  [openactive        ] Playwaze  [COMPLETE]  feeds=4
+      ScheduledSession [COMPLETE_HTML]
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 499  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] https://data.runtogether.co.uk/  [ERROR_NO_JSONLD]  feeds=0
+
+  [openactive        ] SportStarta.com  [COMPLETE]  feeds=1
+
+  [openactive        ] Upshot  [COMPLETE]  feeds=1
+
+  [openactive        ] Exercise Anywhere  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items=  14  {'category': '100%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] SportSuite  [COMPLETE]  feeds=1
+      SessionSeries    [COMPLETE] items= 198  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 193  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+
+  [openactive        ] TeamUp  [COMPLETE]  feeds=3
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '100%'}
+
+  [openactive        ] Played  [COMPLETE]  feeds=4
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 500  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 500  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 201  {'category': '0%', 'activity': '100%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] Courtside Hubs CIC  [COMPLETE]  feeds=4
+      SessionSeries    [COMPLETE] items= 200  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      SessionSeries    [COMPLETE] items= 200  {'category': '0%', 'activity': '100%', 'offers': '100%', 'organizer': '100%', 'superEvent': '0%'}
+      ScheduledSession [COMPLETE] items= 200  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      ScheduledSession [COMPLETE] items= 200  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '100%'}
+      FacilityUse      [COMPLETE] items=  59  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 200  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 200  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] PlayFootball  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  15  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [openactive        ] Find My Facility  [COMPLETE]  feeds=2
+      SessionSeries    [TIMEOUT]
+
+  [app               ] Actihire  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items= 288  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Brea Avalon LLP  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  14  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 873  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Playfinder  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] https://anemoslimited.bookteq.com/api/open-active  [ERROR_HTTP_404]  feeds=0
+
+  [app               ] Appleby Frodingham Sports Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  22  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Ashmole Trust  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 100  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Awesome CIC  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   2  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 313  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Bangor City Stadium  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   7  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 688  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 772  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Basingstoke Wellbeing  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] https://beaconsfieldtownfc.bookteq.com/api/open-active  [ERROR_HTTP_404]  feeds=0
+
+  [app               ] Bedford Town Football Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  15  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Bishop Challoner Sports Centre  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  25  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 859  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Blue Flames Sporting Club Limited  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  20  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 661  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Bolder Academy  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  51  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Broughton Town Council   [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  45  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Brynteg School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  44  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Chauncy School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  25  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 727  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Coram's Fields  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  10  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 561  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Coram's Fields  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  11  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Danbury Parish Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  18  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Debdale Park Sports & Recreation Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  25  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Didcot Town Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  48  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] London Borough of Ealing Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  53  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   3  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   1  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Earlsdon Rugby Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   9  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 736  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] East Midlands Academy Trust  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  40  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Eire Og GAA  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  18  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Elgar Park Regional Hockey Association  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  17  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 846  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Enfield Drill Hall Sports Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  11  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 746  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 629  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Featherstone Sports Centre Trust  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  61  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Mark Allen  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   2  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 210  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 132  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Football 567  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   3  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 111  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=  49  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Football Samurai Academy Limited   [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   4  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] FZ 2024 Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   3  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 148  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 126  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] gmcommunitylettings  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 141  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Gravesham Legend Sports Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  26  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 853  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 544  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Harborne Cricket Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   8  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 504  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Haringey Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 128  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 450  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Harpur Hill Sports Centre CIC  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  28  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] https://hillviewprimaryschool.bookteq.com/api/open-active  [ERROR_HTTP_404]  feeds=0
+
+  [app               ] Hythe Cricket & Squash Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  19  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] ID Verde Charnwood  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  54  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] JMO Sports Limited  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  34  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 896  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Kingsway Park High School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  31  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Langley Grange Pool  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  10  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 796  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Larkhall Sports Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  46  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Matthew Arnold Sports Centre  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 548  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] LRSO  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 412  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Manchester Communication Academy  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  67  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] March was Town FC Estover CIC  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  12  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 759  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 833  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Marston Moretaine Playing Fields  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   4  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 424  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 288  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] NXT Level Sport & Education Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 161  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Old Northamptonians Association  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  11  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 680  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 691  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] https://oldwhitgiftianscc.bookteq.com/api/open-active  [ERROR_HTTP_404]  feeds=0
+
+  [app               ] Orchard Learning Alliance  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  74  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Pomphrey Hill Community Sports Association  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  40  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Precision Football Arena  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=  23  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 228  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Prees Sports and Social Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  15  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Princes Park Youth Football Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   2  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 114  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=  71  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Priory Federation of Academies  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  60  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] QH Memorial Sports Ground - River Pitches  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  30  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Reading Rugby Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  32  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] The Hub - Rise Community  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  10  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 737  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] School Enterprises Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 356  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Courts Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   5  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 856  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Shirley High School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  30  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Southwark Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   8  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=  31  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 189  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Spalding United Football Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  14  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Sports IQ LTD  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  57  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 894  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Stanley Primary School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  37  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 956  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] St Cuthbert Mayne School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   7  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 820  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] St George's School, Harpenden  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  46  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Stowe Enterprises Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  56  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Strikers Indoor Football  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  13  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 231  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 141  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Sunbury Cricket Club  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   6  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 320  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] The Black Prince Trust   [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  42  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] The Downside Settlement  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  22  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 729  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] The Sports Warehouse (Flint) LTD  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  10  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 777  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] The Woodroffe School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  24  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 766  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] 100% TO THE TOP CIC  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=   2  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=  34  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 322  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Waltham Forest Council  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items= 149  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Wasps FC - Rugby in West London  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  20  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Water Lilies Swimming School Ltd  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  10  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Wells Cathedral School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  41  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 967  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] West Heath Primary School  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  30  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Woolmer Hill Sports Association  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  23  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Wycliffe College  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  31  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items=1000  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] Wymondham Town United FC  [COMPLETE]  feeds=2
+      FacilityUse      [COMPLETE] items=  27  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      FacilityUse      [COMPLETE] items=   0  {'category': '0%', 'activity': '0%', 'offers': '0%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 685  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+      Slot             [COMPLETE] items= 599  {'category': '0%', 'activity': '0%', 'offers': '100%', 'organizer': '0%', 'superEvent': '0%'}
+
+  [app               ] https://ymcahumber.bookteq.com/api/open-active  [ERROR_HTTP_404]  feeds=0
+
+========================================================================
+PILOT FINDINGS
+  Q1 joins       : 15278/18690 sampled superEvent targets resolve to parents harvested on page 1 (low is expected: page 1 of each feed is not aligned)
+  Q2 prevalence  : 18690/112718 child records carry superEvent = 16.6% (all child kinds)
+                   ScheduledSession   18690/18690 = 100.0%  <- per-kind is the honest denominator
+                   Slot                   0/94028 =   0.0%  <- per-kind is the honest denominator
+  Q3 capacity    : 1,347 bytes/item raw; 292.5 MB for 217,175 items -> ~10.6 GB to retain 7.9M items
+  Q4 fields      : see results/census2_field_presence.csv (parent presence of category/activity/offers/organizer = the headline)
+  raw retained   : 217,175 items across 767 files; filename collisions handled: 8 (0 pages lost — collisions are suffixed, never overwritten)
+  endpoints      : 974 logged; statuses {'COMPLETE': 930, 'COMPLETE_HTML': 1, 'ERROR_HTTP_403': 24, 'ERROR_NO_JSONLD': 1, 'ERROR_HTTP_500': 9, 'TIMEOUT': 1, 'ERROR_HTTP_404': 8}
+========================================================================
+  -> results/census2_summary.csv  (every headline figure, as an artefact)

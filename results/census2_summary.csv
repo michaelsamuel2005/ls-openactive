@@ -1,0 +1,13 @@
+metric,value,denominator,note
+sites.declared,174,,dataset sites declared by the 4 catalogues
+sites.attempted,174,174,"attempted/declared — coverage of SITES, never of records"
+endpoints.logged,974,,every endpoint carries a status
+endpoints.failed,43,974,failed reads never become zeroes
+raw.items,217175,,items across all retained pages (INCLUDES deleted tombstones)
+raw.files,767,,retained raw pages on disk
+raw.collisions_suffixed,8,,"filename collisions suffixed, never overwritten (0 pages lost)"
+raw.bytes_per_item,1347,,for the capacity plan
+capacity.gb_for_7.9m_items,10.6,,extrapolated; 7.9M is the DIP's published opportunity count
+joins.superEvent_resolvable,15278,18690,"floor, not a rate: parent/child pages are not aligned in this snapshot"
+superEvent.prevalence.ScheduledSession,18690,18690,PER-KIND is the only honest denominator; never pool across kinds
+superEvent.prevalence.Slot,0,94028,PER-KIND is the only honest denominator; never pool across kinds

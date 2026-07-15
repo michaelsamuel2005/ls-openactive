@@ -115,7 +115,7 @@ only clauses in the brief phrased as requirements. Verdicts are as at 2026-07-15
 | **Deliverable** | Verified live 14–15 July 2026: the OpenActive **Data Intelligence Platform is deployed**, not announced — 7.9M opportunities, 175 publishers, 3,642 providers (15 Jul), 785 activities, 74% of local authorities, ODI-stewarded, daily refresh. Recorded in proposal §1. |
 | **Acceptance evidence** | Direct verification of the live artefact, correcting an earlier project claim that it was consultation-stage. |
 | **Verdict** | **PARTIAL — the weakest of the five.** |
-| **Limitation** | **This is a genuine gap, not a nearly-done row.** The brief requires "Highlight various approaches used across the country." (P1 p.19); what exists is a handful of incumbent tools checked to bound our own novelty claim. There is **no literature review and no systematic national scan** in this repo. `docs/references.bib` does not yet exist. R2 as written is **not currently met.** |
+| **Limitation** | **This is a genuine gap, not a nearly-done row.** The brief requires "Highlight various approaches used across the country." (P1 p.19); what exists is a handful of incumbent tools checked to bound our own novelty claim. There is **no literature review and no systematic national scan** in this repo. `docs/references.bib` does not yet exist. R2 as written is **not currently met.** **Boundary rule when it is done (adopted from the external draft, D-027): the deliverable is a critical literature review + novelty matrix with a reproducible search/inclusion record and citation verification — and "no prior work found" is bounded by the search, NEVER "nobody has done this."** |
 
 ### R3 — "Identify challenges and opportunities in the way Londoners search for and engage with local activities."
 
@@ -273,6 +273,35 @@ the two that no amount of harvesting will close, and neither depends on the cens
 start today.
 
 ---
+
+## 5a. London-scope rule (adopted from the external draft, D-027)
+
+The census is **national** — Wigan, BwD Leisure, Chelmsford. The analysis is **London**. This
+repo named that gap and left it open; the external draft closes it with a rule, adopted here:
+
+> **London-wide language is prohibited unless the selection and coverage support it.**
+> Make **London search outcomes the final analysis**; use wider feeds **only to validate
+> mechanisms**. **National mechanism evidence cannot support London-wide consequence claims
+> on its own.**
+
+Consequences: platform×kind findings (D-021) are *mechanism* evidence and may be drawn
+nationally. Any statement of the form "in London, X% of …" requires the London-selected
+subset, its inclusion/exclusion counts and its geography/time rules — none of which exist yet.
+
+## 5b. Alignment acceptance test (adopted from the external draft, D-027)
+
+This document does not "pass" by existing. Alignment passes **only when all five hold**:
+
+| # | Condition | Status, 2026-07-15 |
+|---|---|---|
+| 1 | Every row above has a **completed, citable artefact** | **FAIL** — R2, R3, R4, R5 have none |
+| 2 | Title, RQs, experiment, prototype and recommendations follow **the same discovery task** | **PARTIAL** — v7 aligns them on paper; prototype unbuilt |
+| 3 | **London is present in the final query evidence, not merely the introduction** | **FAIL** — no London query benchmark exists; all evidence is national |
+| 4 | **No claim that the partner commissioned, approved or prioritised this exact task** unless a supervisor-routed record shows it | **PASS** — D-022 forbids it; the permitted claim is fixed in `v7-one-pager.md` |
+| 5 | **Limitations visible beside the corresponding claims** | **PASS** — every row carries one; `[INTERPRETATION]` marks each interpretive leap |
+
+**Two of five pass. Alignment does not currently pass**, and condition 3 is the one no
+harvesting closes — it needs a London query benchmark that does not exist.
 
 ## 6. What must happen to this document
 

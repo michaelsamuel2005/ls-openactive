@@ -1,14 +1,29 @@
+> **REPO STATUS (2026-07-15).** This file is the **(2)** revision, installed verbatim.
+> It **supersedes the (1) copy** previously committed here, and supersedes the five local
+> fixes applied to that copy — **(2) already carries all five, and carries them better**
+> (see D-027). Two of (2)'s corrections land against this repository's own claims and are
+> accepted: **Check 5** rules that the `bytes/item × 7.9M` extrapolation is *"a pilot
+> estimate, not a capacity decision"* — retiring D-021's "capacity is not a constraint";
+> and **§16** rules *"stop treating missing fields as publisher faults until parent lineage
+> is checked"* — which D-025 did, and which D-026 corrects.
+> **Only measured status annotations have been added below.** Nothing in (2)'s text is altered.
+
 # Execution blueprint: maximally aligned, academically exceptional London Sport 1 project
 
 > **Evidence update — 15 July 2026:** the 7 July CSV has now been inspected directly. Its lineage/current-state gate has failed. A fresh, raw-retaining catalogue harvest is Deliverable 1, not an optional feasibility exercise. All existing ecosystem-level diagnostics are suspended pending that harvest.
 
 ## 1. The decision
 
-Adopt the **determinable discovery coverage** pivot and freeze it after the three feasibility checks below.
+Adopt the **determinable discovery coverage** pivot and freeze it only after the five
+corpus, lineage, current-state, mechanism-eligibility and capacity checks below.
 
 Recommended title:
 
-> **Determinable Discovery from Incomplete Opportunity Data: Publication-process effects and query-level fitness for use in London's OpenActive ecosystem**
+> **Determinable Discovery in London's OpenActive Ecosystem: Separating source publication, standards-aware reconstruction and consumer-processing effects**
+
+This title is deliberately outcome-neutral. The pilot proves that information can be
+lost during consumer extraction, but it does not establish that all remaining
+indeterminacy is instrument-side or that publication-side limitations are absent.
 
 Use this claim about alignment:
 
@@ -24,21 +39,24 @@ OpenActive enables digital discovery, but record volume and field presence do no
 
 ### Aim
 
-> To determine which constraint-based searches are supported determinately by a reconciled London OpenActive corpus, identify the publication and processing mechanisms that cause indeterminate results, and quantify which validated repairs most improve query-level discovery coverage.
+> To determine which constraint-based searches are supported determinately by a reconciled London OpenActive corpus, attribute indeterminate results to source publication, standards-aware reconstruction or consumer processing, and quantify which validated changes most improve query-level discovery coverage.
 
 ### Research questions
 
 1. **Corpus validity:** Which feeds, entity types, parent-child structures and semantic fields are actually represented, and what acquisition or extraction losses constrain discovery?
 2. **Discovery determinability:** Across a prespecified benchmark of London searches, what proportion return enough determinate matches, only indeterminate candidates, or no observed listed match?
-3. **Mechanism and repair:** How much do parent resolution and selected secondary mechanisms change determinable discovery coverage, for which search constraints, and at what coverage/error cost?
+3. **Mechanism and repair:** How much do standards-aware reconstruction and consumer projection change determinable discovery coverage, for which search constraints, and at what coverage/error cost?
 
 Do not add a fourth independent research programme. The prototype is an experimental surface for RQ3, not another RQ.
 
 ### Falsifiable central proposition
 
-> Correct corpus reconstruction and uncertainty-aware retrieval materially change the result or interpretation of prespecified London discovery queries relative to child-only, closed-world filtering.
+> Source state, standards-aware reconstruction and consumer projection do not preserve the same determinability for prespecified London discovery queries.
 
-This can be falsified. If reconstruction and uncertainty representation do not materially change the outcome, report that bounded null result and withdraw the improvement claim.
+This can be falsified. If the three stages produce no material difference, report that
+bounded null result and withdraw the information-loss claim. If a difference exists,
+attribute it to the stage where the same-vintage paired comparison changes, rather than
+assigning blame from field presence alone.
 
 ## 3. Formalise the construct without overclaiming
 
@@ -70,21 +88,7 @@ Companion outcomes:
 
 Never translate “no observed listed match” into “no activity exists.” Never translate DDC into participation, physical-activity provision or health outcome.
 
-The database literature establishes query completeness and certain/possible answers over incomplete databases; do not claim invention of those concepts. The contribution is the domain-specific operationalisation, empirical mechanism analysis and reusable OpenActive benchmark. See **[TODO-VERIFY]** Razniewski and Nutt, *Completeness of Queries over Incomplete Databases*, `https://www.vldb.org/pvldb/vol4/p749-razniewski.pdf`.
-
-> **TODO-VERIFY — do not cite in any submitted artefact until cleared.** Per `CLAUDE.md`,
-> a reference not read by a team member stays marked until it is. **No one on this team has
-> read this paper.** It has been used to bound a novelty claim — "do not claim invention of
-> those concepts" — which is precisely the use that requires having read it: if its formalism
-> does not say what we assume, the novelty boundary is drawn in the wrong place, in either
-> direction. The URL resolves to a real VLDB paper; that establishes existence, **not** that
-> our characterisation of its contents is accurate. **Owner: unassigned. Blocks: §11
-> (academic contribution) and any prior-art claim.**
->
-> This is the only reference in this blueprint, and `docs/references.bib` does not exist.
-> That gap is the same one recorded against brief output **R2** ("Highlight various
-> approaches used across the country.", P1 p.19) in `docs/brief-traceability.md` — the
-> literature obligation is currently unmet project-wide, not merely here.
+The database literature establishes query completeness and certain/possible answers over incomplete databases; do not claim invention of those concepts. The contribution is the domain-specific operationalisation, empirical mechanism analysis and reusable OpenActive benchmark. Candidate anchor: [Razniewski and Nutt, *Completeness of Queries over Incomplete Databases*](https://www.vldb.org/pvldb/vol4/p749-razniewski.pdf). **Reference status: primary source verified 15 July 2026** (title, authors, PVLDB volume 4 number 11, 2011, and relevance to query completeness/certain and possible answers). Final reference formatting and fit within the critical literature argument still require team review.
 
 If the team wants to use the formal labels **certain** and **possible**, it must specify a possible-world model and permissible value domains. Otherwise retain the operational labels above.
 
@@ -105,7 +109,7 @@ OpenActive's own quality guidance says data users report end-user search issues 
 
 The Haringey referral workflow is relevant as a public use context because healthcare professionals send patients links to local activity sessions found through OpenActive-compliant sources. It is not evidence that London Sport commissioned this exact evaluation. [London Sport Haringey pathway](https://londonsport.org/focus-area/london-sport-and-haringey-nhs-pioneer-open-data-digital-patient-referrals/)
 
-## 5. Deliver the new corpus, then pass its three gates
+## 5. Deliver the new corpus, then pass its five gates
 
 The legacy corpus cannot pass these gates. Its columns are:
 
@@ -125,28 +129,18 @@ Pass only when `attempted ÷ declared` is reported at catalogue, dataset-site an
 
 ### Check 2 — field lineage
 
+> **STATUS: PASSED-PENDING-REPRODUCTION (D-025).** `src/trace_lineage.py` →
+> `results/lineage_trace.csv`, `results/lineage_sample.csv`. Extraction loss **is** separated
+> from source absence: over 14,790 resolved children, `location` is 100.0% *inheritable* and
+> `level` is 100.0% *source-absent*. **Two caveats bind:** the counts were computed on a raw
+> archive **44 pages short** (filename-collision defect, D-026 item 4), and the gate's second
+> condition — *"a second team member can reproduce every sampled trace"* — **is not ours to
+> close**. `results/lineage_sample.csv` emits 50 hand-checkable traces; a teammate must
+> actually check them. **Not passed until both are done.**
+
 For a stratified sample, trace activity, name, organiser, location, time, price, age and accessibility from raw JSON-LD through parent inheritance to analytical record.
 
 Pass only on the new raw-retaining corpus, when extraction loss is separated from source absence and a second team member can reproduce every sampled trace.
-
-> **STATUS: PASSED-PENDING-REPRODUCTION (2026-07-15).** `src/trace_lineage.py` →
-> `results/lineage_trace.csv`, `results/lineage_sample.csv`. Full result: **D-025**.
-> 21,152 parents indexed · 18,213 children traced · **14,790 resolved (81.2%)**; all rates
-> over resolved children only, with UNRESOLVED never folded into absence.
->
-> **Extraction loss vs source absence is separated — the first half of this gate is met.**
-> *Instrument-side* (published, destroyed by child-only extraction): `location`
-> **100.0%**, `name` 100.0%, `eventSchedule` 99.8%, `category` 97.0%, `url` 87.0%,
-> `offers` 80.6%. *Publication-side* (not published at all): `level` **100.0%**,
-> `ageRange` 99.0%, `description` 97.0%, `activity` 97.0%.
->
-> **`level` is absent on 14,790/14,790 records** — no pipeline recovers it, so
-> "beginner-friendly?" is unanswerable in 100% of cases. This is the empirical warrant for
-> three-state discovery, not an assumption.
->
-> **The second half is NOT ours to close.** `results/lineage_sample.csv` emits 50 traces
-> hand-checkable against `data/raw/census_*/` with no code — but a **second team member must
-> actually reproduce them**. Until then this gate is **not passed**.
 
 ### Check 3 — current-state pipeline
 
@@ -156,67 +150,91 @@ Pass only when counts reconcile from harvest to final entity and failure/partial
 
 If any check fails, the first contribution becomes pipeline/corpus reconstruction and all ecosystem-wide claims are suspended.
 
-### Capacity plan — measured, not assumed
+### Check 4 — mechanism eligibility and prevalence
 
-A raw-retaining harvest is only a plan if the disk arithmetic is done in advance. It is.
+> **STATUS: PARTIAL — prevalence measured, ELIGIBILITY NOT.** Per-kind (the only honest
+> denominator): `superEvent` on `ScheduledSession` **18,935/18,935 = 100.0%**; on `Slot`
+> **0/92,359 = 0.0%** ⇒ **the primary mechanism is scoped to session feeds only**.
+> **This check's own warning applies to us and is conceded:** *"Do not use the exploratory
+> one-page pilot to claim ecosystem prevalence."* Our census read **pages 0–1 of each feed —
+> the oldest end of a `modified`-ordered change feed** — so `173/173 = 100.0%` is coverage of
+> **sites, never of records**. **Not yet done:** independent-cluster counts, the
+> required-paired-record calculation, and the London paired-record count after geography/time
+> rules. Note **31.5% of `ScheduledSession` items are `deleted` tombstones** (8,372 of
+> 26,585), so current-state reconstruction materially changes any prevalence figure.
 
-| Quantity | Value | Source |
-|---|---|---|
-| Raw bytes per item, as served | **~1,329** | Census 2026-07-15: 289.3 MB / 217,743 items |
-| Full-ecosystem raw retention (7.9M items) | **~10.5 GB** | Extrapolation from the above |
-| Census snapshot actually on disk | 289.3 MB, 173/173 declared sites, 2 pages/feed | `data/raw/census_<UTC>/` |
-| Polite-consumer rate | 1 request/second + research User-Agent | `src/harvest_pilot.py` |
-| Observed wall-clock | ~25 min for 969 endpoints | Census run |
+The pilot must report, by entity type and independent dataset/publisher cluster:
 
-**Capacity is not a constraint and must stop being cited as a risk.** ~10.5 GB is
-laptop-scale. The earlier ~16.5 GB and ~14.0 GB estimates came from smaller,
-session-heavier samples and are **superseded**; the difference is composition, not error —
-`Slot` records are markedly smaller than `SessionSeries` records, so a facility-heavy
-ecosystem is cheaper to retain than a session-only sample predicts.
+- the proportion of current children carrying a relevant parent reference;
+- the proportion of those references resolved from the selected current-state corpus;
+- the number of independent clusters contributing paired records;
+- the number of paired London records after the final geography/time rules;
+- field-level change from source child to reconstructed entity and from reconstructed
+  entity to consumer projection.
 
-**Operational rules:** zip each snapshot; checksum the archive; keep raw immutable and
-gitignored (`data/` is already ignored); never flatten at harvest — flattening happens
-downstream, reversibly. **Full-ecosystem retention is a solved problem; the open constraint
-is time and politeness, not disk.**
+Do not use the exploratory one-page pilot to claim ecosystem prevalence. Before the
+confirmatory freeze, calculate the required paired-record count using the pilot's
+cluster structure and the target interval precision, and record that calculation. The
+primary mechanism is eligible only if there are enough paired London records and
+independent clusters to estimate its effect without one publisher dominating it.
+
+If the eligibility gate fails, do not manufacture a trivial null. Use the ranked
+fallback: (1) consumer-projection loss on all reconstructable records; (2) unresolved
+parent/reference failure as the primary mechanism; (3) a bounded corpus/pipeline study
+with no London-wide query-effect claim. The observed prevalence remains a result.
+
+### Check 5 — capacity and resumability
+
+> **STATUS: MEASUREMENT ONLY — NOT a capacity decision, per this check's own rule.**
+> Measured: **~1,329 raw bytes/item** over 217,743 items (`results/census_summary.csv`);
+> ~25 min wall-clock for 969 endpoints at 1 req/sec. The `× 7.9M ≈ 10.5 GB` extrapolation is
+> **a pilot estimate and is hereby demoted from D-021's claim that "capacity is not a
+> constraint"** — it excludes database, index, log, duplicate-response, temporary and backup
+> costs, exactly as this check states. **Not done:** 3× working-space verification, backup
+> destination and owner, resume/restart procedure and recovery test, scope-reduction rule.
+
+The pilot must measure raw feed-page bytes per observed RPDE item, items per page,
+request time, retry behaviour, SQLite growth and temporary-file growth. Before a full
+run, record:
+
+- selected feeds and estimated item/page counts;
+- estimated raw, database and temporary storage;
+- at least three times the estimated local working space available;
+- a separate backup destination and owner;
+- expected wall-clock range under the declared request rate;
+- the resume/restart procedure and a small recovery test;
+- the scope-reduction rule if storage or time is insufficient.
+
+The earlier approximate `bytes/item × 7.9m` calculation is a pilot estimate, not a
+capacity decision. It excludes some database, index, log, duplicate-response,
+temporary and backup costs. “An external drive” is not a plan until space, ownership,
+backup and recovery have been verified.
 
 ## 6. Build one exceptional mechanism study
 
 ### Primary mechanism
 
-Use **child-only projection versus correctly parent-resolved/current-state records from the same new observation vintage** as the primary ablation. It can affect activity, name, location, price and age simultaneously. The legacy CSV cannot form one arm of this comparison because it is a different vintage with irrecoverable provenance.
+Use three deterministic stages from the **same new observation vintage**:
 
-#### PREVALENCE GATE — pass/fail *before* freezing on this mechanism
+- **S0 — source/current-state stage:** the current entity as published, before parent
+  inheritance;
+- **S1 — standards-aware stage:** recursively parent-resolved current entities with
+  property provenance and unresolved references retained;
+- **S2 — consumer-projection stage:** the deliberately specified flattened consumer
+  view used by the discovery experiment.
 
-An ablation on a mechanism that is rare in the corpus is **null by construction**: the two
-arms differ on too few records to move any metric, and the study reports "no effect" when it
-has merely measured "no exposure". This gate must be evaluated and recorded **before** the
-mechanism is frozen, never after seeing the contrast.
-
-- **Pass condition.** The parent pointer is present on a **materially large majority** of the
-  child records the ablation will act on, measured **per `kind`, never pooled across kinds**.
-- **Status: PASSED for session feeds — decisively (census, 2026-07-15; `results/census_field_presence.csv`).**
-  `superEvent` on `ScheduledSession`: **18,935/18,935 = 100.0%** across 124 publishers and
-  173/173 declared sites. Exposure is universal, so the ablation cannot be null by
-  construction on this arm.
-- **Status: FAILS — and therefore SCOPES OUT — facility feeds.** `superEvent` on `Slot`:
-  **0/92,359 = 0.0%**. `Slot` records carry no parent pointer at all, so the
-  parent-resolution ablation **does not apply to the facility model** and must not be run or
-  reported over it. **The primary mechanism study is scoped to session feeds
-  (`SessionSeries`/`ScheduledSession`) only.** This scope limit is a finding, not an
-  omission: it is why the pooled all-kinds rate of **17.0%** is a trap — it would have
-  suggested a weak mechanism where there is in fact one universal mechanism and one
-  inapplicable model.
-- **Corollary — the facility model needs its own ablation, not this one.** For facilities,
-  `offers` sits on the **`Slot` child** (77/77 Bookteq, 25/25 LeisureCloud, 2/2 Legend,
-  1/1 singular: unanimous), inverting the session model where `offers` sits on the parent.
-  Any pipeline that assumes "descriptive fields live on the parent" silently loses **all**
-  facility pricing. That is a separate, independently evidenced instrument-side defect.
+Compare S1−S0 to measure the information made available by standards-aware
+reconstruction and S2−S1 to measure information lost by the consumer projection.
+Remaining indeterminacy at S1 is a source/corpus limitation only after unresolved feed
+coverage and parent references have been accounted for. The legacy CSV cannot form one
+arm of this comparison because it is a different vintage with irrecoverable provenance.
 
 Predeclare:
 
-- raw-retaining harvest identity and the two deterministic pipeline versions being compared;
+- raw-retaining harvest identity and the three deterministic stages being compared;
 - affected fields and expected direction;
-- primary DDC metric;
+- primary prespecified stratum profiles and constraint-count curves, with DDC as a
+  secondary summary;
 - `k`, radius, observation date and a primary future window plus a prespecified window-sensitivity grid;
 - practically meaningful effect rule;
 - clustering/uncertainty method;
@@ -224,23 +242,22 @@ Predeclare:
 
 Do not choose the materiality threshold after seeing the result. If no partner threshold exists, justify it through task consequences and show the full sensitivity curve instead of hiding behind one cutoff.
 
-#### Outcome branch — predeclared, because the mechanism is NOT purely publication-side
+### Predeclared outcome branches
 
-This blueprint was written assuming the effect under study is a property of the **ecosystem**
-(publication-side). D-021 establishes that is **only half true**, and a study that cannot say
-which half it measured is uninterpretable. All three branches below are legitimate results
-and **must be pre-committed now**, so that whichever occurs is reported rather than reframed.
+The same experiment supports four honest outcomes:
 
-| Branch | What it means | Predeclared outcome — no renegotiation after the fact |
-|---|---|---|
-| **A — Publication-side dominates** | The field is absent **at source**: the platform never publishes it for that kind. *Evidenced example:* on `SessionSeries`, LeisureCloud publishes `activity` at **0/28** publishers. | The headline contribution is the **ecosystem mechanism study**. Repair recommendations are addressed to **named vendors**, not to publishers. Discovery consequence: the constraint is **unknowable**, and the three-state presentation is the honest response. |
-| **B — Instrument-side dominates** | The field **is** published but our pipeline discarded it. *Evidenced example:* `category` is published on **28/28** LeisureCloud `SessionSeries` publishers and was absent from the legacy CSV entirely; `superEvent` at **100.0%** was discarded wholesale. | **This is NOT a null result and must not be reported as one.** The contribution becomes the **reproducibility/measurement-validity finding**: that a widely-used extraction path silently destroys fields the ecosystem publishes universally, and that published data-quality diagnostics computed downstream of it are measuring the instrument. This maps directly to brief output type **O3 (Data Quality and Suitability Assessment)** and is *more* on-brief than Branch A, not less. **Kill rule does not fire on Branch B.** |
-| **C — Both compose (CURRENT EVIDENCE)** | Instrument-side loss sits **on top of** genuine source heterogeneity, and the two are separable only because raw is retained. | Report **both, separated by construction**, with the separation itself as the methodological contribution: raw retention is what makes the decomposition possible, and its absence is what retired the legacy corpus. State per field and per `kind` which mechanism dominates. **Do not average them into a single "missingness" rate** — that is the error the legacy corpus made. |
+1. **Source-limited:** S1 remains substantially indeterminate after complete,
+   standards-aware reconstruction.
+2. **Reconstruction-limited:** S1 materially improves on S0 because required fields
+   are available through linked records.
+3. **Projection-limited:** S2 materially degrades S1 because consumer flattening or
+   filtering discards usable information.
+4. **Mixed:** the dominant stage differs by constraint, entity type, publisher or
+   technical system.
 
-**Attribution rule (binding).** No field may be reported as "missing" without naming which
-branch it falls into, evidenced from raw. "Missing" without attribution is the specific
-defect that retired the 7 July corpus, and repeating it here would repeat that failure with
-better provenance.
+The report title, abstract and recommendations must follow the observed branch. The
+instrument-side result is plausible and already motivated, but it is not pre-declared
+as the answer.
 
 ### Secondary mechanisms
 
@@ -376,7 +393,7 @@ The contribution is not “we made an app.” It is the combination of:
 1. a reconciled, auditable OpenActive discovery corpus;
 2. a formally bounded query-determinability construct;
 3. a versioned, provenance-backed London query benchmark;
-4. a causal/ablation account of which publication mechanisms change discovery outcomes;
+4. a paired ablation account of which source, reconstruction and consumer-processing stages change discovery outcomes;
 5. a fair comparison of closed, permissive and uncertainty-aware retrieval;
 6. quantified repair value and failure boundaries;
 7. reusable fixtures, annotation rules and tests;
@@ -414,7 +431,7 @@ Complete personally:
 4. `query_benchmark.yaml` plus a provenance table for every scenario dimension.
 5. Baseline and proposed-policy analysis: closed-world, permissive and three-state.
 6. Paired raw-versus-reconstructed result analysis with feed/publisher-clustered uncertainty.
-7. A single visual chain: source/feed → reconstructed entity → constraint states → query class → aggregate DDC → repair consequence.
+7. A single visual chain: source/feed → reconstructed entity → consumer projection → constraint states → prespecified stratum profiles/constraint-count curves → secondary DDC summary → practical consequence.
 8. `claim_ledger.md`: every planned claim marked proposed, exploratory, confirmatory, supported, falsified or withdrawn.
 9. `decision_log.md`: answerability pivot, rejected alternatives, lack of partner elicitation, threshold rationale and all kill decisions.
 10. Cross-review of the data pipeline and a clean-environment reproduction of someone else's component.
@@ -426,7 +443,10 @@ Do **not** spend your time building a large borough dashboard. Build only the vi
 | Gate | Pass condition | Failure action |
 |---|---|---|
 | Alignment | Complete brief traceability; task derivation; no false partner claim | Rewrite scope/claims |
-| Corpus | **`attempted ÷ declared` reported at catalogue, dataset-site and feed level against the canonical collection's declared frame**; selection rule explicit; every selected endpoint carries a status; failed/unattempted endpoints remain visible; parent/current-state lineage works | Restrict to pipeline study |
+| Corpus scope | Attempted ÷ declared reported at catalogue, dataset and feed levels; every selected endpoint has a status; failures and unattempted endpoints remain visible | Restrict claims to the fully described selected corpus |
+| Lineage/current state | Same-vintage identity, updates, tombstones, recursive relationships and field provenance reconcile | Restrict to pipeline/corpus study |
+| Mechanism eligibility | Paired-record and independent-cluster requirement calculated before final outcomes; prevalence and dominance reported | Use ranked fallback; do not report a null by construction |
+| Capacity/recovery | Measured estimate, ≥3× local headroom, separate backup, wall-clock range and tested resume/restart path | Reduce scope before launch |
 | Construct | Constraint semantics and DDC pass fixtures and adjudication | Redefine or remove affected constraints |
 | Primary effect | Predeclared parent-resolution contrast executed with uncertainty | Report null; remove improvement claim |
 | Benchmark | Frozen, provenance-backed, no data-driven cherry-picking | Label exploratory only |
@@ -444,10 +464,13 @@ Do **not** spend your time building a large borough dashboard. Build only the vi
 - Finish the brief-traceability matrix.
 - Freeze the rejected alternatives and novelty wording.
 - Assign named owners and reviewers for each gate.
+- Record the four outcome branches and the ranked fallback before final analysis.
 
 ### Next 48–72 hours
 
 - Run a bounded catalogue/harvest pilot and inspect failure/status evidence.
+- Produce the machine-readable prevalence/capacity audit; do not promote one-page
+  observations to population rates.
 - Launch the complete selected raw-retaining observation only after the pilot passes.
 - Report attempted-versus-declared catalogue, dataset and feed coverage.
 - Complete scope, lineage and current-state gates on the new observation.
@@ -470,7 +493,7 @@ Do **not** spend your time building a large borough dashboard. Build only the vi
 
 ## 16. Stop doing these things
 
-- Stop revising the central question after the three feasibility checks pass.
+- Stop revising the central question after the five feasibility checks pass.
 - Stop calling record counts provision, access or availability.
 - Stop building deprivation indices, fairness rerankers and generic publisher dashboards.
 - Stop treating missing fields as publisher faults until parent lineage is checked.

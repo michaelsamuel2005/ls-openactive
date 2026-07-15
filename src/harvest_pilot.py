@@ -208,6 +208,16 @@ def main() -> None:
             kind = dist.get("name") or dist.get("additionalType", "").split("/")[-1]
             url = dist.get("contentUrl")
             if not url or kind not in (PARENT_KINDS | CHILD_KINDS):
+                # NEVER skip a declared feed silently. Wesley's v2 puts `Event` (one-off) in
+                # scope; this filter would have dropped it without trace, and the feed-level
+                # `attempted ÷ declared` ledger Check 1 demands would have been quietly wrong.
+                # Undisclosed harvest-time loss is the defect that retired the legacy corpus
+                # (D-021) — a skip is a decision and must appear in the ledger. (D-028)
+                endpoint_log.append({"level": "feed", "url": url or "(no contentUrl)",
+                                     "status": f"SKIPPED_KIND_{kind or 'UNDECLARED'}",
+                                     "platform": platform, "publisher": meta.get("publisher"),
+                                     "kind": kind})
+                print(f"      {str(kind):16s} [SKIPPED — kind not in scope]")
                 continue
             page_url = url
             for pg in range(args.pages):
@@ -305,6 +315,45 @@ def main() -> None:
     print(f"  endpoints      : {len(endpoint_log)} logged; statuses "
           f"{ {s: sum(1 for e in endpoint_log if e['status']==s) for s in {e['status'] for e in endpoint_log}} }")
     print("=" * 72)
+
+    # Every headline figure MUST be a committed artefact, not stdout. K6 fired (D-026)
+    # precisely because these numbers lived only in a terminal and `*.log` is gitignored,
+    # leaving them unreconcilable from any committed file. One row per metric, so a
+    # non-author can check any claim without re-running a live change feed.
+    summary = [
+        {"metric": "sites.declared", "value": declared_sites, "denominator": "",
+         "note": "dataset sites declared by the 4 catalogues"},
+        {"metric": "sites.attempted", "value": len(selected), "denominator": declared_sites,
+         "note": "attempted/declared — coverage of SITES, never of records"},
+        {"metric": "endpoints.logged", "value": len(endpoint_log), "denominator": "",
+         "note": "every endpoint carries a status"},
+        {"metric": "endpoints.failed", "value": sum(1 for e in endpoint_log
+                                                    if e["status"] not in ("COMPLETE", "COMPLETE_HTML")),
+         "denominator": len(endpoint_log), "note": "failed reads never become zeroes"},
+        {"metric": "raw.items", "value": raw_items, "denominator": "",
+         "note": "items across all retained pages (INCLUDES deleted tombstones)"},
+        {"metric": "raw.files", "value": len(list(raw_dir.glob("*.json"))), "denominator": "",
+         "note": "retained raw pages on disk"},
+        {"metric": "raw.collisions_suffixed", "value": len(collisions), "denominator": "",
+         "note": "filename collisions suffixed, never overwritten (0 pages lost)"},
+        {"metric": "raw.bytes_per_item", "value": round(raw_bytes / max(1, raw_items)),
+         "denominator": "", "note": "for the capacity plan"},
+        {"metric": "capacity.gb_for_7.9m_items",
+         "value": round(raw_bytes / max(1, raw_items) * 7.9e6 / 1e9, 1), "denominator": "",
+         "note": "extrapolated; 7.9M is the DIP's published opportunity count"},
+        {"metric": "joins.superEvent_resolvable", "value": resolvable,
+         "denominator": len(child_super_targets),
+         "note": "floor, not a rate: parent/child pages are not aligned in this snapshot"},
+    ]
+    for k in sorted(by_kind_total):
+        summary.append({"metric": f"superEvent.prevalence.{k}", "value": by_kind_super.get(k, 0),
+                        "denominator": by_kind_total[k],
+                        "note": "PER-KIND is the only honest denominator; never pool across kinds"})
+    with open(f"results/{args.tag}_summary.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["metric", "value", "denominator", "note"])
+        w.writeheader()
+        w.writerows(summary)
+    print(f"  -> results/{args.tag}_summary.csv  (every headline figure, as an artefact)")
 
 
 if __name__ == "__main__":
