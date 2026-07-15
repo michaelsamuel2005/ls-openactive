@@ -773,6 +773,22 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   **UNRESOLVED** (parent not in snapshot → **nothing concluded**).
 
 - **Scale.** 21,152 parents indexed · 18,213 children traced · **14,790 resolved = 81.2%**.
+
+  > ⚠️ **DENOMINATOR CAVEAT (D-026).** These counts are computed over the **raw archive on
+  > disk (708 files)**, which the filename-collision defect left **44 pages short** of the 752
+  > actually fetched. That is why this entry says **18,213** children where D-021's census
+  > says **18,935**: the missing **722** children are on the overwritten pages. **The rates
+  > below are therefore measured on an incomplete archive** and must be recomputed after the
+  > re-harvest with the fixed code. The *structural* findings are unlikely to move — but they
+  > are not yet measured on the full retained record, and this entry must not be cited as if
+  > they were.
+
+- **RPDE tombstones are real and material (bearing on Check 3).** The archive carries
+  **8,372 `state: deleted` tombstones** beside 18,213 `updated` items — **31.5% of all
+  `ScheduledSession` items are deletions**. Current-state reconstruction is therefore not a
+  formality: a consumer that ignores tombstones over-counts sessions by roughly a third on
+  this sample. This also **confirms the `n_items` defect** (D-026 item 3): `n_items` counted
+  all 26,585 items while `presence_rate` was computed over the 18,213 payloads.
   All rates below are over **resolved children only** — the honest denominator. **UNRESOLVED
   is never folded into absence**; it is a property of *our snapshot* (2 RPDE pages/feed, and
   parent/child pages are not aligned), not of the ecosystem. Folding it in would manufacture
@@ -792,9 +808,19 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   | `organizer` | 7,852/14,790 | 53.1% |
   | `genderRestriction` | 7,716/14,790 | 52.2% |
 
-  **`location` is 100.0% inheritable with 0 source-absent.** Not one child carries its own
-  `location`; every one is on the parent. A child-only pipeline loses **all** geography — and
-  geography is the field a borough-level equity analysis is built on.
+  **`location` is 100.0% inheritable with 0 source-absent.** Not one child carries the
+  standard `location` field; every one is on the parent.
+
+  > ⚠️ **CORRECTION (D-026, second pass).** An earlier version of this bullet continued:
+  > *"A child-only pipeline loses **all** geography."* **That is false, and this entry
+  > refuted it four bullets below its own claim:** 97.0% of children carry
+  > **`beta:sportsActivityLocation`**, and the legacy CSV's `venue`/`latitude`/`longitude`
+  > came from exactly that. A child-only pipeline loses the **standard** `location` field;
+  > it does **not** lose geography. **This was the "assume instrument-side loss is the
+  > answer" error** — presupposing the instrument story instead of attributing it, which the
+  > answerability-pivot draft explicitly rejects as an alternative. The honest claim: geography
+  > survives child-only extraction **only via a `beta:`-namespaced, explicitly provisional
+  > field**, which is a fragility finding, not an absence finding.
 
 - **PUBLICATION-SIDE — fields the ecosystem genuinely does not publish here:**
 
@@ -946,3 +972,83 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 - **Status: PROPOSED 2026-07-15.** Corrections 1, 2, 5 and 6 are applied to the documents;
   3 and 4 are applied to `src/harvest_pilot.py` but **the committed census raw remains
   incomplete until re-harvested**.
+
+---
+
+## D-027 · Reconciling the external drafts: blueprint (2) supersedes; three-stage attribution adopted (2026-07-15) — **PROPOSED**
+
+Three externally-produced drafts (all timestamped 12:59, 2026-07-15) were assessed against the
+repository's own work: `determinable_discovery_execution_blueprint (2).md`,
+`answerability_pivot_decision_draft.md`, `brief_traceability.md`. **They are better than what
+this repository holds in several specific ways, and two of their criticisms land.**
+
+- **1. Blueprint (2) SUPERSEDES the (1) committed at `docs/execution-blueprint.md`.** The `(1)`
+  copy was the newest available at 09:57; `(2)` was written at 12:59 and changes the
+  architecture. **`docs/execution-blueprint.md` currently holds a superseded design.**
+  The substantive changes, all adopted:
+  - **Three-stage attribution replaces the binary.** **S0** current source entity before
+    inheritance → **S1** recursively reconstructed current entity → **S2** declared consumer
+    projection. Evaluate the same frozen queries at every stage; permit *source-limited*,
+    *reconstruction-limited*, *projection-limited*, *mixed* and *null* outcomes.
+    **This is strictly better than D-021/D-025's instrument-vs-publication binary**, which
+    collapses S1 and S2 — conflating *"we never did the RPDE join"* with *"we did the join,
+    then flattened the fields"*. Different failures, different repairs, one bucket.
+  - **The title becomes outcome-neutral:** *"…Separating source publication, standards-aware
+    reconstruction and consumer-processing effects"*, on the stated grounds that the pilot
+    *"does not establish that all remaining indeterminacy is instrument-side"*. Correct.
+  - **Five gates, not three** (scope, lineage, current-state, mechanism-eligibility, capacity).
+  - **K7 IS CLOSED.** Razniewski & Nutt now carries *"Reference status: primary source verified
+    15 July 2026"* — PVLDB vol. 4 no. 11, 2011, verified against the primary source. The kill
+    rule that was firing this morning no longer fires. Formatting and its fit in the critical
+    literature argument remain open; **the TODO-VERIFY may be lifted.**
+
+- **2. The pivot draft's rejected-alternative list contains one this repository should have
+  written and did not:** *"**Assume instrument-side loss is the answer** — rejected because the
+  final same-vintage comparison must attribute rather than presuppose the dominant cause."*
+  **D-025 committed exactly that error** and it is corrected above: the "child-only extraction
+  loses all geography" claim was refuted by D-025's own `beta:sportsActivityLocation` finding,
+  four bullets later. The draft also warns *"top-level field presence missed some embedded
+  parent information"* — **tested and REJECTED for this corpus**: `superEvent` is a bare string
+  in **18,213/18,213** cases, zero embedded objects, so the `INHERITABLE` classification is not
+  contaminated by that route. **But the warning was right in spirit and caught a real instance
+  by a different path** (`beta:sportsActivityLocation` is exactly "field information the
+  top-level key check misses").
+
+- **3. `brief_traceability.md` (external) vs `docs/brief-traceability.md` (repo) — MERGE, do not
+  replace.**
+  - **The repo version is stronger where it matters most:** its left column is **verbatim
+    partner text, page-cited and machine-checked against the deck**. The external version heads
+    its column *"Supplied brief meaning"* — **paraphrase, honestly labelled but not citable**.
+    An examiner asking *"where does this clause come from?"* gets a page number from one and a
+    characterisation from the other.
+  - **The external version is stronger in three respects, all adopted:**
+    (a) an **alignment acceptance test** — five conditions, incl. *"London is present in the
+    final query evidence, not merely the introduction"* and *"no claim that the partner
+    commissioned, approved or prioritised this exact task"*;
+    (b) a far better **R2** row — *"'No prior work found' is bounded by the search, never
+    'nobody has done this'"*;
+    (c) it **fixes the London-scope problem this repo only flagged**: *"use wider feeds only to
+    validate mechanisms"*, *"National mechanism evidence cannot support London-wide consequence
+    claims alone"*, and *"London-wide language is prohibited unless the selection and coverage
+    support it."* The census is **national** (Wigan, BwD Leisure); the analysis is London. That
+    gap was named here and left open — the drafts close it with a rule.
+
+- **4. A sampling criticism this repository has NOT yet tested.** The pivot draft rejects
+  *"treat the pilot as the final result"* because *"one-page modified-history samples are not
+  representative current-state prevalence measurements"*. **RPDE is a change feed ordered by
+  `modified`; `next` walks forward in time.** The census took **pages 0–1 of each feed — the
+  START of each change history, i.e. the OLDEST records** — not current state and not a random
+  sample. **`attempted ÷ declared = 173/173 = 100.0%` is honest coverage of SITES and must
+  never be read as coverage of records.** Structural findings (`superEvent` universality,
+  parent/child shape) are robust to this; **prevalence rates may not be.** UNTESTED — carry as
+  a live threat to validity until measured.
+
+- **Adopted, subject to ratification:** the S0/S1/S2 model; the outcome-neutral title; the five
+  gates; the alignment acceptance test; the London-scope prohibition; lifting the Razniewski &
+  Nutt TODO-VERIFY. **Action:** replace `docs/execution-blueprint.md` with `(2)`, **re-applying
+  the five fixes from D-024's predecessor work** (the vacuous §14 gate condition, the prevalence
+  gate, the capacity plan, the instrument-side outcome branch) which `(2)` does not carry, and
+  merge the external traceability matrix's acceptance test and R2/London rows into the repo's
+  verbatim-cited version.
+
+- **Status: PROPOSED 2026-07-15.**
