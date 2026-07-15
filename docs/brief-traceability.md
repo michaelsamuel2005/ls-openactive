@@ -25,12 +25,34 @@ each row below states which one it quotes.
 
 ### 0.1 Provenance risks — stated, not hidden
 
-- **Neither primary is in this repository.** P1 sits in `~/Downloads` on one machine; P2
-  exists only inside a zip. Nobody cloning this repo can check any quotation below against
-  its source. **Action required:** obtain permission to commit P1 (or a citable link//
-  reference to it) before this document is relied upon. Until then every row is verifiable
-  by one team member only, which is the same bus-factor defect recorded against
-  `src/recommender/`.
+- **Neither primary is in this repository, and neither may be committed to it.**
+  **This repository is PUBLIC and carries no licence file.** P1 is London Sport's own
+  unpublished deck, authored by a named employee; committing it here would **republish a
+  partner's internal document to the open internet** without their permission. Absence of a
+  confidentiality marking is not permission — copyright subsists automatically. **Do not
+  commit P1 or P2.** Quoting clauses for academic criticism, as this document does, is a
+  different and defensible act; republishing the artefact is not.
+
+- **Verification without publication — the identity block below is the substitute.** Any
+  team member holding the deck can confirm they hold the *same* artefact these quotations
+  were taken from, and can then check every row themselves. This closes the bus-factor gap
+  without distributing anything.
+
+  | Source | SHA-256 | Size | Detail |
+  |---|---|---|---|
+  | **P1** `LS machine learning projects_29-05-2026.pdf` | `5afccb820391fc4dad999e4fdc0cc04f31da49efd11410a942603a4d0959bb9f` | 1,992,626 bytes | 25 pp · `author: Josef Baines` · created `2026-06-03T12:58:00+01:00` |
+  | **P2** listing image (`image(4).png`) | `8bc9b29747c95ca4fc1f1d6042ac476c9108ab901151933760d2ac4969dd6707` | 580,032 bytes | Held in `CODEX_FINAL_ADVERSARIAL_HANDOFF_BUNDLE.zip` |
+
+  Verify with `shasum -a 256 "<file>"`. A mismatch means you hold a **different** artefact
+  and **must not** rely on these quotations until reconciled. *(A second copy,
+  `…_29-05-2026 (1).pdf`, is byte-identical — same digest — so the duplicate is not a fork.)*
+
+- **Still open — the team must decide.** (a) Ask London Sport whether the deck may be
+  committed, or whether a citable public reference exists; and/or (b) circulate P1 through
+  the team's own private channel (email/Teams/OneDrive), **not** this repo. Until one of
+  those happens, quotations are checkable only by members who already hold the deck.
+  **This is a genuine residual gap against output O8**, and it is recorded rather than
+  closed by wishful thinking.
 - **P1 is a deck, not a specification.** Slide bullets are elliptical ("London Sport –
   strengthen its use of…"). Where a bullet is not a grammatical sentence it is quoted
   exactly as it appears and **not silently completed**.
@@ -81,7 +103,7 @@ only clauses in the brief phrased as requirements. Verdicts are as at 2026-07-15
 |---|---|
 | **Research choice** | Treat OpenActive as a **socio-technical publication system, not a census of provision**. Characterise it by walking the canonical catalogue collection → 4 catalogues → declared dataset sites → RPDE feeds, and measuring what is actually published, per platform. |
 | **Deliverable** | `src/harvest_pilot.py`; `results/census_field_presence.csv`; `results/census_endpoint_log.csv`; `docs/data-sources.md`; D-021 incl. its census amendment. |
-| **Acceptance evidence** | **Census, 2026-07-15 — complete coverage of the declared frame:** `attempted ÷ declared` = **173/173 = 100.0%**, 4 catalogues, **124 distinct publishers**, 969 endpoints, **217,743 items**, all CC-BY 4.0. `superEvent` on `ScheduledSession` **18,935/18,935 = 100.0%** (`Slot` 0/92,359 — per-kind is the only honest denominator). Field availability is determined by **platform × feed kind**: on `SessionSeries`, LeisureCloud is `category` **28/28** and `activity` **0/28**; singular is `activity` **6/6**. `offers` inverts between models — parent for sessions, **`Slot` child** for facilities (77/77, 25/25, 2/2, 1/1: unanimous). **52 of 969 endpoints failed (5.4%)**; **14 of 173 declared sites (8.1%) unreadable**. Capacity ~1,329 bytes/item → **~10.5 GB** for all 7.9M. |
+| **Acceptance evidence** | **Census, 2026-07-15 — complete coverage of the declared frame:** `attempted ÷ declared` = **173/173 = 100.0%**, 4 catalogues, **124 distinct publishers**, 969 endpoints, **217,743 items**. **Licence verified, not assumed: 162/162 *readable* sites declare CC-BY 4.0 (100.0%); 11 of 173 were unreadable and their licences are unknown** (`src/verify_licences.py` → `results/licence_audit.csv`). `superEvent` on `ScheduledSession` **18,935/18,935 = 100.0%** (`Slot` 0/92,359 — per-kind is the only honest denominator). Field availability is determined by **platform × feed kind**: on `SessionSeries`, LeisureCloud is `category` **28/28** and `activity` **0/28**; singular is `activity` **6/6**. `offers` inverts between models — parent for sessions, **`Slot` child** for facilities (77/77, 25/25, 2/2, 1/1: unanimous). **52 of 969 endpoints failed (5.4%)**; **14 of 173 declared sites (8.1%) unreadable**. Capacity ~1,329 bytes/item → **~10.5 GB** for all 7.9M. |
 | **Verdict** | **Strongest row in this document — and now measured on the whole declared frame, not a sample.** |
 | **Limitation** | Two RPDE pages per feed, so this is a **snapshot of feed heads, not the full corpus**; item-level rates could shift deeper in the feeds. The frame is **everything the catalogues declare** — publishers outside the four catalogues are invisible by construction, so "173/173" is 100% of *declared*, not of *existing*. The harvest is **national** (Wigan, BwD Leisure) while the analysis is London-scoped: defensible for characterising *platform* behaviour, but it must be stated. "Understanding" here is of the **publication layer**; the brief may have meant something broader. **[INTERPRETATION]** |
 

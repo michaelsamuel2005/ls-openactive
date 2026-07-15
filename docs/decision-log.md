@@ -323,6 +323,28 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   venue counts, borough coverage, and the exploratory gap/validation figures. None
   may be cited in the report except as superseded history with this entry attached.
 
+  - **SCOPE CORRECTION (2026-07-15).** This clause was initially actioned as if it
+    affected only the `harvest0707.*` manifest prefix. **It does not.** Tracing every
+    row in `results/metrics.csv` back to its `source_dataset` field, **31 of 72 rows**
+    derive from a file this entry retires, across **four** prefixes:
+
+    | Prefix | Rows | Retired source |
+    |---|---|---|
+    | `harvest0707.*` | 20 | `data/raw/dataset_2026-07-07.csv` |
+    | `event_harvest.*` | 9 | `data/external/wesley/output.csv` |
+    | `harvest0626.*` | 1 | `output.csv` |
+    | `prereg.*` | 1 | `output.csv` |
+
+    Naming only `harvest0707.*` would have left **11 rows live** that this entry
+    suspends — including every `event_harvest.london33.*` figure. The suspension is
+    **all 31 rows**. Reproduce with: trace `source_dataset` for each row against
+    `dataset_2026-07-07.csv` / `output.csv`.
+  - **Labelling is deferred until ratification, deliberately.** The manifest is the
+    project's canonical evidence record, and this entry is **PROPOSED**. Mutating 31 rows
+    of it to reflect an unratified decision would assert an outcome the team has not
+    agreed. The status column lands **after** ratification, not before. Until then this
+    entry is the register of what is suspended.
+
 - **Why (verified 2026-07-15, not inferred).** Direct column inspection: **both files
   lack** `@id`, `superEvent`, `organizer`, activity/`category` vocabulary,
   publisher/feed identity, RPDE `modified`/`state`, and any retained raw JSON-LD.
@@ -492,6 +514,38 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   use *"for critical pipelines"*. Any future use must be pinned, declared, and its
   join/delete/pagination behaviour independently verified against the raw feeds.
 
+  - **F-DEP RE-EXAMINED (2026-07-15) — it is worse than stated above, and that CLOSES it
+    rather than opening work.** Verified directly:
+
+    | Layer | Result |
+    |---|---|
+    | `openactive` in `requirements.txt`? | **No** (13 lines; verified line-by-line, not by substring — `name: ls-openactive` in `environment.yml` is a false-positive trap) |
+    | `openactive` in `environment.yml`? | **No** |
+    | Installed in the environment? | **No** — `import openactive` raises `ModuleNotFoundError` |
+    | `notebooks/load_dataset.ipynb` committed? | **NO — never, on any branch.** `git log --all -- notebooks/load_dataset.ipynb` is empty; the file is untracked. Only `notebooks/data_audit.ipynb` is tracked. |
+
+    So the original statement — "undeclared, therefore unrebuildable" — **understates it**.
+    **The corpus-building code is not in the repository at all.** Even a correctly pinned
+    dependency would not make the corpus rebuildable, because there is nothing to run.
+    The legacy corpus is **permanently unrebuildable by three independent failures**.
+
+  - **Consequence: F-DEP is not an open task. It is evidence FOR D-021.** This entry retires
+    the corpus; F-DEP explains why retirement is the only available option rather than a
+    preference — the corpus cannot be reconstructed, audited, or defended by anyone but its
+    original author, and no raw was retained to check it against. **No action is required and
+    none should be taken:** there is **no forward dependency** on `openactive`
+    (`src/harvest_pilot.py` and `src/verify_licences.py` use plain HTTP; their only
+    third-party import is `requests`, which **is** declared).
+
+  - **Correction to a claim made against this project (K6).** `docs/v7-one-pager.md` reported
+    kill rule **K6** (*"a non-author cannot reproduce the headline table/figure from a clean
+    clone"*) as **firing**, on F-DEP's authority. **That was wrong and is withdrawn.** K6
+    tests the *current* headline, not the retired corpus. Every current headline figure comes
+    from `harvest_pilot.py` / `verify_licences.py` → `results/census_*.csv`,
+    `results/licence_audit.csv`, whose sole third-party dependency is declared. **A clean
+    clone reproduces the current evidence chain; K6 does not fire.** The error was conflating
+    two different reproducibility questions — the dead corpus and the live evidence.
+
 - **Status: PROPOSED 2026-07-15.** Supersedes nothing yet; D-020 remains PROPOSED and
   its corpus premise is amended by this entry. No document may claim adoption.
 
@@ -543,12 +597,29 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
   > recorded anywhere. This entry asserts the constraint as stated by the team. **Do not
   > ratify this bullet until the reason and date are written down.**
 
-- **Open risk (blocks reliance).** **Neither primary is in this repository.** P1 sits in one
-  member's `~/Downloads`; P2 exists only inside a zip. No one cloning this repo can check a
-  single quotation against its source — the same bus-factor defect recorded against
-  `src/recommender/`, and a direct failure against output type **O8** ("Instructions needed
-  to reproduce the analysis"). **Action:** obtain permission to commit P1, or record a
-  citable reference to it.
+- **Open risk, and a correction to the obvious fix.** Neither primary is in this repository.
+  The obvious remedy — commit them — is **wrong and must not be done**: **this repository is
+  PUBLIC and has no licence file**, so committing P1 would **republish London Sport's
+  unpublished internal deck, authored by a named employee, to the open internet** without
+  their permission. No confidentiality marking appears on it, but absence of a marking is
+  not a licence; copyright subsists automatically. **Decision: do not commit P1 or P2.**
+  Quoting clauses for academic criticism is a different, defensible act; republishing the
+  artefact is not.
+
+- **Substitute adopted — identity by digest, not by distribution.** `docs/brief-traceability.md`
+  §0.1 records SHA-256 digests, byte sizes and metadata for both primaries, so any member
+  holding the deck can prove they hold the **same** artefact the quotations came from and
+  check every row, without anything being published:
+  - **P1** `5afccb820391fc4dad999e4fdc0cc04f31da49efd11410a942603a4d0959bb9f` (1,992,626 bytes,
+    25 pp, `author: Josef Baines`, created 2026-06-03).
+  - **P2** `8bc9b29747c95ca4fc1f1d6042ac476c9108ab901151933760d2ac4969dd6707` (580,032 bytes).
+  A digest mismatch means a different artefact and the quotations must not be relied upon.
+
+- **Residual gap — recorded, not closed.** Members who do **not** hold the deck still cannot
+  verify a quotation, so this remains a partial failure against output type **O8**
+  ("Instructions needed to reproduce the analysis"). **Team to decide:** (a) ask London Sport
+  whether the deck may be committed or whether a citable public reference exists, and/or
+  (b) circulate P1 by the team's own private channel — **not** this repo.
 
 - **Status: PROPOSED 2026-07-15.**
 
@@ -611,3 +682,73 @@ restarted at zero-padded D-007, so the two series are distinct labels (founding
 
 - **Status: PROPOSED 2026-07-15.** Depends on D-021 and D-022. If D-021 is rejected, this
   entry falls with it.
+
+---
+
+## D-024 · Licensing, attribution and the public-repository correction (2026-07-15) — **PROPOSED**
+
+- **Trigger — three live defects found together, all consequences of one unnoticed fact.**
+  **The repository is PUBLIC** (`gh repo view` → `visibility: PUBLIC`), and had been
+  throughout. It was not treated as such:
+  1. **No `LICENSE`, no `NOTICE`, no attribution anywhere**, while publishing derivatives of
+     CC-BY 4.0 OpenActive feeds (`results/census_*.csv`, `reports/*.csv`) to the open
+     internet. **CC-BY 4.0 permits redistribution only with attribution**, so the
+     redistribution was unlicensed. `docs/data-sources.md` line 3 already stated the
+     obligation — *"Every published output must carry CC-BY 4.0 attribution … and OGL v3.0
+     acknowledgement"* — so this was a known rule, unmet.
+  2. **The README asserted the opposite of the truth.** A badge read
+     *"access: private & confidential"* and a `## Confidentiality` section read *"This is a
+     private academic project repository… Please do not share repository contents outside the
+     project team"*. Both **false**. Internal decision logs, team notes naming individuals,
+     and verbatim quotation of the partner's unpublished deck were world-readable while the
+     README said they were not.
+  3. **"All CC-BY 4.0" was asserted with no artefact behind it** (D-021, PR #6).
+     `src/harvest_pilot.py` reads each dataset site's `license` in `site_feeds()` and
+     **discards it** — no licence column exists in any endpoint log. A claim in a decision
+     entry was untraceable, contrary to this project's traceability rule.
+
+- **Decision (proposed).**
+  1. **Remain public**, and correct the README to say so. *(Team decision, 2026-07-15.)*
+  2. **Code (`src/`, `tests/`, config): MIT.** **Docs and analytical outputs (`docs/`,
+     `results/`, `reports/`): CC-BY-4.0.**
+  3. **Add `ATTRIBUTION.md`** carrying every upstream acknowledgement in its required form,
+     and link it from the README. These are **licence conditions, not courtesies**.
+  4. **Never commit the partner's brief (P1/P2)** — see D-022. Verification is by SHA-256
+     digest, not distribution.
+
+- **Why this split, and what was rejected** (P1 p.22 requires "What alternatives were considered"):
+
+  | Option | Verdict |
+  |---|---|
+  | **MIT (code) + CC-BY-4.0 (docs/results)** | **CHOSEN.** Two different kinds of work get their natural licence. MIT means **London Sport — a not-for-profit — can use, embed and modify the code with no legal review**, which is exactly what brief output **O8** ("Reproducible handover material… Instructions needed to reproduce the analysis") is for. CC-BY-4.0 on prose and results **matches the upstream OpenActive licence**, so derivatives return to the ecosystem on the ecosystem's own terms and the team is attributed. |
+  | Apache-2.0 | Rejected. Its patent grant and contribution terms are irrelevant to a 60-credit student analytics project and add legal-review burden for a small charity — friction against O8 with no compensating benefit. |
+  | MIT for everything | Rejected. MIT is a software licence; applying it to prose and datasets is a category error and would not match the CC-BY-4.0 ecosystem the outputs derive from. |
+  | CC-BY-4.0 for everything | Rejected. CC licences are **not recommended for source code** (Creative Commons' own guidance); it would leave the code's reuse terms ambiguous, defeating O8. |
+  | No licence (status quo) | Rejected. Defaults to **all rights reserved** — so London Sport could not lawfully reuse the deliverable they commissioned, and the CC-BY redistribution stays unlicensed. This is the current state and it is a defect. |
+  | Make the repo private instead | **Considered and rejected by the team, 2026-07-15.** It would have dissolved the CC-BY redistribution obligation and the exposure of internal notes. The team chose public; the obligations are therefore **live and must be met**, not deferred. |
+
+- **Evidence — the CC-BY claim is now measured (`src/verify_licences.py` → `results/licence_audit.csv`).**
+  Walking the canonical collection and reading the `license` each dataset site declares:
+  - **162/162 readable sites declare `https://creativecommons.org/licenses/by/4.0/` = 100.0%, unanimous.**
+  - **11 of 173 declared sites were unreadable**; their licences are **unknown, not assumed**,
+    and no data from them is redistributed.
+  - **Precision correction:** the honest claim is *"all readable sites"* (162/162), **not**
+    "all 173". D-021 and PR #6 said "all CC-BY 4.0" without that denominator.
+  - This **discharges the open ask** at `docs/data-sources.md` — *"verify per-feed licences
+    before publishing derived outputs"*.
+
+- **Verified upstream licences (from `docs/data-sources.md`; not assumed here).** OpenActive /
+  Open Sessions **CC-BY 4.0** · IoD2025, ONS Census 2021, ONS boundaries, Active Lives
+  **OGL v3.0** · TfL PTAL 2015 **OGL v2** *(v2, not v3)* · Active Places **Sport England's own
+  licence**, requiring the verbatim acknowledgement *"Contains data Copyright Sport England"*
+  — **not OGL**, a distinction `docs/data-sources.md` records the pre-acquisition runbook
+  having got wrong.
+
+- **Open — team must resolve before submission.** `LICENSE` names the copyright holders as
+  *"Clarence, Fahmi, Michael Samuel, Wesley"*: `docs/team.md` records **only first names** for
+  three of four. **Full legal names are required and must not be invented.** Marked TODO in
+  the file.
+
+- **Status: PROPOSED 2026-07-15.** The visibility correction and attribution are **compliance,
+  not preference** — if the repo stays public they are required regardless of ratification.
+  The licence *choice* (MIT + CC-BY-4.0) is the part open to team amendment.

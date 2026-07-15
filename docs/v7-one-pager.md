@@ -55,11 +55,16 @@ Each is a *pre-declared* action, not a discretionary judgement. Firing one is a 
 | **K3** | Corpus gate fails — `attempted ÷ declared` cannot be reported at catalogue/site/feed level, or failed endpoints are not visible | All ecosystem-wide claims suspended. First contribution becomes corpus/pipeline reconstruction. **STATUS: PASSES** — census reports **173/173 = 100.0% of declared**, 969 endpoints each with a status, 52 failures (5.4%) retained and visible. |
 | **K4** | A field's "missingness" cannot be attributed to publication-side vs instrument-side from retained raw | That field is **excluded** from any mechanism or repair claim. Unattributed missingness is the exact defect that retired the 7 July corpus (D-021). |
 | **K5** | The benchmark query set is not frozen with provenance before results are seen | The prototype is labelled **exploratory only** and makes no comparative claim. |
-| **K6** | A non-author cannot reproduce the headline table/figure from a clean clone | **No exceptional claim.** **STATUS: CURRENTLY FIRING** — see F-DEP below. |
+| **K6** | A non-author cannot reproduce the headline table/figure from a clean clone | **No exceptional claim.** **STATUS: DOES NOT FIRE — re-tested 2026-07-15, correcting an earlier claim that it did.** The scripts producing every current headline figure (`src/harvest_pilot.py`, `src/verify_licences.py` → `results/census_*.csv`, `results/licence_audit.csv`) have **exactly one third-party import — `requests` — and it is declared in `requirements.txt`.** A clean clone reproduces the current evidence chain. *(The retired corpus is a separate matter — see F-DEP.)* |
 | **K7** | Any reference is cited without a team member having read it | It is marked `TODO-VERIFY` and **may not appear in a submitted artefact.** **STATUS: CURRENTLY FIRING** — Razniewski & Nutt is the blueprint's only citation and nobody has read it. |
 
-**Two kill rules are firing right now (K6, K7).** Both are fixable this week; neither is fixable
-by harvesting more data.
+**One kill rule is firing right now: K7** (an unread citation). It is fixable this week and not
+by harvesting more data — someone has to read the paper.
+
+**K6 was previously reported as firing. It is not** — that claim was tested and withdrawn
+(see the row above). The confusion came from conflating two different reproducibility
+questions: *the retired corpus* is permanently unrebuildable (F-DEP), while *the current
+evidence chain* reproduces from a clean clone. Only the second is what K6 tests.
 
 ---
 
@@ -139,7 +144,7 @@ saying so here is cheaper than an examiner saying it in September.
 | | Item | Owner |
 |---|---|---|
 | 1 | **Misquotation of the partner inside quote marks.** Both primaries read "tailored **specifically** to London's diverse communities"; the proposals drop "specifically". Fix every artefact. | unassigned |
-| 2 | **F-DEP / K6.** `openactive` produced the legacy corpus but is declared in neither `requirements.txt` nor `environment.yml` — nobody cloning this repo can rebuild it. Direct failure against brief output **O8** ("Instructions needed to reproduce the analysis"). | unassigned |
+| 2 | **F-DEP — now CLOSED as a task, and it strengthens D-021 rather than blocking it.** Re-examined 2026-07-15: the legacy corpus is unrebuildable for **three independent reasons**, not one. `openactive` is declared in **neither** `requirements.txt` **nor** `environment.yml`; it is **not installed** in the environment; and **`notebooks/load_dataset.ipynb` has never been committed on any branch** — the corpus-building code is not in the repo *at all*. This is not a gap to fix: the corpus is **retired** (D-021), and this is *why it cannot be salvaged*. No forward dependency exists — `harvest_pilot.py` uses plain HTTP. **Nothing to do; cite it as evidence.** | *closed* |
 | 3 | **K7.** Razniewski & Nutt unread; `docs/references.bib` absent. | unassigned |
 | 4 | **Neither primary brief artefact is in the repo.** P1 sits in one member's Downloads; P2 only inside a zip. No teammate can check a single quotation. | unassigned |
 | 5 | **`src/recommender/` has never been committed by anyone.** Bus-factor risk on the largest build effort to date. | Clarence |
