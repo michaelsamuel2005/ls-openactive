@@ -1277,3 +1277,211 @@ rate-limit etiquette (D-028 §2: sleep on empty pages, weekly resync cap, 429 ha
 
 - **Status: PROPOSED 2026-07-15.** Supersedes D-021's endpoint-reliability claim and its
   "173/173" framing; the platform×kind finding is **confirmed by replication** and strengthened.
+
+---
+
+## D-030 · PROPOSED scientific architecture: determinable discovery, London-first (2026-07-15) — **PROPOSED**
+
+> **Status: PROPOSED. NOT ratified, NOT adopted.** This entry becomes operational only when
+> **all four members explicitly accept the architecture and a named deliverable**. Until then it
+> is one member's proposal. **It is not a defect record** — historical corrections are listed
+> once, at the end, as bounded support tasks.
+
+### 1. The decision
+
+**Determinable discovery is the primary scientific and technical architecture. Equity of
+discoverability is its evaluation lens. The existing Open Sessions gap-index association is
+retained as prior-sighted, source-specific exploratory motivation only.**
+
+**Title**
+
+> **Determinable Discovery in London's OpenActive Ecosystem: Separating Source Publication,
+> Standards-Aware Reconstruction and Consumer-Processing Effects**
+
+**Plain-English purpose.** Build a reliable London OpenActive catalogue, test whether realistic
+activity searches can be answered honestly, identify why some searches remain uncertain, and
+measure which improvements help most.
+
+**Aim.** To determine which prespecified London referral- and finder-style searches are supported
+determinately by a correctly reconstructed OpenActive corpus, attribute indeterminate results to
+**source publication (S0)**, **standards-aware reconstruction (S1)** or **consumer processing
+(S2)**, and quantify which validated changes most improve discovery coverage.
+
+**Research questions — three. No fourth.**
+1. **Corpus validity.** Which relevant London feeds, records, parent–child relationships and
+   search fields can be reconstructed reliably, and what acquisition or processing failures remain?
+2. **Discovery determinability.** Which prespecified London searches return sufficient determinate
+   matches, only uncertain candidates, or no observed listed match?
+3. **Mechanisms and improvements.** How do standards-aware reconstruction and consumer projection
+   alter those results, and which feasible repairs produce the greatest measured improvement?
+
+Equity does **not** get a fourth RQ. It controls **query construction, stratification and
+interpretation**.
+
+**Primary estimand.** For each prespecified query, estimate **how its classification and result set
+change between S0, S1 and S2**, and **attribute each change to a documented mechanism**.
+
+Four distinct comparisons, not one:
+- **S0 → S1** — *descriptive reconstruction experiment.* **Not a hypothesis test:** reconstruction is
+  *designed* to recover inherited fields, and `location` is 100% inheritable, so a difference is
+  guaranteed **by construction**. Report the magnitude and mechanism; claim no discovery from it.
+- **S1 → S2** — *information-preservation experiment.* This one **can fail.**
+- **Retrieval policies** — *decision-consequence comparison.*
+- **Repairs** — *measured scenario effects.*
+
+**Falsifiable proposition (S1 → S2):**
+> For at least one prespecified London query family, **consumer projection materially changes
+> determinate discovery relative to standards-aware reconstructed records.**
+
+**"Material" is defined after the development pilot and before locked evaluation**, from a
+use-case consequence — never an invented number. **A null is a result**: if projection preserves
+determinability, report it and withdraw the information-loss claim.
+
+> *An earlier draft proposed "the three stages do not preserve the same determinability". That is
+> near-trivially true by construction and could not fail — it was not a falsifiable proposition.*
+
+### 2. Claims boundary — binding
+
+| We may claim | We may NOT claim |
+|---|---|
+| Which prespecified searches are determinate / indeterminate / no-observed-listed-match, for this corpus at a stated observation time | That any borough has more or less **physical-activity provision** |
+| That indeterminacy attributes to S0, S1 or S2, evidenced by same-vintage paired comparison | That listing counts measure provision, participation or health |
+| That discoverability differs across distributed London origins and barrier-relevant constraints | That **provision** is unequal, or that publication inequality **causes** inactivity |
+| Information sufficiency for **referral-style discovery** | **Clinical safety** or safe signposting |
+| Repair value, measured | Causal or behavioural effect |
+
+**The contribution is task-conditioned London discovery determinability and mechanism
+attribution** — not raw-byte forensics, not generic data quality, not another provision dashboard.
+
+**The Open Sessions association** (partial Spearman ρ = −0.498, p = 0.0044; linear incremental
+model inconclusive: ΔR² = 0.070, nested p = 0.110, CI includes zero; `reports/incremental_validity.csv`)
+is **prior-sighted, source-specific exploratory motivation**. It does not distinguish actual
+provision from publication coverage. **It remains prior-sighted secondary motivation.**
+Multi-publisher replication may be reported as a **listing/discoverability association** — it does
+**not** identify provision, publication inequality or causality, and **cannot promote listing
+density into a provision claim.** A listing corpus, however reconciled, still cannot separate
+real-world provision from whether provision is published from whether we acquired it.
+
+**Haringey** is a **public workflow exemplar** only. London Sport did not commission this
+evaluation. Beginner-suitability is **not** a Haringey finding until the London lineage analysis
+supports it.
+
+### 3. Status — built / partially built / planned (verified 2026-07-15)
+
+| Component | Status |
+|---|---|
+| Catalogue → site → feed walker, per-endpoint status, stratified | **BUILT** (`src/harvest_pilot.py`) |
+| Licence audit + per-feed register | **BUILT** (`src/verify_licences.py`, `src/feed_licence_register.py`) |
+| Field-lineage tracer (parent/child provenance) | **BUILT** (`src/trace_lineage.py`) — rates computed on the lossy archive; recompute |
+| WS1/WS2 borough pipeline + gap index | **BUILT, TESTED** — reclassified to motivation by §2 |
+| Exact-byte raw capture | **PLANNED** — current harvester retains parsed-and-reserialised JSON |
+| RPDE current-state walk — live edge, apply `updated`, drop `deleted`, latest-by-id | **BUILT AND TESTED** — `src/harvest_open_sessions.py:125` (`harvest_feed`); `tests/test_harvest.py` exercises tombstones and the live edge with a canned stub. **Reuse it; do not rebuild.** |
+| *Generic* resumable multi-feed store (exact bytes, cursors, retry/failure history, incomplete-feed flags) | **PLANNED — NOT STARTED.** This — not current-state logic — is the actual gap. |
+| Parent–child reconstruction with property provenance | **PARTIALLY BUILT** — `src/trace_lineage.py` indexes parents, resolves `superEvent`, classifies child-held / inheritable / source-absent / unresolved, and emits hand-checkable samples. **Missing:** reconstruction over a complete current-state corpus, materialised **S1** records, provenance carried into retrieval, recursive/standard-complete inheritance. |
+| S0 / S1 / S2 records | **PLANNED — NOT STARTED** |
+| Frozen London query benchmark | **PLANNED — NOT STARTED** |
+| Three retrieval policies (closed-world / permissive / three-state) | **PLANNED — NOT STARTED** |
+| Thin referral/finder demonstrator | **PLANNED — NOT STARTED.** No retrieval, three-state or scoring logic exists anywhere in `src/`. `src/recommender/` has never been committed by anyone. |
+| *(consequence)* `src/export_ws3_inputs.py` | **BUILT, TESTED — SUPERSEDED as the primary WS3 data contract; PARTIALLY REUSABLE.** Reusable: point-in-polygon borough assignment, spatial join, geographic stratification fields, its test. Superseded: the equity-signal (gap index / quadrant) payload, which §5 demotes to secondary. **Do not delete now** — retire or re-point after the vertical slice establishes the new data contract. |
+| R2 national approaches + prior-art matrix | **PLANNED — NOT STARTED** |
+| Offline reproduction bundle | **PLANNED — NOT STARTED** |
+
+**S0/S1/S2 materialisation, the London benchmark, three-state retrieval, the prototype, the R2
+matrix and the reproduction bundle do not exist.** Current-state walking and lineage tracing **do**
+(see the table) and must be reused.
+
+**Contribution record — dated, not standing:** as at **2026-07-15T16:13Z**, this branch carries
+**37 commits** (40 across all branches), **one author identity**, and **PR #6 had 0 reviews** with
+az25352, wy25780 and fahmi-alshahabi still requested. **Re-check before citing.**
+
+### 4. Immediate priority — one complete London vertical slice
+
+Not more analysis of the two-page census. **A slice that proves the architecture works end to end:**
+
+1. Select a **small heterogeneous group of London session feeds**.
+2. Harvest **to live edge** (not two pages).
+3. **Reconstruct current state** — apply updates and deletions.
+4. **Resolve parent–child** fields, retaining property provenance.
+5. Generate **S0 / S1 / S2** records.
+6. Run **5–10 draft London queries**.
+7. Compare **closed-world / permissive / uncertainty-aware** outputs.
+8. **Capped verification** — not unbounded: **3–5 heterogeneous London session feeds**, **5
+   development queries**, **max top-10 candidates per query per policy**; **inspect every
+   disagreement between policies**, plus a **stratified sample of agreements**; trace every
+   inspected field to child / parent / missing-at-source / acquisition failure.
+9. Demonstrate **one query end-to-end** in the prototype.
+
+**In parallel:** begin R2's reproducible national approaches and literature matrix — search
+protocol, inclusion/exclusion rules, primary-source verification, and a final column stating what
+contribution survives. *"No prior work found"* always means *"none found within this documented
+search."*
+
+### 5. Proposed must-have / stretch boundary
+
+**Must have.** Current-state London session corpus · S0/S1/S2 · frozen London query benchmark ·
+three retrieval baselines · small two-assessor adjudicated sample · thin working prototype · R2
+matrix · measured repair recommendations · non-author reproduction · brief/LO traceability.
+
+**Cut or stretch — do not build.** E2SFCA · Bayesian small-area modelling · full facilities/Slot
+architecture · causal or health-effect interpretation · large polished dashboard · fairness
+reranking · whole-UK longitudinal analysis · additional health validators · full Active Places
+entity linkage.
+
+**Do not add methods to satisfy LO3.** The must-have set already spans data engineering, semantic
+reconstruction, geospatial processing, information retrieval, three-valued reasoning, evaluation,
+sensitivity analysis and human adjudication — **once built**.
+
+### 6. Deliverables and owners — REQUIRED FOR RATIFICATION
+
+| # | Deliverable | Owner | Date |
+|---|---|---|---|
+| 1 | Current-state store + exact-byte capture + tombstones | *(unassigned)* | *(tbd)* |
+| 2 | Parent–child reconstruction + S0/S1/S2 + provenance | *(unassigned)* | *(tbd)* |
+| 3 | Frozen London query benchmark + constraint-provenance table | *(unassigned)* | *(tbd)* |
+| 4 | Three retrieval policies + adjudicated sample + sensitivity | *(unassigned)* | *(tbd)* |
+| 5 | Thin referral/finder demonstrator | *(unassigned)* | *(tbd)* |
+| 6 | R2 national approaches + prior-art matrix | *(unassigned)* | *(tbd)* |
+| 7 | Offline reproduction bundle + non-author verification | *(unassigned)* | *(tbd)* |
+
+**Every owner cell is empty. That is the ratification blocker, and it is not a documentation
+problem.**
+
+### 7. Ratification — four questions, four answers required
+
+1. Do we accept **determinable discovery** as the primary project?
+2. Do we accept **equity of discoverability** as the evaluation lens?
+3. Do we accept the **must-have / stretch** boundary in §5?
+4. **Does each member accept a named deliverable and date in §6?**
+
+**If any member does not answer, this entry stays PROPOSED and the architecture is not frozen.**
+
+### 8. Bounded support corrections — not the dissertation
+
+Recorded once. These are engineering and documentation tasks; **none is a research contribution**,
+and **none justifies re-running census2**.
+
+- **Exact-byte capture.** The harvester retains `json.dumps(response.json())` — parsed and
+  re-serialised, **not** bytes as served (duplicate keys collapse; formatting is lost). Fix before
+  the **final** collection: retain `response.content`, URL, status, headers, retrieval timestamp,
+  SHA-256, retry attempt, feed identity. **Delete the false "exactly as served" comment.** Census2
+  remains usable as **structural pilot evidence**; do not re-run it for byte fidelity.
+- **Offline reproduction (replaces K6 rhetoric).** One acceptance test: *a named teammate obtains
+  the private frozen raw bundle, verifies its checksum, runs the documented offline pipeline and
+  reproduces the primary tables within declared tolerances.* Needs: snapshot location, SHA-256
+  manifest, access instructions, environment lock, one command, signed non-author verification.
+  **Stop adjudicating whether K6 "fires".**
+- **Prior-sight terminology — split, not global replace.** **Code/tests:** *"adult inactivity
+  excluded from index construction"* (true — `tests/test_analysis.py` proves it by perturbation).
+  **Report/decision log:** *"prior-sighted external criterion"*. **Never:** *"confirmatory
+  held-out validation"*. Hours, not another decision cycle.
+- **Bristol Level 7 descriptors** are general, not the SEMTM0044 rubric. **Obtaining the
+  unit-specific rubric remains open.**
+
+### 9. Supersession
+
+Supersedes D-020's architecture and the equity-primary reading of D-011/D-012/D-013 **as the
+project's central claim** — those entries stand as executed work and motivation. D-021 (corpus
+retirement), D-025 (lineage method), D-027 (S0/S1/S2), D-028 (Wesley's adoptions) are **inputs to
+this decision**, not superseded.
+
+- **Status: PROPOSED 2026-07-15. Not ratified. Owners unassigned.**
