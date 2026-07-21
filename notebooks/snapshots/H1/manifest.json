@@ -1,0 +1,21 @@
+{
+  "snapshot_id": "H1",
+  "built_at_utc": "2026-07-20T19:46:41.115783+00:00",
+  "git_sha": "78ffa09",
+  "python": "3.13.5",
+  "feeds_attempted": 413,
+  "feeds_converged": 334,
+  "feeds_failed": 82,
+  "pages_acquired": 7982,
+  "collection_start": "2026-07-20T11:53:48.513410+00:00",
+  "collection_end": "2026-07-20T18:26:24.127890+00:00",
+  "records_s0": 2329014,
+  "tombstones": 743537,
+  "located": 356846,
+  "known_inside_london": 95511,
+  "known_outside_london": 260661,
+  "scope_indeterminate": 674,
+  "no_coord_s0": 1972168,
+  "lineage_metrics": "pending S1 (Michael)",
+  "schedule_metrics": "pending S1b (Michael)"
+}
