@@ -1,0 +1,317 @@
+# =====================================================================
+# F-02 — Estimand and Outcome Registry
+# Project: Evidence-Bounded Conversational Activity Discovery (London Sport 1)
+# Owner: Fahmi Alshahabi (benchmark / statistics / evaluation stream)
+# Version: 0.1.0-provisional
+# Date: 2026-08-07
+# Status: PROVISIONAL — drafted against the CA-01 vocabulary as permitted
+#   by CA-01 Part 3.4. Becomes reviewable for freeze only after the
+#   CA-01 amendments land in the canonical protocols and RATIFY-19-04
+#   passes. Every numeric threshold below is deliberately RATIFY:
+#   "none may be invented for apparent completeness" (work package,
+#   status notice).
+# Path note: docs/evaluation/ is the §17 candidate layout, pending
+#   architecture ratification with Wesley.
+# Authorship notice: AI-assisted coordination scaffold. Not evidence
+#   that Fahmi authored, read, accepted or completed the work. Fahmi
+#   must inspect and correct it in his own words and obtain scoped
+#   non-author review (F-02 reviewer: Michael).
+# Authority order: 00_CANONICAL_DECISIONS (as amended by CA-01) >
+#   ratified Sections 09-14 > work package > this file.
+# =====================================================================
+
+meta:
+  registry_id: F-02
+  depends_on_amendments: [CA-01.A1, CA-01.A2, CA-01.A5, CA-01.A6, CA-01.A8]
+  reviewer: michael
+  machine_readable: true
+  units_vocabulary: [task, episode, response, candidate]
+  primary_unit_rule: >
+    The primary unit is the task (or the episode for dialogue outcomes).
+    Nested candidates, claims and turns are never treated as independent
+    tasks unless an estimand explicitly declares them the primary unit.
+
+# ---------------------------------------------------------------------
+# 1. CORE ESTIMANDS (frozen vocabulary per CA-01.A1)
+# ---------------------------------------------------------------------
+estimands:
+
+  K:
+    name: selection_emission_coverage
+    definition: >
+      Proportion of tasks in the declared universe receiving a
+      substantive decision or response (i.e., not abstained/refused),
+      under the frozen design weights.
+    unit: task
+    numerator: tasks_with_substantive_emission
+    denominator: intention_to_evaluate_task_universe
+    weights: design_weights_v: RATIFY
+    permitted_claims: [coverage_within_declared_universe]
+    prohibited_claims: [population_coverage, londoner_behaviour]
+    source: [work_package_10.1, CA-01.A1]
+
+  U:
+    name: useful_supported_decision_coverage
+    definition: >
+      Proportion of tasks receiving an independently judged relevant,
+      evidence-supported, useful decision. The H-P coverage component.
+    unit: task
+    role: H-P_superiority_quantity
+    requires_human_judgment: [usefulness, soft_relevance]
+    gold_source: independent_reference_route   # never the treatment verifier
+    weights: design_weights_v: RATIFY
+    superiority_margin: RATIFY   # RATIFY-10-xx practical margin, partner-derived
+    source: [work_package_10.1, CA-01.A1]
+
+  Q:
+    name: ranking_utility
+    definition: >
+      Graded ranking relevance at frozen depth on the emitted slate;
+      judged episode-level by independent assessors, never supplied by
+      the production ranker. Distinct symbol — U is never reused for
+      ranking (CA-01.A1).
+    unit: task
+    metric_family: nDCG_or_equivalent   # exact metric: RATIFY
+    depth: RATIFY
+    non_inferiority_margin: RATIFY
+    source: [work_package_10.1, integrated_proposal_s3]
+
+  R_evidence:
+    name: conditional_evidence_false_assurance_risk
+    definition: >
+      Among emitted decisions, the design-weighted probability of an
+      L_evidence event.
+    unit: task
+    conditioning: emitted_only
+    loss: L_evidence
+    source: [work_package_10.1]
+
+  R_decision:
+    name: conditional_whole_decision_risk
+    definition: >
+      Among emitted decisions, the design-weighted probability of an
+      L_decision event. The H-P risk-gate quantity (CA-01.A2).
+    unit: task
+    conditioning: emitted_only
+    loss: L_decision
+    risk_ceiling: RATIFY   # public false-assurance/harm trade-off — Fahmi cannot decide alone (work package §19)
+    source: [work_package_10.1, CA-01.A2]
+
+  H_evidence:
+    name: unconditional_harmful_emission_probability_evidence
+    definition: >
+      Over all tasks (emitted or not), probability of an emitted
+      L_evidence event. COMPUTED DIRECTLY; the identity H = K x R is a
+      reconciliation check only where universes, inclusion rules and
+      weights are identical (CA-01.A5).
+    unit: task
+    computed_directly: true
+    source: [work_package_10.1, CA-01.A5]
+
+  H_decision:
+    name: unconditional_harmful_emission_probability_decision
+    definition: same_as_H_evidence_with_loss: L_decision
+    unit: task
+    computed_directly: true
+    source: [work_package_10.1, CA-01.A5]
+
+# ---------------------------------------------------------------------
+# 2. LOSSES (CA-01.A2)
+# ---------------------------------------------------------------------
+losses:
+  L_evidence:
+    definition: >
+      Unsupported catalogue assertion; unsupported mandatory
+      implication; or unjustified bounded non-match.
+    used_by: [H-G, R_evidence, H_evidence]
+  L_decision:
+    definition: >
+      L_evidence OR the independently frozen unacceptable-decision
+      condition.
+    unacceptable_decision_condition: RATIFY   # must be frozen from partner/workflow meaning, never invented here
+    used_by: [H-P, R_decision, H_decision]
+  reporting_rule: components_always_reported_separately
+
+# ---------------------------------------------------------------------
+# 3. SECONDARY / COMPONENT OUTCOMES
+# ---------------------------------------------------------------------
+secondary_outcomes:
+
+  false_suppression:
+    definition: >
+      Task-level: an evidence-supported useful option existed under the
+      independent reference route but the system suppressed or refused.
+    unit: task
+    disjoint_with: over_refusal
+    gold_source: independent_reference_route
+
+  over_refusal:
+    definition: >
+      Task-level: abstention/refusal where emission was permitted and
+      safe under the frozen rules.
+    unit: task
+
+  correct_abstention:
+    definition: >
+      Abstention where no evidence-supported emission was permitted.
+    unit: task
+
+  supported_fact_completeness:
+    definition: >
+      Of the finite eligible fact set the evidence could support for the
+      task, the proportion delivered in the rendered response.
+    unit: response
+    requires_human_judgment: true
+    role: H-G_non_inferiority_component
+    non_inferiority_margin: RATIFY
+
+  integrated_regret:
+    symbol: IReg
+    definition: >
+      Preference loss over turns versus the theta_true-optimal permitted
+      slate, integrated over the episode; evidence-permitted regret.
+    unit: episode
+    evaluation: simulation_first   # gold typed intents + controlled simulated preference states
+    improvement_margin: RATIFY
+
+  wasted_questions:
+    symbol: W
+    definition: >
+      Questions whose every possible answer changes no permitted slate
+      or gate partition; decomposed by cause into preference_side and
+      observability_side.
+    unit: episode
+    conditioning: questions_asked
+    improvement_margin: RATIFY
+
+  state_transitions:
+    definition: >
+      S0->S1->S1b task-decision transition matrix (weighted); partial
+      identification bounds retained, never collapsed to points.
+    unit: task
+    inferential_status: estimative
+
+# ---------------------------------------------------------------------
+# 4. ABSTENTION MECHANISMS (closed enum; CA-01.A6)
+# ---------------------------------------------------------------------
+abstention_mechanisms:
+  - evidence_required
+  - model_uncertainty
+  - policy_safety
+  - adversarial_containment_retrieval_jamming
+  - collection_scope_limitation
+  - service_failure
+reporting_rule: >
+  Mechanisms are disjoint in reporting; induced refusal under attack is
+  never scored as safe abstention.
+
+# ---------------------------------------------------------------------
+# 5. SYSTEM FAILURE CODES (typed; intention-to-evaluate)
+# ---------------------------------------------------------------------
+failure_codes:
+  - timeout
+  - crash
+  - malformed_output
+rules:
+  - every_assigned_locked_task_stays_in_its_denominator
+  - failures_are_typed_system_failures_not_missing_at_random
+  - no_outcome_dependent_complete_case_deletion
+  - zero_failures_in_both_arms_never_establish_superiority_or_zero_risk
+
+# ---------------------------------------------------------------------
+# 6. CONFIRMATORY DECISION RULES
+# ---------------------------------------------------------------------
+decisions:
+
+  H-P:
+    status: sole_unconditional_confirmatory
+    analysis_primacy: design_based_paired_design_weighted   # per locked Section 2; PENDING CA-01.A8 team ratification; Packet 11 D23 conflicts
+    conjuncts:                       # all must pass; no compensation
+      - U_superiority_over_strongest_eligible_baseline: {margin: RATIFY}
+      - Q_non_inferiority: {margin: RATIFY}
+      - L_decision_risk_gate: {ceiling: RATIFY, method: LTT_RCPS_if_valid_else_empirical_curve}   # CA-01.A4
+    comparator_selection: DEV_only_strongest_eligible
+
+  H-E:
+    status: readiness_gated
+    gates: [posterior_correctness, oracle_checks, policy_parity]
+    conjuncts:
+      - IReg_improvement: {margin: RATIFY}
+      - wasted_question_improvement: {margin: RATIFY}
+      - non_harm_vs_system_risk_ceiling: true
+
+  H-G1:
+    status: readiness_gated
+    conjuncts:
+      - L_evidence_improvement_vs_strongest_of_A1_A2: {margin: RATIFY}
+      - supported_fact_completeness_non_inferiority: {margin: RATIFY}
+  H-G2:
+    status: readiness_gated_descriptive_contrast
+    contrast: A3_vs_A0
+    reported: [assurance, quality, latency, coverage, abstention_cost]
+
+  gate_failure_rule: >
+    A failed readiness gate permits estimative reporting only;
+    confirmatory wording prohibited. H-E/H-G cannot rescue a failed H-P.
+
+# ---------------------------------------------------------------------
+# 7. CONDITION REGISTRIES (pointers; owned elsewhere, frozen with them)
+# ---------------------------------------------------------------------
+conditions:
+  recommender: [B0, B1, B2, B3_offline_only, B4, B5]
+  generation: [A0, A1, A2, A3]
+  applications_public: [P0, P1, P2]
+  applications_staff: [W0, W1, W1-NA]
+  elicitation: DISCREPANCY   # see discrepancy log D-1
+
+# ---------------------------------------------------------------------
+# 8. DISCREPANCY LOG (found while drafting; take to ratification)
+# ---------------------------------------------------------------------
+discrepancies:
+  D-1:
+    where: elicitation_conditions
+    detail: >
+      Work package §4.4 lists SIX elicitation conditions (no question,
+      fixed order, random eligible, uncertainty-only, conventional EVOI,
+      observability-aware EVOI). The integrated proposal's Section 8
+      table lists FIVE (E0-E4, no "random eligible"). The condition set
+      must be frozen to one list before the sizing simulation, since arm
+      count drives assessor effort.
+    disposition: RATIFY
+  D-2:
+    where: ranking_utility_metric
+    detail: >
+      "nDCG at frozen depth" appears as an example, not a decision.
+      Exact metric and depth are RATIFY before codebook pilot, since
+      judgment collection depends on them.
+    disposition: RATIFY
+
+# ---------------------------------------------------------------------
+# 9. RESULT-ROW MINIMUM SCHEMA (every reported number carries these)
+# ---------------------------------------------------------------------
+result_row_schema:
+  - result_id
+  - claim_id
+  - estimand_id
+  - partition
+  - task_universe
+  - primary_unit
+  - system_contrast
+  - operating_point
+  - numerator
+  - denominator
+  - raw_count
+  - weight_factors
+  - effective_sample_size
+  - estimate
+  - interval
+  - interval_method
+  - practical_margin
+  - decision_status
+  - vintage_hash
+  - benchmark_hash
+  - system_hashes
+  - analysis_hash
+  - seed_run_id
+  - open_limitations
+  - permitted_wording
