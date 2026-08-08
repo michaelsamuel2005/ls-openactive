@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""
+C-09 independent certificate checker (reference implementation).
+
+AI-ASSISTED SCAFFOLD prepared from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md
+section 10. NOT evidence Clarence authored/accepted it; he must inspect it, correct it in his
+own words, and obtain non-author review. He CANNOT certify his own checker (WP 2.6).
+
+Independence (WP 10.4), enforced by construction here:
+  - imports nothing from any production/evidence module (stdlib only);
+  - never calls a production interpreter to decide the expected output;
+  - implements only the frozen certificate contract;
+  - expected values (versions, receipts, target query/decision, certifiable fragment) are
+    supplied by the caller's manifest/store, never re-derived from production code.
+
+The outcome vocabulary is the WP 10.3 enum and is PROPOSED pending RATIFY-09-04 / Section 09.
+Do not rename to make production pass (WP 10.4); record disagreements in discrepancy-register.md.
+"""
+from __future__ import annotations
+
+# --- WP 10.3 outcome enum (exact names ratified with Section 09) ------------
+PASS = "PASS"
+FAIL_MALFORMED = "FAIL_MALFORMED"
+FAIL_MISSING_WITNESS = "FAIL_MISSING_WITNESS"
+FAIL_UNRESOLVED_RECEIPT = "FAIL_UNRESOLVED_RECEIPT"
+FAIL_DIGEST_MISMATCH = "FAIL_DIGEST_MISMATCH"
+FAIL_VERSION_MISMATCH = "FAIL_VERSION_MISMATCH"
+FAIL_ILLEGAL_ESCALATION = "FAIL_ILLEGAL_ESCALATION"
+FAIL_SCOPE_INCONSISTENCY = "FAIL_SCOPE_INCONSISTENCY"
+FAIL_UNSUPPORTED_FRAGMENT = "FAIL_UNSUPPORTED_FRAGMENT"
+
+_EVIDENCE_STATES = {"T", "F", "U", "B"}
+_GRADES = {"explicit", "schedule_derived", "specification_default"}
+_TERMINALS = {"supported_match", "bounded_non_match", "evidence_indeterminate"}
+_SCOPES = {"scope_complete", "scope_indeterminate"}
+_ACTIONS = {"authorised_slate", "model_abstained", "deterministic_fallback", "browse_only"}
+_POOLS = {"supported", "indeterminate", "excluded"}
+
+
+# --- individual checks: each returns a detail string if it FAILS, else None -
+def _c_malformed(cert, ctx):
+    if not isinstance(cert, dict):
+        return "certificate is not an object"
+    if cert.get("contract") != "Certificate":
+        return "contract != 'Certificate'"
+    for k in ("query_id", "decision_digest", "compatible_release_root",
+              "claimed", "versions", "scope_witness",
+              "predicate_witnesses", "candidate_witnesses", "state_transition"):
+        if k not in cert:
+            return f"missing required key: {k}"
+    cl = cert["claimed"]
+    if cl.get("terminal_decision") not in _TERMINALS: return "bad claimed.terminal_decision"
+    if cl.get("scope_qualifier") not in _SCOPES: return "bad claimed.scope_qualifier"
+    if cl.get("recommendation_action") not in _ACTIONS: return "bad claimed.recommendation_action"
+    if not isinstance(cert["scope_witness"], dict) or not isinstance(cert["scope_witness"].get("evaluated_complete"), bool):
+        return "bad scope_witness.evaluated_complete"
+    pws = cert["predicate_witnesses"]
+    if not isinstance(pws, list): return "predicate_witnesses not a list"
+    seen_p = set()
+    for pw in pws:
+        if not isinstance(pw, dict): return "predicate_witness not an object"
+        pid = pw.get("predicate_id")
+        if not isinstance(pid, str): return "predicate_witness.predicate_id missing"
+        if pid in seen_p: return f"duplicate/ambiguous predicate identity: {pid}"
+        seen_p.add(pid)
+        if pw.get("evidence_state") not in _EVIDENCE_STATES: return f"bad evidence_state for {pid}"
+        if pw.get("grade") not in _GRADES: return f"bad grade for {pid}"
+        if not isinstance(pw.get("fragment_class"), str): return f"missing fragment_class for {pid}"
+        if not isinstance(pw.get("receipts"), list): return f"receipts not a list for {pid}"
+        for r in pw["receipts"]:
+            if not isinstance(r, dict) or "receipt_id" not in r or "content_digest" not in r:
+                return f"malformed receipt on {pid}"
+    cws = cert["candidate_witnesses"]
+    if not isinstance(cws, list): return "candidate_witnesses not a list"
+    seen_c = set()
+    for cw in cws:
+        cid = cw.get("candidate_id")
+        if not isinstance(cid, str): return "candidate_witness.candidate_id missing"
+        if cid in seen_c: return f"duplicate/ambiguous candidate identity: {cid}"
+        seen_c.add(cid)
+        if cw.get("pool") not in _POOLS: return f"bad pool for {cid}"
+        if not isinstance(cw.get("rank"), int) or cw["rank"] < 1: return f"bad rank for {cid}"
+        if not isinstance(cw.get("hard_predicate_ids"), list): return f"bad hard_predicate_ids for {cid}"
+    return None
+
+
+def _c_version(cert, ctx):
+    man = ctx["manifest"]
+    if cert.get("compatible_release_root") != man.get("compatible_release_root"):
+        return "compatible_release_root does not match the release manifest"
+    allowed = man.get("allowed_versions", {})
+    cv = cert.get("versions", {})
+    for k, want in allowed.items():
+        if cv.get(k) != want:
+            return f"version {k}={cv.get(k)!r} not compatible (manifest requires {want!r})"
+    return None
+
+
+def _c_fragment(cert, ctx):
+    allowed = set(ctx["manifest"].get("certifiable_fragment", []))
+    for pw in cert["predicate_witnesses"]:
+        if pw["fragment_class"] not in allowed:
+            return f"predicate {pw['predicate_id']} uses fragment '{pw['fragment_class']}' outside the certifiable fragment"
+    return None
+
+
+def _c_missing_witness(cert, ctx):
+    wit = {pw["predicate_id"] for pw in cert["predicate_witnesses"]}
+    if cert["claimed"]["terminal_decision"] == "supported_match" and not cert["predicate_witnesses"]:
+        return "supported_match with no predicate witnesses"
+    for pw in cert["predicate_witnesses"]:
+        if pw["evidence_state"] == "T" and not pw["receipts"]:
+            return f"truncated evidence path: T witness {pw['predicate_id']} has no receipts"
+    for cw in cert["candidate_witnesses"]:
+        if cw["pool"] == "supported":
+            for hp in cw["hard_predicate_ids"]:
+                if hp not in wit:
+                    return f"missing witness for hard predicate {hp} of supported candidate {cw['candidate_id']}"
+    return None
+
+
+def _c_unresolved(cert, ctx):
+    store = ctx["receipt_store"]
+    for pw in cert["predicate_witnesses"]:
+        for r in pw["receipts"]:
+            if r["receipt_id"] not in store:
+                return f"receipt {r['receipt_id']} does not resolve in the receipt store"
+    return None
+
+
+def _c_digest(cert, ctx):
+    if cert.get("query_id") != ctx["expected_query_id"]:
+        return f"certificate is for another query ({cert.get('query_id')!r} != {ctx['expected_query_id']!r})"
+    if cert.get("decision_digest") != ctx["expected_decision_digest"]:
+        return "decision_digest does not match the expected DecisionEnvelope digest"
+    store = ctx["receipt_store"]
+    for pw in cert["predicate_witnesses"]:
+        for r in pw["receipts"]:
+            if store.get(r["receipt_id"]) != r["content_digest"]:
+                return f"receipt {r['receipt_id']} digest mismatch (swapped/forged)"
+    return None
+
+
+def _c_escalation(cert, ctx):
+    cl = cert["claimed"]
+    states = {pw["predicate_id"]: pw["evidence_state"] for pw in cert["predicate_witnesses"]}
+    if cl["terminal_decision"] == "supported_match":
+        for pid, st in states.items():
+            if st != "T":
+                return f"supported_match but predicate {pid} is {st} (illegal U/B/F -> supported escalation)"
+    if cl["recommendation_action"] == "authorised_slate":
+        for cw in cert["candidate_witnesses"]:
+            if cw["pool"] != "supported":
+                return f"authorised_slate contains ineligible candidate {cw['candidate_id']} (pool={cw['pool']})"
+            for hp in cw["hard_predicate_ids"]:
+                if states.get(hp) != "T":
+                    return f"slate candidate {cw['candidate_id']} rests on non-T predicate {hp}"
+    return None
+
+
+def _c_scope(cert, ctx):
+    cl = cert["claimed"]
+    sw = cert["scope_witness"]["evaluated_complete"]
+    if cl["scope_qualifier"] == "scope_complete" and sw is False:
+        return "scope_qualifier claims scope_complete but scope was not fully evaluated (dropped qualifier)"
+    if cl["scope_qualifier"] == "scope_indeterminate" and sw is True:
+        return "scope_qualifier claims scope_indeterminate but scope was fully evaluated"
+    if cl["terminal_decision"] == "bounded_non_match":
+        cq = cert.get("coverage_qualifier") or {}
+        if not cq.get("statement"):
+            return "bounded_non_match without a coverage qualifier"
+    return None
+
+
+# Ordered precedence: the first failing check wins (WP 10.3 single outcome).
+CHECKS = [
+    (FAIL_MALFORMED, _c_malformed),
+    (FAIL_VERSION_MISMATCH, _c_version),
+    (FAIL_UNSUPPORTED_FRAGMENT, _c_fragment),
+    (FAIL_MISSING_WITNESS, _c_missing_witness),
+    (FAIL_UNRESOLVED_RECEIPT, _c_unresolved),
+    (FAIL_DIGEST_MISMATCH, _c_digest),
+    (FAIL_ILLEGAL_ESCALATION, _c_escalation),
+    (FAIL_SCOPE_INCONSISTENCY, _c_scope),
+]
+
+
+def check(cert, ctx, checks=None):
+    """Return (outcome, detail). Fail-closed: any exception during a check is treated as
+    FAIL_MALFORMED rather than an accidental PASS."""
+    checks = CHECKS if checks is None else checks
+    for code, fn in checks:
+        try:
+            detail = fn(cert, ctx)
+        except Exception as ex:  # fail closed
+            return (FAIL_MALFORMED, f"exception in {code} check: {ex!r}")
+        if detail:
+            return (code, detail)
+    return (PASS, "certificate verified against witness, receipts, versions and scope")
+
+
+if __name__ == "__main__":
+    import json, sys
+    if len(sys.argv) >= 3:
+        cert = json.load(open(sys.argv[1]))
+        ctx = json.load(open(sys.argv[2]))
+        outcome, detail = check(cert, ctx)
+        print(outcome, "-", detail)
+        sys.exit(0 if outcome == PASS else 2)
+    print("usage: certificate_checker.py <certificate.json> <context.json>")
