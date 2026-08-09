@@ -19,6 +19,11 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
+# Node / frontend build output
+node_modules/
+dist/
+apps/public-discovery/server/static/enhanced/
+
 # Misc
 *.log
 .cache/

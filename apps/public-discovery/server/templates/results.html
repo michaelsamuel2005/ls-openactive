@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<h1>{{ v.terminal_text }}</h1>
+
+{% if v.scope_notice %}
+<p class="notice" role="note"><strong>Coverage:</strong> {{ v.scope_notice }}.</p>
+{% endif %}
+
+<p class="meta">Ordering: {{ v.recommendation_text }}. Data vintage: {{ v.vintage }}.</p>
+{% if v.coverage %}<p class="meta">{{ v.coverage }}</p>{% endif %}
+
+<ol class="slate">
+{% for c in v.candidates %}
+  <li>
+    <h2>Option {{ c.rank }}: {{ c.id }}</h2>
+    <ul class="evidence">
+      {% for a in c.attributes %}
+      <li class="ev ev-{{ a.state }}">
+        <span class="ev-tag">{{ a.state }}</span>
+        <span class="ev-label">{{ a.id }}:</span> {{ a.state_text }}{% if a.grade_text %} <span class="grade">({{ a.grade_text }})</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="actions">
+      <a class="button" href="/result/{{ c.id }}?scenario={{ scenario }}">Why shown &amp; details</a>
+      {% if c.provider_link %}<a class="button" href="{{ c.provider_link }}" rel="nofollow noopener">Go to provider</a>{% endif %}
+    </p>
+  </li>
+{% endfor %}
+</ol>
+
+<section aria-label="Compare options">
+  <h2>Compare</h2>
+  <p class="hint">A side-by-side compare is available as an enhancement. Without it, each option&rsquo;s
+     evidence is shown above and on its detail page.</p>
+  <div data-enhance="compare" data-scenario="{{ scenario }}"></div>
+</section>
+
+<p><a href="/">Start a new search</a></p>
+{% endblock %}
+
+{% block scripts %}
+<!-- OPTIONAL progressive enhancement. The core above works with this absent (ADR-0001). -->
+<script type="module" src="/static/enhanced/enhance.js"></script>
+{% endblock %}
