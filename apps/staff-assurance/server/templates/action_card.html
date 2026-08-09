@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Action-card workflow{% endblock %}
+{% block content %}
+<h1>Action-card workflow</h1>
+<p>Current state: <strong>{{ card.state }}</strong>. No chart, alert, model or staff assistant may
+   skip independent review or approval (WP §8.5).</p>
+
+<h2>Permitted next transitions</h2>
+<ul>
+  {% for t in card.allowed %}
+  <li>&rarr; {{ t.to }} ({{ t.trigger }}){% if t.requires_non_author_review %} — requires non-author review{% endif %}{% if t.requires_authorised_role %} — requires authorised role{% endif %}</li>
+  {% endfor %}
+</ul>
+
+<h2>Required card fields (§8.5)</h2>
+<ul>
+  {% for f in card.required_fields %}<li>{{ f }}</li>{% endfor %}
+</ul>
+
+<h2>Gates</h2>
+<dl>
+  <dt>Independent review required before</dt><dd>{{ card.gates.requires_independent_review_before }}</dd>
+  <dt>Authorised role required for</dt><dd>{{ card.gates.requires_authorised_role_for }}</dd>
+  <dt>Correction token may only create</dt><dd>{{ card.gates.correction_token_may_only_create }}</dd>
+</dl>
+<p><a href="/">Back to workbench</a></p>
+{% endblock %}

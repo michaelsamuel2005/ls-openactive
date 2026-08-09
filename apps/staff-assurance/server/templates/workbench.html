@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Workbench{% endblock %}
+{% block content %}
+<h1>Assurance workbench</h1>
+<p>Restricted staff view. Every panel shows its provenance (universe, denominator, vintage, versions)
+   and its permitted wording. This view can diagnose and draft; it cannot change evidence or send an
+   action without independent review and an authorised role.</p>
+
+<h2>Workspaces</h2>
+<ul>
+  <li><a href="/replay?scenario=supported">Public-state replay</a> &mdash; reconstruct exactly what the public user received</li>
+  <li><a href="/failure-chain?scenario=indeterminate">Failure-chain explorer</a> &mdash; where an outcome became limited</li>
+  <li><a href="/collection-health?scenario=indeterminate">Collection / vintage health</a> &mdash; denominators and freshness</li>
+  <li><a href="/action-card?state=drafted">Action-card workflow</a> &mdash; governed next steps</li>
+</ul>
+
+<h2>Scenarios</h2>
+<ul>
+  {% for s in scenarios %}<li>{{ s }}</li>{% endfor %}
+</ul>
+{% endblock %}
