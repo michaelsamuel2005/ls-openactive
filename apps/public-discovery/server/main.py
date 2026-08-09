@@ -11,7 +11,10 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-import render
+try:  # imported as `server.main` (uvicorn server.main:app --app-dir apps/public-discovery)
+    from . import render
+except ImportError:  # imported as top-level `main` (server dir on sys.path: tests / --app-dir .../server)
+    import render
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(HERE, "templates"))

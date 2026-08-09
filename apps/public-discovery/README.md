@@ -26,8 +26,9 @@ and the [WCAG 2.2 AA plan](../../docs/applications/accessibility-wcag22-plan.md)
 ## Run
 ```bash
 pip install fastapi jinja2 httpx uvicorn --break-system-packages
-# serve locally (authorised-staging / research demonstration only):
-uvicorn server.main:app --app-dir apps/public-discovery --reload
+# serve locally (authorised-staging / research demonstration only), from the repo root:
+uvicorn server.main:app --app-dir apps/public-discovery --reload --reload-dir apps/public-discovery
+# then open http://127.0.0.1:8000
 # verify:
 python apps/public-discovery/test_slice.py
 # optional enhancement build:
