@@ -23,11 +23,49 @@ templates = Jinja2Templates(directory=os.path.join(HERE, "templates"))
 app = FastAPI(title="LS OpenActive — staff assurance (restricted, research demonstration)")
 app.mount("/static", StaticFiles(directory=os.path.join(HERE, "static")), name="static")
 
-ALLOWED_ROLES = {"analyst", "assurance"}
+# Role -> capabilities (PROPOSED; ratify with Wesley/partner, RATIFY-15-06). Demonstrates WP §8.3:
+# access is not granted "merely because the user is staff" — capabilities differ per role, and
+# independent review / approval / sending are separated (WP §8.5).
+ROLE_CAPABILITIES = {
+    "analyst":    {"view", "triage", "draft"},
+    "assurance":  {"view", "triage", "draft", "review", "approve"},
+    "authoriser": {"view", "send"},
+}
+ALLOWED_ROLES = set(ROLE_CAPABILITIES)
+
+# Which capability each action-card transition requires.
+TRANSITION_CAPABILITY = {
+    ("observed", "investigated"): "triage",
+    ("investigated", "drafted"): "draft",
+    ("drafted", "independently_reviewed"): "review",
+    ("drafted", "returned_for_more_evidence"): "review",
+    ("independently_reviewed", "approved_for_route"): "approve",
+    ("independently_reviewed", "rejected"): "approve",
+    ("approved_for_route", "sent_by_authorised_role"): "send",
+    ("approved_for_route", "hold"): "approve",
+    ("sent_by_authorised_role", "monitored"): "send",
+    ("monitored", "closed_or_withdrawn"): "approve",
+    ("returned_for_more_evidence", "investigated"): "triage",
+    ("hold", "approved_for_route"): "approve",
+    ("hold", "withdrawn"): "approve",
+    ("rejected", "closed_or_withdrawn"): "approve",
+    ("withdrawn", "closed_or_withdrawn"): "approve",
+}
+
+
+def _cap_for(frm, to):
+    return TRANSITION_CAPABILITY.get((frm, to), "view")
+
+
+def _can(role, capability):
+    return capability in ROLE_CAPABILITIES.get(role, set())
 
 
 def _role(request: Request):
-    r = request.headers.get("x-staff-role")
+    # Real access is IAM-controlled (Wesley, Section 16, C-BLOCK-04). For LOCAL DEMO viewing only,
+    # a ?role= query param is accepted in addition to the header — still 403 without either, so the
+    # server-side gate and its test are unchanged. Remove when real auth lands.
+    r = request.headers.get("x-staff-role") or request.query_params.get("role")
     return r if r in ALLOWED_ROLES else None
 
 
@@ -95,8 +133,24 @@ def action_card(request: Request, state: str = "drafted"):
     role = _role(request)
     if not role:
         return _forbidden(request)
-    return templates.TemplateResponse(request, "action_card.html",
-                                      {"role": role, "card": render.action_card(state)})
+    card = render.action_card(state)
+    for t in card["allowed"]:
+        t["capability"] = _cap_for(state, t["to"])
+        t["permitted"] = _can(role, t["capability"])
+    card["capabilities"] = sorted(ROLE_CAPABILITIES.get(role, []))
+    return templates.TemplateResponse(request, "action_card.html", {"role": role, "card": card})
+
+
+@app.get("/action-card/perform", response_class=HTMLResponse)
+def action_card_perform(request: Request, frm: str, to: str):
+    role = _role(request)
+    if not role:
+        return _forbidden(request)
+    cap = _cap_for(frm, to)
+    ctx = {"role": role, "frm": frm, "to": to, "capability": cap}
+    if not _can(role, cap):
+        return templates.TemplateResponse(request, "not_permitted.html", ctx, status_code=403)
+    return templates.TemplateResponse(request, "performed.html", ctx)
 
 
 @app.get("/help", response_class=HTMLResponse)

@@ -44,11 +44,24 @@ authority; no imputation presented as publisher data; no automatic publisher con
 threshold change or action approval; no diagnosis of real provision from listing absence; no
 cross-role access merely because a user is "staff"; no research telemetry silently repurposed.
 
-## 5. Role / action matrix (stub)
+## 5. Role / action matrix
 
-The demo enforces a role server-side (`x-staff-role ∈ {analyst, assurance}`); without it every staff
-route returns 403 and shows no content. Real roles, purpose-binding and break-glass are Wesley's
-(`RATIFY-15-06`, Section 16). Actions never bypass the action-card gates (§6).
+Capabilities differ **per role** (enforced server-side); access is never granted "merely because the
+user is staff" (WP §8.3). Without a known role every staff route returns 403.
+
+| Role | Capabilities |
+|------|--------------|
+| `analyst` | view, triage, draft |
+| `assurance` | view, triage, draft, review, approve |
+| `authoriser` | view, send |
+
+Each action-card transition requires a matching capability: `draft` to draft a card;
+`review`/`approve` (assurance) to move it through independent review and approval; `send`
+(authoriser) to dispatch — so **no single role can draft, approve and send the same card**. The
+`/action-card/perform` route enforces this (403 when the role lacks the capability). Person-level
+independence (reviewer ≠ author), real roles, purpose-binding and break-glass remain Wesley's IAM
+decision (`RATIFY-15-06`, Section 16); this is a demonstration matrix. Actions never bypass the
+action-card gates (§7).
 
 ## 6. Optional staff conversational surface (WP §8.4) — gated, not built
 

@@ -42,6 +42,12 @@ def run():
         print(f"[{'OK ' if ok else 'BAD'}] role-gate {path}  (no-role={no.status_code}, role={yes.status_code})")
         fails += 0 if ok else 1
 
+    # 1b. dev-only ?role= query param also opens (still 403 without any role)
+    qp_ok = (client.get("/replay?scenario=supported&role=analyst").status_code == 200
+             and client.get("/replay?scenario=supported").status_code == 403)
+    print(f"[{'OK ' if qp_ok else 'BAD'}] dev ?role= param opens; still 403 without any role")
+    fails += 0 if qp_ok else 1
+
     # 2. a11y on staff pages (with role) + forbidden page
     pages = {p: client.get(p, headers=ROLE).text for p in STAFF_ROUTES}
     pages["/(forbidden)"] = client.get("/").text
@@ -109,6 +115,23 @@ def run():
               and send is not None and send.get("requires_authorised_role"))
     print(f"[{'OK ' if noskip else 'BAD'}] action-card no-skip (review+approval+authorised-role enforced)")
     fails += 0 if noskip else 1
+
+    # 7. per-role authorisation on action-card transitions (WP §8.3, §8.5)
+    def perform(frm, to, role):
+        return client.get(f"/action-card/perform?frm={frm}&to={to}", headers={"x-staff-role": role}).status_code
+    matrix = [
+        ("investigated", "drafted", "analyst", 200),
+        ("drafted", "independently_reviewed", "analyst", 403),
+        ("drafted", "independently_reviewed", "assurance", 200),
+        ("approved_for_route", "sent_by_authorised_role", "analyst", 403),
+        ("approved_for_route", "sent_by_authorised_role", "assurance", 403),
+        ("approved_for_route", "sent_by_authorised_role", "authoriser", 200),
+    ]
+    for frm, to, role, exp in matrix:
+        got = perform(frm, to, role)
+        ok = got == exp
+        print(f"[{'OK ' if ok else 'BAD'}] role {role:9s} {frm} -> {to} = {got} (expect {exp})")
+        fails += 0 if ok else 1
 
     print("\nRESULT:", "ALL STAFF SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
