@@ -39,14 +39,21 @@ def index(request: Request):
 
 
 @app.get("/discover", response_class=HTMLResponse)
-def discover(request: Request, scenario: str = "supported", activity: str = "", access: str = ""):
+def discover(request: Request, scenario: str = "supported", activity: str = "", access: str = "",
+             condition: str = "P1"):
     sc = _pick(scenario)
+    cond = condition if condition in ("P0", "P1", "P2") else "P1"
+    caps = render.condition_caps(cond)
     view = render.build_view(render.load_public(sc))
+    # Condition changes ONLY presentation; the decision, candidates and certified order are identical.
+    view["condition"] = cond
+    view["evidence_communication"] = caps["evidence_communication"]
+    view["conversation"] = caps["conversation"]
     if view["action_kind"] == "service_failure":
         tmpl = "service_failure.html"
     else:
         tmpl = TEMPLATE_FOR_TERMINAL.get(view.get("terminal"), "results.html")
-    return templates.TemplateResponse(request, tmpl, {"v": view, "scenario": sc,
+    return templates.TemplateResponse(request, tmpl, {"v": view, "scenario": sc, "condition": cond,
                                                       "query": {"activity": activity, "access": access}})
 
 

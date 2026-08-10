@@ -23,6 +23,17 @@ _LEX = json.load(open(os.path.join(CONTENT, "evidence-language.json")))
 
 SCENARIOS = ("supported", "no_match", "indeterminate", "service_failure")
 
+# Evaluation conditions (C-17): P0/P1/P2 change only PRESENTATION over the same decision (C-BLOCK-06).
+EVAL_MANIFEST = os.path.join(REPO, "packages", "evaluation", "condition-manifest.json")
+try:
+    _COND_CAPS = {c["id"]: c["capabilities"] for c in json.load(open(EVAL_MANIFEST)).get("public_conditions", [])}
+except Exception:
+    _COND_CAPS = {}
+
+
+def condition_caps(cid):
+    return _COND_CAPS.get(cid, {"evidence_communication": True, "conversation": False})
+
 
 def phrase(cat, val, default=""):
     e = _LEX.get(cat, {}).get(val or "")

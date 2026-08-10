@@ -123,6 +123,21 @@ def main_run():
     for rid, d in violations: print(f"      {rid}: {d}")
     fails += 0 if ok else 1
 
+    # C-17: conditions change only presentation over the SAME decision (C-BLOCK-06 at the app boundary)
+    order = {}
+    for cond in ("P0", "P1", "P2"):
+        h = client.get(f"/discover?scenario=supported&condition={cond}").text
+        order[cond] = re.findall(r"Option \d+: (sess-\d+)", h)
+    p0 = client.get("/discover?scenario=supported&condition=P0").text
+    p1 = client.get("/discover?scenario=supported&condition=P1").text
+    same_order = order["P0"] == order["P1"] == order["P2"] == ["sess-101", "sess-102"]
+    p0_hides = ("not published" not in p0) and ("not published" in p1)
+    cond_ok = same_order and p0_hides
+    print(f"[{'OK ' if cond_ok else 'BAD'}] C-17 conditions: identical order P0/P1/P2; P0 list-only, P1 evidence-aware")
+    if not cond_ok:
+        print("      order:", order, "p0_hides:", p0_hides)
+    fails += 0 if cond_ok else 1
+
     print("\nRESULT:", "ALL SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 
