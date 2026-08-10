@@ -1,0 +1,141 @@
+{
+  "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md §12.1 (C-16 executable assurance case). NOT authorship evidence. An orphan use/harm/control/test/reviewer/authority blocks the affected maturity state. Executable tests are green here; reviewer and authority gates are human and remain PENDING — an authorised person, not Clarence, records the maturity decision (WP §12.9).",
+  "version": "0.1.0-PROPOSED",
+  "status": "PROPOSED",
+  "maturity_target": "research_demonstration",
+
+  "test_registry": {
+    "T-contracts":   { "kind": "executable", "command": "python3 packages/application-contracts/c-block-05/projection_and_invariants.py", "expect": "ALL EXPECTATIONS MET" },
+    "T-checker":     { "kind": "executable", "command": "python3 packages/certificate-checker/test_certificate_checker.py", "expect": "ALL CHECKER TESTS PASS" },
+    "T-register":    { "kind": "executable", "command": "python3 docs/assurance/validate_register.py", "expect": "REGISTER OK" },
+    "T-wording":     { "kind": "executable", "command": "python3 packages/accessible-design-system/content/render_lint.py", "expect": "ALL CONTENT-LINT CHECKS PASS" },
+    "T-ia":          { "kind": "executable", "command": "python3 packages/public-ia/validate_ia.py", "expect": "IA OK" },
+    "T-actioncard":  { "kind": "executable", "command": "python3 packages/staff-ia/validate_action_cards.py", "expect": "ACTION-CARD WORKFLOW OK" },
+    "T-conditions":  { "kind": "executable", "command": "python3 packages/evaluation/validate_conditions.py", "expect": "ALL CONDITION CHECKS PASS" },
+    "T-publicslice": { "kind": "executable", "command": "python3 apps/public-discovery/test_slice.py", "expect": "ALL SLICE CHECKS PASS" },
+    "T-staffslice":  { "kind": "executable", "command": "python3 apps/staff-assurance/test_staff.py", "expect": "ALL STAFF SLICE CHECKS PASS" }
+  },
+
+  "claims": [
+    {
+      "id": "CL-1",
+      "statement": "Public and staff surfaces never disagree on the retained decision, and restricted staff values cannot change public output.",
+      "permitted_wording": "evidence-symmetric but authority-asymmetric applications with value-level non-interference",
+      "affected_party": "public users and London Sport staff",
+      "harm": "leaked staff information, or public/staff disagreement that misleads a decision",
+      "controls": [{ "id": "K-noninterference", "desc": "fail-closed disclosure-class projection; value-level non-interference", "owner": "Clarence" }],
+      "test_ids": ["T-contracts", "T-staffslice", "T-publicslice"],
+      "reviewer": { "scope": "evidence semantics + transport", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "person-level review of projections outstanding",
+      "authority": { "decision": "public_safe_demonstration gate", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-2",
+      "statement": "Missing or unknown evidence is never rendered as a negative fact.",
+      "permitted_wording": "unknown is rendered as 'not published', never as 'no' or 'free'",
+      "affected_party": "public users",
+      "harm": "user misled into believing an activity is unavailable/free when the data is simply silent",
+      "controls": [{ "id": "K-nocollapse", "desc": "evidence-language lexicon + no-collapse invariant", "owner": "Clarence" }],
+      "test_ids": ["T-wording", "T-contracts", "T-publicslice"],
+      "reviewer": { "scope": "content / HCI", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "wording to be corrected in Clarence's own words + reviewed",
+      "authority": { "decision": "content sign-off", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-3",
+      "statement": "No unsupported factual token reaches a user.",
+      "permitted_wording": "verify-before-render; only verified claims are rendered",
+      "affected_party": "public users",
+      "harm": "a fluent but unsupported statement is believed",
+      "controls": [{ "id": "K-verify", "desc": "deterministic verify-before-render; independent certificate checker", "owner": "Clarence + Michael" }],
+      "test_ids": ["T-contracts", "T-checker"],
+      "reviewer": { "scope": "evidence semantics (Section 09)", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "conversational renderer not yet built",
+      "authority": { "decision": "Section 09 vocabulary ratification", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-4",
+      "statement": "The interface preserves the certified slate and order; client controls cannot bypass abstention.",
+      "permitted_wording": "map/list/sort preserve the certified slate and order",
+      "affected_party": "public users",
+      "harm": "a re-ordered or padded list presents a non-certified result as certified",
+      "controls": [{ "id": "K-order", "desc": "immutable certified order; IA coverage of every state", "owner": "Clarence" }],
+      "test_ids": ["T-contracts", "T-ia", "T-publicslice"],
+      "reviewer": { "scope": "HCI / evaluation parity", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "none known within tested routes",
+      "authority": { "decision": "public_safe_demonstration gate", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-5",
+      "statement": "Restricted staff information cannot leak to the public plane; staff access is role-gated.",
+      "permitted_wording": "one-way disclosure; role-appropriate presentation",
+      "affected_party": "publishers, staff, public users",
+      "harm": "receipts/lineage/aggregates or research identity exposed publicly",
+      "controls": [{ "id": "K-disclosure", "desc": "disclosure classes + server-side role gate + per-role capabilities", "owner": "Clarence + Wesley" }],
+      "test_ids": ["T-contracts", "T-staffslice", "T-publicslice"],
+      "reviewer": { "scope": "security / IAM", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "real IAM/break-glass is Wesley's; role gate here is a stub",
+      "authority": { "decision": "security review + RATIFY-15-06", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-6",
+      "statement": "Forged, stale, swapped or illegally escalated evidence is rejected by an independent checker.",
+      "permitted_wording": "limited technical independence certificate checker",
+      "affected_party": "public users, London Sport",
+      "harm": "a wrong production decision is trusted",
+      "controls": [{ "id": "K-checker", "desc": "independent checker; §10.5 negative tests; branch mutation testing", "owner": "Clarence" }],
+      "test_ids": ["T-checker"],
+      "reviewer": { "scope": "non-author code review + Section 09 contract", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "production/reference/checker discrepancy register empty until production emits certificates",
+      "authority": { "decision": "RATIFY-09-04", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-7",
+      "statement": "Application effects are not confounded with retrieval, ranking or content differences.",
+      "permitted_wording": "shared-backend P0/P1/P2 and W0/W1/W1-NA conditions",
+      "affected_party": "the evaluation / research claim",
+      "harm": "an interface effect is falsely attributed, invalidating a headline result",
+      "controls": [{ "id": "K-conditions", "desc": "condition manifests with shared terminal DecisionEnvelope per task", "owner": "Clarence (build); Fahmi (estimands)" }],
+      "test_ids": ["T-conditions"],
+      "reviewer": { "scope": "evaluation design (Fahmi)", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "human-effect claims require ethics approval",
+      "authority": { "decision": "RATIFY-14-07/08 + ethics route", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-8",
+      "statement": "Governed actions cannot skip independent review or approval, and sending requires an authorised role.",
+      "permitted_wording": "action-card workflow with separated review/approval/send",
+      "affected_party": "publishers, London Sport",
+      "harm": "an unreviewed or unauthorised action is sent to a publisher",
+      "controls": [{ "id": "K-actioncard", "desc": "action-card state-machine gates + per-role capability matrix", "owner": "Clarence" }],
+      "test_ids": ["T-actioncard", "T-staffslice"],
+      "reviewer": { "scope": "Section 18 partner route", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "person-level independence (reviewer != author) needs real IAM",
+      "authority": { "decision": "Section 18 owner", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-9",
+      "statement": "All pre-code reconciliation blockers are dispositioned with owner, tests and fallback.",
+      "permitted_wording": "reconciliation register per WP §3",
+      "affected_party": "the team / examiner",
+      "harm": "a release-blocking ambiguity is hidden beneath an implementation choice",
+      "controls": [{ "id": "K-register", "desc": "C-01 reconciliation register with completeness validation", "owner": "Clarence" }],
+      "test_ids": ["T-register"],
+      "reviewer": { "scope": "team ratification", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "institutional cells remain PENDING until ratified",
+      "authority": { "decision": "team ratification (RATIFY-19-04)", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-10",
+      "statement": "The applications are evaluated toward WCAG 2.2 AA within a stated, tested matrix (not a blanket conformance claim).",
+      "permitted_wording": "evaluated toward WCAG 2.2 AA within the tested matrix",
+      "affected_party": "disabled users",
+      "harm": "an accessibility barrier prevents a tested route for material users",
+      "controls": [{ "id": "K-a11y", "desc": "accessible components + static a11y subset + declared test matrix", "owner": "Clarence" }],
+      "test_ids": ["T-publicslice", "T-staffslice"],
+      "reviewer": { "scope": "non-author HCI/accessibility reviewer (C-BLOCK-03)", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "manual keyboard/screen-reader/AT/contrast testing OUTSTANDING; automated subset is one input only",
+      "authority": { "decision": "RATIFY-14-02 + accessibility statement", "holder": null, "status": "pending" }
+    }
+  ]
+}
