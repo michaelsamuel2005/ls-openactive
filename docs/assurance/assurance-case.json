@@ -16,7 +16,8 @@
     "T-staffslice":  { "kind": "executable", "command": "python3 apps/staff-assurance/test_staff.py", "expect": "ALL STAFF SLICE CHECKS PASS" },
     "T-privacy":     { "kind": "executable", "command": "python3 packages/privacy/validate_privacy.py", "expect": "PRIVACY MODEL OK" },
     "T-ethics":      { "kind": "executable", "command": "python3 packages/ethics/validate_ethics.py", "expect": "ETHICS MODEL OK" },
-    "T-security":    { "kind": "executable", "command": "python3 packages/security/validate_security.py", "expect": "SECURITY MODEL OK" }
+    "T-security":    { "kind": "executable", "command": "python3 packages/security/validate_security.py", "expect": "SECURITY MODEL OK" },
+    "T-conversation":{ "kind": "executable", "command": "python3 apps/public-discovery/test_conversation.py", "expect": "ALL CONVERSATION CHECKS PASS" }
   },
 
   "claims": [
@@ -175,6 +176,18 @@
       "reviewer": { "scope": "security / assurance reviewer", "eligible_non_author": true, "status": "pending", "name": null },
       "residual_risk": "infra controls (rate limits, headers, egress, SBOM, deletion) are Wesley's and planned; injection battery pending the conversational layer",
       "authority": { "decision": "RATIFY-15-07 (security)", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-14",
+      "statement": "The conversational route interprets and communicates but never decides truth: it converges on the same certified decision as guided search, confirms high-consequence constraints, renders only verified claims, and degrades safely.",
+      "permitted_wording": "evidence-contract conversation; chat and non-chat converge on compatible terminal semantics",
+      "affected_party": "public users",
+      "harm": "a chatbot asserts an unsupported fact or diverges from the certified decision",
+      "controls": [{ "id": "K-conversation", "desc": "deterministic typed-intent parse; high-consequence confirmation; resolve to the shared DecisionEnvelope; verified-claims-only rendering; safe degradation", "owner": "Clarence (UX) + Michael (verifier)" }],
+      "test_ids": ["T-conversation", "T-contracts"],
+      "reviewer": { "scope": "Section 08 owner + evidence semantics", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)",
+      "authority": { "decision": "Section 08 ownership + RATIFY-09-05", "holder": null, "status": "pending" }
     }
   ]
 }

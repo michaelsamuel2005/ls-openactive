@@ -4,7 +4,7 @@
 
 > **AI-ASSISTED SCAFFOLD (WP §12.1).** Executable tests are run live below. Reviewer and authority gates are human and PENDING; an authorised person — not Clarence — records the maturity decision (WP §12.9).
 
-**Status:** PROPOSED · **Maturity target:** research_demonstration · **13 claims**
+**Status:** PROPOSED · **Maturity target:** research_demonstration · **14 claims**
 
 ## Linked test results (live)
 
@@ -22,6 +22,7 @@
 | `T-privacy` | ✅ pass | `python3 packages/privacy/validate_privacy.py` |
 | `T-ethics` | ✅ pass | `python3 packages/ethics/validate_ethics.py` |
 | `T-security` | ✅ pass | `python3 packages/security/validate_security.py` |
+| `T-conversation` | ✅ pass | `python3 apps/public-discovery/test_conversation.py` |
 
 ## Claims → controls → evidence → maturity
 
@@ -153,5 +154,15 @@
 - **Reviewer:** security / assurance reviewer — pending
 - **Authority:** RATIFY-15-07 (security) — pending
 - **Residual risk:** infra controls (rate limits, headers, egress, SBOM, deletion) are Wesley's and planned; injection battery pending the conversational layer
+- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+
+### CL-14 — The conversational route interprets and communicates but never decides truth: it converges on the same certified decision as guided search, confirms high-consequence constraints, renders only verified claims, and degrades safely.
+*Permitted wording:* evidence-contract conversation; chat and non-chat converge on compatible terminal semantics
+- **Affected / harm:** public users — a chatbot asserts an unsupported fact or diverges from the certified decision
+- **Controls:** K-conversation (Clarence (UX) + Michael (verifier))
+- **Evidence (tests):** T-conversation ✅, T-contracts ✅
+- **Reviewer:** Section 08 owner + evidence semantics — pending
+- **Authority:** Section 08 ownership + RATIFY-09-05 — pending
+- **Residual risk:** LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
 

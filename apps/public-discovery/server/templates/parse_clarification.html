@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Did I understand you?{% endblock %}
+{% block content %}
+<h1>Did I understand you?</h1>
+<p>So far I understood: <strong>{{ it.hard|join(', ') if it.hard else 'nothing specific yet' }}</strong>.</p>
+{% if it.ambiguous %}
+<p class="notice" role="note">Still unclear: {{ it.ambiguous|join(', ') }}. I won&rsquo;t guess &mdash;
+   please add these so I don&rsquo;t show you the wrong thing.</p>
+{% endif %}
+
+<form action="/chat" method="get" novalidate>
+  <div class="field">
+    <label for="q">Edit your request</label>
+    <input id="q" name="q" type="text" autocomplete="off" value="{{ q }}" size="48">
+  </div>
+  <button type="submit">Try again</button>
+</form>
+<p><a href="/">Use guided search instead</a></p>
+{% endblock %}

@@ -12,9 +12,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 try:  # imported as `server.main` (uvicorn server.main:app --app-dir apps/public-discovery)
-    from . import render
+    from . import render, intent
 except ImportError:  # imported as top-level `main` (server dir on sys.path: tests / --app-dir .../server)
-    import render
+    import render, intent
+
+from urllib.parse import urlencode
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(HERE, "templates"))
@@ -55,6 +57,32 @@ def discover(request: Request, scenario: str = "supported", activity: str = "", 
         tmpl = TEMPLATE_FOR_TERMINAL.get(view.get("terminal"), "results.html")
     return templates.TemplateResponse(request, tmpl, {"v": view, "scenario": sc, "condition": cond,
                                                       "query": {"activity": activity, "access": access}})
+
+
+@app.get("/chat", response_class=HTMLResponse)
+def chat(request: Request, q: str = "", model: str = "on", confirm: str = "0"):
+    """Conversational route (WP §9). Interprets words -> typed intent -> confirms high-consequence
+    constraints -> resolves to the SAME DecisionEnvelope as guided search. Renders only verified
+    claims (C-BLOCK-10); never fabricates a result from an unclear query."""
+    if not q.strip():
+        return templates.TemplateResponse(request, "chat.html", {})
+    if model == "off":  # safe degradation (WP §9.5): the deterministic guided route still works
+        return templates.TemplateResponse(request, "chat_unavailable.html", {"q": q})
+    it = intent.parse(q)
+    if not it["confident"]:  # unclear query -> clarify, do not invent a result
+        return templates.TemplateResponse(request, "parse_clarification.html", {"q": q, "it": it})
+    if it["high_consequence"] and confirm != "1":  # confirm accessibility/negative hard constraints
+        return templates.TemplateResponse(request, "confirm.html",
+                                          {"q": q, "it": it, "confirm_qs": urlencode({"q": q, "confirm": "1"})})
+    sc = it["scenario"]
+    caps = render.condition_caps("P2")
+    view = render.build_view(render.load_public(sc))
+    view["condition"] = "P2"
+    view["evidence_communication"] = caps["evidence_communication"]
+    view["conversation"] = caps["conversation"]
+    tmpl = ("service_failure.html" if view["action_kind"] == "service_failure"
+            else TEMPLATE_FOR_TERMINAL.get(view.get("terminal"), "results.html"))
+    return templates.TemplateResponse(request, tmpl, {"v": view, "scenario": sc, "condition": "P2", "query": {}})
 
 
 @app.get("/result/{cid}", response_class=HTMLResponse)
