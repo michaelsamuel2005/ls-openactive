@@ -15,7 +15,8 @@
     "T-publicslice": { "kind": "executable", "command": "python3 apps/public-discovery/test_slice.py", "expect": "ALL SLICE CHECKS PASS" },
     "T-staffslice":  { "kind": "executable", "command": "python3 apps/staff-assurance/test_staff.py", "expect": "ALL STAFF SLICE CHECKS PASS" },
     "T-privacy":     { "kind": "executable", "command": "python3 packages/privacy/validate_privacy.py", "expect": "PRIVACY MODEL OK" },
-    "T-ethics":      { "kind": "executable", "command": "python3 packages/ethics/validate_ethics.py", "expect": "ETHICS MODEL OK" }
+    "T-ethics":      { "kind": "executable", "command": "python3 packages/ethics/validate_ethics.py", "expect": "ETHICS MODEL OK" },
+    "T-security":    { "kind": "executable", "command": "python3 packages/security/validate_security.py", "expect": "SECURITY MODEL OK" }
   },
 
   "claims": [
@@ -162,6 +163,18 @@
       "reviewer": { "scope": "Bristol PGT ethics route", "eligible_non_author": true, "status": "pending", "name": null },
       "residual_risk": "ethics determination outstanding; operating under the no-study fallback",
       "authority": { "decision": "RATIFY-15-03 (PGT ethics)", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-13",
+      "statement": "Application-facing security controls neutralise injection and unsafe output, and no secret is committed.",
+      "permitted_wording": "application-facing security controls with a threat register",
+      "affected_party": "public users, staff, publishers",
+      "harm": "formula/HTML/URL injection, receipt forgery, or a committed secret",
+      "controls": [{ "id": "K-security", "desc": "csv_field/safe_url/escape_html sanitisers; threat register; secret scan; receipt forgery via C-09", "owner": "Clarence (app) + Wesley (infra)" }],
+      "test_ids": ["T-security", "T-checker"],
+      "reviewer": { "scope": "security / assurance reviewer", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "infra controls (rate limits, headers, egress, SBOM, deletion) are Wesley's and planned; injection battery pending the conversational layer",
+      "authority": { "decision": "RATIFY-15-07 (security)", "holder": null, "status": "pending" }
     }
   ]
 }

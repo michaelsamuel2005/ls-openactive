@@ -4,7 +4,7 @@
 
 > **AI-ASSISTED SCAFFOLD (WP §12.1).** Executable tests are run live below. Reviewer and authority gates are human and PENDING; an authorised person — not Clarence — records the maturity decision (WP §12.9).
 
-**Status:** PROPOSED · **Maturity target:** research_demonstration · **12 claims**
+**Status:** PROPOSED · **Maturity target:** research_demonstration · **13 claims**
 
 ## Linked test results (live)
 
@@ -21,6 +21,7 @@
 | `T-staffslice` | ✅ pass | `python3 apps/staff-assurance/test_staff.py` |
 | `T-privacy` | ✅ pass | `python3 packages/privacy/validate_privacy.py` |
 | `T-ethics` | ✅ pass | `python3 packages/ethics/validate_ethics.py` |
+| `T-security` | ✅ pass | `python3 packages/security/validate_security.py` |
 
 ## Claims → controls → evidence → maturity
 
@@ -142,5 +143,15 @@
 - **Reviewer:** Bristol PGT ethics route — pending
 - **Authority:** RATIFY-15-03 (PGT ethics) — pending
 - **Residual risk:** ethics determination outstanding; operating under the no-study fallback
+- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+
+### CL-13 — Application-facing security controls neutralise injection and unsafe output, and no secret is committed.
+*Permitted wording:* application-facing security controls with a threat register
+- **Affected / harm:** public users, staff, publishers — formula/HTML/URL injection, receipt forgery, or a committed secret
+- **Controls:** K-security (Clarence (app) + Wesley (infra))
+- **Evidence (tests):** T-security ✅, T-checker ✅
+- **Reviewer:** security / assurance reviewer — pending
+- **Authority:** RATIFY-15-07 (security) — pending
+- **Residual risk:** infra controls (rate limits, headers, egress, SBOM, deletion) are Wesley's and planned; injection battery pending the conversational layer
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
 
