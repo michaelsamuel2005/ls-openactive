@@ -32,7 +32,7 @@ core** for essential content and actions (C-BLOCK-11/14).
 | scope_notice | How complete is this? | Surface incomplete scope even when a match exists | `scope_indeterminate` |
 | service_failure | Something went wrong — now what? | Failed stage + safe retry/fallback/handoff; **no stale reuse** | `service_failure` |
 | detail_receipt | Why was this shown? | Confirmed evidence, limits, ordering, source/vintage, next step | — |
-| compare | How do options differ? | Retain unknown/conflict; no invented composite winner | — |
+| compare | How do options differ? | Retain unknown/conflict; no invented composite winner (server-rendered `/compare`, no-JS) | — |
 | handoff | How do I continue/challenge? | Provider-controlled next step; assisted option; minimal token | — |
 
 The five outcomes that must be **visibly distinct** (WP §7.2, §9.3) — `supported_match`,

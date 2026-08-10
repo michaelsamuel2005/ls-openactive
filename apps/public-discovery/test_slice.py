@@ -41,7 +41,7 @@ LEAK_KEYS = {
 }
 CORE_PAGES = ["/", "/discover?scenario=supported", "/discover?scenario=no_match",
               "/discover?scenario=indeterminate", "/discover?scenario=service_failure",
-              "/result/sess-101?scenario=supported", "/help"]
+              "/result/sess-101?scenario=supported", "/compare?scenario=supported", "/help"]
 
 
 def strip_tags(html):
@@ -95,6 +95,7 @@ def main_run():
         "/discover?scenario=no_match": ["No listed match", "does not mean no activity exists"],
         "/discover?scenario=indeterminate": ["can't tell", "weren't fully checked"],
         "/discover?scenario=service_failure": ["Something went wrong", "stale"],
+        "/compare?scenario=supported": ["sess-101", "sess-102", "not published", "no overall"],
     }
     for path, needles in checks.items():
         html = _html.unescape(client.get(path).text)  # compare semantic text (Jinja escapes ' -> &#39;)

@@ -22,12 +22,12 @@ mechanisms, aggregates the public must never receive). Both are projections of o
 | Task answerability | Which queries are supported / bounded / indeterminate? | Partial (via scenarios) |
 | Failure-chain explorer | Where did a public outcome become limited? | Yes |
 | Receipt inspector / public-state replay | Can this public payload be reconstructed? | Yes (digest replay) |
-| Bounded scenario laboratory | What could change under an explicit hypothetical? | Planned |
-| Recommender / AI assurance | Is the system within its frozen risk/coverage envelope? | Planned |
-| Equity-relevant audit | Which tasks/origins carry evidence burden? | Planned (contextual, not identity) |
+| Bounded scenario laboratory | What could change under an explicit hypothetical? | Yes (bounds; no realised-gain) |
+| Recommender / AI assurance | Is the system within its frozen risk/coverage envelope? | Yes (vintage/coverage; rates by Fahmi) |
+| Equity-relevant audit | Which tasks/origins carry evidence burden? | Yes (contextual, not identity) |
 | Public-state replay | What exactly did the public user receive? | Yes |
 | Action / escalation | What governed next step is justified? | Yes (action-card workflow) |
-| Release / incident control | What maturity/failure state applies? | Planned |
+| Release / incident control | What maturity/failure state applies? | Yes (maturity + kill/rollback stubs) |
 
 ## 3. Every staff panel binds (WP §8.2)
 

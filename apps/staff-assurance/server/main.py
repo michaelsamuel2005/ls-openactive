@@ -153,6 +153,62 @@ def action_card_perform(request: Request, frm: str, to: str):
     return templates.TemplateResponse(request, "performed.html", ctx)
 
 
+@app.get("/bounded-scenario", response_class=HTMLResponse)
+def bounded_scenario(request: Request, scenario: str = "indeterminate"):
+    role = _role(request)
+    if not role:
+        return _forbidden(request)
+    sc = _pick(scenario)
+    env = render.load_env(sc)
+    return templates.TemplateResponse(request, "bounded_scenario.html", {
+        "role": role, "scenario": sc, "b": render.bounded_scenario(env),
+        "prov": render.provenance(env, "Bounded scenario laboratory", "inspect only",
+                                  "Best/worst-case bounds only; no realised-gain wording."),
+    })
+
+
+@app.get("/recommender-assurance", response_class=HTMLResponse)
+def recommender_assurance(request: Request, scenario: str = "supported"):
+    role = _role(request)
+    if not role:
+        return _forbidden(request)
+    sc = _pick(scenario)
+    env = render.load_env(sc)
+    return templates.TemplateResponse(request, "recommender_assurance.html", {
+        "role": role, "scenario": sc, "r": render.recommender_assurance(env),
+        "prov": render.provenance(env, "Recommender / AI assurance", "inspect only",
+                                  "Model/policy vintage and coverage; rates measured by Fahmi, not asserted."),
+    })
+
+
+@app.get("/equity-audit", response_class=HTMLResponse)
+def equity_audit(request: Request, scenario: str = "indeterminate"):
+    role = _role(request)
+    if not role:
+        return _forbidden(request)
+    sc = _pick(scenario)
+    env = render.load_env(sc)
+    return templates.TemplateResponse(request, "equity_audit.html", {
+        "role": role, "scenario": sc, "e": render.equity_audit(env),
+        "prov": render.provenance(env, "Equity-relevant audit", "inspect only",
+                                  "Contextual (area/scope) not identity; no league tables; bounded wording."),
+    })
+
+
+@app.get("/release-incident", response_class=HTMLResponse)
+def release_incident(request: Request, scenario: str = "supported"):
+    role = _role(request)
+    if not role:
+        return _forbidden(request)
+    sc = _pick(scenario)
+    env = render.load_env(sc)
+    return templates.TemplateResponse(request, "release_incident.html", {
+        "role": role, "scenario": sc, "x": render.release_incident(env),
+        "prov": render.provenance(env, "Release / incident control", "inspect only",
+                                  "Maturity state and controls; the authority records the decision."),
+    })
+
+
 @app.get("/help", response_class=HTMLResponse)
 def help_page(request: Request):
     # Help/guidance carries no evidence, so it is available without a role (consistent help, 3.2.6).

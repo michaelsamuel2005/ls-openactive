@@ -97,6 +97,17 @@ def result(request: Request, cid: str, scenario: str = "supported"):
     return templates.TemplateResponse(request, "detail.html", {"v": view, "c": cand})
 
 
+@app.get("/compare", response_class=HTMLResponse)
+def compare(request: Request, scenario: str = "supported", condition: str = "P1"):
+    sc = _pick(scenario)
+    cond = condition if condition in ("P0", "P1", "P2") else "P1"
+    view = render.build_view(render.load_public(sc))
+    view["condition"] = cond
+    matrix = render.compare_matrix(view)
+    return templates.TemplateResponse(request, "compare.html",
+                                      {"v": view, "scenario": sc, "condition": cond, "matrix": matrix})
+
+
 @app.get("/help", response_class=HTMLResponse)
 def help_page(request: Request):
     return templates.TemplateResponse(request, "help.html", {})

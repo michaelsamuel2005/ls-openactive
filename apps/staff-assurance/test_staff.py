@@ -27,7 +27,9 @@ import a11y_check                          # noqa: E402
 client = TestClient(main.app)
 ROLE = {"x-staff-role": "analyst"}
 STAFF_ROUTES = ["/", "/replay?scenario=supported", "/failure-chain?scenario=indeterminate",
-                "/collection-health?scenario=indeterminate", "/action-card?state=drafted"]
+                "/collection-health?scenario=indeterminate", "/action-card?state=drafted",
+                "/bounded-scenario?scenario=indeterminate", "/recommender-assurance?scenario=supported",
+                "/equity-audit?scenario=indeterminate", "/release-incident?scenario=supported"]
 RESEARCH_TOKENS = ["ep-7731", "trace-aa19", "ep-in-1", "tr-in-1", "ep-nm-1", "tr-nm-1"]
 
 
@@ -115,6 +117,18 @@ def run():
               and send is not None and send.get("requires_authorised_role"))
     print(f"[{'OK ' if noskip else 'BAD'}] action-card no-skip (review+approval+authorised-role enforced)")
     fails += 0 if noskip else 1
+
+    # 6b. new workspaces render honest wording (WP §8.1/§8.3)
+    ea = client.get("/equity-audit?scenario=indeterminate", headers=ROLE).text
+    ri = client.get("/release-incident?scenario=supported", headers=ROLE).text
+    ra = client.get("/recommender-assurance?scenario=supported", headers=ROLE).text
+    bs = client.get("/bounded-scenario?scenario=indeterminate", headers=ROLE).text
+    ws_ok = ("identity" in ea and "league table" in ea            # contextual, not identity; no league tables
+             and "research_demonstration" in ri                    # maturity surfaced
+             and "recmodel-0.3" in ra                              # staff sees model version
+             and "not a realised gain" in bs)                      # bounded, no realised-gain
+    print(f"[{'OK ' if ws_ok else 'BAD'}] staff workspaces render honest wording")
+    fails += 0 if ws_ok else 1
 
     # 7. per-role authorisation on action-card transitions (WP §8.3, §8.5)
     def perform(frm, to, role):

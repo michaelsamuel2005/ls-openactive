@@ -86,6 +86,25 @@ def build_view(pub):
     return v
 
 
+def compare_matrix(view):
+    """Compare grid over the SAME certified candidates: predicates as rows, candidates as columns.
+    Preserves unknown/conflict wording; invents no composite winner (WP §7.3)."""
+    cands = view.get("candidates", [])
+    pids = []
+    for c in cands:
+        for a in c["attributes"]:
+            if a["id"] not in pids:
+                pids.append(a["id"])
+    header = [{"id": c["id"], "rank": c["rank"]} for c in cands]
+    rows = []
+    for p in pids:
+        cells = []
+        for c in cands:
+            cells.append(next((a["state_text"] for a in c["attributes"] if a["id"] == p), "not published"))
+        rows.append({"predicate": p, "cells": cells})
+    return {"candidates": header, "rows": rows}
+
+
 def visible_strings(view):
     """Flatten the human-facing strings a page shows, for the C-11 render linter."""
     out = [view.get("terminal_text", ""), view.get("recommendation_text", ""),

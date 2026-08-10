@@ -109,3 +109,55 @@ def provenance(env, panel, permitted_action, permitted_wording):
             "interpretation_version": v.get("interpretation_version"),
             "access_role": "staff", "permitted_action": permitted_action,
             "permitted_wording": permitted_wording}
+
+
+def bounded_scenario(env):
+    """Bounded-scenario lab (WP §8.1): best/worst-case bounds only, no realised-gain wording."""
+    d = _decision(_project(env, "staff"))
+    flippable = [w for w in d.get("why_not", []) if w.get("blocking_state") in ("U", "B")]
+    supported = sum(1 for c in d.get("candidates", []) if c.get("pool") == "supported")
+    return {
+        "hypothesis": "If the unknown or conflicting fields were resolved favourably",
+        "unknown_or_conflict": [w.get("predicate_id") for w in flippable],
+        "lower_bound": supported,
+        "upper_bound": supported + len(flippable),
+        "note": "Best/worst-case bounds only — missing values are unknown, so this is not a realised gain.",
+    }
+
+
+def recommender_assurance(env):
+    """Recommender/AI assurance (WP §8.1): within the frozen risk/coverage envelope."""
+    d = _decision(_project(env, "staff"))
+    v = d.get("versions", {})
+    return {
+        "model_version": v.get("model_version"), "policy_version": v.get("policy_version"),
+        "recommendation_action": d.get("recommendation_action"),
+        "abstained": d.get("recommendation_action") == "model_abstained",
+        "supported_count": sum(1 for c in d.get("candidates", []) if c.get("pool") == "supported"),
+        "scope": d.get("scope_qualifier"),
+        "note": "False-assurance and coverage rates are measured in Fahmi's evaluation, not asserted here.",
+    }
+
+
+def equity_audit(env):
+    """Equity-relevant audit (WP §8.1/§8.3): contextual, never identity; no league tables."""
+    s = _project(env, "staff")
+    d = _decision(s)
+    return {
+        "coarsened_origin": (s.get("header") or {}).get("coarsened_origin"),
+        "scope": d.get("scope_qualifier"),
+        "unevaluated_feeds": (d.get("coverage_qualifier") or {}).get("unevaluated_feeds"),
+        "note": "Contextual measures only (area/scope) — never identity; no borough or publisher league tables; bounded wording.",
+    }
+
+
+def release_incident(env):
+    """Release / incident control (WP §8.1/§12.9/§12.10)."""
+    h = _project(env, "staff").get("header") or {}
+    return {
+        "maturity": h.get("release_maturity_class"),
+        "safety_gate_state": h.get("safety_gate_state"),
+        "kill_switch": "available (stub — Wesley implements)",
+        "rollback": "available (stub — Wesley implements)",
+        "note": "An authorised person — not Clarence — records the maturity / residual-risk decision (WP §12.9).",
+    }
