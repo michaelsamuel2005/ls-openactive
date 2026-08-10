@@ -13,7 +13,9 @@
     "T-actioncard":  { "kind": "executable", "command": "python3 packages/staff-ia/validate_action_cards.py", "expect": "ACTION-CARD WORKFLOW OK" },
     "T-conditions":  { "kind": "executable", "command": "python3 packages/evaluation/validate_conditions.py", "expect": "ALL CONDITION CHECKS PASS" },
     "T-publicslice": { "kind": "executable", "command": "python3 apps/public-discovery/test_slice.py", "expect": "ALL SLICE CHECKS PASS" },
-    "T-staffslice":  { "kind": "executable", "command": "python3 apps/staff-assurance/test_staff.py", "expect": "ALL STAFF SLICE CHECKS PASS" }
+    "T-staffslice":  { "kind": "executable", "command": "python3 apps/staff-assurance/test_staff.py", "expect": "ALL STAFF SLICE CHECKS PASS" },
+    "T-privacy":     { "kind": "executable", "command": "python3 packages/privacy/validate_privacy.py", "expect": "PRIVACY MODEL OK" },
+    "T-ethics":      { "kind": "executable", "command": "python3 packages/ethics/validate_ethics.py", "expect": "ETHICS MODEL OK" }
   },
 
   "claims": [
@@ -136,6 +138,30 @@
       "reviewer": { "scope": "non-author HCI/accessibility reviewer (C-BLOCK-03)", "eligible_non_author": true, "status": "pending", "name": null },
       "residual_risk": "manual keyboard/screen-reader/AT/contrast testing OUTSTANDING; automated subset is one input only",
       "authority": { "decision": "RATIFY-14-02 + accessibility statement", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-11",
+      "statement": "Telemetry is transient-by-default and cannot carry raw utterances, exact location or free text.",
+      "permitted_wording": "privacy-minimised, transient-by-default telemetry",
+      "affected_party": "public users and staff",
+      "harm": "creation of persistent personal data through ordinary telemetry",
+      "controls": [{ "id": "K-telemetry", "desc": "telemetry dictionary in lock-step with the event schema; forbidden concepts cannot be fields; personal-data fields transient", "owner": "Clarence (coord) + Wesley + governance" }],
+      "test_ids": ["T-privacy"],
+      "reviewer": { "scope": "data governance / DPIA", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "controller/processor + lawful basis + DPIA sign-off outstanding; no collection until then",
+      "authority": { "decision": "RATIFY-15-02/04 (governance)", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-12",
+      "statement": "Every human-facing activity is ethically gated with a fallback, and no human-effect claim is made without approval.",
+      "permitted_wording": "ethics activity matrix with a no-study fallback",
+      "affected_party": "participants and the public",
+      "harm": "human-participant data used without approval, or an over-claim about lived effect",
+      "controls": [{ "id": "K-ethics", "desc": "ethics activity matrix (gate+fallback per activity); human-participant requires ethics route; prohibited-use register; no-study fallback", "owner": "Clarence (coord)" }],
+      "test_ids": ["T-ethics"],
+      "reviewer": { "scope": "Bristol PGT ethics route", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "ethics determination outstanding; operating under the no-study fallback",
+      "authority": { "decision": "RATIFY-15-03 (PGT ethics)", "holder": null, "status": "pending" }
     }
   ]
 }

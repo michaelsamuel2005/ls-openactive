@@ -4,7 +4,7 @@
 
 > **AI-ASSISTED SCAFFOLD (WP §12.1).** Executable tests are run live below. Reviewer and authority gates are human and PENDING; an authorised person — not Clarence — records the maturity decision (WP §12.9).
 
-**Status:** PROPOSED · **Maturity target:** research_demonstration · **10 claims**
+**Status:** PROPOSED · **Maturity target:** research_demonstration · **12 claims**
 
 ## Linked test results (live)
 
@@ -19,6 +19,8 @@
 | `T-conditions` | ✅ pass | `python3 packages/evaluation/validate_conditions.py` |
 | `T-publicslice` | ✅ pass | `python3 apps/public-discovery/test_slice.py` |
 | `T-staffslice` | ✅ pass | `python3 apps/staff-assurance/test_staff.py` |
+| `T-privacy` | ✅ pass | `python3 packages/privacy/validate_privacy.py` |
+| `T-ethics` | ✅ pass | `python3 packages/ethics/validate_ethics.py` |
 
 ## Claims → controls → evidence → maturity
 
@@ -120,5 +122,25 @@
 - **Reviewer:** non-author HCI/accessibility reviewer (C-BLOCK-03) — pending
 - **Authority:** RATIFY-14-02 + accessibility statement — pending
 - **Residual risk:** manual keyboard/screen-reader/AT/contrast testing OUTSTANDING; automated subset is one input only
+- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+
+### CL-11 — Telemetry is transient-by-default and cannot carry raw utterances, exact location or free text.
+*Permitted wording:* privacy-minimised, transient-by-default telemetry
+- **Affected / harm:** public users and staff — creation of persistent personal data through ordinary telemetry
+- **Controls:** K-telemetry (Clarence (coord) + Wesley + governance)
+- **Evidence (tests):** T-privacy ✅
+- **Reviewer:** data governance / DPIA — pending
+- **Authority:** RATIFY-15-02/04 (governance) — pending
+- **Residual risk:** controller/processor + lawful basis + DPIA sign-off outstanding; no collection until then
+- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+
+### CL-12 — Every human-facing activity is ethically gated with a fallback, and no human-effect claim is made without approval.
+*Permitted wording:* ethics activity matrix with a no-study fallback
+- **Affected / harm:** participants and the public — human-participant data used without approval, or an over-claim about lived effect
+- **Controls:** K-ethics (Clarence (coord))
+- **Evidence (tests):** T-ethics ✅
+- **Reviewer:** Bristol PGT ethics route — pending
+- **Authority:** RATIFY-15-03 (PGT ethics) — pending
+- **Residual risk:** ethics determination outstanding; operating under the no-study fallback
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
 
