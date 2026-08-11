@@ -48,14 +48,14 @@ yours** — this is a rehearsal scaffold and evidence index, not a script (WP §
 - **Limit:** you build the conditions; Fahmi owns the estimands; `P2−P1` is not cosmetic if conversation changes the interpreted query.
 
 ## 9. What result would falsify the candidate contribution
-- **Evidence:** `docs/applications/C-BLOCK-05.md` §falsification; the assurance case claims CL-1…CL-14.
+- **Evidence:** `docs/applications/C-BLOCK-05.md` §falsification; the assurance case claims CL-1…CL-15.
 - **Key facts:** it narrows or fails if public/staff disagree on retained semantics; restricted staff info leaks; the interface bypasses abstention/order; unsupported model text reaches users; explanations increase *unsafe* reliance; the staff workbench doesn't improve diagnosis vs a comparator; accessibility barriers block tested routes; or the §17 audit shows the integration already exists.
 - **Limit:** null/adverse results are reportable — the question is not redesigned after seeing them.
 
 ## 10. Which artefacts and review records prove your intellectual ownership
 - **Evidence:** the branch commit history (atomic, per-deliverable); each decision doc's dated rationale + rejected alternatives; `docs/assurance/assurance-case.json` (per-claim reviewer/authority slots); the PR (`docs/PULL_REQUEST.md`).
 - **Key facts:** every artefact links claim → control → **passing test** → the review still required; contribution is shown by reasoning and tests, never commit-count or hours.
-- **Limit — the big one:** these are **AI-assisted scaffolds**; ownership is only real once you've corrected them in your own words, done your K7 primary-source reading, and the non-author reviews are recorded. Say this plainly; it is itself evidence of the discipline the project is about.
+- **Limit — the big one:** these are **AI-assisted scaffolds**; ownership is only real once you've corrected them in your own words, done your K7 primary-source reading (tracked in `docs/assurance/reading-log.md`, claim `CL-15`), and the non-author reviews are recorded. Say this plainly; it is itself evidence of the discipline the project is about.
 
 ---
 

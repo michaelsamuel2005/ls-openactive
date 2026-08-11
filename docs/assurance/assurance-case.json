@@ -17,7 +17,8 @@
     "T-privacy":     { "kind": "executable", "command": "python3 packages/privacy/validate_privacy.py", "expect": "PRIVACY MODEL OK" },
     "T-ethics":      { "kind": "executable", "command": "python3 packages/ethics/validate_ethics.py", "expect": "ETHICS MODEL OK" },
     "T-security":    { "kind": "executable", "command": "python3 packages/security/validate_security.py", "expect": "SECURITY MODEL OK" },
-    "T-conversation":{ "kind": "executable", "command": "python3 apps/public-discovery/test_conversation.py", "expect": "ALL CONVERSATION CHECKS PASS" }
+    "T-conversation":{ "kind": "executable", "command": "python3 apps/public-discovery/test_conversation.py", "expect": "ALL CONVERSATION CHECKS PASS" },
+    "T-reading":     { "kind": "executable", "command": "python3 docs/assurance/validate_foundation_matrix.py", "expect": "FOUNDATION MATRIX OK" }
   },
 
   "claims": [
@@ -188,6 +189,18 @@
       "reviewer": { "scope": "Section 08 owner + evidence semantics", "eligible_non_author": true, "status": "pending", "name": null },
       "residual_risk": "LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)",
       "authority": { "decision": "Section 08 ownership + RATIFY-09-05", "holder": null, "status": "pending" }
+    },
+    {
+      "id": "CL-15",
+      "statement": "Every load-bearing source is attested to K7 — personally read, bound to a verified version-of-record DOI, with Clarence's own verdict — before it carries a claim.",
+      "permitted_wording": "K7 per-claim primary-source attestation (WP §18.3, CA-5)",
+      "affected_party": "the academic claim and the examiner",
+      "harm": "a load-bearing citation is asserted from a theme or surname cluster without the primary source being read and version-verified",
+      "controls": [{ "id": "K-k7", "desc": "foundation matrix binds each source to the specific claim it supports; validator enforces a verified DOI + Clarence's verdict before a source counts as read, and rejects a load-bearing preprint where a version of record exists", "owner": "Clarence" }],
+      "test_ids": ["T-reading"],
+      "reviewer": { "scope": "non-author check that attested records match the primary sources", "eligible_non_author": true, "status": "pending", "name": null },
+      "residual_risk": "attestation incomplete — reading is Clarence's ongoing task; reading-log.md reports the live n/28 count and --strict makes full attestation a hard gate",
+      "authority": { "decision": "K7 attestation complete + Clarence's §26 acceptance record", "holder": null, "status": "pending" }
     }
   ]
 }

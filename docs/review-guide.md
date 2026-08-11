@@ -79,14 +79,17 @@ python docs/assurance/validate_assurance.py
 [OK ] T-ethics        ← C-15 activity matrix gated + no-study fallback
 [OK ] T-security      ← C-14 threat register + sanitisers + secret scan
 [OK ] T-conversation  ← C-08 chat↔guided convergence, confirmation, no unverified token
+[OK ] T-reading       ← CA-5 K7 foundation matrix structurally sound + attestation gate active
 == claims ==
-[OK ] CL-1 … CL-14    each: "graph sound & evidence green; verdict=BLOCKED (…review/authority pending)"
+[OK ] CL-1 … CL-15    each: "graph sound & evidence green; verdict=BLOCKED (…review/authority pending)"
 Graph: SOUND — all linked evidence green
-Maturity: 0 authorised, 14 awaiting human review/authority (expected at this stage)
+Maturity: 0 authorised, 15 awaiting human review/authority (expected at this stage)
 ```
-**Pass criteria:** `Graph: SOUND`, **13 `[OK]` tests, 14 `[OK]` claims**. Every claim reading
+**Pass criteria:** `Graph: SOUND`, **14 `[OK]` tests, 15 `[OK]` claims**. Every claim reading
 `BLOCKED pending non-author review + authority` is **correct** — the human gates are open by design;
-that is the honest state, not a failure.
+that is the honest state, not a failure. Note `CL-15` (K7 reading) shows green *evidence* only because
+the register and gate exist; the reading itself is still 0/28 — `python
+docs/assurance/validate_foundation_matrix.py` shows the live count.
 
 **If a test is `[BAD]`:** read the one line under it.
 - `No such file or directory` → the file wasn't committed. Run `git status` (untracked shows `??`),
@@ -167,7 +170,7 @@ become PR comments and agenda items.
 `python docs/assurance/validate_assurance.py`).
 
 **How to read it:** the first table is the **live test results** (which script backs what). The
-second is the **14 claims**; each shows *controls → evidence (tests) → reviewer → authority →
+second is the **15 claims**; each shows *controls → evidence (tests) → reviewer → authority →
 residual → verdict*. To analyse any deliverable, find its claim, then jump to the file/test named.
 `BLOCKED` = evidence green but a human still has to sign; that is expected now.
 
@@ -434,7 +437,7 @@ In `docs/assurance/assurance-case.json`, for the claim, change the reviewer and/
 Then re-run `python docs/assurance/validate_assurance.py`. That claim's verdict flips
 **BLOCKED → AUTHORISED**.
 
-**Done means:** all 14 claims read **AUTHORISED** *and* your Step-7 authorship pass is complete. That
+**Done means:** all 15 claims read **AUTHORISED** *and* your Step-7 authorship pass is complete. That
 is the difference between "green and drafted" and "genuinely finished".
 
 ---
@@ -455,6 +458,7 @@ python packages/ethics/validate_ethics.py                                     # 
 python apps/public-discovery/test_slice.py                                     # public app
 python apps/public-discovery/test_conversation.py                             # conversation
 python apps/staff-assurance/test_staff.py                                      # staff app
+python docs/assurance/validate_foundation_matrix.py                            # K7 reading log (CA-5)
 ```
 
 ## Appendix B — the 1-hour fast path

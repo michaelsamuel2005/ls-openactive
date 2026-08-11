@@ -22,10 +22,11 @@ human gate.
 
 ## 2. Current state (live)
 
-Ten claims, each linked to the real checks built across the stream. As run:
+Fifteen claims, each linked to the real checks built across the stream. As run:
 
-- **All nine linked test suites pass** (C-BLOCK-05 invariants, C-09 checker + mutation, C-01 register,
-  C-11 wording, C-04 IA, action-card gates, C-17 conditions, public slice, staff slice).
+- **All fourteen linked test suites pass** (C-BLOCK-05 invariants, C-09 checker + mutation, C-01
+  register, C-11 wording, C-04 IA, action-card gates, C-17 conditions, public slice, staff slice,
+  C-13 privacy, C-15 ethics, C-14 security, C-08 conversation, CA-5 K7 reading log).
 - **Graph is sound** — no orphans (every claim has a harm, a control with an owner, ≥1 resolving
   test, a reviewer scope and an authority).
 - **Every claim's maturity verdict is BLOCKED**, on `non-author review pending` and

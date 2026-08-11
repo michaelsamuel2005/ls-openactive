@@ -8,7 +8,7 @@
 - [ ] Step 1 (run it) → Step 4 (the contract) → Step 6 (click the apps). Enough to defend the core thesis and spot anything to change.
 
 ## 1. Prove the ground truth
-- [ ] `python docs/assurance/validate_assurance.py` → expect **13 checks green, 14 claims, all BLOCKED pending human sign-off**.
+- [ ] `python docs/assurance/validate_assurance.py` → expect **14 checks green, 15 claims, all BLOCKED pending human sign-off**.
 - [ ] Run the apps: `uvicorn server.main:app --app-dir apps/public-discovery` and `… --app-dir apps/staff-assurance`.
 
 ## 2. Re-read your authority docs (scope check)

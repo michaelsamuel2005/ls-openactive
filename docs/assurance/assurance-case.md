@@ -4,7 +4,7 @@
 
 > **AI-ASSISTED SCAFFOLD (WP §12.1).** Executable tests are run live below. Reviewer and authority gates are human and PENDING; an authorised person — not Clarence — records the maturity decision (WP §12.9).
 
-**Status:** PROPOSED · **Maturity target:** research_demonstration · **14 claims**
+**Status:** PROPOSED · **Maturity target:** research_demonstration · **15 claims**
 
 ## Linked test results (live)
 
@@ -23,6 +23,7 @@
 | `T-ethics` | ✅ pass | `python3 packages/ethics/validate_ethics.py` |
 | `T-security` | ✅ pass | `python3 packages/security/validate_security.py` |
 | `T-conversation` | ✅ pass | `python3 apps/public-discovery/test_conversation.py` |
+| `T-reading` | ✅ pass | `python3 docs/assurance/validate_foundation_matrix.py` |
 
 ## Claims → controls → evidence → maturity
 
@@ -164,5 +165,15 @@
 - **Reviewer:** Section 08 owner + evidence semantics — pending
 - **Authority:** Section 08 ownership + RATIFY-09-05 — pending
 - **Residual risk:** LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)
+- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+
+### CL-15 — Every load-bearing source is attested to K7 — personally read, bound to a verified version-of-record DOI, with Clarence's own verdict — before it carries a claim.
+*Permitted wording:* K7 per-claim primary-source attestation (WP §18.3, CA-5)
+- **Affected / harm:** the academic claim and the examiner — a load-bearing citation is asserted from a theme or surname cluster without the primary source being read and version-verified
+- **Controls:** K-k7 (Clarence)
+- **Evidence (tests):** T-reading ✅
+- **Reviewer:** non-author check that attested records match the primary sources — pending
+- **Authority:** K7 attestation complete + Clarence's §26 acceptance record — pending
+- **Residual risk:** attestation incomplete — reading is Clarence's ongoing task; reading-log.md reports the live n/28 count and --strict makes full attestation a hard gate
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
 

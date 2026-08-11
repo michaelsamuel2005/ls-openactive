@@ -21,8 +21,8 @@ executable validators/test-suites; two runnable FastAPI apps.
 python docs/assurance/validate_assurance.py
 ```
 
-This **executable assurance case** runs all 13 linked checks live and prints the graph. Expected:
-`Graph: SOUND — all linked evidence green`, with all **14 claims BLOCKED pending non-author review +
+This **executable assurance case** runs all 14 linked checks live and prints the graph. Expected:
+`Graph: SOUND — all linked evidence green`, with all **15 claims BLOCKED pending non-author review +
 authority** (the honest state). Individual suites can be run directly (see each package README).
 
 ## Deliverables

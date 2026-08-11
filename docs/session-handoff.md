@@ -41,7 +41,7 @@
 python docs/assurance/validate_assurance.py
 ```
 
-Runs all 13 linked checks live. Expected: **Graph SOUND — all evidence green**; **14 claims BLOCKED
+Runs all 14 linked checks live. Expected: **Graph SOUND — all evidence green**; **15 claims BLOCKED
 pending non-author review + authority** (the honest state). Needs Python 3.10+; the two app tests
 need `pip install fastapi jinja2 httpx`.
 
@@ -58,7 +58,7 @@ uvicorn server.main:app --app-dir apps/staff-assurance --reload --reload-dir app
 ## Current state
 
 - **PR is open** on `clarence/c-block-05` (body = `docs/PULL_REQUEST.md`).
-- Assurance case: **14 claims, evidence green, all BLOCKED pending human sign-off.**
+- Assurance case: **15 claims, evidence green, all BLOCKED pending human sign-off.**
 - Maturity: `research_demonstration` only. No conformance / no human-effect / no deployment claims.
 
 ## What's left (not code)
