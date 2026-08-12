@@ -13,24 +13,24 @@
 
 | ID | Source (verify against version of record) | Priority | Supports | VoR DOI | Status |
 |----|------|----------|----------|---------|--------|
-| FM-01 | Lee & See 2004 | high | CL-1, L_reliance referent (CA-1 / C-BLOCK-15), WP §13 appropriate-reliance design goal | — | ◻ to read |
-| FM-02 | Parasuraman & Riley 1997 | high | CL-1, misuse/disuse framing for L_reliance | — | ◻ to read |
-| FM-03 | Buçinca et al. 2021 | high | CL-1, cognitive-forcing rationale for confirmation step (C-08) | — | ◻ to read |
-| FM-04 | Bansal et al. 2021 | high | CL-1, CL-2, explanations can harm as well as help — falsification condition WP §19.4 | — | ◻ to read |
+| FM-01 | Lee & See 2004 | high | CL-1, L_reliance referent (CA-1 / C-BLOCK-15), WP §13 appropriate-reliance design goal | 10.1518/hfes.46.1.50_30392 | ◻ to read |
+| FM-02 | Parasuraman & Riley 1997 | high | CL-1, misuse/disuse framing for L_reliance | 10.1518/001872097778543886 | ◻ to read |
+| FM-03 | Buçinca et al. 2021 | high | CL-1, cognitive-forcing rationale for confirmation step (C-08) | 10.1145/3449287 | ◻ to read |
+| FM-04 | Bansal et al. 2021 | high | CL-1, CL-2, explanations can harm as well as help — falsification condition WP §19.4 | 10.1145/3411764.3445717 | ◻ to read |
 
 ## Explanation and why/why-not
 
 | ID | Source (verify against version of record) | Priority | Supports | VoR DOI | Status |
 |----|------|----------|----------|---------|--------|
-| FM-05 | Tintarev & Masthoff 2012 | high | CL-2, evidence-card explanation goals (C-11) | — | ◻ to read |
-| FM-06 | Nunes & Jannach 2017 | high | CL-2, taxonomy for why / why-not surfaces | — | ◻ to read |
-| FM-07 | Lim et al. 2009 | high | CL-2, why-not / bounded_non_match presentation | — | ◻ to read |
+| FM-05 | Tintarev & Masthoff 2012 | high | CL-2, evidence-card explanation goals (C-11) | 10.1007/s11257-011-9117-5 | ◻ to read |
+| FM-06 | Nunes & Jannach 2017 | high | CL-2, taxonomy for why / why-not surfaces | 10.1007/s11257-017-9195-0 | ◻ to read |
+| FM-07 | Lim et al. 2009 | high | CL-2, why-not / bounded_non_match presentation | 10.1145/1518701.1519023 | ◻ to read |
 
 ## Uncertainty communication
 
 | ID | Source (verify against version of record) | Priority | Supports | VoR DOI | Status |
 |----|------|----------|----------|---------|--------|
-| FM-08 | van der Bles et al. 2019 | high | CL-2, render U/B without false precision (INV-NO-COLLAPSE) | — | ◻ to read |
+| FM-08 | van der Bles et al. 2019 | high | CL-2, render U/B without false precision (INV-NO-COLLAPSE) | 10.1098/rsos.181870 | ◻ to read |
 | FM-09 | van der Bles et al. 2020 | medium | CL-2, uncertainty does not automatically reduce trust | — | ◻ to read |
 | FM-10 | MacEachren et al. 2005 | medium | CL-2, spatial uncertainty on map route (C-BLOCK-14) | — | ◻ to read |
 | FM-11 | Kinkeldey et al. 2017 | medium | CL-2, evaluating uncertainty representations | — | ◻ to read |
@@ -39,15 +39,15 @@
 
 | ID | Source (verify against version of record) | Priority | Supports | VoR DOI | Status |
 |----|------|----------|----------|---------|--------|
-| FM-12 | Power et al. 2012 | high | CL-10, WCAG scanning ≠ experienced accessibility (C-12) | — | ◻ to read |
-| FM-13 | Petrie & Kheir 2007 | high | CL-10, accessibility/usability overlap | — | ◻ to read |
+| FM-12 | Power et al. 2012 | high | CL-10, WCAG scanning ≠ experienced accessibility (C-12) | 10.1145/2207676.2207736 | ◻ to read |
+| FM-13 | Petrie & Kheir 2007 | high | CL-10, accessibility/usability overlap | 10.1145/1240624.1240688 | ◻ to read |
 
 ## RAG / claim verification / constrained generation
 
 | ID | Source (verify against version of record) | Priority | Supports | VoR DOI | Status |
 |----|------|----------|----------|---------|--------|
 | FM-14 | Lewis et al. 2020 | high | CL-3, retrieval grounding for C-08; not proof of truth | — | ◻ to read |
-| FM-15 | Thorne et al. 2018 | high | CL-3, attribution/verification distinct from generation (C-BLOCK-10) | — | ◻ to read |
+| FM-15 | Thorne et al. 2018 | high | CL-3, attribution/verification distinct from generation (C-BLOCK-10) | 10.18653/v1/N18-1074 | ◻ to read |
 | FM-16 | Scholak et al. 2021 | medium | CL-3, constrained decoding rationale for deterministic rendering | — | ◻ to read |
 | FM-17 | Rashkin et al. 2023 | medium | CL-3, attribution measurement — no unverified token (INV-NO-UNVERIFIED) | — | ◻ to read |
 | FM-18 | Niu et al. 2024 | medium | CL-3, hallucination risk motivating verify-before-render | — | ◻ to read |
