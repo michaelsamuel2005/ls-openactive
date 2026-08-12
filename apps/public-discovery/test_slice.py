@@ -37,7 +37,7 @@ LEAK_VALUES = [
 LEAK_KEYS = {
     "internal_score", "lineage_note", "receipts", "receipt_id", "content_digest",
     "receipt_ids", "verification", "request_id", "episode_id", "trace_id",
-    "model_version", "policy_version", "blocking_state", "unevaluated_feeds",
+    "model_version", "policy_version", "blocking_state", "unevaluated_feeds", "failed_stage",
 }
 CORE_PAGES = ["/", "/discover?scenario=supported", "/discover?scenario=no_match",
               "/discover?scenario=indeterminate", "/discover?scenario=service_failure",

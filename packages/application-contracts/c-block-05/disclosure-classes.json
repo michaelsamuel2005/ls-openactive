@@ -53,7 +53,7 @@
     "payload.can_user_answer_change": "PUBLIC_SAFE",
     "payload.mechanism": "STAFF_EVIDENCE",
 
-    "payload.failed_stage": "PUBLIC_SAFE",
+    "payload.failed_stage": "STAFF_AGGREGATE",
     "payload.safe_next": "PUBLIC_SAFE",
     "payload.stale_content_reused": "PUBLIC_SAFE",
     "payload.diagnostic": "STAFF_EVIDENCE",

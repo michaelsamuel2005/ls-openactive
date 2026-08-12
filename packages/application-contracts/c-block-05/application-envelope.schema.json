@@ -174,7 +174,7 @@
       "additionalProperties": false,
       "required": ["failed_stage", "safe_next"],
       "properties": {
-        "failed_stage": { "type": "string", "x-release-class": "PUBLIC_SAFE" },
+        "failed_stage": { "type": "string", "x-release-class": "STAFF_AGGREGATE" },
         "safe_next": {
           "enum": ["retry", "deterministic_fallback", "assisted_handoff"],
           "description": "Never silently reuse stale content after failure (WP 7.3).",

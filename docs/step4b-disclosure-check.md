@@ -47,6 +47,10 @@ public while the internal `predicate_id`/`blocking_state` are staff.
   but-opaque failure message ("something went wrong; we won't show a stale result").
 - **Recommend:** reclass `failed_stage` → **STAFF_AGGREGATE**; public template shows only the generic
   message + `safe_next`. Owner: Clarence (template is my UI); the class change is joint at the workshop.
+- **Status (2026-08-12): FIXED in code** — reclassed to `STAFF_AGGREGATE` in `disclosure-classes.json`
+  + the schema annotation; `service_failure.html` no longer names the stage; `render.py` stops copying
+  it; regression guard added (`failed_stage` in `test_slice.py` `LEAK_KEYS`). Invariants + slice test
+  re-run green. The *class* flip still needs joint ratification with Michael/Wesley at the freeze.
 
 ### F2 — `payload.budget_state.budget` (and `.asked`) = PUBLIC_SAFE → **CHANGE / confirm**
 - **Evidence:** `application-envelope.schema.json:132-139` — `budget_state{asked,budget}` under the
@@ -78,8 +82,8 @@ public while the internal `predicate_id`/`blocking_state` are staff.
 context split), F4 (which provenance versions are public).
 **Confirm with Wesley (transport/exposure):** F4 (version exposure), and that the role gate enforces
 these classes server-side.
-**Proposed change now:** F1 — reclass `failed_stage` to STAFF_AGGREGATE and stop naming the stage on
-the public failure page.
+**Done in code (2026-08-12):** F1 — `failed_stage` reclassed to STAFF_AGGREGATE and the public failure
+page no longer names the stage (class flip still needs joint ratification at the freeze).
 
 ## Bottom line
 

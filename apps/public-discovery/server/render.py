@@ -56,7 +56,8 @@ def build_view(pub):
     }
     if v["action_kind"] == "service_failure":
         p = pub.get("payload", {})
-        v["failed_stage"] = p.get("failed_stage")
+        # failed_stage is STAFF_AGGREGATE (F1): dropped by the public projection, never named to
+        # users. The public failure page shows only the generic message + the safe next step.
         v["safe_next"] = p.get("safe_next")
         return v
     d = (pub.get("payload") or {}).get("decision", {})
