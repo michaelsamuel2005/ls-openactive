@@ -76,32 +76,41 @@ def check_capabilities():
 
 
 def check_event_schema():
-    errs = []
+    # Fail CLEANLY, never with an uncaught crash: report the exact remedy instead of
+    # stopping the run with no RESULT line.
     try:
         import jsonschema
     except Exception as ex:
-        return [f"jsonschema unavailable: {ex}"]
-    schema = json.load(open(EVSCHEMA))
-    jsonschema.Draft202012Validator.check_schema(schema)
-    # allowed property names must not include a forbidden concept
-    for name in schema["properties"]:
-        if any(s in name.lower() for s in FORBIDDEN_KEY_SUBSTR):
-            errs.append(f"event schema exposes a forbidden field: {name}")
-    good = {
-        "event_name": "slate_shown", "event_schema_version": "0.1.0", "condition_id": "P1",
-        "task_id": "T-swim-croydon", "episode_id": "eph-xyz", "application_release_id": "app-0.1.0",
-        "envelope_digest": "sha256:" + "d" * 64, "route": "guided_search",
-        "state_before": "query_review", "authorised_action": "render_slate", "state_after": "results",
-        "duration_ms": 812, "error_or_fallback_code": None, "purpose": "research",
-        "retention_class": "transient",
-    }
-    v = jsonschema.Draft202012Validator(schema)
-    ge = list(v.iter_errors(good))
-    if ge:
-        errs.append(f"valid sample event rejected: {ge[0].message}")
-    bad = {**good, "raw_utterance": "cheap swimming near me"}
-    if not list(v.iter_errors(bad)):
-        errs.append("event schema ACCEPTED a raw_utterance field (should be rejected)")
+        return [f"jsonschema not installed — run: pip install -U jsonschema  ({ex})"]
+    try:
+        Validator = jsonschema.Draft202012Validator
+    except Exception:
+        return ["jsonschema too old (no Draft202012Validator) — run: pip install -U jsonschema"]
+    errs = []
+    try:
+        schema = json.load(open(EVSCHEMA))
+        Validator.check_schema(schema)
+        # allowed property names must not include a forbidden concept
+        for name in schema["properties"]:
+            if any(s in name.lower() for s in FORBIDDEN_KEY_SUBSTR):
+                errs.append(f"event schema exposes a forbidden field: {name}")
+        good = {
+            "event_name": "slate_shown", "event_schema_version": "0.1.0", "condition_id": "P1",
+            "task_id": "T-swim-croydon", "episode_id": "eph-xyz", "application_release_id": "app-0.1.0",
+            "envelope_digest": "sha256:" + "d" * 64, "route": "guided_search",
+            "state_before": "query_review", "authorised_action": "render_slate", "state_after": "results",
+            "duration_ms": 812, "error_or_fallback_code": None, "purpose": "research",
+            "retention_class": "transient",
+        }
+        v = jsonschema.Draft202012Validator(schema)
+        ge = list(v.iter_errors(good))
+        if ge:
+            errs.append(f"valid sample event rejected: {ge[0].message}")
+        bad = {**good, "raw_utterance": "cheap swimming near me"}
+        if not list(v.iter_errors(bad)):
+            errs.append("event schema ACCEPTED a raw_utterance field (should be rejected)")
+    except Exception as ex:
+        errs.append(f"event-schema validation error: {ex!r}")
     return errs
 
 

@@ -43,7 +43,7 @@ python docs/assurance/validate_assurance.py
 
 Runs all 14 linked checks live. Expected: **Graph SOUND — all evidence green**; **15 claims BLOCKED
 pending non-author review + authority** (the honest state). Needs Python 3.10+; the two app tests
-need `pip install fastapi jinja2 httpx`.
+need `pip install fastapi jinja2 httpx`, and the conditions check needs `pip install -U jsonschema`.
 
 ## Run the apps
 
