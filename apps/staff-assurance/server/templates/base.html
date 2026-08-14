@@ -11,8 +11,8 @@
   <header>
     <p class="brand">Staff assurance <span class="tag tag-restricted">restricted &middot; research demonstration</span></p>
     <nav aria-label="Primary">
-      <a href="/">Workbench</a>
-      <a href="/help">Help</a>
+      <a href="/?role={{ role or '' }}">Workbench</a>
+      <a href="/help?role={{ role or '' }}">Help</a>
     </nav>
     {% if role %}<p class="meta">Signed-in role: {{ role }}</p>{% endif %}
   </header>

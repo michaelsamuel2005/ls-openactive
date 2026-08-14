@@ -7,5 +7,5 @@
 <p class="meta">This demonstration route only checks authorisation &mdash; it does not mutate any
    record. A real transition also requires the card's evidence and, for review/approval, a reviewer
    who is not the author.</p>
-<p><a href="/action-card?state={{ frm }}">Back to the card</a></p>
+<p><a href="/action-card?state={{ frm }}&role={{ role or '' }}">Back to the card</a></p>
 {% endblock %}

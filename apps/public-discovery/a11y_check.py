@@ -80,7 +80,8 @@ def check_html(html: str):
     if not any(t == "a" and a.get("href") == "#main" for t, a, _ in p.interactive_text):
         issues.append("missing skip link to #main (2.4.1)")
     # consistent help present (3.2.6)
-    if not any(t == "a" and a.get("href") == "/help" for t, a, _ in p.interactive_text):
+    if not any(t == "a" and ((a.get("href") or "") == "/help" or (a.get("href") or "").startswith("/help?"))
+               for t, a, _ in p.interactive_text):
         issues.append("missing consistent help link to /help (3.2.6)")
 
     # form controls have a name
