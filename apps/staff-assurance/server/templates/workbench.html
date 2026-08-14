@@ -7,19 +7,43 @@
    action without independent review and an authorised role.</p>
 
 <h2>Workspaces</h2>
-<ul>
-  <li><a href="/replay?scenario=supported&role={{ role or '' }}">Public-state replay</a> &mdash; reconstruct exactly what the public user received</li>
-  <li><a href="/failure-chain?scenario=indeterminate&role={{ role or '' }}">Failure-chain explorer</a> &mdash; where an outcome became limited</li>
-  <li><a href="/collection-health?scenario=indeterminate&role={{ role or '' }}">Collection / vintage health</a> &mdash; denominators and freshness</li>
-  <li><a href="/action-card?state=drafted&role={{ role or '' }}">Action-card workflow</a> &mdash; governed next steps</li>
-  <li><a href="/bounded-scenario?scenario=indeterminate&role={{ role or '' }}">Bounded scenario laboratory</a> &mdash; best/worst-case bounds</li>
-  <li><a href="/recommender-assurance?scenario=supported&role={{ role or '' }}">Recommender / AI assurance</a> &mdash; within the frozen envelope</li>
-  <li><a href="/equity-audit?scenario=indeterminate&role={{ role or '' }}">Equity-relevant audit</a> &mdash; contextual, not identity</li>
-  <li><a href="/release-incident?scenario=supported&role={{ role or '' }}">Release / incident control</a> &mdash; maturity and controls</li>
+<ul class="workspaces">
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/replay?scenario=supported&role={{ role or '' }}">Public-state replay</a></h3>
+    <p class="wcard-desc">Reconstruct exactly what the public user received.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/failure-chain?scenario=indeterminate&role={{ role or '' }}">Failure-chain explorer</a></h3>
+    <p class="wcard-desc">Where an outcome became limited.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/collection-health?scenario=indeterminate&role={{ role or '' }}">Collection / vintage health</a></h3>
+    <p class="wcard-desc">Denominators and freshness.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/action-card?state=drafted&role={{ role or '' }}">Action-card workflow</a></h3>
+    <p class="wcard-desc">Governed next steps, with separated review, approval and send.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/bounded-scenario?scenario=indeterminate&role={{ role or '' }}">Bounded scenario laboratory</a></h3>
+    <p class="wcard-desc">Best- and worst-case bounds.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/recommender-assurance?scenario=supported&role={{ role or '' }}">Recommender / AI assurance</a></h3>
+    <p class="wcard-desc">Within the frozen envelope.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/equity-audit?scenario=indeterminate&role={{ role or '' }}">Equity-relevant audit</a></h3>
+    <p class="wcard-desc">Contextual, not identity.</p>
+  </li>
+  <li class="wcard">
+    <h3 class="wcard-title"><a href="/release-incident?scenario=supported&role={{ role or '' }}">Release / incident control</a></h3>
+    <p class="wcard-desc">Maturity and controls.</p>
+  </li>
 </ul>
 
 <h2>Scenarios</h2>
-<ul>
+<ul class="chips">
   {% for s in scenarios %}<li>{{ s }}</li>{% endfor %}
 </ul>
 {% endblock %}

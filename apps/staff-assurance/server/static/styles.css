@@ -139,13 +139,34 @@ tbody tr:last-child td { border-bottom: none; }
 .prov dt { font-weight: 700; margin-top: 0.4rem; color: var(--muted); }
 .prov dd { margin: 0 0 0.2rem 0; }
 
+/* Workbench workspace card grid */
+.workspaces { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+.wcard { position: relative; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1rem 1.15rem; background: var(--surface); box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.wcard:hover { transform: translateY(-2px); border-color: var(--line-strong); box-shadow: 0 6px 18px rgba(16,32,28,.10); }
+.wcard-title { margin: 0 0 0.3rem; font-size: 1.05rem; letter-spacing: -0.01em; }
+.wcard-title a { text-decoration: none; color: var(--ink); }
+.wcard-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; } /* whole card is the target */
+.wcard-title a:hover { color: var(--brand); }
+.wcard-title a:focus-visible { outline: none; }                 /* focus shown on the card instead */
+.wcard:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.wcard-desc { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+/* Scenario chips */
+.chips { list-style: none; padding: 0; margin: 0.75rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li { background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.25rem 0.75rem; font-size: 0.85rem; color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .button:hover, button:hover { transform: none; }
+  .button:hover, button:hover, .wcard:hover { transform: none; }
 }
 @media (forced-colors: active) {
   .button, button { border: 2px solid ButtonText; background: ButtonFace; color: ButtonText; }
-  .slate > li, fieldset, table, .notice, .ev, .prov { border-color: CanvasText; }
-  :focus-visible { outline: 3px solid Highlight; }
+  .slate > li, fieldset, table, .notice, .ev, .prov, .wcard { border-color: CanvasText; }
+  :focus-visible, .wcard:focus-within { outline: 3px solid Highlight; }
   .ev { border-left-color: CanvasText; }
 }
