@@ -22,7 +22,7 @@
 
 meta:
   registry_id: F-02
-  depends_on_amendments: [CA-01.A1, CA-01.A2, CA-01.A5, CA-01.A6, CA-01.A8]
+  depends_on_amendments: [CA-01.A1, CA-01.A2, CA-01.A5, CA-01.A6, CA-01.A8, F-BLOCK-09]
   reviewer: michael
   machine_readable: true
   units_vocabulary: [task, episode, response, candidate]
@@ -45,7 +45,8 @@ estimands:
     unit: task
     numerator: tasks_with_substantive_emission
     denominator: intention_to_evaluate_task_universe
-    weights: design_weights_v: RATIFY
+    weights:
+      design_weights_v: RATIFY
     permitted_claims: [coverage_within_declared_universe]
     prohibited_claims: [population_coverage, londoner_behaviour]
     source: [work_package_10.1, CA-01.A1]
@@ -59,7 +60,8 @@ estimands:
     role: H-P_superiority_quantity
     requires_human_judgment: [usefulness, soft_relevance]
     gold_source: independent_reference_route   # never the treatment verifier
-    weights: design_weights_v: RATIFY
+    weights:
+      design_weights_v: RATIFY
     superiority_margin: RATIFY   # RATIFY-10-xx practical margin, partner-derived
     source: [work_package_10.1, CA-01.A1]
 
@@ -110,7 +112,7 @@ estimands:
 
   H_decision:
     name: unconditional_harmful_emission_probability_decision
-    definition: same_as_H_evidence_with_loss: L_decision
+    definition: "same_as_H_evidence_with_loss: L_decision"
     unit: task
     computed_directly: true
     source: [work_package_10.1, CA-01.A5]
@@ -130,6 +132,19 @@ losses:
       condition.
     unacceptable_decision_condition: RATIFY   # must be frozen from partner/workflow meaning, never invented here
     used_by: [H-P, R_decision, H_decision]
+  L_reliance:
+    layer: application_only
+    definition: >
+      AUTHOR-FAHMI. Must be a property of a human action taken in response
+      to a rendered decision, judged against the terminal DecisionEnvelope
+      evidence state, never against what any condition displayed.
+    referent: terminal_decision_envelope_evidence_state
+    referent_source: [C-BLOCK-05_section_6, C-BLOCK-15, F-BLOCK-09]
+    used_by: []
+    never_enters: [H-P, H-E, H-G, CAL-RISK, risk_control_of_any_kind]
+    inferential_status: estimative
+    requires_ethics_route: true
+    unmeasured_without_ethics: true
   reporting_rule: components_always_reported_separately
 
 # ---------------------------------------------------------------------
@@ -190,6 +205,56 @@ secondary_outcomes:
       identification bounds retained, never collapsed to points.
     unit: task
     inferential_status: estimative
+
+# ---------------------------------------------------------------------
+# 3b. APPLICATION-LAYER OUTCOMES (F-BLOCK-09; estimative, never confirmatory)
+# ---------------------------------------------------------------------
+application_outcomes:
+
+  reliance_loss_rate:
+    loss: L_reliance
+    unit: episode
+    conditioning: unrepaired_episodes_only
+    excluded: query_repaired_episodes
+    repair_screen:
+      stage_1_mechanical: >
+        Opening-query envelope digest != terminal envelope digest
+        -> classified repaired, no human judgment.
+        DEPENDS ON: opening-query digest field in event-schema.json,
+        which does not yet exist. Raised with Clarence for the
+        C-BLOCK-05 contract workshop.
+      stage_2_adjudicated: >
+        Digest-equal residual only, judged blind to and before the
+        reliance outcome, on whether the interpreted query changed.
+      blinding_and_order: >
+        AUTHOR-FAHMI. State the assessor separation or the frozen
+        ordering that makes the exclusion non-outcome-dependent.
+      screen_audit: >
+        AUTHOR-FAHMI. Decide whether a random sample of auto-classified
+        episodes is re-judged, so a screen error rate can be reported.
+    exclusion_rule_declared: pre_declared_never_outcome_dependent
+    contrasts: [P1_vs_P0, P2_vs_P1, W1_vs_W0, W1_vs_W1-NA]
+    inferential_status: estimative
+    requires_human_judgment: true
+    weights:
+      design_weights_v: RATIFY
+    permitted_claims: AUTHOR-FAHMI
+    prohibited_claims:
+      - no_human_effectiveness_claim_absent_ethics
+      - no_deployment_or_organisational_effectiveness_claim
+      - no_inference_about_attendance_or_health_outcomes
+      - no_demographic_fairness_claim
+      - no_confirmatory_wording
+      - no_safer_by_displaying_less_claim
+
+  query_repair_rate:
+    definition: >
+      AUTHOR-FAHMI. Proportion of P2 episodes classified repaired,
+      reported with uncertainty; declares the inference boundary created
+      by the exclusion.
+    unit: episode
+    inferential_status: estimative
+    reported_always: true
 
 # ---------------------------------------------------------------------
 # 4. ABSTENTION MECHANISMS (closed enum; CA-01.A6)
