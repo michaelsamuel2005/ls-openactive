@@ -391,3 +391,76 @@ result_row_schema:
   - seed_run_id
   - open_limitations
   - permitted_wording
+
+# ---------------------------------------------------------------------
+# 10. DECLARED OUT OF SCOPE (19 August 2026)
+# ---------------------------------------------------------------------
+# These were within the proposal's stated ambition and are NOT delivered.
+# Each is recorded as a dated scope decision with its reason, so that the
+# absence is a declared limitation rather than an undisclosed gap.
+# Declared by Fahmi Alshahabi (evaluation stream). Ratification may revisit
+# any of them; until then they are out of scope and no claim depends on them.
+declared_out_of_scope:
+
+  F-10_hierarchical_bayesian:
+    declared: 2026-08-19
+    scope: >
+      The hierarchical Bayesian secondary analysis is not executed. No
+      hierarchical posterior, prior sensitivity, simulation-based
+      calibration, posterior predictive check or convergence diagnostic
+      is reported.
+    reason: >
+      Locked Section 2 makes the design-weighted finite-benchmark analysis
+      the primary decision instrument. The analysis-primacy conflict raised
+      as CA-01.A8 — Packet 11's D23 proposed the hierarchical posterior as
+      the decision instrument instead — was never resolved by the team, and
+      the readiness conditions for the secondary layer were not met before
+      freeze. Executing an unratified secondary instrument would create two
+      competing analyses with no agreed precedence.
+    consequence: >
+      No partial-pooling, shrinkage or borrowing-of-strength claim is made.
+      All reported quantities come from the design-weighted analysis.
+    reading_released: [R-09, R-10, R-11, R-14]
+
+  F-12_equity_analysis:
+    declared: 2026-08-19
+    scope: >
+      Equity-relevant quantitative analysis is not executed. No subgroup,
+      deprivation-linked or distributional fairness quantity is reported.
+    reason: >
+      Section 22 already prohibits demographic-fairness claims for this
+      design. No approved ethics route exists for participant-level data,
+      and IMD and scenario data do not identify people, so any output would
+      be descriptive of areas rather than of groups and could not support
+      the claim the analysis exists to make.
+    consequence: >
+      No fairness, equity or distributional-impact claim is made at any
+      level. Area-level descriptive context, if reported at all, is labelled
+      as such and carries no fairness interpretation.
+
+  F-14_recommender_review:
+    declared: 2026-08-19
+    scope: >
+      The independent non-author review of the production recommender is
+      not delivered.
+    reason: >
+      No recommender was built. The acquisition stream delivered harvest
+      and snapshot functionality only; there is no production EVOI
+      recommender artefact to review.
+    consequence: >
+      No claim is made about recommender quality, calibration or behaviour.
+      The evaluation-side recommender estimands remain defined but unused.
+
+  clean_room_reproduction:
+    declared: 2026-08-19
+    scope: >
+      Independent clean-room reproduction of the analysis by a non-author is
+      not performed. The run registry and claim-linkage matrix are retained.
+    reason: >
+      Clean-room reproduction requires a named non-author reproducer. The
+      assessor-eligibility matrix that would make that assignment was raised
+      but never ratified, so no eligible reproducer was ever assigned.
+    consequence: >
+      Reproducibility is evidenced by the retained run registry, seeds,
+      hashes and claim-linkage matrix rather than by an executed independent
+      reproduction. No claim of independent reproduction is made.
