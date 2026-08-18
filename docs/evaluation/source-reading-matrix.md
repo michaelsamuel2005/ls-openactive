@@ -1,11 +1,12 @@
 # Source-reading matrix — Fahmi Alshahabi
 
-**Owner:** Fahmi Alshahabi · Consolidated 18 August 2026 · v1.2
+**Owner:** Fahmi Alshahabi · Consolidated 18 August 2026 · Updated 19 August 2026 · v1.3
 **Companion:** `docs/evaluation/F-20-reading-register.md` (which sources are needed and why).
 **Rule (CA-01.A11):** no source is attested until it binds to a version of record with DOI,
 personally read, with the reader's own claim and limit wording.
 **Reviewer spot-check:** all rows pending; spot-check is a non-author task under Section 19.
 
+> **v1.3 change:** row 9 added — Dror et al. 2018 attested (R-12), gating F-06 test selection.
 > **v1.2 change:** rows 1 and 3 completed. Row 1's page ranges, claim and limits written;
 > row 3 transcribed from the RCPS attestation worksheet, resolving the inconsistency where F-20
 > listed R-03 as attested with no matrix row.
@@ -127,7 +128,23 @@ personally read, with the reader's own claim and limit wording.
 
 ---
 
+## Row 9 — Dror, Baumer, Shlomov & Reichart (2018)
+
+| field | entry |
+|---|---|
+| source | Dror, R., Baumer, G., Shlomov, S., & Reichart, R. (2018). The Hitchhiker's Guide to Testing Statistical Significance in Natural Language Processing. *Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, Melbourne, pp. 1383–1392. DOI 10.18653/v1/P18-1128. Version of record, ACL Anthology. |
+| sections/pages read | pp. 1383–1385, motivation and the test-selection protocol; pp. 1385–1388, choosing between parametric and non-parametric tests for paired experimental designs, including the practical sample-size guidance discussed by the authors; pp. 1388–1391, repeated testing across datasets and conditions, with the paper's treatment of multiple comparisons; p. 1392, conclusions and practical guidance. |
+| claim supported | The paper establishes a decision protocol for selecting statistical significance tests rather than recommending a single default procedure. The first decision is whether observations are paired; the second is whether the assumptions required by parametric tests are satisfied. When those assumptions are doubtful, the authors recommend non-parametric alternatives instead of relying on inappropriate parametric tests. For experiments that compare multiple systems, datasets or conditions, the paper warns that repeated hypothesis testing increases false-positive risk and that multiplicity must be declared and controlled rather than ignored. |
+| assumptions/limits | The paper governs hypothesis-test selection and valid p-value interpretation; it does not justify practical significance, effect-size thresholds or study design. It also does not provide a complete replicability framework for multi-dataset inference, instead pointing readers toward the authors' separate 2017 replicability work for that setting. |
+| decision affected | F-06 test-selection governance: the paired design-weighted benchmark must pre-declare an appropriate paired significance test, justify whether parametric assumptions hold, and declare multiplicity handling before any confirmatory sizing or analysis. This attestation supports the test-selection protocol only; any load-bearing replicability framework across multiple datasets must be attested separately (Dror, Baumer, Bogomolov & Reichart 2017, *TACL* 5:471–486). |
+| date / reader | 2026-08-19 / Fahmi Alshahabi |
+| reviewer spot-check | — pending — |
+
+---
+
 ## Outstanding
 
-- Reviewer spot-check pending on all eight rows — non-author task, blocked with RATIFY-19-04.
+- Reviewer spot-check pending on all nine rows — non-author task, blocked with RATIFY-19-04.
 - Row 5: version-of-record pagination not verified; read from arXiv:2107.07511v6.
+- Dror et al. 2017 (*TACL* 5:471–486, replicability analysis across multiple datasets) is required
+  only if multi-dataset replicability becomes load-bearing. Not currently attested.
