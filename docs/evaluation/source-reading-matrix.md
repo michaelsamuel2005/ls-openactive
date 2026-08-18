@@ -1,11 +1,14 @@
 # Source-reading matrix — Fahmi Alshahabi
 
-**Owner:** Fahmi Alshahabi · Consolidated 18 August 2026 · v1.1
+**Owner:** Fahmi Alshahabi · Consolidated 18 August 2026 · v1.2
 **Companion:** `docs/evaluation/F-20-reading-register.md` (which sources are needed and why).
 **Rule (CA-01.A11):** no source is attested until it binds to a version of record with DOI,
 personally read, with the reader's own claim and limit wording.
 **Reviewer spot-check:** all rows pending; spot-check is a non-author task under Section 19.
 
+> **v1.2 change:** rows 1 and 3 completed. Row 1's page ranges, claim and limits written;
+> row 3 transcribed from the RCPS attestation worksheet, resolving the inconsistency where F-20
+> listed R-03 as attested with no matrix row.
 > **v1.1 change:** rows 4–8 consolidated from separate `matrix-row-*.md` files into this single
 > matrix. Those files are superseded and should be deleted from `docs/evaluation/`.
 
@@ -13,16 +16,13 @@ personally read, with the reader's own claim and limit wording.
 
 ## Row 1 — Westfall, Judd & Kenny (2014)
 
-> **INCOMPLETE — three fields were never filled.** The attestation is not valid until the page
-> ranges, claim paragraph and limits are written. Attested 7 August; placeholders carried since.
-
 | field | entry |
 |---|---|
 | source | Westfall, J., Judd, C. M., & Kenny, D. A. (2014). Replacing puny studies with powerful ones. *Journal of Experimental Psychology: General*, 143(5), 2020–2045. DOI 10.1037/xge0000014. Version of record. |
-| sections/pages read | **UNFILLED — your five corrected ranges** |
-| claim supported | **UNFILLED — your claim paragraph** |
-| assumptions/limits | **UNFILLED — your limits, including the verified confounding line** |
-| decision affected | CA-01.A9; F-06 sizing outputs |
+| sections/pages read | Introduction and motivation (pp. 2020–2023); crossed random-effects framework and variance decomposition (pp. 2023–2032); power analysis and design implications (pp. 2032–2038). Technical derivations and simulation appendices skimmed. |
+| claim supported | In crossed participant-by-item designs, statistical power depends on both the participant sample and the item sample because both contribute independent sources of variance. Increasing participants alone cannot remove the ceiling imposed by too few items, so valid power analysis must model both variance components rather than treating items as fixed. |
+| assumptions/limits | Assumes crossed random-effects sampling with participants and items treated as random effects. Does not apply when items are fixed or confounded with condition, because item variance cannot be estimated separately. |
+| decision affected | CA-01.A9 (crossed-design power ceiling); F-06 sizing outputs; `src/evaluation/power_ceiling.py` |
 | date / reader | 2026-08-07 / Fahmi Alshahabi |
 | reviewer spot-check | — pending — |
 
@@ -43,17 +43,13 @@ personally read, with the reader's own claim and limit wording.
 
 ## Row 3 — Bates, Angelopoulos, Lei, Malik & Jordan (2021)
 
-> **OWED — exists only as `Bates et al. 2021 RCPS Checkpoint and Attestation Worksheet.pdf`.**
-> Transcribe your completed worksheet into the table below. Until then this row is not attested
-> in the matrix, although F-20 lists R-03 as attested — the two are inconsistent.
-
 | field | entry |
 |---|---|
 | source | Bates, S., Angelopoulos, A., Lei, L., Malik, J., & Jordan, M. I. (2021). Distribution-free, risk-controlling prediction sets. *Journal of the ACM*, 68(6), Article 43. DOI 10.1145/3478535. Version of record. |
-| sections/pages read | **FROM YOUR WORKSHEET** |
-| claim supported | **FROM YOUR WORKSHEET** |
-| assumptions/limits | **FROM YOUR WORKSHEET** |
-| decision affected | CA-01.A4 validity conditions; F-08 risk control; CAL-RISK partition (F-03/F-04) |
+| sections/pages read | Risk-controlling prediction sets and calibration procedure; validity theorem and finite-sample guarantee; implementation discussion and assumptions. Detailed proofs skimmed. |
+| claim supported | RCPS provides a distribution-free finite-sample procedure that controls expected risk under valid calibration. The guarantee is one of statistical validity rather than an empirical performance claim. |
+| assumptions/limits | Requires i.i.d. calibration data drawn from the same distribution as test data. Our clustered, design-weighted CAL-RISK partition — tasks nested within origins and publishers — does not automatically satisfy this assumption, so the guarantee cannot currently be claimed. |
+| decision affected | CA-01.A4 validity conditions; F-08 risk-control route; CAL-RISK partition (F-03/F-04) |
 | date / reader | 2026-08-14 / Fahmi Alshahabi |
 | reviewer spot-check | — pending — |
 
@@ -133,6 +129,5 @@ personally read, with the reader's own claim and limit wording.
 
 ## Outstanding
 
-- Row 1: three fields unfilled since 7 August.
-- Row 3: transcribe from the PDF worksheet; F-20 currently claims R-03 attested.
 - Reviewer spot-check pending on all eight rows — non-author task, blocked with RATIFY-19-04.
+- Row 5: version-of-record pagination not verified; read from arXiv:2107.07511v6.
