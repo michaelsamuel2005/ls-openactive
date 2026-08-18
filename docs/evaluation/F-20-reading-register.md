@@ -1,6 +1,6 @@
 # F-20 — Reading Register (evaluation stream)
 
-**Owner:** Fahmi Alshahabi · Created 14 August 2026 · v1.0
+**Owner:** Fahmi Alshahabi · Created 14 August 2026 · Updated 18 August 2026 · v1.1
 **Status:** ACTIVE. This register supersedes the §20 reading list of `FAHMI_ALSHAHABI_SPECIALISED_WORK_PACKAGE.md` for the evaluation stream.
 **Why it exists:** the work package is no longer available to its owner and no copy could be obtained. Rather than reconstruct a list from memory — which would produce plausible but unverifiable citations, the failure mode CA-01.A11 exists to prevent — this register is derived from the opposite direction: **from the committed artifacts in this repository and the claims they actually make.** Every row therefore traces to a file and a claim that exists and can be checked, not to a remembered document.
 **Rule (CA-01.A11):** no source is attested until it binds to a version of record with DOI, personally read, with the reader's own claim and limit wording. A surname alone is not a citation.
@@ -17,14 +17,22 @@
 | R-03 | Bates, Angelopoulos, Lei, Malik & Jordan (2021), *J. ACM* 68(6). DOI 10.1145/3478535 | CA-01.A4 validity conditions; F-08 risk control; CAL-RISK partition (F-03/F-04) | ✅ row 3 |
 | R-04 | Lakens (2017), *Social Psychological and Personality Science* 8(4):355–362. DOI 10.1177/1948550617697177 | RATIFY-values memo (margin justification hierarchy; last-resort fallback); SAP equivalence-testing conditions | ✅ row 4 |
 | R-05 | Angelopoulos & Bates (2023), *Foundations and Trends in ML* 16(4):494–591. DOI 10.1561/2200000101 — Appendix A (Learn then Test) | F-08 procedure; why LTT rather than conformal risk control (non-monotone conditional risk) | ✅ row 5 |
+| R-06 | Buckley & Voorhees (2004), *SIGIR '04*, pp. 25–32. DOI 10.1145/1008992.1009000 | F-07 pooling decisions PD-1 to PD-6; unjudged-means-non-relevant rule; dual standard/evidence-conditioned measurement | ✅ row 6 |
+| R-07 | Vehtari, Gelman, Simpson, Carpenter & Bürkner (2021), *Bayesian Analysis* 16(2):667–718. DOI 10.1214/20-BA1221 | F-02 §6 diagnostics (R̂ ≤ 1.01; bulk-ESS and tail-ESS ≥ 400); F-02 amendment A-01 | ✅ row 7 |
+| R-08 | Lundberg, Johnson & Stewart (2021), *American Sociological Review* 86(3):532–565. DOI 10.1177/00031224211004187 | F-02 registry structure; theoretical/empirical estimand separation; F-02 amendment A-02 | ✅ row 8 |
 
 ## 2. Required next — each gates a claim already committed
 
 | # | Source | Claim in the repo that requires it | Priority |
 |---|---|---|---|
-| R-06 | Buckley & Voorhees (2004), *Retrieval evaluation with incomplete information*, SIGIR. **Verify VoR + DOI before attesting.** | Pool construction and the unjudged-means-non-relevant rule (F-03/F-07). Without it, baselines outside the pool are systematically penalised and RQ2's comparisons are unfair. No committed artifact yet defends this design. | **High — gates F-03** |
-| R-07 | Vehtari, Gelman, Simpson, Carpenter & Bürkner (2021), *Rank-normalization, folding, and localization: an improved R̂ for assessing convergence of MCMC*, *Bayesian Analysis* 16(2). **Verify VoR + DOI.** | F-02 §6 diagnostics already commit to R-hat ≤ 1.01 and ESS ≥ 400. Those numbers are currently inherited, not defended. | **High — already committed** |
-| R-08 | Lundberg, Johnson & Stewart (2021), *What is your estimand? Defining the target quantity connects statistical evidence to theory*, *American Sociological Review* 86(3). **Verify VoR + DOI.** | The estimand framing of F-02 as a whole; the K/U/Q/R/H vocabulary and the separation of quantity from estimator. | **High — underpins F-02** |
+| R-12 | Dror, Baumer, Shlomov & Reichart (2018), *The Hitchhiker's Guide to Testing Statistical Significance in NLP*, ACL. **Verify VoR + DOI before attesting.** | F-06 sizing and the SAP's choice of test and multiplicity handling across benchmark arms. | **High — gates F-06** |
+| R-13 | Geifman & El-Yaniv (2017), *Selective classification for deep neural networks*, NeurIPS. **Verify VoR + DOI.** | The abstention/coverage framing behind `U`, `Q` and the risk–coverage reporting in F-08. | **High — gates F-08 fallback** |
+| R-14 | Gelman — **which paper is undecided.** Candidates: (2006) variance priors, *Bayesian Analysis* 1(3); (2008) weakly informative separation priors, *Ann. Appl. Stat.* 2(4). | F-10 prior choices. Cannot be attested as "Gelman" — CA-01.A11 requires a specific version of record. | Medium — gated on F-10 scope |
+
+**Deferred, dated 18 August 2026 — not yet load-bearing.** No committed artifact currently makes a
+claim that depends on these, so under §6 they do not gate a freeze: Bowman & Dahl; Raji et al.;
+Cook, Gelman & Rubin; Modrák et al.; Gardner et al.; Ribeiro et al.; Selbst et al. Revisit if F-10
+survives at full scope or if the fairness/robustness suites are executed.
 
 ## 3. Conditional — required only if the Bayesian secondary survives at full scope
 
@@ -40,15 +48,15 @@ Deferred pending the ratification decision on analysis primacy (CA-01.A8) and F-
 
 | Entry | Problem | Disposition |
 |---|---|---|
-| "Angelopoulos 2025" | Does not resolve. The Gentle Introduction is 2023; Conformal Risk Control is ICLR 2024; Learn then Test appears to remain a preprint; *Theoretical foundations of conformal prediction* (arXiv:2411.11824, 2025) is a pre-publication book draft. None is both 2025 and peer-reviewed in a form our rules accept. | CA-01.A11 case. Raised with the team; not attestable until it binds to a version of record. R-05 covers the LTT material the claim actually needed. |
+| "Angelopoulos 2025" | Does not resolve. The Gentle Introduction is 2023; Conformal Risk Control is ICLR 2024; Learn then Test appears to remain a preprint; *Theoretical foundations of conformal prediction* (arXiv:2411.11824, 2025) is a pre-publication book draft. None is both 2025 and peer-reviewed in a form our rules accept. | **CLOSED 18 August 2026 — formally declared unresolvable.** No candidate binds to a 2025 version of record meeting CA-01.A11. The entry is withdrawn rather than repaired; R-05 (Angelopoulos & Bates 2023, Appendix A) covers the LTT material the claim actually needed. Any future use of "Angelopoulos 2025" in project documents should be treated as a citation defect. |
 
 ## 5. Open governance issue
 
-The specialised work package exists only outside this repository and is no longer available to its owner. Under the team's founding rule — a protocol that exists only outside the repository does not exist — any load-bearing content still needed from it must be re-committed to the repo by its custodian, or superseded by artifacts that are in the repo. This register supersedes its §20 list for the evaluation stream; the phase plan, viva/defence bank (§21) and ownership statement (§25) remain outstanding and should be re-issued into `docs/` or re-authored.
+**Updated 18 August 2026: the work package has been recovered.** It exists outside this repository and remains outside it. Under the team's founding rule — a protocol that exists only outside the repository does not exist — any load-bearing content still needed from it must be re-committed to the repo by its custodian, or superseded by artifacts that are in the repo. This register supersedes its §20 list for the evaluation stream; the phase plan, viva/defence bank (§21) and ownership statement (§25) remain outstanding and should be re-issued into `docs/` or re-authored.
 
 ## 6. Working rule
 
 A source enters section 2 only when a committed artifact makes a claim that depends on it. Sources are not read because they appear on a list; lists are derived from claims. Where no committed claim depends on a source, it does not gate a freeze.
 
 ---
-*Change log: v1.0 — 14 Aug 2026, created from committed repo artifacts after loss of the work package §20 list.*
+*Change log: v1.0 — 14 Aug 2026, created from committed repo artifacts after loss of the work package §20 list. v1.1 — 18 Aug 2026: R-06/R-07/R-08 moved to attested; Angelopoulos 2025 closed as unresolvable; next-required set replaced with R-12/R-13/R-14; seven sources deferred as not-yet-load-bearing; work package recovery recorded.*
