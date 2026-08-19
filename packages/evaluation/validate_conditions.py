@@ -114,6 +114,12 @@ def check_event_schema():
     return errs
 
 
+def _task_vintage(scenario):
+    env = json.load(open(os.path.join(SCEN, scenario + ".json")))
+    p = proj.project(env, FIELDS, set(PLANES["public"]))
+    return (((p.get("payload") or {}).get("decision") or {}).get("versions") or {}).get("vintage")
+
+
 def main():
     fails = 0
     empty = {}
@@ -139,6 +145,43 @@ def main():
     ee = check_event_schema()
     print("OK — validates sample; rejects raw fields by construction" if not ee else "FAIL")
     [print("  -", e) for e in ee]; fails += len(ee)
+
+    print("\n== task-set completeness (Fahmi review 2026-08) ==")
+    tasks = MAN["tasks"]
+    fv = MAN.get("frozen_vintage")
+    role = MAN.get("task_set_role", "demonstration")
+    minb = (MAN.get("benchmark_requirements") or {}).get("min_tasks_for_benchmark", 20)
+
+    # R2: origin + publisher recorded (PD-6 leakage splits / CAL-RISK clustering)
+    miss = [t["task_id"] for t in tasks if not t.get("origin") or not t.get("publisher")]
+    print(f"[{'OK ' if not miss else 'BAD'}] every task records origin + publisher (PD-6 / CAL-RISK)")
+    for m in miss:
+        print("  - missing origin/publisher:", m)
+    fails += len(miss)
+
+    # R4: single frozen vintage — nothing runs two conditions at different vintages
+    badv = [(t["task_id"], _task_vintage(t["scenario"])) for t in tasks if _task_vintage(t["scenario"]) != fv]
+    print(f"[{'OK ' if not badv else 'BAD'}] all tasks bound to frozen_vintage {fv}")
+    for tid, v in badv:
+        print(f"  - {tid} -> {v}")
+    fails += len(badv)
+
+    # R3: query-repair minting — a repaired task references a distinct existing base (F-BLOCK-09)
+    ids = {t["task_id"] for t in tasks}
+    badr = [t["task_id"] for t in tasks
+            if t.get("repair_of") and (t["repair_of"] not in ids or t["repair_of"] == t["task_id"])]
+    print(f"[{'OK ' if not badr else 'BAD'}] repaired tasks reference a distinct existing base (F-BLOCK-09)")
+    for r in badr:
+        print("  - bad repair_of:", r)
+    fails += len(badr)
+
+    # R1: task-set role vs benchmark minimum (demo fixtures are fine; a benchmark must meet the floor)
+    if role == "benchmark" and len(tasks) < minb:
+        print(f"[BAD] benchmark task set needs >= {minb} tasks; has {len(tasks)}")
+        fails += 1
+    else:
+        extra = "benchmark" if role == "benchmark" else f"demonstration fixtures; benchmark requires >= {minb}"
+        print(f"[OK ] task-set role = {role}: {len(tasks)} tasks ({extra})")
 
     print("\nRESULT:", "ALL CONDITION CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0

@@ -32,10 +32,28 @@
 
   "families": { "public": ["P0", "P1", "P2"], "staff": ["W0", "W1", "W1-NA"] },
 
+  "frozen_vintage": "2026-06-30",
+  "vintage_note": "All conditions and tasks run at this single frozen vintage; validate_conditions.py fails if any task resolves an envelope at a different vintage. Nothing may run two conditions at different vintages (Fahmi review, 2026-08).",
+  "origin_publisher_note": "origin + publisher are recorded per task so leakage-safe splits (PD-6) and CAL-RISK clustering can be built over them (Fahmi review). Values here are DEMONSTRATION placeholders; real feed origins/publishers attach when the benchmark set is minted.",
+
+  "task_set_role": "demonstration",
+  "benchmark_requirements": {
+    "_comment": "The tasks below are DEMONSTRATION FIXTURES for the C-BLOCK-06 confound-proof, NOT a benchmark task set (Fahmi review, 2026-08).",
+    "min_tasks_for_benchmark": 20,
+    "rationale": "At three tasks the crossed-design power ceiling is ~0.18 on illustrative variance components; a usable target needs ~20+ tasks. The benchmark set is minted jointly with Fahmi, who owns the power target, sampling and annotation (RATIFY-14-07/08).",
+    "owner": "Fahmi (power target, sampling) + Clarence (frozen build)",
+    "status": "PENDING — benchmark task set not yet minted"
+  },
+  "repair_minting": {
+    "_comment": "F-BLOCK-09 / WP §13.1. When a P2 conversation changes the INTERPRETED query, the changed query is a DIFFERENT task, minted here — never a silent same-envelope change.",
+    "convention": "A repaired task sets \"repair_of\": <base task_id>, uses a distinct task_id, and carries its own scenario/envelope. It is exempt from same-envelope-as-base equality (the changed query is the point); within its own family it still shares one envelope across conditions.",
+    "field": "repair_of"
+  },
+
   "tasks": [
-    { "task_id": "T-swim-croydon",  "scenario": "supported",     "note": "supported_match" },
-    { "task_id": "T-climb-havering","scenario": "no_match",       "note": "bounded_non_match" },
-    { "task_id": "T-yoga-croydon",  "scenario": "indeterminate",  "note": "evidence_indeterminate" }
+    { "task_id": "T-swim-croydon",  "scenario": "supported",     "origin": "LB Croydon",  "publisher": "demo-provider-croydon-1",  "note": "supported_match" },
+    { "task_id": "T-climb-havering","scenario": "no_match",       "origin": "LB Havering", "publisher": "demo-provider-havering-1", "note": "bounded_non_match" },
+    { "task_id": "T-yoga-croydon",  "scenario": "indeterminate",  "origin": "LB Croydon",  "publisher": "demo-provider-croydon-2",  "note": "evidence_indeterminate" }
   ],
   "scenario_overrides": {
     "_comment": "MUST stay empty. Any per-condition override of a task's scenario would confound the interface effect with a backend difference (C-BLOCK-06). The validator fails if a family's conditions do not all resolve the same decision per task."
@@ -44,5 +62,12 @@
   "identification_honesty": "P2 − P1 is NOT a same-envelope cosmetic interface effect if conversation changes the interpreted query. Any such change is recorded as a different task/decision, never silently (WP §13.1).",
   "tuning_freeze": "Treatment tuning (wording/layout/logic) freezes before locked exposure. Post-freeze accessibility/security repairs are classified; if they change semantics or task flow, the affected conditions are versioned and re-run (WP §13.4).",
   "no_study_fallback": "If ethics/recruitment/readiness fails: retain deterministic conformance, accessibility/AT, semantic-replay / non-interference / security tests; remove usability, practitioner-actionability, organisational-effectiveness and lived-equity claims (WP §13.5).",
-  "owner": "Clarence builds the frozen conditions; Fahmi owns estimands, sampling, annotation and analysis (RATIFY-14-07/08)."
+  "owner": "Clarence builds the frozen conditions; Fahmi owns estimands, sampling, annotation and analysis (RATIFY-14-07/08).",
+  "review_dispositions": {
+    "_comment": "Disposition of Fahmi's evaluation-stream review of this manifest (2026-08), feeding C-BLOCK-06 / F-BLOCK-09.",
+    "R1_task_count": "ACCEPTED — 3 tasks marked demonstration fixtures; benchmark_requirements records the >=20 minimum and power rationale; validator warns unless a benchmark set meets it. Minting the 20+ real tasks is joint with Fahmi.",
+    "R2_origin_publisher": "ACCEPTED — origin + publisher now recorded per task; validator requires both so PD-6 leakage splits and CAL-RISK clustering can be built.",
+    "R3_query_repair_minting": "ACCEPTED — repair_minting convention added (repair_of field); validator checks a repaired task references a distinct existing base (F-BLOCK-09 repair screen).",
+    "R4_vintage_binding": "ACCEPTED — frozen_vintage added and enforced; validator fails if any task resolves an envelope at a different vintage."
+  }
 }
