@@ -155,6 +155,15 @@ def run():
     return 1 if failures else 0
 
 
+def test_certificate_checker():
+    """pytest entry point so PyCharm's green button / `pytest` collect this file
+    (they look for a test_* function; the full report lives in run()). Passes when the
+    golden certificate PASSes, every negative case returns its expected FAIL_* code, and
+    no checker branch survives mutation. Run with -s to see the per-case lines, or run the
+    file directly (python test_certificate_checker.py) for the full printed report."""
+    assert run() == 0, "checker suite failed — run the file directly to see which case"
+
+
 if __name__ == "__main__":
     import sys
     sys.exit(run())

@@ -18,6 +18,8 @@ for p in (SERVER, CONTENT, HERE):
     sys.path.insert(0, p)
 
 from fastapi.testclient import TestClient  # noqa: E402
+for _m in ("main", "render"):              # both apps ship their own main.py/render.py;
+    sys.modules.pop(_m, None)              # bind THIS app's copy when harnesses share a process
 import main, render                        # noqa: E402
 import a11y_check, render_lint             # noqa: E402
 
@@ -93,6 +95,13 @@ def run():
 
     print("\nRESULT:", "ALL CONVERSATION CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
+
+
+def test_conversation():
+    """pytest entry point so PyCharm's green button / `pytest` collect this file (they look
+    for a test_* function; the report lives in run()). Use -s to see the per-check lines, or
+    run the file directly (python test_conversation.py) for the full printed report."""
+    assert run() == 0, "conversation suite failed — run the file directly to see which check"
 
 
 if __name__ == "__main__":
