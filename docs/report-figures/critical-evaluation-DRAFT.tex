@@ -1,0 +1,81 @@
+% =====================================================================
+%  DRAFT — AI-ASSISTED SCAFFOLD, FOR GROUP REVIEW ONLY.
+%  The executable assurance case (extends 3.6) + Chapter 4 Critical Evaluation.
+%  NOT for verbatim submission: re-voice in your own words and verify every
+%  figure against the code/assurance-case.md before the report is submitted.
+%  Facts from branch clarence/c-block-05 (validate_assurance.py: graph SOUND,
+%  15 claims, 0 authorised) 2026-08-19. Requires booktabs; Table 5 = tab:assurance.
+% =====================================================================
+
+\subsection{The Executable Assurance Case}
+\label{sec:assurance}
+The controls described in the preceding sections are not asserted individually but are consolidated
+into an executable assurance case, which is the mechanism by which the project reasons about its own
+maturity. Each claim is represented as a small graph linking the promise to the affected party and the
+harm it addresses, to the control that keeps it, to the executable test or tests that evidence that
+control, and finally to the two human gates it still requires: a named non-author reviewer and a named
+authority. A validator runs every linked test live and additionally performs orphan detection, so that
+a claim missing any element---an unowned control, an unbacked test, or an unnamed reviewer or
+authority---cannot silently pass. The case presently holds fifteen such claims (Table~\ref{tab:assurance}).
+Its dependency graph is sound and every linked test is green, yet the maturity verdict of all fifteen is
+\textsc{blocked}, because the two human gates are, by design, still open. This is a deliberate design
+decision rather than an incidental shortcoming. The project's central thesis---that a system must
+distinguish what its evidence supports from what it cannot determine, and must never convert the absence
+of evidence into a positive claim---is here turned upon the project's own governance: an assurance
+dashboard that reported ``not yet reviewed'' as ``authorised'' would commit precisely the error the
+applications are built to prevent. The honest, and defensible, state is therefore that the executable
+evidence is complete while the human authorisation remains outstanding.
+
+\section{Critical Evaluation}
+\label{ch:eval}
+The contribution of this stream should be read as a research demonstration of a proposed design, and
+its limits are best stated in the same disciplined terms as its claims. What has been demonstrated is
+that the applications and their supporting contracts satisfy a set of executable invariants: the public
+and staff surfaces remain evidence-symmetric and value-level non-interfering, unknown and conflicting
+states are never rendered as negative facts, unsupported model text cannot reach a user, and governed
+staff actions cannot skip review. What has not been demonstrated is any human-facing effect. None of the
+fifteen assurance claims has been authorised; each remains blocked pending a named non-author review and
+an authority decision that the author is explicitly not entitled to issue. The distinction is not
+pedantic: ``the evidence is green'' is a statement about the code, whereas ``the claim is authorised''
+is a statement about a person with standing having accepted the residual risk, and only the second
+licenses a maturity claim.
+
+The design was specified with explicit falsification conditions, and it is instructive to evaluate the
+work against them. The contribution would narrow or fail if the public and staff surfaces disagreed on
+the retained semantics, if restricted staff information leaked into the public plane, if the interface
+bypassed model abstention or the certified order, or if unsupported model content reached users; the
+executable gates target each of these, and none is currently violated on the tested fixtures. That the
+gates are not merely decorative was borne out during review, when a disclosure defect---the public
+service-failure page named an internal pipeline stage held in a field that had been misclassified as
+public-safe---was detected, reclassified to a staff-only class, and closed with a regression test.
+Reporting this openly is deliberate: it shows the control functioning as intended rather than concealing
+a lapse, and a single such finding strengthens rather than weakens the assurance argument, because it
+demonstrates that the case is capable of failing.
+
+Several limits are load-bearing and should not be understated. The accessibility position is
+deliberately scoped as ``evaluated toward WCAG~2.2~AA within a tested matrix'' rather than as
+conformance, because the automated checks performed are only one input and the manual keyboard,
+screen-reader and assistive-technology testing, together with an independent accessibility review,
+remain outstanding; a single examiner-found failure would falsify a blanket conformance claim, whereas
+the scoped statement survives \cite{power2012guidelines, w3c2023wcag22}. The evaluation manifest,
+similarly, currently carries three tasks that are adequate as demonstration fixtures for the
+confound-proof but are not a benchmark task set: an independent review of the manifest against the
+evaluation estimands established that, at three tasks, the crossed-design power ceiling sits at
+approximately $0.18$, so that no realistic participant count reaches a usable target, and a benchmark
+would require on the order of twenty or more tasks. The staff role gate is a demonstration stub rather
+than production identity management, the conversational parser is deterministic and stands in for a
+language model that would sit behind the same contract, and the data-protection and research-ethics
+determinations that would license any human-facing study are institutional decisions that are
+progressed and evidenced but cannot be self-certified. Each of these is recorded rather than obscured,
+and each has a defined route to closure.
+
+Taken together, these limits define the distance between the present research demonstration and a
+system that could make stronger claims. Closing that distance is a matter of completing the human half
+of the assurance case---the non-author reviews, the named authorities, and the team ratifications---and
+of executing the evaluation the instruments were built to support: minting the benchmark task set
+against a stated power target, and running the manual accessibility and adversarial security batteries.
+The contribution of the work is therefore not a claim of effectiveness, which the evaluation is not yet
+positioned to make, but the demonstrated integration of an evidence-symmetric, authority-asymmetric
+application pair over a single certified contract, together with the executable discipline that keeps
+its claims honest---a discipline whose value is precisely that it renders the outstanding work visible
+and auditable rather than assumed.

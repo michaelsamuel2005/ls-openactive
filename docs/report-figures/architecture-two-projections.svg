@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" font-family="Helvetica, Arial, sans-serif" fill="#14201c">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495a54"/>
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#aab6b1;stroke-width:1.5;rx:10;}
+      .env{fill:#e6f2ef;stroke:#0b5c52;stroke-width:2;}
+      .pub{fill:#eef6f4;stroke:#0b5c52;stroke-width:1.5;}
+      .stf{fill:#fbeeee;stroke:#8a1c1c;stroke-width:1.5;}
+      .chk{fill:#f4f1ec;stroke:#6b4e00;stroke-width:1.5;}
+      .t{font-size:15px;font-weight:700;}
+      .s{font-size:12.5px;fill:#495a54;}
+      .lbl{font-size:12px;fill:#495a54;font-style:italic;}
+      .edge{stroke:#495a54;stroke-width:1.6;fill:none;}
+    </style>
+  </defs>
+
+  <text x="24" y="34" font-size="18" font-weight="700">Two applications, one certified evidence contract</text>
+  <text x="24" y="56" class="s">One staff-complete DecisionEnvelope; the public view is a derived, fail-closed projection — never a second document.</text>
+
+  <!-- upstream -->
+  <rect x="24" y="90" width="220" height="86" rx="10" class="box"/>
+  <text x="134" y="120" text-anchor="middle" class="t">Reconstruction / evidence</text>
+  <text x="134" y="140" text-anchor="middle" class="s">stream (Michael, Wesley)</text>
+  <text x="134" y="160" text-anchor="middle" class="s">emits certificate + witness</text>
+
+  <!-- envelope (single source of truth) -->
+  <rect x="330" y="82" width="300" height="104" rx="12" class="env"/>
+  <text x="480" y="112" text-anchor="middle" class="t">Terminal DecisionEnvelope</text>
+  <text x="480" y="132" text-anchor="middle" class="s">immutable evidence decision · scope</text>
+  <text x="480" y="150" text-anchor="middle" class="s">certified candidate slate · typed claims</text>
+  <text x="480" y="168" text-anchor="middle" class="s">receipts · content digest</text>
+
+  <path d="M244,133 L326,133" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- checker -->
+  <rect x="330" y="228" width="300" height="72" rx="10" class="chk"/>
+  <text x="480" y="256" text-anchor="middle" class="t">Independent certificate checker (C-09)</text>
+  <text x="480" y="276" text-anchor="middle" class="s">limited technical independence · fails closed</text>
+  <path d="M480,228 L480,188" class="edge" marker-end="url(#arrow)"/>
+  <text x="496" y="212" class="lbl">verifies</text>
+
+  <!-- projector -->
+  <rect x="330" y="340" width="300" height="70" rx="10" class="box"/>
+  <text x="480" y="368" text-anchor="middle" class="t">Fail-closed projector</text>
+  <text x="480" y="388" text-anchor="middle" class="s">field-level disclosure classes · drop-by-default</text>
+  <path d="M480,300 L480,338" class="edge" marker-end="url(#arrow)" transform="translate(0,40)"/>
+  <path d="M480,300 L480,338" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- public projection + app -->
+  <rect x="690" y="300" width="266" height="70" rx="10" class="pub"/>
+  <text x="823" y="328" text-anchor="middle" class="t">Public projection</text>
+  <text x="823" y="348" text-anchor="middle" class="s">PUBLIC_SAFE fields only</text>
+  <rect x="690" y="392" width="266" height="52" rx="10" class="box"/>
+  <text x="823" y="423" text-anchor="middle" class="t">Public discovery app</text>
+
+  <!-- staff projection + app -->
+  <rect x="690" y="470" width="266" height="70" rx="10" class="stf"/>
+  <text x="823" y="498" text-anchor="middle" class="t">Staff projection</text>
+  <text x="823" y="518" text-anchor="middle" class="s">all classes · role-gated</text>
+  <rect x="690" y="90" width="266" height="52" rx="10" class="box"/>
+  <text x="823" y="121" text-anchor="middle" class="t">Staff assurance app</text>
+
+  <!-- projector to projections -->
+  <path d="M630,368 L688,335" class="edge" marker-end="url(#arrow)"/>
+  <path d="M630,375 L688,500" class="edge" marker-end="url(#arrow)"/>
+  <path d="M823,300 L823,144" class="edge" marker-end="url(#arrow)"/>
+  <text x="835" y="240" class="lbl">role-gated</text>
+  <path d="M823,370 L823,390" class="edge" marker-end="url(#arrow)"/>
+  <path d="M823,470 L823,446" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- invariant annotations -->
+  <rect x="24" y="360" width="272" height="196" rx="10" fill="#f5f8f7" stroke="#dbe3e0"/>
+  <text x="40" y="386" class="t">Executable release gates</text>
+  <text x="40" y="412" class="s">INV-SYMMETRY — public ≡ staff on the decision</text>
+  <text x="40" y="434" class="s">INV-NONINTERFERENCE — staff-only changes</text>
+  <text x="56" y="452" class="s">never move the public output (CA-1)</text>
+  <text x="40" y="474" class="s">INV-REPLAY — retained public payload</text>
+  <text x="56" y="492" class="s">recomputes to the stored digest</text>
+  <text x="40" y="514" class="s">INV-NO-UNVERIFIED · INV-NO-COLLAPSE</text>
+  <text x="40" y="534" class="s">INV-COVERAGE · INV-SLATE-ORDER · INV-DISCLOSURE</text>
+
+  <text x="24" y="588" class="lbl">Research demonstration (PROPOSED). Evidence-symmetric, authority-asymmetric. Colour is illustrative; every state also carries text.</text>
+</svg>
