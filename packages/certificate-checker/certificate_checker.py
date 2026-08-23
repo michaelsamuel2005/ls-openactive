@@ -185,10 +185,13 @@ CHECKS = [
 ]
 
 
-def check(cert, ctx, checks=None):
-    """Return (outcome, detail). Fail-closed: any exception during a check is treated as
-    FAIL_MALFORMED rather than an accidental PASS."""
-    checks = CHECKS if checks is None else checks
+def _run_checks(cert, ctx, checks):
+    """Run an explicit, ordered check list. INTERNAL ONLY — used by the mutation harness to
+    prove each branch is load-bearing. Not for production use: it can be handed a reduced list.
+    Fail-closed: an empty check set never certifies (MS-8), and any exception is FAIL_MALFORMED
+    rather than an accidental PASS."""
+    if not checks:
+        return (FAIL_MALFORMED, "empty check set: refusing to certify without running the checks")
     for code, fn in checks:
         try:
             detail = fn(cert, ctx)
@@ -197,6 +200,12 @@ def check(cert, ctx, checks=None):
         if detail:
             return (code, detail)
     return (PASS, "certificate verified against witness, receipts, versions and scope")
+
+
+def check(cert, ctx):
+    """Public entry point. ALWAYS runs the complete, ordered CHECKS — there is no caller
+    override, so there is no bypass (MS-8, Michael 2026-08-23). Fail-closed throughout."""
+    return _run_checks(cert, ctx, CHECKS)
 
 
 if __name__ == "__main__":

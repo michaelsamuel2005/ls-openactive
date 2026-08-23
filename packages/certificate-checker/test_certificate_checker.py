@@ -121,6 +121,17 @@ def run():
     failures += (not ok)
     print(f"[{'OK ' if ok else 'BAD'}] golden -> {out}")
 
+    # MS-8 (Michael 2026-08-23): the public API must not allow a bypass with an empty check set
+    try:
+        C.check(c, x, [])  # type: ignore[call-arg]
+        print("[BAD] check() accepted a checks override (MS-8 bypass OPEN)"); failures += 1
+    except TypeError:
+        print("[OK ] check() has no bypass parameter (MS-8)")
+    if C._run_checks(c, x, [])[0] != C.FAIL_MALFORMED:
+        print("[BAD] _run_checks([]) did not fail closed (MS-8)"); failures += 1
+    else:
+        print("[OK ] _run_checks([]) fails closed -> FAIL_MALFORMED (MS-8)")
+
     # 2) each negative must hit its exact code
     print("\n-- negative cases (WP 10.5) --")
     baseline = {}
@@ -141,7 +152,7 @@ def run():
         changed = False
         for name, label, mut, expected in NEGATIVES:
             c, x = build(mut)
-            if C.check(c, x, mutant)[0] != baseline[name]:
+            if C._run_checks(c, x, mutant)[0] != baseline[name]:
                 changed = True
                 break
         status = "killed" if changed else "SURVIVED"

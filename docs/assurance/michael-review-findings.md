@@ -24,7 +24,7 @@ vocabulary + rendering obligations) remain blank — Michael has **not** recorde
 | MS-5 | Candidate identity, witness content and claimed decision are not cryptographically bound to the `DecisionEnvelope` | CL-1, CL-6 | Joint (contract) | OPEN |
 | MS-6 | State transitions are not checked | CL-6 | Clarence (checker) | OPEN |
 | MS-7 | The checker accepts incompatible decision combinations and caller-asserted checker versions | CL-6 | Clarence (checker) | OPEN |
-| MS-8 | `check(..., checks=[])` bypasses every check and returns `PASS` | CL-6 | Clarence (checker) | OPEN |
+| MS-8 | `check(..., checks=[])` bypasses every check and returns `PASS` | CL-6 | Clarence (checker) | **FIXED — pending Michael re-review** (public `check()` has no override; `_run_checks([])` fails closed; adversarial test added) |
 | MS-9 | Conversation route silently ignores or reverses constraints (e.g. "under £10" ignored; "climbing in Havering" adds unrequested step-free; "not wheelchair accessible" interpreted as requiring step-free) | CL-14 | Clarence (conversation) | OPEN |
 | MS-10 | Candidate attributes are rendered directly without requiring corresponding verifier-approved claim tuples | CL-3 | Clarence (render) | OPEN |
 
