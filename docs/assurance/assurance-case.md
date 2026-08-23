@@ -94,7 +94,7 @@
 - **Evidence (tests):** T-conditions ✅
 - **Reviewer:** evaluation design (Fahmi) — done
 - **Authority:** RATIFY-14-07/08 + ethics route — pending
-- **Residual risk:** RATIFY-14-07/08 withheld by Fahmi (2026-08-23) pending M-6 (envelope_digest must be listed in required + schema version bumped) and M-2 (shared terminal referent produced and verified by the evidence engine); ethics via no-study fallback
+- **Residual risk:** RATIFY-14-07/08 withheld by Fahmi (2026-08-23). M-6 FIX APPLIED (envelope_digest now required; event-schema v0.2.0-PROPOSED) — awaiting Fahmi re-verification. M-2 OPEN (shared terminal referent must be produced and verified by the evidence engine). Ethics via no-study fallback.
 - **Maturity verdict:** BLOCKED  — blocked on: authority decision pending
 
 ### CL-8 — Governed actions cannot skip independent review or approval, and sending requires an authorised role.
