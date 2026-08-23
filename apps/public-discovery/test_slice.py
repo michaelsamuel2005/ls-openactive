@@ -141,6 +141,20 @@ def main_run():
         print("      order:", order, "p0_hides:", p0_hides)
     fails += 0 if cond_ok else 1
 
+    # MS-1 (Michael 2026-08-23): a non-verified claim's content must not survive public projection
+    _env = {"action_kind": "discovery_decision", "payload": {"decision": {
+        "terminal_decision": "supported_match",
+        "claims": [
+            {"subject": "sess-x", "predicate": "leak=unverified", "value": "SECRET-UNVERIFIED", "verification": "failed"},
+            {"subject": "sess-101", "predicate": "activity=swimming", "value": True, "verification": "verified"},
+        ]}}}
+    render._drop_unverified_claims(_env)
+    _pub = render.proj.project(_env, render._FIELDS, set(render._PLANES["public"]))
+    if "SECRET-UNVERIFIED" in str(_pub) or "leak=unverified" in str(_pub):
+        print("[BAD] MS-1: non-verified claim content survived public projection"); fails += 1
+    else:
+        print("[OK ] MS-1: non-verified claim tuple removed from public projection")
+
     print("\nRESULT:", "ALL SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 

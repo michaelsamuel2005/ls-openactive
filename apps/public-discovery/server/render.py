@@ -42,9 +42,22 @@ def phrase(cat, val, default=""):
     return default or (val or "")
 
 
+def _drop_unverified_claims(env):
+    """MS-1 (Michael 2026-08-23): a claim whose verification is not 'verified' must have its ENTIRE
+    tuple removed before public projection. The verification field is staff-only, so field-class
+    projection alone would strip 'verification' yet leave the unverified subject/predicate/value
+    visible to the public. Reject the whole tuple instead."""
+    dec = (env.get("payload") or {}).get("decision")
+    if isinstance(dec, dict) and isinstance(dec.get("claims"), list):
+        dec["claims"] = [c for c in dec["claims"] if c.get("verification") == "verified"]
+
+
 def load_public(scenario):
-    """Load the staff-complete scenario envelope and return ONLY its public projection."""
+    """Load the staff-complete scenario envelope and return ONLY its public projection. Non-verified
+    claim tuples are removed entirely first (MS-1), so no unverified claim content survives even
+    though the verification field itself is staff-only."""
     env = json.load(open(os.path.join(SCEN, scenario + ".json")))
+    _drop_unverified_claims(env)
     pub = proj.project(env, _FIELDS, set(_PLANES["public"]))
     return {} if pub is proj.DROP else pub
 
