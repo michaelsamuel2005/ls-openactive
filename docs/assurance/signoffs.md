@@ -64,6 +64,23 @@ CONDITIONS. `REVIEWED`-only or entries with open blocking findings do **not** fl
 _Recorded in `assurance-case.json`: CL-7 reviewer = done (Fahmi Alshahabi, 2026-08-23, REVIEWED);
 authority = pending (RATIFY-14-07/08 withheld pending M-6 + M-2). **CL-7 remains BLOCKED.**_
 
+## SIGN-OFF — M-6 closure (event-schema opening-query digest)
+- **Claim ID:** CL-7 (follow-up to entry of 2026-08-23)
+- **Artefacts checked:** packages/evaluation/event-schema.json,
+  packages/evaluation/validate_conditions.py — branch clarence/c-block-05, commit 21c788b
+- **Method:** inspected event-schema.json directly — `envelope_digest` present in `required`, version
+  0.2.0-PROPOSED; ran validate_conditions.py (exit 0)
+- **Outcome:** REVIEWED — M-6 closed on this commit
+- **Conditions:** CL-7 remains unauthorised. M-2 stays open.
+- **Not covered by this sign-off:**
+  - M-2 — shared terminal referent produced and verified by the evidence engine. Open until the engine runs.
+  - Any HCI, usability, actionability or application-effectiveness claim.
+- **Reference:** RATIFY-14-07/08
+- **Signed:** Fahmi Alshahabi · 2026-08-23
+
+_Recorded in `assurance-case.json`: M-6 CLOSED; CL-7 authority still pending — sole remaining blocker
+is M-2 (evidence engine). **CL-7 remains BLOCKED.**_
+
 ---
 
 # Pending entries (prepared for the signer — NOT yet signed, NOT yet recorded)

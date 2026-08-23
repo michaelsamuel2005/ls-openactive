@@ -103,7 +103,7 @@
       "controls": [{ "id": "K-conditions", "desc": "condition manifests with shared terminal DecisionEnvelope per task", "owner": "Clarence (build); Fahmi (estimands)" }],
       "test_ids": ["T-conditions"],
       "reviewer": { "scope": "evaluation design (Fahmi)", "eligible_non_author": true, "status": "done", "name": "Fahmi Alshahabi", "date": "2026-08-23", "outcome": "REVIEWED — M-1/M-3/M-4/M-5 accepted as addressed on ea8f5bd; explicitly does NOT authorise CL-7 (see docs/assurance/signoffs.md)" },
-      "residual_risk": "RATIFY-14-07/08 withheld by Fahmi (2026-08-23). M-6 FIX APPLIED (envelope_digest now required; event-schema v0.2.0-PROPOSED) — awaiting Fahmi re-verification. M-2 OPEN (shared terminal referent must be produced and verified by the evidence engine). Ethics via no-study fallback.",
+      "residual_risk": "RATIFY-14-07/08 withheld by Fahmi. M-6 CLOSED (Fahmi verified 2026-08-23 at commit 21c788b: envelope_digest required, event-schema v0.2.0-PROPOSED). M-2 OPEN and is the sole remaining blocker (shared terminal referent must be produced and verified by the evidence engine). Ethics via no-study fallback.",
       "authority": { "decision": "RATIFY-14-07/08 + ethics route", "holder": null, "status": "pending" }
     },
     {
