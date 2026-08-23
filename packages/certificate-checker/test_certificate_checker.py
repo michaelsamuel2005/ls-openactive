@@ -66,6 +66,11 @@ def golden():
                 "checker_version": "chk-1.0",
             },
             "certifiable_fragment": ["activity", "access", "geo"],
+            "allowed_transitions": [
+                {"from_state": "query_review", "to_state": "discovery_decision"},
+                {"from_state": "query_review", "to_state": "clarify"},
+                {"from_state": "clarify", "to_state": "discovery_decision"},
+            ],
         },
         "expected_query_id": "q-croydon-swim-stepfree",
         "expected_decision_digest": hx("d"),
@@ -87,6 +92,11 @@ def _wrong_target(c, x):         c["query_id"] = "q-some-other-query"
 def _unsupported_fragment(c, x): c["predicate_witnesses"][0]["fragment_class"] = "free_text_guess"
 def _unresolved_receipt(c, x):   c["predicate_witnesses"][0]["receipts"].append({"receipt_id": "r-nope", "content_digest": hx("1")})
 def _dup_identity(c, x):         c["predicate_witnesses"].append(copy.deepcopy(c["predicate_witnesses"][0]))
+def _schema_extra_field(c, x):   c["surprise_field"] = "unexpected"                             # additionalProperties:false (MS-3)
+def _incompatible_decision(c, x): c["claimed"]["terminal_decision"] = "evidence_indeterminate"  # slate under non-supported (MS-7)
+def _bad_transition(c, x):       c["state_transition"]["to_state"] = "results_leak"             # not a permitted transition (MS-6)
+def _caller_asserted_checker(c, x):                                                             # MS-7 checker version
+    c["versions"]["checker_version"] = "chk-9.9"; x["manifest"]["allowed_versions"]["checker_version"] = "chk-9.9"
 
 NEGATIVES = [
     ("missing_witness",      "missing witness",                       _missing_witness,      C.FAIL_MISSING_WITNESS),
@@ -102,6 +112,10 @@ NEGATIVES = [
     ("unsupported_fragment", "predicate outside certifiable fragment", _unsupported_fragment, C.FAIL_UNSUPPORTED_FRAGMENT),
     ("unresolved_receipt",   "unresolved receipt",                    _unresolved_receipt,   C.FAIL_UNRESOLVED_RECEIPT),
     ("dup_identity",         "duplicated/ambiguous identity",         _dup_identity,         C.FAIL_MALFORMED),
+    ("schema_extra_field",   "certificate violates its JSON Schema",   _schema_extra_field,   C.FAIL_MALFORMED),
+    ("incompatible_decision","incompatible decision combination",      _incompatible_decision, C.FAIL_MALFORMED),
+    ("bad_transition",       "impermissible state transition",         _bad_transition,       C.FAIL_MALFORMED),
+    ("caller_asserted_checker","caller-asserted checker version",       _caller_asserted_checker, C.FAIL_VERSION_MISMATCH),
 ]
 
 

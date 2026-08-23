@@ -19,11 +19,11 @@ vocabulary + rendering obligations) remain blank — Michael has **not** recorde
 |----|---------|---------|-------|--------|
 | MS-1 | Unverified claims survive public projection: failed verification status is removed while the claim content remains | CL-3 | Clarence (projection/render) | OPEN |
 | MS-2 | Receipt IDs are arbitrary strings; the contract does not prove a receipt exists, supports that specific claim, or belongs to a compatible release | CL-6, CL-3 | Joint (Michael §09 contract + Clarence consumer) | OPEN |
-| MS-3 | The checker does not enforce its own JSON Schema — schema-invalid certificates can return `PASS` | CL-6 | Clarence (checker) | OPEN |
+| MS-3 | The checker does not enforce its own JSON Schema — schema-invalid certificates can return `PASS` | CL-6 | Clarence (checker) | **FIXED — pending Michael re-review** (`_c_schema` validates cert against `certificate.schema.json` + context structure at runtime; adversarial test `schema_extra_field`) |
 | MS-4 | A valid receipt can be moved from one predicate to another and still pass (semantic receipt swap) | CL-6 | Joint (receipt↔predicate binding) | OPEN |
 | MS-5 | Candidate identity, witness content and claimed decision are not cryptographically bound to the `DecisionEnvelope` | CL-1, CL-6 | Joint (contract) | OPEN |
-| MS-6 | State transitions are not checked | CL-6 | Clarence (checker) | OPEN |
-| MS-7 | The checker accepts incompatible decision combinations and caller-asserted checker versions | CL-6 | Clarence (checker) | OPEN |
+| MS-6 | State transitions are not checked | CL-6 | Clarence (checker) | **FIXED — pending Michael re-review** (`_c_transition` checks the transition against manifest `allowed_transitions`; adversarial test `bad_transition`) |
+| MS-7 | The checker accepts incompatible decision combinations and caller-asserted checker versions | CL-6 | Clarence (checker) | **FIXED — pending Michael re-review** (`_c_decision_consistency` rejects bad terminal/action combos; `_c_version` enforces this checker's own `CHECKER_VERSION`; tests `incompatible_decision`, `caller_asserted_checker`) |
 | MS-8 | `check(..., checks=[])` bypasses every check and returns `PASS` | CL-6 | Clarence (checker) | **FIXED — pending Michael re-review** (public `check()` has no override; `_run_checks([])` fails closed; adversarial test added) |
 | MS-9 | Conversation route silently ignores or reverses constraints (e.g. "under £10" ignored; "climbing in Havering" adds unrequested step-free; "not wheelchair accessible" interpreted as requiring step-free) | CL-14 | Clarence (conversation) | OPEN |
 | MS-10 | Candidate attributes are rendered directly without requiring corresponding verifier-approved claim tuples | CL-3 | Clarence (render) | OPEN |

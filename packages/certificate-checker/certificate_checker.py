@@ -7,7 +7,8 @@ section 10. NOT evidence Clarence authored/accepted it; he must inspect it, corr
 own words, and obtain non-author review. He CANNOT certify his own checker (WP 2.6).
 
 Independence (WP 10.4), enforced by construction here:
-  - imports nothing from any production/evidence module (stdlib only);
+  - imports nothing from any production/evidence module (stdlib + jsonschema for runtime
+    schema enforcement only — never a production interpreter);
   - never calls a production interpreter to decide the expected output;
   - implements only the frozen certificate contract;
   - expected values (versions, receipts, target query/decision, certifiable fragment) are
@@ -17,6 +18,8 @@ The outcome vocabulary is the WP 10.3 enum and is PROPOSED pending RATIFY-09-04 
 Do not rename to make production pass (WP 10.4); record disagreements in discrepancy-register.md.
 """
 from __future__ import annotations
+import json as _json
+import os as _os
 
 # --- WP 10.3 outcome enum (exact names ratified with Section 09) ------------
 PASS = "PASS"
@@ -36,8 +39,46 @@ _SCOPES = {"scope_complete", "scope_indeterminate"}
 _ACTIONS = {"authorised_slate", "model_abstained", "deterministic_fallback", "browse_only"}
 _POOLS = {"supported", "indeterminate", "excluded"}
 
+# This checker's own identity. A certificate must name THIS checker; a caller cannot assert a
+# different checker_version and have it trusted (MS-7, Michael 2026-08-23).
+CHECKER_VERSION = "chk-1.0"
+
+_SCHEMA_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "certificate.schema.json")
+
 
 # --- individual checks: each returns a detail string if it FAILS, else None -
+def _c_schema(cert, ctx):
+    """MS-3: enforce the certificate JSON Schema at runtime, and structurally validate the
+    verification context. A schema-invalid certificate can never reach PASS. Fail-closed if
+    jsonschema is unavailable (cannot enforce -> cannot certify)."""
+    try:
+        import jsonschema
+    except Exception as ex:
+        return f"jsonschema not installed — cannot enforce the certificate schema (pip install jsonschema) ({ex})"
+    try:
+        with open(_SCHEMA_PATH) as fh:
+            schema = _json.load(fh)
+        errs = sorted(jsonschema.Draft202012Validator(schema).iter_errors(cert), key=lambda e: list(e.path))
+        if errs:
+            e = errs[0]
+            loc = "/".join(str(p) for p in e.path) or "(root)"
+            return f"certificate fails its JSON Schema at {loc}: {e.message}"
+    except Exception as ex:
+        return f"schema validation error: {ex!r}"
+    if not isinstance(ctx, dict):
+        return "context is not an object"
+    if not isinstance(ctx.get("receipt_store"), dict):
+        return "context.receipt_store missing or not an object"
+    man = ctx.get("manifest")
+    if not isinstance(man, dict):
+        return "context.manifest missing or not an object"
+    for k in ("compatible_release_root", "allowed_versions", "certifiable_fragment"):
+        if k not in man:
+            return f"context.manifest missing required key: {k}"
+    for k in ("expected_query_id", "expected_decision_digest"):
+        if k not in ctx:
+            return f"context missing required key: {k}"
+    return None
 def _c_malformed(cert, ctx):
     if not isinstance(cert, dict):
         return "certificate is not an object"
@@ -86,10 +127,13 @@ def _c_malformed(cert, ctx):
 
 def _c_version(cert, ctx):
     man = ctx["manifest"]
+    cv = cert.get("versions", {})
+    # MS-7: the certificate must name THIS checker; never trust a caller-asserted checker version.
+    if cv.get("checker_version") != CHECKER_VERSION:
+        return f"certificate names checker_version {cv.get('checker_version')!r} but this checker is {CHECKER_VERSION!r}"
     if cert.get("compatible_release_root") != man.get("compatible_release_root"):
         return "compatible_release_root does not match the release manifest"
     allowed = man.get("allowed_versions", {})
-    cv = cert.get("versions", {})
     for k, want in allowed.items():
         if cv.get(k) != want:
             return f"version {k}={cv.get(k)!r} not compatible (manifest requires {want!r})"
@@ -172,8 +216,39 @@ def _c_scope(cert, ctx):
     return None
 
 
+_ALLOWED_DECISION_ACTIONS = {
+    "supported_match": {"authorised_slate", "browse_only"},
+    "bounded_non_match": {"deterministic_fallback", "browse_only"},
+    "evidence_indeterminate": {"model_abstained", "deterministic_fallback", "browse_only"},
+}
+
+
+def _c_decision_consistency(cert, ctx):
+    """MS-7: reject incompatible terminal_decision / recommendation_action combinations
+    (e.g. an authorised_slate under a non-supported terminal decision)."""
+    cl = cert["claimed"]
+    td, act = cl["terminal_decision"], cl["recommendation_action"]
+    allowed = _ALLOWED_DECISION_ACTIONS.get(td, set())
+    if act not in allowed:
+        return f"incompatible decision combination: {td} with {act} (allowed: {sorted(allowed)})"
+    return None
+
+
+def _c_transition(cert, ctx):
+    """MS-6: the claimed state transition must be one the release manifest permits."""
+    st = cert.get("state_transition") or {}
+    frm, to = st.get("from_state"), st.get("to_state")
+    allowed = ctx["manifest"].get("allowed_transitions")
+    if allowed is None:
+        return "manifest does not declare allowed_transitions; cannot verify the state transition"
+    if not any(t.get("from_state") == frm and t.get("to_state") == to for t in allowed):
+        return f"state transition {frm!r} -> {to!r} is not a permitted transition"
+    return None
+
+
 # Ordered precedence: the first failing check wins (WP 10.3 single outcome).
 CHECKS = [
+    (FAIL_MALFORMED, _c_schema),
     (FAIL_MALFORMED, _c_malformed),
     (FAIL_VERSION_MISMATCH, _c_version),
     (FAIL_UNSUPPORTED_FRAGMENT, _c_fragment),
@@ -181,6 +256,8 @@ CHECKS = [
     (FAIL_UNRESOLVED_RECEIPT, _c_unresolved),
     (FAIL_DIGEST_MISMATCH, _c_digest),
     (FAIL_ILLEGAL_ESCALATION, _c_escalation),
+    (FAIL_MALFORMED, _c_decision_consistency),
+    (FAIL_MALFORMED, _c_transition),
     (FAIL_SCOPE_INCONSISTENCY, _c_scope),
 ]
 
