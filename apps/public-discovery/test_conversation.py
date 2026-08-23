@@ -93,6 +93,28 @@ def run():
             print("      a11y:", pr)
         fails += len(problems)
 
+    # 8. MS-9 (Michael 2026-08-23): conversation must not silently ignore or reverse constraints
+    import intent
+    ms9 = 0
+    p = intent.parse("swimming in Croydon under £10")
+    if "price" not in p["unsupported"] or p["confident"]:
+        print("[BAD] MS-9: stated price ceiling silently ignored"); ms9 += 1
+    n = intent.parse("swimming in Croydon but not wheelchair accessible")
+    if n["access"] == "step_free" or n["confident"]:
+        print("[BAD] MS-9: negated accessibility reversed into a requirement"); ms9 += 1
+    b = intent.parse("climbing in Havering")
+    if b["scenario"] is not None or b["access"] == "step_free":
+        print("[BAD] MS-9: bare query injected an unrequested step-free scenario"); ms9 += 1
+    m = intent.parse("climbing in Havering with step-free access")
+    if m["scenario"] != "no_match":
+        print("[BAD] MS-9: explicit step-free query no longer resolves"); ms9 += 1
+    for _label, _qq in (("price", "swimming in Croydon under £10"),
+                        ("negation", "swimming in Croydon but not wheelchair accessible")):
+        if "sess-101" in client.get("/chat", params={"q": _qq}).text:
+            print(f"[BAD] MS-9: {_label} query returned a fabricated result"); ms9 += 1
+    print(f"[{'OK ' if ms9 == 0 else 'BAD'}] MS-9 conversation preserves/limits constraints (price, negation, no injection)")
+    fails += ms9
+
     print("\nRESULT:", "ALL CONVERSATION CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 

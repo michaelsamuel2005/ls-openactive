@@ -7,6 +7,11 @@
 <p class="notice" role="note">Still unclear: {{ it.ambiguous|join(', ') }}. I won&rsquo;t guess &mdash;
    please add these so I don&rsquo;t show you the wrong thing.</p>
 {% endif %}
+{% if it.unsupported %}
+<p class="notice" role="note">I can&rsquo;t act on: {{ it.unsupported|join(', ') }}. I won&rsquo;t
+   silently ignore these &mdash; the current evidence doesn&rsquo;t let me check them, so I&rsquo;m
+   telling you rather than showing a result that pretends otherwise.</p>
+{% endif %}
 
 <form action="/chat" method="get" novalidate>
   <div class="field">
