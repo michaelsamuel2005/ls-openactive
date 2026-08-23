@@ -81,6 +81,31 @@ authority = pending (RATIFY-14-07/08 withheld pending M-6 + M-2). **CL-7 remains
 _Recorded in `assurance-case.json`: M-6 CLOSED; CL-7 authority still pending — sole remaining blocker
 is M-2 (evidence engine). **CL-7 remains BLOCKED.**_
 
+## SIGN-OFF — application-facing evidence contract, checker & conversation route
+- **Claim ID:** CL-1, CL-3, CL-6, CL-14
+- **Artefacts checked:** `packages/application-contracts/c-block-05/`, `packages/certificate-checker/`,
+  `apps/public-discovery/` (conversation route) — branch clarence/c-block-05, commit `9b0807d`
+- **Method:** ran the application-contract invariant battery, `test_certificate_checker.py` (golden +
+  13 negative + 8 mutation) and `test_conversation.py` — all supplied tests pass; then additional
+  adversarial review
+- **Outcome:** REVIEWED WITH BLOCKING CONDITIONS — **NOT approved.**
+- **Conditions:** findings MS-1…MS-10 (see `docs/assurance/michael-review-findings.md`) must be fixed,
+  each with the adversarial test that would have caught it, then re-reviewed at the successor commit.
+- **Not covered by this sign-off:**
+  - `RATIFY-09-04` (production/reference/checker ownership + independence) and `RATIFY-09-05` (claim
+    vocabulary + rendering obligations) — **not recorded** (register fields blank).
+  - Section 09 spec is proposed, not ratified (SHA-256 `48828408b1e93d6284022fec4618e52128363d35951a9d656613941c68d2133e`).
+  - Any HCI/accessibility, evaluation or effectiveness claim.
+- **CA-2 position:** claim-contract author may also author the production interpreter only if the
+  contract is jointly frozen and independently reviewed; the reference interpreter has a different
+  owner; the checker remains independently authored and reviewed.
+- **Reference:** RATIFY-09-04, RATIFY-09-05 (both blank)
+- **Signed:** Michael Samuel · 2026-08-23
+
+_Recorded in `assurance-case.json`: CL-1, CL-3, CL-6, CL-14 reviewer = `conditions` (Michael Samuel,
+2026-08-23, REVIEWED WITH BLOCKING CONDITIONS); authority pending. **All four remain BLOCKED** — and
+these are open defects, not just missing signatures._
+
 ---
 
 # Pending entries (prepared for the signer — NOT yet signed, NOT yet recorded)

@@ -32,7 +32,7 @@
 - **Affected / harm:** public users and London Sport staff — leaked staff information, or public/staff disagreement that misleads a decision
 - **Controls:** K-noninterference (Clarence)
 - **Evidence (tests):** T-contracts ✅, T-staffslice ✅, T-publicslice ✅
-- **Reviewer:** evidence semantics + transport — pending
+- **Reviewer:** evidence semantics + transport — conditions
 - **Authority:** public_safe_demonstration gate — pending
 - **Residual risk:** person-level review of projections outstanding
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
@@ -52,7 +52,7 @@
 - **Affected / harm:** public users — a fluent but unsupported statement is believed
 - **Controls:** K-verify (Clarence + Michael)
 - **Evidence (tests):** T-contracts ✅, T-checker ✅
-- **Reviewer:** evidence semantics (Section 09) — pending
+- **Reviewer:** evidence semantics (Section 09) — conditions
 - **Authority:** Section 09 vocabulary ratification — pending
 - **Residual risk:** conversational renderer not yet built
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
@@ -82,7 +82,7 @@
 - **Affected / harm:** public users, London Sport — a wrong production decision is trusted
 - **Controls:** K-checker (Clarence)
 - **Evidence (tests):** T-checker ✅
-- **Reviewer:** non-author code review + Section 09 contract — pending
+- **Reviewer:** non-author code review + Section 09 contract — conditions
 - **Authority:** RATIFY-09-04 — pending
 - **Residual risk:** production/reference/checker discrepancy register empty until production emits certificates
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
@@ -162,7 +162,7 @@
 - **Affected / harm:** public users — a chatbot asserts an unsupported fact or diverges from the certified decision
 - **Controls:** K-conversation (Clarence (UX) + Michael (verifier))
 - **Evidence (tests):** T-conversation ✅, T-contracts ✅
-- **Reviewer:** Section 08 owner + evidence semantics — pending
+- **Reviewer:** Section 08 owner + evidence semantics — conditions
 - **Authority:** Section 08 ownership + RATIFY-09-05 — pending
 - **Residual risk:** LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
