@@ -92,10 +92,10 @@
 - **Affected / harm:** the evaluation / research claim — an interface effect is falsely attributed, invalidating a headline result
 - **Controls:** K-conditions (Clarence (build); Fahmi (estimands))
 - **Evidence (tests):** T-conditions ✅
-- **Reviewer:** evaluation design (Fahmi) — pending
+- **Reviewer:** evaluation design (Fahmi) — done
 - **Authority:** RATIFY-14-07/08 + ethics route — pending
-- **Residual risk:** human-effect claims require ethics approval
-- **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
+- **Residual risk:** RATIFY-14-07/08 withheld by Fahmi (2026-08-23) pending M-6 (envelope_digest must be listed in required + schema version bumped) and M-2 (shared terminal referent produced and verified by the evidence engine); ethics via no-study fallback
+- **Maturity verdict:** BLOCKED  — blocked on: authority decision pending
 
 ### CL-8 — Governed actions cannot skip independent review or approval, and sending requires an authorised role.
 *Permitted wording:* action-card workflow with separated review/approval/send
