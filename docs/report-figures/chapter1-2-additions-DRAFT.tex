@@ -1,0 +1,179 @@
+% =====================================================================
+%  DRAFT — AI-ASSISTED SCAFFOLD, FOR GROUP REVIEW ONLY.
+%  Chapter 1 Contributions entry + Chapter 2 additions (2.7–2.10) + fixes + .bib.
+%  NOT for verbatim submission: re-voice in your own words, verify every source
+%  against the version of record (K7), and keep the honest wording (no
+%  conformance / superiority / novelty claims). Citations use \cite{key} — the
+%  matching BibTeX is at the bottom; your bibliographystyle formats them.
+% =====================================================================
+
+
+% #####################################################################
+% 1.6  CONTRIBUTIONS  — paste your entry into the (currently empty) 1.6
+% #####################################################################
+My contribution to the project was the public-facing and staff-facing application layer and its
+supporting assurance. I designed and implemented the public discovery application, an accessible,
+no-JavaScript-core web interface that renders each result as a typed outcome---supported match,
+bounded non-match, or evidence-indeterminate---so that missing or conflicting information is never
+presented to the user as a negative fact. I also built the staff assurance application, a role-gated
+internal workbench separating the analyst, assurance and authoriser roles, through which staff can
+replay a decision's evidence receipts and progress an action through review, approval and send
+without being able to skip a step. Underpinning both, I specified the application contracts---the
+versioned \texttt{DecisionEnvelope}, the public and staff projections, and the field-level disclosure
+matrix---together with the fail-closed projector that enforces them, eight executable
+release-blocking invariants, and a fifteen-claim executable assurance case wired to a validator. To
+guard the evidence path independently, I implemented a separate certificate checker that verifies
+each decision's certificate and witness and rejects forged, stale or over-claimed evidence, tested
+against thirteen negative cases and branch mutation. Finally, I carried out the accessibility
+evaluation toward WCAG~2.2~AA and prepared the frozen evaluation instruments---the condition manifest
+and telemetry schema---used by the evaluation stream.
+
+
+% #####################################################################
+% CHAPTER 2 ADDITIONS  — append after the current §2.6
+% #####################################################################
+
+\section{Trust, Reliance and Overreliance in AI-Assisted Decisions}
+\label{sec:reliance}
+A system that presents machine-derived recommendations to non-expert users must contend not only with
+whether its outputs are correct but with how users calibrate their trust in them. The foundational
+account of this problem describes trust in automation as an attitude that should be matched to the
+automation's actual reliability, so that the design goal is appropriate reliance rather than maximal
+reliance \cite{leesee2004trust}. Where reliance is miscalibrated, the classic failure modes are
+misuse, the over-reliance on automation that is wrong, and disuse, the rejection of automation that is
+right, each carrying its own cost \cite{parasuraman1997humans}. For this project these ideas reframe
+the purpose of the interface: it is not to maximise the user's confidence in a recommendation but to
+help the user place confidence where the evidence warrants it, and to withhold it where the evidence
+does not.
+
+Recent research on human--AI decision-making shows that this calibration does not happen
+automatically, and that fluent explanations can make it worse. Empirical work on cognitive-forcing
+functions demonstrates that interventions which interrupt automatic acceptance and require the user to
+engage can reduce overreliance on AI, albeit sometimes at a cost to user satisfaction
+\cite{bucinca2021trust}. Complementary studies show that adding explanations to AI advice does not
+reliably improve, and can even harm, complementary team performance, because users may accept
+explained-but-incorrect answers more readily \cite{bansal2021whole}. These findings directly motivate
+two features of the present design: an explicit confirmation step before a consequential action,
+understood as a cognitive-forcing step aimed at appropriate rather than maximal reliance; and an
+evidence-first presentation in which the ground for a recommendation is shown alongside it, rather
+than a persuasive summary that could invite unwarranted trust.
+
+\section{Explaining Recommendations and Communicating Evidence and Uncertainty}
+\label{sec:explanation}
+Closely related to reliance is the question of what an explanation in a recommender system is actually
+for. A recommendation may be explained in order to increase transparency, to build or calibrate trust,
+to improve decision effectiveness, or simply to persuade, and these goals can conflict: an explanation
+optimised for persuasion is not the same as one optimised for helping the user judge whether the
+recommendation is right for them \cite{tintarev2012evaluating}. This project adopts the
+transparency-and-effectiveness reading. The interface's evidence card exists to expose why a candidate
+is or is not supported---including a ``why-not'' account for excluded options---so that the
+explanation serves the user's judgement rather than the system's persuasiveness.
+
+Where part of the pipeline is generative, explanation also raises the problem of attribution: whether
+a natural-language statement is in fact supported by the source it purports to rest on. Work on
+measuring attribution in natural-language generation formalises this as whether a system's output can
+be traced to, and is entailed by, identified evidence, and provides an evaluation framework for
+assessing it \cite{rashkin2023attribution}. This is the standard against which the project's rendering
+discipline is set. No factual token about a catalogue attribute is displayed unless it has been
+verified against a certified evidence receipt, and states that cannot be attributed are shown as
+unknown or conflicting rather than being smoothed into a definite claim. Communicating uncertainty
+honestly in this way is treated as a first-class interface requirement rather than as a fallback
+behaviour.
+
+\section{Accessibility and Inclusive Interaction}
+\label{sec:accessibility}
+Because the intended users include people seeking activities under accessibility-related constraints,
+the accessibility of the interface is itself a substantive requirement rather than a compliance
+afterthought. The Web Content Accessibility Guidelines 2.2 provide the reference success criteria for
+perceivable, operable, understandable and robust web content \cite{w3c2023wcag22}. Conformance to
+guideline checkpoints is not, however, equivalent to usability for disabled people: empirical
+evaluation with blind users has found that a substantial proportion of the problems they actually
+encounter are not captured by guideline conformance alone, so that guidelines are ``only half the
+story'' \cite{power2012guidelines}. This evidence shapes two decisions in the project. First, the
+applications are built on a no-JavaScript core, with routes that remain usable without a map or a
+conversational widget, minimising the interaction assumptions placed on assistive technology. Second,
+and as a direct consequence, the project deliberately does not claim conformance; it claims to have
+been evaluated toward WCAG~2.2~AA within a declared browser and assistive-technology matrix, supported
+by manual keyboard and screen-reader testing, precisely because an automated checkpoint pass would
+overstate what has been established. A single examiner-found failure would falsify a blanket
+conformance claim, whereas the scoped and evidenced claim is defensible.
+
+\section{Positioning: A Capability Audit of Existing Activity-Discovery Tools}
+\label{sec:audit}
+The design choices above are made against a backdrop of existing tools for discovering physical-activity
+opportunities, and the position of this work is best established not by assertion but by a dated
+capability audit that compares systems on fixed dimensions. Two broad categories of comparator are
+relevant. The first is consumer-facing discovery and booking services built on the same open-data
+ecosystem, of which OpenActive-aligned activity finders such as Get Active are representative; the
+second is commercial aggregation and booking infrastructure that consolidates provider feeds, of which
+imin is an example. Alongside these sit grounded question-answering assistants from the public sector
+and data-grounded generation efforts more broadly, which share the reliability concerns discussed in
+Section~\ref{sec:grounded}.
+
+The audit compares these systems on dimensions that follow directly from the project's aims rather than
+on general feature counts: whether a tool distinguishes an activity being absent from the observed
+catalogue from the tool simply lacking the evidence to decide; whether it communicates uncertainty and
+provenance to the user or presents all results with uniform confidence; whether any factual claim it
+displays is independently checkable; whether it abstains or qualifies rather than answering when
+evidence is insufficient; and whether its accessibility is evaluated rather than assumed. Because these
+dimensions require inspecting each system as deployed at a specific date, the audit is maintained as
+dated evidence rather than reported from memory, and this dissertation does not claim priority, novelty
+or superiority over any named incumbent in advance of that comparison. What the audit establishes is
+the position of the contribution: the specific combination of evidence-bounded decisions, independently
+checkable receipts, and an interface disciplined not to convert absence into denial is the gap the
+present design occupies. Establishing that this combination outperforms an incumbent would require the
+controlled comparison the evaluation instruments are built to support, and is not claimed here.
+
+
+% #####################################################################
+% FIXES to the EXISTING Chapter 2 text (find-and-replace)
+% #####################################################################
+% (1) §2.2 — remove the editing marker. REPLACE:
+%     "...to support a query result (Razniewski & Nutt, 2014) Need to check properly."
+%   WITH:
+%     "...to support a given query result, independent of which values happen to be present
+%      \cite{razniewski2014completeness}."
+%   THEN verify that Razniewski & Nutt reference against the version of record and add its bib entry.
+%
+% (2) §2.5 — the forward reference now points to the audit section. REPLACE:
+%     "examined further in the capability audit (Section 2.9)."
+%   WITH:
+%     "examined further in the capability audit (Section~\ref{sec:audit})."
+%
+% (3) Citation style — the chapter mixes [n] and (Author, year). Cite everything with \cite{key}
+%   and let one \bibliographystyle format them consistently; do not hand-type "(Author, year)".
+%
+% (4) §2.10 cross-refs §2.5 via \ref{sec:grounded}. Add a label to your existing §2.5 heading:
+%     \section{Grounded Conversational AI and its Reliability Limits}\label{sec:grounded}
+%   (or just write "(Section 2.5)" as plain text instead of the \ref).
+
+
+% #####################################################################
+% BIBTEX — add these to your .bib file.  (bucinca / rashkin / power / w3c
+% are already in execution-refs.bib; reuse those keys, don't duplicate.)
+% DOIs verified against publisher records; the 4 new entries are below.
+% #####################################################################
+%
+% @article{leesee2004trust,
+%   author  = {Lee, John D. and See, Katrina A.},
+%   title   = {Trust in Automation: Designing for Appropriate Reliance},
+%   journal = {Human Factors}, volume = {46}, number = {1}, pages = {50--80},
+%   year    = {2004}, doi = {10.1518/hfes.46.1.50_30392} }
+%
+% @article{parasuraman1997humans,
+%   author  = {Parasuraman, Raja and Riley, Victor},
+%   title   = {Humans and Automation: Use, Misuse, Disuse, Abuse},
+%   journal = {Human Factors}, volume = {39}, number = {2}, pages = {230--253},
+%   year    = {1997}, doi = {10.1518/001872097778543886} }
+%
+% @inproceedings{bansal2021whole,
+%   author    = {Bansal, Gagan and Wu, Tongshuang and Zhou, Joyce and Fok, Raymond and Nushi, Besmira and Kamar, Ece and Ribeiro, Marco Tulio and Weld, Daniel S.},
+%   title     = {Does the Whole Exceed its Parts? The Effect of {AI} Explanations on Complementary Team Performance},
+%   booktitle = {Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems},
+%   year      = {2021}, doi = {10.1145/3411764.3445717} }
+%
+% @article{tintarev2012evaluating,
+%   author  = {Tintarev, Nava and Masthoff, Judith},
+%   title   = {Evaluating the Effectiveness of Explanations for Recommender Systems},
+%   journal = {User Modeling and User-Adapted Interaction}, volume = {22}, number = {4--5},
+%   pages   = {399--439}, year = {2012}, doi = {10.1007/s11257-011-9117-5} }
