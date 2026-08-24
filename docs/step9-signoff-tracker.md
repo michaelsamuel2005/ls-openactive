@@ -31,11 +31,11 @@ claim stays BLOCKED — correctly.
 
 | Claim | Real event that unlocks it | Eligible signer(s) | Evidence (name · date · ref) | Status |
 |---|---|---|---|---|
-| CL-1 | evidence-semantics + transport review signed; public-safe demo authority records decision | Michael + Wesley | | BLOCKED |
+| CL-1 | evidence-semantics + transport review signed; public-safe demo authority records decision | Michael + Wesley | Michael Samuel · 2026-08-23 · `michael-review-findings.md` (conditions); Wesley · 2026-08-24 · `reviews/wesley-review-c-block-05.md` (conditions, transport half) | BLOCKED |
 | CL-2 | non-author content/HCI review; content sign-off | non-author HCI reviewer | | BLOCKED |
 | CL-3 | Section 09 vocabulary ratified; evidence-semantics review | Michael (RATIFY-09-*) | | BLOCKED |
 | CL-4 | HCI/eval-parity review; public-safe demo gate | non-author HCI / Fahmi | | BLOCKED |
-| CL-5 | security/IAM review (real IAM replaces the stub) | Wesley (RATIFY-15-06) | | BLOCKED |
+| CL-5 | security/IAM review (real IAM replaces the stub) | Wesley (RATIFY-15-06) | Wesley · 2026-08-24 · `reviews/wesley-review-c-block-05.md` · REVIEWED WITH BLOCKING CONDITIONS. **RATIFY-15-06 not issued** — the stub has not been replaced (WY-1 open) | BLOCKED |
 | CL-6 | non-author code review of the checker + Section 09 contract | non-author dev + Michael (RATIFY-09-04) | | BLOCKED |
 | CL-7 | evaluation-parity review; ethics route for any human-effect claim | Fahmi (RATIFY-14-07/08) | | BLOCKED |
 | CL-8 | Section 18 partner-route review + owner named | Section 18 owner | | BLOCKED |
@@ -43,7 +43,7 @@ claim stays BLOCKED — correctly.
 | CL-10 | manual keyboard/screen-reader/AT testing done **and** non-author accessibility review | non-author HCI reviewer (C-BLOCK-03 / RATIFY-14-02) | | BLOCKED |
 | CL-11 | controller/processor + lawful basis + DPIA signed | governance (RATIFY-15-02/04) | | BLOCKED |
 | CL-12 | Bristol PGT ethics determination issued | PGT ethics (RATIFY-15-03) | | BLOCKED |
-| CL-13 | security/assurance review of the app controls | security reviewer (RATIFY-15-07) | | BLOCKED |
+| CL-13 | security/assurance review of the app controls | security reviewer (RATIFY-15-07) — **not yet named; C-BLOCK-04 still PROPOSED** | Findings supplied for that reviewer (WY-2, WY-7, WY-9 + register corrections) · Wesley · 2026-08-24. **Not a RATIFY-15-07 outcome** — institutional authority, cannot be self-signed | BLOCKED |
 | CL-14 | Section 08 accountable owner named (C-BLOCK-01) + evidence-semantics review | Section 08 owner + Michael | | BLOCKED |
 | CL-15 | all load-bearing sources attested (28/28) **and** a non-author checks your records; your §26 acceptance completed | you (reading) + a non-author checker | | BLOCKED |
 

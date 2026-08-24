@@ -106,6 +106,66 @@ _Recorded in `assurance-case.json`: CL-1, CL-3, CL-6, CL-14 reviewer = `conditio
 2026-08-23, REVIEWED WITH BLOCKING CONDITIONS); authority pending. **All four remain BLOCKED** — and
 these are open defects, not just missing signatures._
 
+## SIGN-OFF — transport/versioning, server-side disclosure enforcement & the IAM path
+- **Claim ID:** CL-5 (primary); CL-1 (transport/versioning half)
+- **Claim wording (as seen):** CL-5 — "Restricted staff information cannot leak to the public plane;
+  staff access is role-gated." CL-1 — "Public and staff surfaces never disagree on the retained
+  decision, and restricted staff values cannot change public output."
+- **Artefacts checked:** `packages/application-contracts/c-block-05/` (schemas,
+  `disclosure-classes.json`, `projection_and_invariants.py`, fixtures),
+  `packages/certificate-checker/certificate_checker.py`, `packages/security/`,
+  `apps/public-discovery/server/{main,render}.py`, `apps/staff-assurance/server/{main,render}.py`,
+  `packages/staff-ia/action-card-state-machine.json` — branch `clarence/c-block-05`, commit `e390072`
+- **Method:** ran `projection_and_invariants.py` (8/8 expectations met);
+  `test_certificate_checker.py` (fails in the `requirements.txt` environment — 24 failures, 10
+  surviving mutants, no `jsonschema`; ALL PASS once `jsonschema` is installed);
+  `apps/public-discovery/test_slice.py`, `apps/staff-assurance/test_staff.py`,
+  `packages/security/validate_security.py` (all pass). Then adversarial testing beyond the supplied
+  suites, via `fastapi.testclient` against both apps and direct calls into the checker:
+  (a) injected three undeclared fields at three depths into `supported.json` and read
+  `/api/envelope` — all dropped, all 13 declared staff/research fields absent;
+  (b) set a candidate `provider_link` to `javascript:alert(document.domain)` and read the rendered
+  `href` — served live;
+  (c) requested unmodelled `(frm,to)` pairs on `/action-card/perform` as `analyst`;
+  (d) ran the checker with `allowed_versions: {}` and with individual pins removed;
+  (e) placed regex-dodging staff text in a `PUBLIC_SAFE` field and re-ran `INV-DISCLOSURE`;
+  (f) wrote and ran the schema-annotation/class-map agreement check the README describes;
+  (g) swept every file with no extension filter, plus the last 40 commits, for credentials.
+  Full detail and reproductions: `docs/reviews/wesley-review-c-block-05.md`.
+- **Outcome:** **REVIEWED WITH BLOCKING CONDITIONS — not approved.** Server-side disclosure
+  enforcement is confirmed and holds under adversarial input (question 2: yes). Four release-blocking
+  defects found that the supplied tests do not reach — WY-1 (action-card capability gate fails open:
+  an `analyst` is granted `observed -> sent_by_authorised_role`), WY-2 (`safe_url()`/`csv_field()`/
+  `escape_html()` have no call sites; a `javascript:` provider link renders live), WY-3
+  (`allowed_versions: {}` waives version pinning and returns PASS on a 2019 corpus), WY-4 (no
+  staleness bound exists anywhere in the block). These are open defects, not missing signatures.
+- **Conditions:** CL-5 and CL-1 remain unauthorised. WY-1, WY-2 and WY-3 fixed and re-reviewed;
+  WY-4/WY-5 resolved by design decision (bound release freshness, or record staleness as out of
+  contract scope); WY-11 dependency pin so the Phase B evidence reproduces.
+- **Not covered by this sign-off:**
+  - **`RATIFY-15-06` — NOT ISSUED.** CL-5 unlocks on "real IAM replaces the stub"; the stub has not
+    been replaced. Authentication, identity binding, person-level independence (reviewer ≠ author),
+    audit, session/break-glass/revocation and purpose binding are all still absent — see §4 of the
+    review. `C-BLOCK-04` (who holds the Section 15 authorities) is itself still PROPOSED.
+  - **`RATIFY-15-07` / CL-13 — NOT MINE TO ISSUE** and not issued here. The security review outcome
+    belongs to the institutional security/assurance reviewer (`step9-signoff-tracker.md`,
+    `step3-assurance-map.md`, `signoff-requests.md` #8). My `packages/security/` findings (WY-2, WY-7,
+    WY-9 and the register corrections in §5) are supplied *to* that reviewer, not in place of them.
+  - Infrastructure controls (rate limits, security headers, egress, SBOM, deletion) — mine under
+    Section 16, none of them built yet; recorded as WY-9.
+  - WY-8 — field classes constrain *where* a value sits, not *what* is written into a correctly
+    classified field. Named as a residual risk on CL-1/CL-5; not fixable by projection.
+  - Any evidence-semantics, HCI/accessibility, evaluation or effectiveness claim. MS-2, MS-4 and MS-5
+    from Michael's review remain open and are unaffected by this entry.
+- **Reference:** RATIFY-15-06 — **not issued** (IAM path not yet agreed; design to be drafted against
+  C-BLOCK-04). RATIFY-15-07 — routed to the security/assurance reviewer, unassigned pending C-BLOCK-04.
+- **Signed:** Wesley · 2026-08-24
+
+_Recorded in `assurance-case.json`: CL-5 reviewer = `conditions` (Wesley, 2026-08-24, REVIEWED WITH
+BLOCKING CONDITIONS); authority = pending (RATIFY-15-06 withheld — real IAM does not yet exist).
+CL-1 reviewer note extended with the transport/versioning half. CL-13 untouched — not mine to move.
+**CL-1, CL-5 and CL-13 all remain BLOCKED**, and WY-1..WY-4 are open defects, not missing signatures._
+
 ---
 
 # Pending entries (prepared for the signer — NOT yet signed, NOT yet recorded)

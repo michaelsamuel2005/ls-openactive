@@ -30,7 +30,7 @@
       "harm": "leaked staff information, or public/staff disagreement that misleads a decision",
       "controls": [{ "id": "K-noninterference", "desc": "fail-closed disclosure-class projection; value-level non-interference", "owner": "Clarence" }],
       "test_ids": ["T-contracts", "T-staffslice", "T-publicslice"],
-      "reviewer": { "scope": "evidence semantics + transport", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel (evidence semantics)", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-2/MS-5 (see michael-review-findings.md); transport half still pending Wesley" },
+      "reviewer": { "scope": "evidence semantics + transport", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel (evidence semantics)", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-2/MS-5 (see michael-review-findings.md); transport half still pending Wesley. Transport/versioning half reviewed by Wesley 2026-08-24: REVIEWED WITH BLOCKING CONDITIONS \u2014 WY-3/WY-4/WY-5 (see wesley-review-c-block-05.md)" },
       "residual_risk": "person-level review of projections outstanding",
       "authority": { "decision": "public_safe_demonstration gate", "holder": null, "status": "pending" }
     },
@@ -78,7 +78,7 @@
       "harm": "receipts/lineage/aggregates or research identity exposed publicly",
       "controls": [{ "id": "K-disclosure", "desc": "disclosure classes + server-side role gate + per-role capabilities", "owner": "Clarence + Wesley" }],
       "test_ids": ["T-contracts", "T-staffslice", "T-publicslice"],
-      "reviewer": { "scope": "security / IAM", "eligible_non_author": true, "status": "pending", "name": null },
+      "reviewer": { "scope": "security / IAM", "eligible_non_author": true, "status": "conditions", "name": "Wesley", "date": "2026-08-24", "outcome": "REVIEWED WITH BLOCKING CONDITIONS \u2014 WY-1 (action-card capability gate fails open), WY-2 (sanitisers never called), WY-3 (empty allowed_versions waives version pinning), WY-4 (no staleness bound); see docs/reviews/wesley-review-c-block-05.md. RATIFY-15-06 NOT issued \u2014 real IAM has not replaced the stub" },
       "residual_risk": "real IAM/break-glass is Wesley's; role gate here is a stub",
       "authority": { "decision": "security review + RATIFY-15-06", "holder": null, "status": "pending" }
     },

@@ -72,7 +72,7 @@
 - **Affected / harm:** publishers, staff, public users — receipts/lineage/aggregates or research identity exposed publicly
 - **Controls:** K-disclosure (Clarence + Wesley)
 - **Evidence (tests):** T-contracts ✅, T-staffslice ✅, T-publicslice ✅
-- **Reviewer:** security / IAM — pending
+- **Reviewer:** security / IAM — conditions
 - **Authority:** security review + RATIFY-15-06 — pending
 - **Residual risk:** real IAM/break-glass is Wesley's; role gate here is a stub
 - **Maturity verdict:** BLOCKED  — blocked on: non-author review pending; authority decision pending
