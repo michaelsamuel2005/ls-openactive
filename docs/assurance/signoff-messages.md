@@ -1,192 +1,108 @@
-# Sign-off outreach — ready-to-send messages
+# Sign-off request messages — C-BLOCK-05
 
-**Purpose.** Each message below asks one person (or the team, or an institution) for the *real*
-review or decision that unblocks specific assurance claims. A claim flips BLOCKED → AUTHORISED only
-when a genuine disposition comes back — **a name, a date, and a reference** — which is then recorded
-in `docs/assurance/assurance-case.json` and confirmed by re-running `validate_assurance.py`.
+Record of the re-review requests sent to each reviewer after the C-BLOCK-05 fixes landed.
+Kept here so that every request is auditable against the commit it was pinned to, and so
+that `signoffs.md` entries can be traced back to the request that prompted them.
 
-**Ask everyone to reply in this one format:**
-> `<name>, <date> — approved / approved-with-conditions / not-yet — <reference or decision-log ID>`
-> (plus a short list of any findings to fix)
+| | |
+|---|---|
+| Branch | `clarence/c-block-05` |
+| Commit pinned in all three messages | `7cf65ca` |
+| Sent by | Clarence |
+| Recipients | Michael, Wesley, Fahmi |
+| Recorded | 2026-08-24 |
 
-**Branch under review:** `clarence/c-block-05` · **Repo:** `ls-openactive`
-
----
-
-## Tracker
-
-| # | To | Unblocks | Kind | Status |
-|---|----|----------|------|--------|
-| 1 | Michael | CL-1, CL-3, CL-6, CL-14 | in-team review + ratification | not sent |
-| 2 | Wesley | CL-1, CL-5, CL-13 | in-team review + ratification | not sent |
-| 3 | Fahmi | CL-7 (+ CL-4 parity) | in-team review + ratification | not sent |
-| 4 | Non-author HCI/accessibility reviewer *(to be named — not Clarence)* | CL-2, CL-4, CL-10 | in-team review | not sent |
-| 5 | Team meeting | CL-9, CL-8, + demo/§08/§18 authorities on CL-1, CL-4, CL-14 | ratification | not sent |
-| 6 | Data-governance / DPIA authority | CL-11 | institutional determination | not sent |
-| 7 | Bristol PGT research-ethics route | CL-12 (+ ethics part of CL-7) | institutional determination | not sent |
-| 8 | You (Clarence) + a non-author spot-check | CL-15 | own work + check | not sent |
+> Every message below is pinned to `7cf65ca`. If the branch moves, do **not** edit these
+> messages — send a new request against the new tip and add it as a new section. Sign-off
+> is against a commit, not against a branch name.
 
 ---
 
-## 1 → Michael  (evidence semantics / Section 09) — unblocks CL-1, CL-3, CL-6, CL-14
+## Status at time of sending
 
-**Subject:** Review request — evidence-contract & checker on `clarence/c-block-05` (CL-1/3/6/14)
+| Message | Reviewer | Claims | Findings sent for re-review | Asked for | Still open after re-review |
+|---|---|---|---|---|---|
+| 1 | Michael | CL-1, CL-3, CL-6, CL-14 | MS-1, MS-3, MS-6, MS-7, MS-8, MS-9 | Re-review at `7cf65ca`; one follow-up `signoffs.md` entry per finding | MS-2, MS-4, MS-5 (receipt semantics + crypto-binding); MS-10 (attribute↔claim binding) → `RATIFY-09-04`, `RATIFY-09-05` |
+| 2 | Wesley | CL-1, CL-5, CL-13 | WY-1, WY-2, WY-3, WY-11 | Re-review at `7cf65ca`; follow-up `signoffs.md` entries | CL-5 real IAM (`RATIFY-15-06` withheld); WY-4, WY-5 design conversation; CL-13 with institutional security reviewer (`RATIFY-15-07`) |
+| 3 | Fahmi | CL-7 | M-1, M-3, M-4, M-5, M-6 all closed | Final pass once M-2 lands, then upgrade to **APPROVED** and issue `RATIFY-14-07/08` | M-2 — terminal referent produced and verified by the evidence engine (owner not yet assigned) |
+
+---
+
+## 1. → Michael — re-review (CL-1, CL-3, CL-6, CL-14)
+
+**Subject:** All six of my fixes are in at `7cf65ca` — re-review?
 
 Hi Michael,
 
-Could you do a non-author review of the application-facing use of the evidence contract on
-`clarence/c-block-05`? Specifically:
+Every finding of yours that was mine to fix is done and pushed, at branch `clarence/c-block-05`, commit **`7cf65ca`**, each with the adversarial test that would have caught it:
 
-- `packages/application-contracts/c-block-05/` — does every application-facing state map to a valid,
-  distinguishable typed decision, and can any claim resolve to a receipt and a compatible release?
-- `packages/certificate-checker/` — is the certificate/witness shape and the checker contract
-  sufficient, versioned and fail-closed from a consumer's view? (run `python test_certificate_checker.py`)
-- the conversation route (`apps/public-discovery/test_conversation.py`) — does the interface ever
-  strengthen, suppress or confuse a state?
-- `RATIFY-09-04` (CA-2): is it acceptable for the claim-contract author to also author the production
-  interpreter, or must that pair be split?
+- **MS-1** — public projection drops non-verified claim tuples entirely (`test_slice.py`).
+- **MS-3** — checker enforces `certificate.schema.json` + context at runtime (`schema_extra_field`).
+- **MS-6** — state-transition check against the manifest (`bad_transition`).
+- **MS-7** — incompatible decision combos rejected + checker's own version enforced (`incompatible_decision`, `caller_asserted_checker`).
+- **MS-8** — the `check(checks=[])` bypass is gone (`_run_checks([])` fails closed).
+- **MS-9** — conversation no longer drops/reverses constraints or injects step-free (4 tests).
 
-Please send back, in the format above: your review outcome + name + date; the **Section 09 vocabulary
-ratification** reference; and the `RATIFY-09-04` and `RATIFY-09-05` decision-log IDs. Aim for [date]?
+Could you re-review at `7cf65ca` and, for each you're satisfied with, add a follow-up entry to `docs/assurance/signoffs.md` (per your one-entry-per-finding rule)? To fully close CL-1/3/6/14 we still need the two joint pieces — **MS-2, MS-4, MS-5** (receipt semantics + crypto-binding to the `DecisionEnvelope`) and **MS-10** (the attribute↔claim binding that defines "verifier-approved"). Can we book a short session to freeze that part of the §09 contract and record `RATIFY-09-04`/`RATIFY-09-05`?
 
-Thanks,
-Clarence
+Thanks, Clarence
 
 ---
 
-## 2 → Wesley  (transport, versioning, IAM / Section 16) — unblocks CL-1, CL-5, CL-13
+## 2. → Wesley — re-review (CL-1, CL-5, CL-13)
 
-**Subject:** Review request — versioning, disclosure enforcement & security (CL-1/5/13)
+**Subject:** WY-1/2/3/11 fixed at `7cf65ca` — re-review?
 
 Hi Wesley,
 
-Could you review, on `clarence/c-block-05`:
+Your "fix first" four are done and pushed at commit **`7cf65ca`**, each with its test:
 
-- version/compatibility rules and fail-closed behaviour on stale/incompatible releases
-  (`packages/application-contracts/c-block-05/`);
-- whether the field-level disclosure classes are enforceable **server-side**
-  (`disclosure-classes.json`, `projection_and_invariants.py`);
-- the plan to replace the demonstration role-gate stub with real authentication/IAM;
-- application-facing security controls (`packages/security/`: sanitisers, threat register, secret scan).
+- **WY-1** — `_cap_for` default-denies; `/action-card/perform` rejects any unmodelled `(frm,to)` (analyst `observed→sent_by_authorised_role` = 403).
+- **WY-2** — `safe_url()` wired into `build_view`; a `javascript:` provider link renders empty.
+- **WY-3** — `_c_version` fails closed on empty/partial `allowed_versions` (the 2019-corpus PASS is gone).
+- **WY-11** — `jsonschema` + `fastapi/jinja2/uvicorn/httpx` pinned in `requirements.txt`.
 
-Please send back: outcome + name + date; the `RATIFY-15-06` (IAM) reference; and the `RATIFY-15-07`
-(security review) reference. If a separate security reviewer owns `RATIFY-15-07`, let me know and I'll
-route that part to them. Aim for [date]?
+Could you re-review at `7cf65ca` and add your follow-up entries to `signoffs.md`? To fully close: **CL-5** still needs real IAM to replace the stub (so `RATIFY-15-06` stays withheld — let's draft that against C-BLOCK-04 and take it at the team meeting); **WY-4/WY-5** (staleness bound + app-side version gate) need the short design conversation you offered; and **CL-13** I've routed to the institutional security reviewer with WY-7 and your threat-register corrections, since `RATIFY-15-07` isn't yours to issue. Full disposition is in `docs/reviews/wesley-review-response.md`.
 
-Thanks,
-Clarence
+Thanks, Clarence
 
 ---
 
-## 3 → Fahmi  (evaluation) — unblocks CL-7 (and the CL-4 parity check)
+## 3. → Fahmi — close-out (CL-7)
 
-**Subject:** Confirm evaluation-parity sign-off + book the benchmark session (CL-7)
+**Subject:** CL-7 — M-6 closed; only M-2 (evidence engine) remains
 
 Hi Fahmi,
 
-Following your review of `condition-manifest.json`, the four points (task count, origin/publisher,
-repair minting, vintage) are actioned and validator-enforced — see
-`packages/evaluation/fahmi-review-response.md` and `python packages/evaluation/validate_conditions.py`.
+Thanks for the M-6 re-verification. Your review side of CL-7 is effectively complete — the manifest findings (M-1/3/4/5) and M-6 are all closed and logged in `signoffs.md`. The single remaining blocker, **M-2**, is the shared terminal referent being *produced and verified by the evidence engine*, which is out of my stream.
 
-Could you confirm the fixes address your review and **sign the evaluation-parity gate**, and let's
-book the session to mint the ≥20-task benchmark set against your power target? Please also confirm the
-HCI/evaluation-parity view for CL-4.
+So there's nothing further for you on the manifest. Once the evidence-engine owner produces the verified referent, could you do a final pass and, if satisfied, upgrade your entry to **APPROVED** and issue `RATIFY-14-07/08`? I'll hand M-2 to whoever owns the engine and copy you when the referent lands.
 
-Send back: confirmed / remaining points + name + date, and the `RATIFY-14-07/08` reference. (The
-ethics-route part of CL-7 is tracked separately under the PGT ethics submission.) Aim for [date]?
-
-Thanks,
-Clarence
+Thanks, Clarence
 
 ---
 
-## 4 → [NAME the non-author HCI / accessibility reviewer] — unblocks CL-2, CL-4, CL-10
+## What re-review can and cannot close
 
-> **First action for the team:** name an eligible non-author reviewer for this — it **cannot be
-> Clarence**, who built the interfaces (`RATIFY-14-02` / C-BLOCK-03).
+Re-review lets each reviewer upgrade REVIEWED-WITH-CONDITIONS → APPROVED on the findings
+that were fixed at `7cf65ca`. It does **not** by itself authorise the underlying claims,
+because for each of these claims something remains that is not the reviewer's to give:
 
-**Subject:** Accessibility & content review request — public/staff apps (CL-2/4/10)
+| Claim(s) | Remaining blocker | Owner | Gate |
+|---|---|---|---|
+| CL-1, CL-3, CL-6, CL-14 | §09 contract freeze — MS-2/4/5 (receipt semantics + crypto-binding to `DecisionEnvelope`), MS-10 (attribute↔claim binding) | Clarence + Michael, jointly | `RATIFY-09-04`, `RATIFY-09-05` |
+| CL-5 | Real IAM replacing the stub, designed against C-BLOCK-04 | Clarence + Wesley | `RATIFY-15-06` (withheld) |
+| CL-7 | M-2 — terminal referent produced *and verified* by the evidence engine | Evidence-engine owner — **unassigned** | `RATIFY-14-07/08` (Fahmi, after final pass) |
+| CL-13 | Institutional security review of WY-7 + threat-register corrections | Institutional security reviewer | `RATIFY-15-07` (not Wesley's to issue) |
 
-Hi [name],
+Separately, the authority gates — ratifications, institutional security, and the
+demonstration gate — sit outside the code review stream entirely and are not affected by
+anything at `7cf65ca`.
 
-Could you do an independent (non-author) review of the two applications on `clarence/c-block-05`?
+**Realistic outcome of these three messages:** the fixed findings get signed off, four
+claims move close to clearing, and what remains is joint work plus authority items. Not
+15/15 — but the movement is real, and the remainder is now named and owned rather than
+diffuse.
 
-- Run manual keyboard, focus and screen-reader testing on the declared browser × assistive-technology
-  matrix (`apps/public-discovery/`, `apps/staff-assurance/`; `a11y_check.py` is only a partial input).
-- Confirm the wording never over-claims and that each evidence state (supported / bounded non-match /
-  unknown / conflicting) is distinguishable and never rendered as a negative fact.
-- Confirm map/list/compare/browse routes preserve the certified slate and order.
-
-Please send back: the tested matrix + findings + name + date; the **content sign-off**; and the
-**accessibility statement** text + `RATIFY-14-02`. Aim for [date]?
-
-Thanks,
-Clarence
-
----
-
-## 5 → Team meeting agenda item — unblocks CL-9 (and the authorities on CL-1, CL-4, CL-8, CL-14)
-
-**Agenda: assurance ratifications (5 min).** Please minute these with real decision-log IDs:
-
-1. Ratify the reconciliation register (`RATIFY-19-04`) → **CL-9**.
-2. Name the accountable **Section 08 owner** (bind to a real canonical decision-log ID, *not* an
-   invented `RATIFY-08-*`; C-BLOCK-01) → enables **CL-14**.
-3. Name the public/staff **product / demonstration lead** and issue the `public_safe_demonstration`
-   gate → authorities on **CL-1** and **CL-4**.
-4. **Section 18 partner-route owner** to sign the governed-action route → **CL-8**.
-
-Please send back the decision-log IDs + date for each.
-
----
-
-## 6 → Data-governance / DPIA authority — unblocks CL-11
-
-**Subject:** DPIA / controller-processor determination — telemetry & dialogue-log path
-
-This is a **formal determination**, not a verbal sign-off. Please issue (or point me to) the
-controller/processor determination, the lawful-basis finding, and the DPIA outcome for the telemetry
-and dialogue-log data path (`packages/evaluation/event-schema.json` is transient-by-default by
-construction; the privacy/telemetry write-up is in `docs/applications/C-13-privacy-telemetry.md`).
-
-Send back: the DPIA reference / decision (`RATIFY-15-02/04`). Until that reference exists, CL-11 stays
-blocked — which is correct.
-
----
-
-## 7 → Bristol PGT research-ethics route — unblocks CL-12 (and the ethics part of CL-7)
-
-**Subject:** PGT research-ethics submission — status & approval reference
-
-Also a **formal determination**. The ethics application, participant materials and data plan are
-drafted (`docs/assurance/ethics-application-outline.md`). Please confirm submission and, when issued,
-the approval reference (`RATIFY-15-03`). Until that reference exists, CL-12 stays blocked and the
-project runs under the no-study fallback (which yields real technical/accessibility/replay evidence
-with no participant claim).
-
-Send back: submission confirmation + the approval reference when issued.
-
----
-
-## 8 → You (Clarence) + a non-author spot-check — unblocks CL-15
-
-Not an outreach message — your own work:
-
-1. Finish the K7 reading: complete every load-bearing row in `docs/assurance/foundation-matrix.json`
-   (personally read, version-of-record DOI verified, your own verdict recorded) until
-   `reading-log.md` reaches 28/28.
-2. Record your §26 acceptance.
-3. Ask **one non-author** to spot-check that the attested records match the primary sources, and to
-   reply with name + date.
-
-That closes CL-15 without needing anyone external.
-
----
-
-## When a reply comes back
-
-Paste it here (or into this file). I will set that claim's `reviewer` and/or `authority` block in
-`assurance-case.json` — `status: "done"`, plus the name, date and reference — and re-run
-`python docs/assurance/validate_assurance.py` so the claim flips **BLOCKED → AUTHORISED**, with the
-evidence on record. When all fifteen carry a real disposition, the run reports **15 authorised** — and
-every one is true.
+> This record covers only the claims named above (CL-1, CL-3, CL-5, CL-6, CL-7, CL-13,
+> CL-14). It makes no statement about the other claims in the set.
