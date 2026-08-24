@@ -149,6 +149,14 @@ def run():
         print(f"[{'OK ' if ok else 'BAD'}] role {role:9s} {frm} -> {to} = {got} (expect {exp})")
         fails += 0 if ok else 1
 
+    # WY-1 (Wesley 2026-08-24): the perform endpoint enforces the state machine — an unmodelled
+    # (frm,to) pair is refused, so an analyst cannot be told it may "send".
+    r = client.get("/action-card/perform",
+                   params={"frm": "observed", "to": "sent_by_authorised_role"}, headers={"x-staff-role": "analyst"})
+    wy1 = r.status_code == 403
+    print(f"[{'OK ' if wy1 else 'BAD'}] WY-1 unmodelled transition refused (analyst observed->sent_by_authorised_role = {r.status_code}, expect 403)")
+    fails += 0 if wy1 else 1
+
     print("\nRESULT:", "ALL STAFF SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 

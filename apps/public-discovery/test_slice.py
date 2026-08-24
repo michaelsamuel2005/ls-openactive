@@ -155,6 +155,17 @@ def main_run():
     else:
         print("[OK ] MS-1: non-verified claim tuple removed from public projection")
 
+    # WY-2 (Wesley 2026-08-24): a javascript: provider link must be sanitised out at the render boundary
+    _v = render.build_view({"action_kind": "discovery_decision", "payload": {"decision": {
+        "terminal_decision": "supported_match",
+        "candidates": [{"candidate_id": "sess-1", "rank": 1, "pool": "supported",
+                        "provider_link": "javascript:alert(document.domain)", "attributes": []}]}}})
+    _pl = _v["candidates"][0]["provider_link"]
+    if _pl:
+        print(f"[BAD] WY-2: unsafe provider_link survived render: {_pl!r}"); fails += 1
+    else:
+        print("[OK ] WY-2: unsafe provider_link sanitised to empty at the render boundary")
+
     print("\nRESULT:", "ALL SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 

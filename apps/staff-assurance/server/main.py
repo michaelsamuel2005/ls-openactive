@@ -53,8 +53,13 @@ TRANSITION_CAPABILITY = {
 }
 
 
+_DENY = "__deny__"  # sentinel capability no role holds; default-deny for unmodelled transitions (WY-1)
+
+
 def _cap_for(frm, to):
-    return TRANSITION_CAPABILITY.get((frm, to), "view")
+    # WY-1 (Wesley 2026-08-24): an unmodelled transition must grant NO capability, not "view" (which
+    # every role holds). Fail closed.
+    return TRANSITION_CAPABILITY.get((frm, to), _DENY)
 
 
 def _can(role, capability):
@@ -148,7 +153,9 @@ def action_card_perform(request: Request, frm: str, to: str):
         return _forbidden(request)
     cap = _cap_for(frm, to)
     ctx = {"role": role, "frm": frm, "to": to, "capability": cap}
-    if not _can(role, cap):
+    # WY-1: the endpoint — not just the offered UI transitions — enforces the state machine. Reject any
+    # request asserting an unmodelled (frm,to) pair, and any role lacking the capability.
+    if (frm, to) not in TRANSITION_CAPABILITY or not _can(role, cap):
         return templates.TemplateResponse(request, "not_permitted.html", ctx, status_code=403)
     return templates.TemplateResponse(request, "performed.html", ctx)
 

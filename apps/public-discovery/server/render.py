@@ -15,8 +15,11 @@ CB05 = os.path.join(REPO, "packages", "application-contracts", "c-block-05")
 CONTENT = os.path.join(REPO, "packages", "accessible-design-system", "content")
 SCEN = os.path.join(HERE, "scenarios")
 
+SEC = os.path.join(REPO, "packages", "security")
 sys.path.insert(0, CB05)
+sys.path.insert(0, SEC)
 import projection_and_invariants as proj  # noqa: E402
+from sanitize import safe_url              # noqa: E402  (WY-2: sanitise provider links at the render boundary)
 
 _FIELDS, _PLANES = proj.load_classes()
 _LEX = json.load(open(os.path.join(CONTENT, "evidence-language.json")))
@@ -94,7 +97,7 @@ def build_view(pub):
             })
         cands.append({
             "id": c["candidate_id"], "rank": c["rank"], "pool": c["pool"],
-            "provider_link": c.get("provider_link", ""), "attributes": attrs,
+            "provider_link": safe_url(c.get("provider_link", "")), "attributes": attrs,
         })
     v["candidates"] = cands
     return v

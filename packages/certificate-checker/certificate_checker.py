@@ -134,9 +134,18 @@ def _c_version(cert, ctx):
     if cert.get("compatible_release_root") != man.get("compatible_release_root"):
         return "compatible_release_root does not match the release manifest"
     allowed = man.get("allowed_versions", {})
-    for k, want in allowed.items():
-        if cv.get(k) != want:
-            return f"version {k}={cv.get(k)!r} not compatible (manifest requires {want!r})"
+    # WY-3 (Wesley 2026-08-24): an empty or partial allowed_versions map must NOT waive version
+    # pinning (fail closed, as certifiable_fragment already does). Every declared version except this
+    # checker's own identity must be pinned by the manifest and match.
+    if not isinstance(allowed, dict) or not allowed:
+        return "release manifest waives version pinning (allowed_versions is empty) — refusing to certify"
+    for k in cv:
+        if k == "checker_version":
+            continue
+        if k not in allowed:
+            return f"version key {k!r} is not pinned by the release manifest (allowed_versions incomplete)"
+        if cv.get(k) != allowed[k]:
+            return f"version {k}={cv.get(k)!r} not compatible (manifest requires {allowed[k]!r})"
     return None
 
 

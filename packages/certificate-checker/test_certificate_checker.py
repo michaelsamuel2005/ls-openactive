@@ -97,6 +97,8 @@ def _incompatible_decision(c, x): c["claimed"]["terminal_decision"] = "evidence_
 def _bad_transition(c, x):       c["state_transition"]["to_state"] = "results_leak"             # not a permitted transition (MS-6)
 def _caller_asserted_checker(c, x):                                                             # MS-7 checker version
     c["versions"]["checker_version"] = "chk-9.9"; x["manifest"]["allowed_versions"]["checker_version"] = "chk-9.9"
+def _empty_allowed_versions(c, x): x["manifest"]["allowed_versions"] = {}                        # WY-3 fail-open
+def _unpinned_version_key(c, x):   x["manifest"]["allowed_versions"].pop("corpus_version", None)  # WY-3 partial pin
 
 NEGATIVES = [
     ("missing_witness",      "missing witness",                       _missing_witness,      C.FAIL_MISSING_WITNESS),
@@ -116,6 +118,8 @@ NEGATIVES = [
     ("incompatible_decision","incompatible decision combination",      _incompatible_decision, C.FAIL_MALFORMED),
     ("bad_transition",       "impermissible state transition",         _bad_transition,       C.FAIL_MALFORMED),
     ("caller_asserted_checker","caller-asserted checker version",       _caller_asserted_checker, C.FAIL_VERSION_MISMATCH),
+    ("empty_allowed_versions", "empty allowed_versions waives pinning",  _empty_allowed_versions,  C.FAIL_VERSION_MISMATCH),
+    ("unpinned_version_key",   "partial allowed_versions (unpinned key)", _unpinned_version_key,   C.FAIL_VERSION_MISMATCH),
 ]
 
 
