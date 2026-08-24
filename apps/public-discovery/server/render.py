@@ -55,14 +55,27 @@ def _drop_unverified_claims(env):
         dec["claims"] = [c for c in dec["claims"] if c.get("verification") == "verified"]
 
 
+def _sanitise_provider_links(pub):
+    """WY-2a (Wesley re-review 2026-08-24): sanitise provider links at the load_public / JSON boundary,
+    so /api/envelope (which returns load_public directly) cannot serve a javascript: URL — not only the
+    build_view HTML path."""
+    dec = (pub.get("payload") or {}).get("decision") or {}
+    for c in dec.get("candidates", []):
+        if isinstance(c, dict) and "provider_link" in c:
+            c["provider_link"] = safe_url(c.get("provider_link", ""))
+
+
 def load_public(scenario):
     """Load the staff-complete scenario envelope and return ONLY its public projection. Non-verified
-    claim tuples are removed entirely first (MS-1), so no unverified claim content survives even
-    though the verification field itself is staff-only."""
+    claim tuples are removed entirely first (MS-1); provider links are sanitised here so the JSON
+    boundary is covered too, not only build_view (WY-2a)."""
     env = json.load(open(os.path.join(SCEN, scenario + ".json")))
     _drop_unverified_claims(env)
     pub = proj.project(env, _FIELDS, set(_PLANES["public"]))
-    return {} if pub is proj.DROP else pub
+    if pub is proj.DROP:
+        return {}
+    _sanitise_provider_links(pub)
+    return pub
 
 
 def build_view(pub):

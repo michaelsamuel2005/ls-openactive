@@ -166,6 +166,14 @@ def main_run():
     else:
         print("[OK ] WY-2: unsafe provider_link sanitised to empty at the render boundary")
 
+    # WY-2a (Wesley re-review 2026-08-24): the JSON boundary (load_public) must also sanitise links
+    _pub2 = {"payload": {"decision": {"candidates": [{"candidate_id": "c1", "provider_link": "javascript:alert(1)"}]}}}
+    render._sanitise_provider_links(_pub2)
+    if _pub2["payload"]["decision"]["candidates"][0]["provider_link"]:
+        print("[BAD] WY-2a: /api/envelope boundary still serves an unsafe provider_link"); fails += 1
+    else:
+        print("[OK ] WY-2a: provider link sanitised at the load_public / JSON boundary too")
+
     print("\nRESULT:", "ALL SLICE CHECKS PASS" if fails == 0 else f"{fails} FAILURE(S)")
     return 1 if fails else 0
 
