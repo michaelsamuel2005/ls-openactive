@@ -166,6 +166,65 @@ BLOCKING CONDITIONS); authority = pending (RATIFY-15-06 withheld — real IAM do
 CL-1 reviewer note extended with the transport/versioning half. CL-13 untouched — not mine to move.
 **CL-1, CL-5 and CL-13 all remain BLOCKED**, and WY-1..WY-4 are open defects, not missing signatures._
 
+## SIGN-OFF — WY-1/WY-2/WY-3/WY-11 closure (re-review)
+- **Claim ID:** CL-5 (primary); CL-1 (transport/versioning half) — follow-up to entry of 2026-08-24
+- **Artefacts checked:** `apps/staff-assurance/server/main.py`,
+  `apps/public-discovery/server/render.py`, `packages/certificate-checker/certificate_checker.py`,
+  `requirements.txt`, `packages/staff-ia/action-card-state-machine.json`,
+  `packages/certificate-checker/certificate.schema.json`,
+  `apps/public-discovery/client/src/{enhance.ts,compare.tsx,types.ts}`,
+  `packages/security/threat-register.json`, `docs/reviews/wesley-review-response.md` — branch
+  `clarence/c-block-05`, commit `7cf65ca` (branch head `ca74024` is docs-only, so this is the head's
+  code state)
+- **Method:** re-ran the exact reproductions from my 2026-08-24 review against `7cf65ca`, not the
+  diff. (a) the four unmodelled `(frm,to)` pairs on `/action-card/perform` as `analyst`, plus seven
+  modelled transitions across all three roles as controls, plus a set-comparison of
+  `TRANSITION_CAPABILITY` against the state machine's declared transitions; (b) `provider_link` set
+  to `javascript:alert(document.domain)` read back from `/discover`, the detail page **and**
+  `/api/envelope`, and traced whether the enhancement client renders it; (c) the empty and partial
+  `allowed_versions` cases, plus golden/genuine-mismatch/null/omitted-key controls, plus a check of
+  whether the manifest-pins-an-absent-key path is reachable given `_c_schema` ordering; (d) built a
+  clean virtualenv from the new `requirements.txt` block alone and ran all five suites in it, and
+  simulated a `jsonschema` ImportError to confirm the degradation path is unchanged. All supplied
+  suites and all eight validators green at `7cf65ca`.
+- **Outcome:** **REVIEWED — WY-1, WY-3 and WY-11 CLOSED on this commit; WY-2 closed on the reported
+  path.** All four unmodelled transitions now 403 with no over-correction (capability table and state
+  machine are in exact 15/15 bijection); both `allowed_versions` cases now `FAIL_VERSION_MISMATCH`
+  with genuine mismatches still detected; the Phase B evidence reproduces from a clean install
+  (checker suite ALL PASS, previously 24 failures / 10 surviving mutants). This does **not** authorise
+  CL-5 or CL-1.
+- **Conditions:** CL-1 and CL-5 remain unauthorised. WY-2a (below) folded into the WY-4/WY-5 design
+  session; WY-4, WY-5, WY-6, WY-9, WY-10 open as dispositioned in `wesley-review-response.md`.
+- **Not covered by this sign-off:**
+  - **WY-2a — NEW, open.** `safe_url()` is wired into `render.build_view` (the SSR path) but
+    `/api/envelope` returns `render.load_public(...)`, which does not pass through it — the JSON
+    contract boundary still emits `javascript:alert(document.domain)`. Not exploitable today
+    (`compare.tsx` never renders `provider_link`), but `client/src/types.ts` declares that field as
+    part of the public contract boundary, so the next consumer inherits an unsanitised URL. One line:
+    sanitise in `load_public()` so both exits inherit it.
+  - **WY-3a — NEW, open (very low).** `_c_version` skips `checker_version` in the manifest loop.
+    Correct as far as MS-7 goes, but a manifest pinning a *different* checker version (or omitting it)
+    is silently tolerated and `PASS`es — a release/tooling mismatch that goes unreported.
+  - **`RATIFY-15-06` — STILL NOT ISSUED.** The fixes improve the stub; they do not make it real IAM.
+    CL-5's unlock condition ("real IAM replaces the stub") is unchanged, and authentication, identity
+    binding, reviewer≠author, audit, session/break-glass/revocation and purpose binding are all still
+    absent. To be drafted against C-BLOCK-04 and ratified at the team meeting.
+  - **`RATIFY-15-07` / CL-13 — still not mine to issue.** WY-7 and the threat-register corrections —
+    restated against `7cf65ca` in the re-review section of `wesley-review-c-block-05.md`, since two of
+    my original reasons have changed — travel to the institutional security reviewer. The register was
+    not modified by `7cf65ca`; `authorization`, `unsafe_html_url`, `spreadsheet_formula_injection` and
+    `receipt_forgery_version` all still read `mitigated` and in my view should read `partial`.
+  - WY-8 residual risk unchanged; infrastructure controls (Section 16) unchanged and unbuilt.
+  - Any evidence-semantics, HCI/accessibility, evaluation or effectiveness claim. MS-2, MS-4 and MS-5
+    from Michael's review are unaffected by this entry.
+- **Reference:** RATIFY-15-06 — **not issued**. RATIFY-15-07 — routed, not mine.
+- **Signed:** Wesley · 2026-08-24
+
+_Recorded in `assurance-case.json`: CL-5 reviewer stays `conditions` (Wesley, 2026-08-24), outcome
+updated to note WY-1/WY-2/WY-3/WY-11 closed at `7cf65ca` with WY-2a/WY-3a opened; authority still
+`pending`. **CL-1, CL-5 and CL-13 all remain BLOCKED** — WY-4/WY-5 need the design decision and CL-5
+needs real IAM._
+
 ---
 
 # Pending entries (prepared for the signer — NOT yet signed, NOT yet recorded)

@@ -333,3 +333,134 @@ WY-1, WY-2 and WY-3 are each a few lines and each turns a currently-false assura
 one. WY-11 is a one-line dependency pin that makes the Phase B evidence reproducible. Those four are
 worth doing before the report freeze; WY-4/WY-5 need a short design conversation; the rest can be
 recorded and scheduled. Happy to patch WY-1/WY-2/WY-3/WY-11 myself if that is faster — say the word.
+
+---
+
+# Re-review at `7cf65ca` — Wesley · 2026-08-24
+
+**Commit re-reviewed:** `7cf65ca` (branch head is `ca74024`; the two commits between are docs-only —
+`signoff-messages.md`, `signoff-outreach-initial.md`, `team-meeting-agenda.md` — so the code state
+signed here is the branch head's code state).
+**Outcome: REVIEWED — WY-1, WY-3 and WY-11 CLOSED; WY-2 closed on the reported path with one residual.
+CL-1 and CL-5 remain BLOCKED. `RATIFY-15-06` still withheld.**
+
+Method: re-ran the exact reproductions from the review above against the new commit, plus controls to
+check the fixes did not over-correct, plus a clean-environment rebuild. I did not review these from
+the diff.
+
+## Closed
+
+**WY-1 — CLOSED.** All four unmodelled pairs that were performed at `e390072` now return 403:
+
+```
+analyst observed        -> sent_by_authorised_role   cap=__deny__  403
+analyst drafted         -> approved_for_route        cap=__deny__  403
+analyst observed        -> approved_for_route        cap=__deny__  403
+analyst anything_at_all -> sent_by_authorised_role   cap=__deny__  403
+```
+
+Seven modelled transitions across all three roles still behave exactly as before (analyst
+`investigated→drafted` 200, analyst `drafted→independently_reviewed` 403, assurance same 200,
+assurance `approved_for_route→sent_by_authorised_role` 403, authoriser same 200, and two more) — no
+over-correction. Better than I asked for: the capability table and
+`action-card-state-machine.json` are now in exact **15/15 bijection**, no declared transition lacks a
+capability and no capability entry is undeclared, so no legitimate UI-offered transition renders as
+`__deny__`. The endpoint check and the sentinel are independently sufficient, which is the right
+shape for something the real IAM will inherit.
+
+**WY-3 — CLOSED.** Both cases that returned `PASS` now fail closed:
+
+```
+allowed_versions = {}                    -> FAIL_VERSION_MISMATCH "release manifest waives version
+                                            pinning (allowed_versions is empty) — refusing to certify"
+allowed_versions missing corpus_version  -> FAIL_VERSION_MISMATCH "version key 'corpus_version' is not
+                                            pinned by the release manifest"
+```
+
+Controls: the golden case still `PASS`es, a genuine version mismatch is still caught with its original
+message, and `allowed_versions: null` also fails closed. The "manifest pins a key the certificate
+omits" gap I flagged as a possibility is **unreachable** — `certificate.schema.json` marks all five
+version keys `required` with `additionalProperties: false`, and `_c_schema` runs before `_c_version`
+in `CHECKS`, so the schema guarantees the key set before the version loop sees it. The ordering is
+load-bearing; worth leaving a comment saying so.
+
+**WY-11 — CLOSED, verified end to end.** I built a clean virtualenv containing only the newly added
+requirements block and ran the Phase B evidence in it:
+
+```
+test_certificate_checker.py   OK   (was: 24 failures, 10 surviving mutants)
+projection_and_invariants.py  OK
+test_slice.py                 OK
+test_staff.py                 OK
+test_conversation.py          OK
+RESULT: ALL CHECKER TESTS PASS
+```
+
+The evidence now reproduces from `requirements.txt` alone. Fail-closed behaviour is unchanged when
+`jsonschema` is genuinely absent — I simulated the import failure and still got
+`FAIL_MALFORMED "jsonschema not installed — cannot enforce the certificate schema"`, so the fix adds
+the dependency without weakening the degradation path. Minor: the comment says "pinned to the tested
+majors" but `>=` is a floor, not a pin; harmless here, just inaccurate wording.
+
+**WY-2 — CLOSED on the reported path.** The original reproduction is gone: with a candidate's
+`provider_link` set to `javascript:alert(document.domain)`, `/discover` now renders only the one safe
+link and suppresses the hostile anchor entirely, and the detail page renders no link. See WY-2a below
+for what the fix does not reach.
+
+## New findings from the re-review
+
+### WY-2a — the sanitiser is on the template boundary, not the contract boundary (low; not blocking)
+
+`safe_url()` is applied in `render.build_view`, which is the SSR path. `/api/envelope` returns
+`render.load_public(...)` — the projection — which never passes through `build_view`, so the JSON
+boundary still emits the raw value:
+
+```
+/discover      href           -> hostile anchor suppressed
+/api/envelope  provider_link  -> 'javascript:alert(document.domain)'
+```
+
+**Not exploitable today:** `compare.tsx` never renders `provider_link`, and `enhance.ts` only fetches
+the envelope for the compare grid. But `client/src/types.ts` declares `provider_link` as part of
+"the PUBLIC ApplicationEnvelope projection (contract boundary from `/api/envelope`)", so any future
+consumer — the enhancement client, a partner, the demo in the report — inherits an unsanitised URL,
+and the control sits on one of two exits rather than on the thing both exits share.
+
+**Fix (one line):** sanitise in `load_public()` instead of `build_view()`; `build_view` then inherits
+it and both boundaries are covered. Keep the `test_slice.py` case and add the API assertion.
+
+### WY-3a — a manifest that disagrees with the checker's identity is silently tolerated (very low)
+
+`_c_version` skips `checker_version` in the manifest loop. That is correct as far as MS-7 goes — the
+checker's self-identity check (`cv["checker_version"] != CHECKER_VERSION`) is strictly stronger than
+a manifest pin, because a caller-supplied manifest cannot be trusted to assert the checker's identity.
+But it means a manifest that *disagrees* is ignored rather than reported:
+
+```
+manifest allowed_versions.checker_version = 'chk-9.9', checker is 'chk-1.0'  -> PASS
+manifest omits checker_version entirely                                      -> PASS
+```
+
+A release pinned to a checker version other than the one actually run is a tooling mismatch that
+currently goes unreported. One line: if the manifest declares `checker_version` and it is not
+`CHECKER_VERSION`, return `FAIL_VERSION_MISMATCH` naming the disagreement.
+
+## Threat-register statuses — restated at `7cf65ca`
+
+All five are still `mitigated`/`partial` as they were; the register was not touched by `7cf65ca`. My
+§5 corrections still stand, with updated reasons, and should travel to the `RATIFY-15-07` reviewer:
+
+| id | now | should be | reason **as of `7cf65ca`** |
+|---|---|---|---|
+| `authorization` | `mitigated` | `partial` | WY-1 fixed, but the role is still caller-asserted — no authentication behind it |
+| `unsafe_html_url` | `mitigated` | `partial` | SSR path fixed; `/api/envelope` still unsanitised (WY-2a) |
+| `spreadsheet_formula_injection` | `mitigated` | `partial` | `csv_field()` still has zero call sites; no export surface exists yet |
+| `receipt_forgery_version` | `mitigated` | `partial` | WY-3 fixed, but WY-4 (no staleness bound) is open |
+| `malicious_staff_action` | `partial` | `partial` | now correct on its merits — the gate it names actually holds |
+
+## Still open
+
+WY-4 and WY-5 (the design conversation — happy to take these at the §09/§16 session with WY-3a and
+WY-2a folded in), WY-6, WY-9, WY-10 as dispositioned; WY-7 routed to `RATIFY-15-07`; WY-8 recorded as
+residual risk. `RATIFY-15-06` remains withheld: the fixes improve the stub, they do not make it real
+IAM, and CL-5's unlock condition is unchanged.
