@@ -30,7 +30,7 @@
       "harm": "leaked staff information, or public/staff disagreement that misleads a decision",
       "controls": [{ "id": "K-noninterference", "desc": "fail-closed disclosure-class projection; value-level non-interference", "owner": "Clarence" }],
       "test_ids": ["T-contracts", "T-staffslice", "T-publicslice"],
-      "reviewer": { "scope": "evidence semantics + transport", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel (evidence semantics)", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-2/MS-5 (see michael-review-findings.md); transport half still pending Wesley. Transport/versioning half reviewed by Wesley 2026-08-24: REVIEWED WITH BLOCKING CONDITIONS — WY-3 closed at 7cf65ca; WY-4/WY-5 still open (see wesley-review-c-block-05.md)" },
+      "reviewer": { "scope": "evidence semantics + transport", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel (evidence semantics) + Wesley (transport)", "date": "2026-08-26", "outcome": "Re-review at 7cf65ca (PR #12): Michael's fixed MS findings APPROVED; CL-1 still blocked on MS-2/MS-5 (joint §09). Transport half — Wesley 2026-08-24: WY-1/2/3/11 closed, WY-4/WY-5 open (see wesley-review-c-block-05.md)" },
       "residual_risk": "person-level review of projections outstanding",
       "authority": { "decision": "public_safe_demonstration gate", "holder": null, "status": "pending" }
     },
@@ -54,7 +54,7 @@
       "harm": "a fluent but unsupported statement is believed",
       "controls": [{ "id": "K-verify", "desc": "deterministic verify-before-render; independent certificate checker", "owner": "Clarence + Michael" }],
       "test_ids": ["T-contracts", "T-checker"],
-      "reviewer": { "scope": "evidence semantics (Section 09)", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-1/MS-2/MS-10 (see michael-review-findings.md)" },
+      "reviewer": { "scope": "evidence semantics (Section 09)", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel", "date": "2026-08-26", "outcome": "Re-review at 7cf65ca (PR #12): MS-1 APPROVED (no conditions); still blocked on MS-2 + MS-10 (joint §09 work) — see michael-review-findings.md / signoffs.md" },
       "residual_risk": "conversational renderer not yet built",
       "authority": { "decision": "Section 09 vocabulary ratification", "holder": null, "status": "pending" }
     },
@@ -90,7 +90,7 @@
       "harm": "a wrong production decision is trusted",
       "controls": [{ "id": "K-checker", "desc": "independent checker; §10.5 negative tests; branch mutation testing", "owner": "Clarence" }],
       "test_ids": ["T-checker"],
-      "reviewer": { "scope": "non-author code review + Section 09 contract", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-2..MS-8 (see michael-review-findings.md)" },
+      "reviewer": { "scope": "non-author code review + Section 09 contract", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel", "date": "2026-08-26", "outcome": "Re-review at 7cf65ca (PR #12): MS-3/MS-6/MS-7/MS-8 APPROVED (MS-3/MS-7 conditions met at 1a9aae8); still blocked on MS-2/MS-4/MS-5 (joint §09 work) — see signoffs.md" },
       "residual_risk": "production/reference/checker discrepancy register empty until production emits certificates",
       "authority": { "decision": "RATIFY-09-04", "holder": null, "status": "pending" }
     },
@@ -186,7 +186,7 @@
       "harm": "a chatbot asserts an unsupported fact or diverges from the certified decision",
       "controls": [{ "id": "K-conversation", "desc": "deterministic typed-intent parse; high-consequence confirmation; resolve to the shared DecisionEnvelope; verified-claims-only rendering; safe degradation", "owner": "Clarence (UX) + Michael (verifier)" }],
       "test_ids": ["T-conversation", "T-contracts"],
-      "reviewer": { "scope": "Section 08 owner + evidence semantics", "eligible_non_author": true, "status": "conditions", "name": "Michael Samuel (evidence semantics)", "date": "2026-08-23", "outcome": "REVIEWED WITH BLOCKING CONDITIONS — MS-9 conversation constraint handling (see michael-review-findings.md); Section 08 owner still to be named" },
+      "reviewer": { "scope": "Section 08 owner + evidence semantics", "eligible_non_author": true, "status": "done", "name": "Michael Samuel (evidence semantics)", "date": "2026-08-26", "outcome": "APPROVED WITH CONDITIONS on re-review at 7cf65ca (PR #12; signoffs.md) — MS-9 approved, the 'inaccessible' condition met at 1a9aae8; finding-side clear. Authority still pending: Section 08 owner + RATIFY-09-05" },
       "residual_risk": "LLM parse/verbalise not yet integrated; Section 08 accountable owner unresolved (C-BLOCK-01)",
       "authority": { "decision": "Section 08 ownership + RATIFY-09-05", "holder": null, "status": "pending" }
     },
