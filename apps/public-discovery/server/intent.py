@@ -25,6 +25,7 @@ SCENARIO_MAP = {
 # A negation must never be read as a positive requirement (MS-9, Michael 2026-08-23):
 # "not wheelchair accessible" must NOT become "requires step-free".
 NEG_ACCESS_RE = re.compile(
+    r"\binaccessible\b|"
     r"\b(?:not|no|without|non[-\s]?)\s+(?:\w+\s+){0,2}?(?:step[-\s]?free|stepfree|wheelchair|accessible)\b",
     re.I)
 # A stated price ceiling cannot be evaluated from the demonstration evidence; it must be surfaced,

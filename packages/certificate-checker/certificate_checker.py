@@ -126,9 +126,10 @@ def _c_malformed(cert, ctx):
 
 
 def _c_version(cert, ctx):
-    # ORDERING (WY-3, Wesley): _c_schema MUST run before this check — it guarantees all five version
-    # keys are present (additionalProperties:false). Reordering CHECKS would reintroduce the
-    # empty/partial allowed_versions fail-open.
+    # ORDERING (WY-3 / MS-3<->MS-7 interlock, Wesley + Michael): _c_schema MUST run before this check.
+    # The schema requires all five version keys (additionalProperties:false), which is what stops a
+    # certificate from OMITTING a version key to dodge the pin loop below (MS-7). Reordering CHECKS
+    # would reintroduce the empty/partial allowed_versions fail-open — do not move _c_schema after this.
     man = ctx["manifest"]
     cv = cert.get("versions", {})
     # MS-7: the certificate must name THIS checker; never trust a caller-asserted checker version.
