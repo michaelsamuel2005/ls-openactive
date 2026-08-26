@@ -258,3 +258,64 @@ needs real IAM._
 `REVIEWED` (findings M-1/M-3/M-4/M-5 addressed), which does **not** flip CL-7 to AUTHORISED. CL-7
 clears only when M-6 is closed (make `envelope_digest` `required` and bump the schema version) and
 M-2's shared referent is produced and verified by the evidence engine.
+
+### Re-review — MS-1 (CL-3)
+
+- **Finding:** MS-1 — Unverified claims survive public projection: failed verification status is removed while the claim content remains.
+- **Artefacts checked:** `apps/public-discovery/server/render.py` (`_drop_unverified_claims`, called in `load_public` before projection); adversarial case in `apps/public-discovery/test_slice.py` — branch `clarence/c-block-05`, commit `7cf65ca`.
+- **Method:** suite re-run at `7cf65ca` in a clean environment (pass; the planted `verification:"failed"` claim carrying `SECRET-UNVERIFIED` does not survive projection). At the reviewed baseline `9b0807d` the fix is absent (`render._drop_unverified_claims` does not exist; the transplanted test fails). Hostile read: a claim with a *missing* verification field is also dropped (fail-closed); the remaining attribute-side question is MS-10, correctly left open.
+- **Outcome:** APPROVED
+- **Conditions:** none.
+- **Not covered:** MS-10 (attribute↔claim binding — joint §09); any commit after `7cf65ca`.
+- **Signed:** Michael Samuel · 2026-08-26
+
+### Re-review — MS-3 (CL-6)
+
+- **Finding:** MS-3 — The checker does not enforce its own JSON Schema — schema-invalid certificates can return PASS.
+- **Artefacts checked:** `packages/certificate-checker/certificate_checker.py` (`_c_schema`, first in the ordered `CHECKS`); `certificate.schema.json` (root `additionalProperties:false`; `versions` requires all five keys); negative case `_schema_extra_field` in `test_certificate_checker.py` — commit `7cf65ca`.
+- **Method:** suite re-run at `7cf65ca` (pass). Exploit reproduced at `9b0807d`: a certificate with an extra field returns **PASS** on the pre-fix checker; returns FAIL_MALFORMED at `7cf65ca`. Hostile read: fail-closed when jsonschema is missing or the schema file is unreadable; context structure also validated.
+- **Outcome:** APPROVED WITH CONDITIONS
+- **Conditions:** add a one-line comment in `_c_version` noting that its per-key pin loop is sound because `_c_schema` runs first and the schema requires the complete `versions` key set — so a future schema edit cannot silently reopen the omit-a-version-key path.
+- **Not covered:** MS-2/4/5 (joint §09); RATIFY-09-04/05.
+- **Signed:** Michael Samuel · 2026-08-26
+
+### Re-review — MS-6 (CL-6)
+
+- **Finding:** MS-6 — State transitions are not checked.
+- **Artefacts checked:** `certificate_checker.py` (`_c_transition` against manifest `allowed_transitions`); negative case `_bad_transition` — commit `7cf65ca`.
+- **Method:** suite re-run at `7cf65ca` (pass). Exploit reproduced at `9b0807d`: a forbidden transition (`…→ results_leak`) returns **PASS** on the pre-fix checker; fails at `7cf65ca`. Hostile read: a manifest that omits `allowed_transitions` refuses to certify (fail-closed); the schema makes `state_transition` mandatory with both fields.
+- **Outcome:** APPROVED
+- **Conditions:** none.
+- **Not covered:** as MS-3.
+- **Signed:** Michael Samuel · 2026-08-26
+
+### Re-review — MS-7 (CL-6)
+
+- **Finding:** MS-7 — The checker accepts incompatible decision combinations and caller-asserted checker versions.
+- **Artefacts checked:** `certificate_checker.py` (`_ALLOWED_DECISION_ACTIONS` closed table; `_c_decision_consistency`; `_c_version` hard-equality against this checker's own `CHECKER_VERSION = "chk-1.0"`); negative cases `_incompatible_decision`, `_caller_asserted_checker` — commit `7cf65ca`.
+- **Method:** suite re-run at `7cf65ca` (pass). Both exploits reproduced at `9b0807d`: an `authorised_slate` under `evidence_indeterminate`, and a caller-asserted `checker_version` matching a doctored manifest, each return **PASS** on the pre-fix checker; both fail at `7cf65ca`. Hostile read: unknown terminal decisions yield an empty allowed-set and fail; WY-3's addition also rejects empty or partial `allowed_versions` maps.
+- **Outcome:** APPROVED WITH CONDITIONS
+- **Conditions:** shares the single MS-3 condition (the `_c_schema`↔`_c_version` interlock comment); no separate action.
+- **Not covered:** as MS-3.
+- **Signed:** Michael Samuel · 2026-08-26
+
+### Re-review — MS-8 (CL-6)
+
+- **Finding:** MS-8 — `check(..., checks=[])` bypasses every check and returns PASS.
+- **Artefacts checked:** `certificate_checker.py` (public `check(cert, ctx)` with no override parameter; `_run_checks` fail-closed on an empty list and on exceptions) — commit `7cf65ca`.
+- **Method:** bypass reproduced at `9b0807d`: the pre-fix public signature is `check(cert, ctx, checks=None)` and `check(cert, ctx, checks=[])` returns **PASS**. At `7cf65ca` the public API has no such parameter, `_run_checks([])` returns FAIL_MALFORMED ("refusing to certify"), and any in-check exception returns FAIL_MALFORMED rather than an accidental PASS.
+- **Outcome:** APPROVED
+- **Conditions:** none. Observation for the record, no action: `_run_checks` remains importable as a private function (unavoidable in Python); it is documented internal-only and outside the finding as written.
+- **Not covered:** as MS-3.
+- **Signed:** Michael Samuel · 2026-08-26
+
+### Re-review — MS-9 (CL-14)
+
+- **Finding:** MS-9 — Conversation route silently ignores or reverses constraints (price ignored; unrequested step-free added; negated accessibility read as requiring step-free).
+- **Artefacts checked:** `apps/public-discovery/server/intent.py` (`NEG_ACCESS_RE`, `PRICE_RE`, `unsupported` surface, scenario resolution only when step-free was actually requested); four adversarial cases in `test_conversation.py` — commit `7cf65ca`.
+- **Method:** suite re-run at `7cf65ca` (pass). At `9b0807d` the fix is provably absent: the pre-fix parser has no `unsupported` surface at all (transplanted suite fails on `KeyError: 'unsupported'`). Hostile read: negations set access to None and are surfaced, never reversed; prices surface as unsupported, never dropped; `confident` requires zero unsupported items, so both route to clarification; the injection case is closed structurally (scenarios resolve only when step-free was requested).
+- **Outcome:** APPROVED WITH CONDITIONS
+- **Conditions:** add the single word "inaccessible" to the negation pattern (currently it falls through to a safe clarification rather than a reversal — fail-safe, but incomplete).
+- **Not covered:** RATIFY-09-05 (claim vocabulary and rendering obligations); the complete-decision-digest comparison requirement in your condition 6 remains part of the §09 joint work.
+- **Signed:** Michael Samuel · 2026-08-26
+
