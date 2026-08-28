@@ -1,0 +1,31 @@
+# S1/S1b engine v0.1 — first run on real data, and what it found
+
+**Date:** 27 August 2026 · **Deliverables:** `s1_engine_v0_1.py` (`d563b305…`), `LINEAGE_PACK_WORKED_EXAMPLE_v0_1.json` (`d8dd9e3f…`), `s1_run_hartlepool_20260827.zip` (`7432fa0b…` — records, summaries, DST demo, RUN_RECEIPT with input/output hashes)
+**Status:** engine PROPOSED v0.1; run on **DEV-EXPOSED** census2 only (H3 guard built in and demonstrated: the engine refuses any path matching the sealed vintage by name). Inheritance applied under the **M-06 candidate policy v0.2, UNRATIFIED** — every inherited value carries that label in its lineage row; ratification flips the label, not the code.
+**What this is for:** the Item-1 commitment to Fahmi (S1/S1b by 10 Sep) now rests on running code proven against real bytes; his Item-4 worked example ships with this memo, as offered "this week".
+
+## 1. What the engine does (M-09/M-10 first executable)
+
+Stage A folds raw RPDE pages to current state (last-wins per id, tombstones removed, per-item provenance retained, page licences read from the envelope, RPDE order violations counted). Stage B resolves each child's `superEvent` and classifies **every property, field by field**: `ON_CHILD`, `INHERITED` (whole-value only — no deep merge, per M-06), `CHILD_OVERRIDES`, `BOTH_EQUAL`, `SOURCE_ABSENT`, or `UNRESOLVABLE_PARENT_UNAVAILABLE`; parents absent from the sample are classed `PARENT_NOT_IN_SAMPLE` — a corpus-boundary fact, never feed absence. Stage C expands only **READY full Schedules** (all six fields present *and* `@type` ≠ `PartialSchedule`, per your attested OA-1 rule), timezone-aware, with explicit-child collision flagging (a `(series, start-minute)` heuristic, flagged as such — this feed publishes no idTemplate). Everything lands in a hash-bound `RUN_RECEIPT.json`; the run is deterministic, no seed, no wall-clock in outputs.
+
+## 2. Results on real data (Active Hartlepool parents+children, plus Leeds children as the boundary case)
+
+**S1 — inheritance works, at scale, on the exact problem Wesley's manifest names.** 1,381 children processed: **898 RESOLVED** to in-sample parents, 483 `PARENT_NOT_IN_SAMPLE` (the Leeds children staged without their parents — the boundary classification doing its job). From the 898: **898 locations, names, offers, categories and urls inherited; 618 organizers; 697 attendeeInstructions** — each with a rule id and the parent's source page in its lineage. The worked example is one of them: child `…/30035397` had *no location of its own* and now carries **Mill House Leisure Centre (54.6893, −1.2157)** inherited from its SessionSeries parent, traceable to the exact retained raw pages by hash. This is Wesley's 1.97M no-coordinate records in miniature — the S1 run over his corpus is what converts them into locatable, borough-assignable records.
+
+**S1b — a genuine empirical finding, not a bug.** Across **six publishers and 6,455 real schedules** (Hartlepool, Better, Bookwhen, Tower Hamlets Be Well, Birmingham City Council): **every single one is typed `PartialSchedule`; zero full `Schedule` objects exist in the sample.** Under your attested OA-1 verdict (never extrapolate a PartialSchedule under the examined guidance), the engine correctly expanded none of them — 734/734 Hartlepool schedules refused with a typed reason. The consequence is a finding worth a paragraph in the report and a row in M-23: *in the observed corpus, the explicit ScheduledSession children are the occurrence layer; schedule expansion is empirically inapplicable unless the team records a deliberate decision to treat structurally-complete PartialSchedules as expandable* — that is an `M05-D` family decision for the meeting, with the conservative default (don't) currently in force and consistent with both guidance and data. The expansion machinery itself is proven on a clearly-labelled synthetic full Schedule spanning the 25 Oct 2026 clock change: 18:00 Europe/London renders `17:00Z` before the change and `18:00Z` after — DST handled exactly as RFC 5545 requires.
+
+## 3. The worked lineage pack (Fahmi's Item 4, delivered)
+
+`LINEAGE_PACK_WORKED_EXAMPLE_v0_1.json` instantiates the seven-part format from the response document, on real data: a DEMO decision with digest; one supported candidate; three evidence rows including an honest **U** (`has-activity-classification`, mechanism `SOURCE_ABSENT` on child *and* resolved parent); lineage rows tracing the start time to the child's JSON path and the venue to the parent's page; receipts binding both to retained raw files (whose sha256s sit in the RUN_RECEIPT); versions incl. the unratified-policy label; and a limits block that forbids exactly the over-readings the collection cannot support (2-page breadth sample ⇒ no bounded non-matches; no borough claim). An assessor can reconstruct every value without seeing the engine — which is the definition of the pack.
+
+## 4. What remains for the 10 Sep delivery (scoped, in order)
+
+1. Receive Wesley's delivery per the receipt protocol (vintage question outstanding — if it's the clean one, it is sealed, and the run happens on H1/H2).
+2. Scale pass: run this engine over the full H1 `records.jsonl`-equivalent (fold from raw pages or consume his records directly — decide with him at the S0 co-design; the engine folds raw natively).
+3. B0 unacceptable-decision rate on H1-DEV (Fahmi Item 2) — first number out of the scaled run.
+4. Cross-kind extension: FacilityUse→Slot classification (M06-D-07 reading first — your gate), EventSeries grandparents (M06-D-08) currently classified but not chased.
+5. Golden-fixture derivations (M-07) can now be cut from real engine outputs.
+
+## 5. Honest boundaries
+
+Six publishers ≠ the corpus: the PartialSchedule finding is strong (6,455/6,455) but must be restated over the full delivery before it goes in the report as a corpus-level claim. The explicit-collision check is a flagged heuristic pending idTemplate evidence. The M-06 policy remains a candidate until the team ratifies — nothing here closes M-09/M-10, which need review and acceptance like everything else; what exists tonight is a working, fail-closed, provenance-carrying engine and the first real reconstruction numbers of the project.
