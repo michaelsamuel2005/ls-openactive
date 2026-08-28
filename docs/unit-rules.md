@@ -11,6 +11,8 @@
 | Individual reflective account | **20%** | LO1, LO2, LO5 | **max 2 pages A4, min 500 words** (see §4) |
 | Group presentation | **20%** | LO2, LO5 | **15 minutes, LIVE ONLINE over Teams**, late-Aug window |
 
+> **DEADLINE CORRECTION 2 (Michael, 28 Aug 2026, supersedes the note below):** written submissions - the group report AND each individual reflective account - are due **Thursday 18 September 2026, 23:59 (Blackboard)**. The **group presentation** is **Monday 22 September 2026, 11:00**. The 22 Sep 23:59 figure below conflated the two. Evidence: Michael's attestation 28 Aug; Blackboard screenshot to be filed alongside.
+
 > **DEADLINE CORRECTION (Michael, 28 Aug 2026):** the final submission deadline is **22 September 2026, 23:59 (Blackboard)**. Any 4 September date in this file is stale and superseded by this note. Evidence: Blackboard as checked by Michael, 27 Aug 2026; screenshot to be filed alongside. All planning uses 22 Sep 23:59. (Note recorded AI-assisted; the correction itself is Michael's attestation.)
 
 - **Submission: Dissertation portfolio via Blackboard, 1pm Friday 4 September 2026.** (Date now confirmed — no longer "working assumption". Note the 1pm time.)
