@@ -36,3 +36,14 @@
 * **Not covered:** no threshold is set for how many deferrals the route can absorb before it stops being a real adjudication route.
 * **Reference:** RATIFY-19-07
 * **Signed:** Fahmi Alshahabi · 2026-08-29
+
+### SIGN-OFF — Clarence's eligibility once P0/P1/P2 became the treatment
+
+* **Claim ID:** C-a
+* **Artefacts checked:** Michael's reply of 2026-08-29, docs/evaluation/estimand-registry.yaml §6, this file's assignments table — branch `fahmi/proposal-v2-sections-6-7`, commit `4605587`
+* **Method:** read Michael's 2026-08-29 confirmation that the arms are Clarence's presentation conditions against the C2 recusal already applied to Michael for his own engine, to determine whether Clarence's authorship creates a conflict for usefulness.
+* **Outcome:** APPROVED WITH CONDITIONS — Clarence recused from usefulness; Michael assesses it
+* **Conditions:** recusal is scoped to usefulness only, because that's the construct carrying the primary; Michael assesses in his place.
+* **Not covered:** Clarence still assesses relevance and evidence-support while authoring the arms; and Michael now holds five roles.
+* **Reference:** RATIFY-19-07
+* **Signed:** Fahmi Alshahabi · 2026-08-29
