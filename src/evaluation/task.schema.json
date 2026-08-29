@@ -46,7 +46,7 @@
     "split": {
       "type": "string",
       "enum": ["DEV", "CAL_MODEL", "CAL_RISK", "LOCKED"],
-      "description": "Partition assignment (F-07 §5). Assigned by grouped random assignment on task_template_id, seeded, before freeze."
+      "description": "Partition assignment (F-07 §5). Assigned by grouped random assignment on task_template_id, seeded, before freeze. ROBUST removed 2026-08-29: it contradicted PD-6, since a paraphrase shares its parent's template and a template sits in exactly one split. Robustness tasks sit in their parent's split."
     },
     "query_text": {
       "type": "string",
