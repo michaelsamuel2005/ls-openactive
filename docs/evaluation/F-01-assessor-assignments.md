@@ -25,3 +25,14 @@
 * **Not covered:** This doesn't rule on whether `Q` is collected at all, which is pending Clarence's answer on whether P0/P1/P2 differ in ordering.
 * **Reference:** RATIFY-19-03
 * **Signed:** Fahmi Alshahabi · 2026-08-29
+
+### SIGN-OFF — OPEN-2, alternate arbiter appointment
+
+* **Claim ID:** OPEN-2
+* **Artefacts checked:** docs/evaluation/eligibility-matrix-feasibility.md §2, this file's assignments table — branch `fahmi/proposal-v2-sections-6-7`, commit `4605587`
+* **Method:** checked the eligibility matrix and assignments table for an alternate arbiter who is eligible for the constructs in question. Wesley is an assessor on all three constructs, so there is no item where he is eligible to arbitrate without already being a party to it.
+* **Outcome:** APPROVED WITH CONDITIONS — option 2a
+* **Conditions:** the alternate covers primary-arbiter unavailability by deferring the item, not arbitrating it; deferred items are reported as unresolved.
+* **Not covered:** no threshold is set for how many deferrals the route can absorb before it stops being a real adjudication route.
+* **Reference:** RATIFY-19-07
+* **Signed:** Fahmi Alshahabi · 2026-08-29
