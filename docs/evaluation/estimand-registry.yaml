@@ -1,4 +1,4 @@
-```yaml
+
 # =====================================================================
 # F-02 — Estimand and Outcome Registry
 # Project: Evidence-Bounded Conversational Activity Discovery (London Sport 1)
@@ -511,4 +511,4 @@ declared_out_of_scope:
 #   Michael accepted the non-author reproducer role on 29 Aug 2026
 #   (mechanical re-execution on frozen inputs plus hash comparison, by
 #   17 Sep). The deliverable is revived and is no longer out of scope.
-```
+
