@@ -1,3 +1,4 @@
+```yaml
 # =====================================================================
 # F-02 — Estimand and Outcome Registry
 # Project: Evidence-Bounded Conversational Activity Discovery (London Sport 1)
@@ -62,14 +63,11 @@ estimands:
 
   U:
     name: useful_supported_decision_coverage
-    # TODO-FAHMI: rewrite this definition in your own words. The structural
-    # point it must now carry: the supported-decision denominator is fixed
-    # across arms by the shared DecisionEnvelope; only the assessor's
-    # usefulness judgment varies. U is therefore a communication-side
-    # estimand, not a coverage-of-emission estimand (that is K).
     definition: >
-      Proportion of tasks receiving an independently judged relevant,
-      evidence-supported, useful decision. The H-P coverage component.
+      The proportion of tasks with a supported decision that receive an
+      assessor-judged useful label, where the denominator is fixed across
+      arms by the shared DecisionEnvelope and only the usefulness judgment
+      varies; U is communication-side, while K carries emission coverage.
     unit: task
     role: H-P_primary_endpoint   # single primary under the 2026-08-29 restatement
     requires_human_judgment: [usefulness]   # soft_relevance removed: Q is no longer an H-P conjunct
@@ -329,35 +327,27 @@ rules:
 decisions:
 
   # ===================================================================
-  # TODO-FAHMI — H-P restatement. WRITE THIS BLOCK IN YOUR OWN WORDS.
-  # This is the confirmatory decision rule you defend orally; it is not
-  # scaffolded for you. The decisions below are the ones you locked on
-  # 2026-08-29 and are recorded here as inputs, not as wording:
-  #   A1(i)  one designated arm vs P0, no gatekeeping, no multiplicity
-  #   A2     P0 is the baseline; three arms exist, one enters the primary
-  #   A5(a)  one adjudicated usefulness label per template-arm
-  #   unit   paired within template; q counts templates, not task rows
-  #   test   one-sided, H0: delta-U <= 0, alpha = .05
-  #   delta  F-06 design-derived MDE. DECLARED, NOT A PASS CONDITION.
-  #          (Gating on delta as well as the test halves power against
-  #          delta itself and cannot be fixed by adding templates.)
-  #   gate   L_decision risk gate is NOT a conjunct. Absolute
-  #          certification of the single engine, reported separately.
-  #   scope  no non-system comparator anywhere in H-P.
-  #   B0     Michael's unacceptable-decision rate is a decision-level
-  #          anchor. It is NOT this baseline. Do not conflate.
-  # Designated arm stays UNFILLED until Clarence returns P0/P1/P2
-  # definitions; fix it in a dated record before outcome inspection.
   # ===================================================================
   H-P:
     status: sole_unconditional_confirmatory
     restated: 2026-08-29
     analysis_primacy: design_based_paired_design_weighted   # per locked Section 2; PENDING CA-01.A8 team ratification; Packet 11 D23 conflicts
-    primary_endpoint: TODO-FAHMI
-    primary_contrast: TODO-FAHMI          # [designated arm] vs P0
+    primary_endpoint: >
+      The primary endpoint is binary usefulness, assessor-judged under
+      F-05 §2, recorded as an adjudicated label with one label per
+      template-arm.
+    primary_contrast: >
+      The primary contrast is [PENDING CLARENCE] versus P0, with the
+      designation fixed in a dated record before outcome inspection.
     designated_arm: PENDING-CLARENCE
-    decision_rule: TODO-FAHMI
-    delta_role: TODO-FAHMI                # declared sensitivity, not a threshold
+    decision_rule: >
+      A one-sided test of H0: the paired within-template usefulness
+      difference is at or below zero, at alpha = 0.05. q counts
+      templates, not task rows.
+    delta_role: >
+      δ comes from F-06 and is the effect detected at 0.80 power.
+      It is reported alongside the result and is not a pass condition,
+      because gating on it would halve power against δ itself.
     not_conjuncts: [Q_non_inferiority, L_decision_risk_gate]
     superseded_2026_08_29:
       - U_superiority_over_strongest_eligible_baseline   # "strongest eligible" void: comparator is designated, not selected
@@ -521,3 +511,4 @@ declared_out_of_scope:
 #   Michael accepted the non-author reproducer role on 29 Aug 2026
 #   (mechanical re-execution on frozen inputs plus hash comparison, by
 #   17 Sep). The deliverable is revived and is no longer out of scope.
+```
