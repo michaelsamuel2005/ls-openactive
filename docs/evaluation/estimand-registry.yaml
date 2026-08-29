@@ -3,7 +3,12 @@
 # Project: Evidence-Bounded Conversational Activity Discovery (London Sport 1)
 # Owner: Fahmi Alshahabi (benchmark / statistics / evaluation stream)
 # Version: 0.1.0-provisional
-# Date: 2026-08-07
+# Date: 2026-08-29
+# Amendment 2026-08-29: arms are presentation-only conditions over one
+#   shared terminal DecisionEnvelope (Michael, 29 Aug: no recommender
+#   exists in any branch). Decision-level estimands are therefore
+#   invariant by construction and cannot carry a between-arm contrast.
+#   §6 H-P restated; §10 clean-room entry deleted (deliverable revived).
 # Status: PROVISIONAL — drafted against the CA-01 vocabulary as permitted
 #   by CA-01 Part 3.4. Becomes reviewable for freeze only after the
 #   CA-01 amendments land in the canonical protocols and RATIFY-19-04
@@ -48,21 +53,31 @@ estimands:
     weights:
       design_weights_v: RATIFY
     permitted_claims: [coverage_within_declared_universe]
-    prohibited_claims: [population_coverage, londoner_behaviour]
+    prohibited_claims: [population_coverage, londoner_behaviour, between_arm_difference]
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Arms share one terminal
+      DecisionEnvelope, so emission is identical across arms. Reported once
+      as a system property; never a between-arm contrast.
     source: [work_package_10.1, CA-01.A1]
 
   U:
     name: useful_supported_decision_coverage
+    # TODO-FAHMI: rewrite this definition in your own words. The structural
+    # point it must now carry: the supported-decision denominator is fixed
+    # across arms by the shared DecisionEnvelope; only the assessor's
+    # usefulness judgment varies. U is therefore a communication-side
+    # estimand, not a coverage-of-emission estimand (that is K).
     definition: >
       Proportion of tasks receiving an independently judged relevant,
       evidence-supported, useful decision. The H-P coverage component.
     unit: task
-    role: H-P_superiority_quantity
-    requires_human_judgment: [usefulness, soft_relevance]
+    role: H-P_primary_endpoint   # single primary under the 2026-08-29 restatement
+    requires_human_judgment: [usefulness]   # soft_relevance removed: Q is no longer an H-P conjunct
     gold_source: independent_reference_route   # never the treatment verifier
+    analysis_label: adjudicated_label_per_template_arm   # A5(a); Michael arbitrates
     weights:
       design_weights_v: RATIFY
-    superiority_margin: RATIFY   # RATIFY-10-xx practical margin, partner-derived
+    superiority_margin: RATIFY   # design-derived last-resort bound; partner trigger of 26 Aug 2026 passed unanswered. Value from F-06. NOT a pass threshold - see §6.
     source: [work_package_10.1, CA-01.A1]
 
   Q:
@@ -74,8 +89,14 @@ estimands:
       ranking (CA-01.A1).
     unit: task
     metric_family: nDCG_or_equivalent   # exact metric: RATIFY
-    depth: RATIFY
+    depth: RATIFY   # first-screen display depth - pending Clarence
     non_inferiority_margin: RATIFY
+    status_2026_08_29: >
+      HELD, pending Clarence's definitions of P0/P1/P2. If the conditions are
+      identical in ordering and display depth, Q is invariant by construction
+      and demotes alongside K. If they differ, Q is a secondary estimative
+      outcome and is not an H-P conjunct either way.
+    inferential_status: estimative_or_invariant_pending_clarence
     source: [work_package_10.1, integrated_proposal_s3]
 
   R_evidence:
@@ -97,6 +118,11 @@ estimands:
     conditioning: emitted_only
     loss: L_decision
     risk_ceiling: RATIFY   # public false-assurance/harm trade-off — Fahmi cannot decide alone (work package §19)
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Identical terminal decisions
+      across arms. Retained as an ABSOLUTE certification of the single
+      certified engine against the ratified ceiling; never a between-arm
+      contrast, and no longer an H-P conjunct.
     source: [work_package_10.1, CA-01.A2]
 
   H_evidence:
@@ -115,6 +141,9 @@ estimands:
     definition: "same_as_H_evidence_with_loss: L_decision"
     unit: task
     computed_directly: true
+    invariance: >
+      INVARIANT BY CONSTRUCTION (2026-08-29). Reported once; never a
+      between-arm contrast.
     source: [work_package_10.1, CA-01.A5]
 
 # ---------------------------------------------------------------------
@@ -299,14 +328,45 @@ rules:
 # ---------------------------------------------------------------------
 decisions:
 
+  # ===================================================================
+  # TODO-FAHMI — H-P restatement. WRITE THIS BLOCK IN YOUR OWN WORDS.
+  # This is the confirmatory decision rule you defend orally; it is not
+  # scaffolded for you. The decisions below are the ones you locked on
+  # 2026-08-29 and are recorded here as inputs, not as wording:
+  #   A1(i)  one designated arm vs P0, no gatekeeping, no multiplicity
+  #   A2     P0 is the baseline; three arms exist, one enters the primary
+  #   A5(a)  one adjudicated usefulness label per template-arm
+  #   unit   paired within template; q counts templates, not task rows
+  #   test   one-sided, H0: delta-U <= 0, alpha = .05
+  #   delta  F-06 design-derived MDE. DECLARED, NOT A PASS CONDITION.
+  #          (Gating on delta as well as the test halves power against
+  #          delta itself and cannot be fixed by adding templates.)
+  #   gate   L_decision risk gate is NOT a conjunct. Absolute
+  #          certification of the single engine, reported separately.
+  #   scope  no non-system comparator anywhere in H-P.
+  #   B0     Michael's unacceptable-decision rate is a decision-level
+  #          anchor. It is NOT this baseline. Do not conflate.
+  # Designated arm stays UNFILLED until Clarence returns P0/P1/P2
+  # definitions; fix it in a dated record before outcome inspection.
+  # ===================================================================
   H-P:
     status: sole_unconditional_confirmatory
+    restated: 2026-08-29
     analysis_primacy: design_based_paired_design_weighted   # per locked Section 2; PENDING CA-01.A8 team ratification; Packet 11 D23 conflicts
-    conjuncts:                       # all must pass; no compensation
-      - U_superiority_over_strongest_eligible_baseline: {margin: RATIFY}
-      - Q_non_inferiority: {margin: RATIFY}
-      - L_decision_risk_gate: {ceiling: RATIFY, method: LTT_RCPS_if_valid_else_empirical_curve}   # CA-01.A4
-    comparator_selection: DEV_only_strongest_eligible
+    primary_endpoint: TODO-FAHMI
+    primary_contrast: TODO-FAHMI          # [designated arm] vs P0
+    designated_arm: PENDING-CLARENCE
+    decision_rule: TODO-FAHMI
+    delta_role: TODO-FAHMI                # declared sensitivity, not a threshold
+    not_conjuncts: [Q_non_inferiority, L_decision_risk_gate]
+    superseded_2026_08_29:
+      - U_superiority_over_strongest_eligible_baseline   # "strongest eligible" void: comparator is designated, not selected
+      - Q_non_inferiority                                # Q invariant or estimative; pending Clarence
+      - L_decision_risk_gate                             # invariant by construction; now absolute certification
+    comparator_selection: designated_before_outcome_inspection   # was DEV_only_strongest_eligible
+    limitations:
+      - blinding_impossible_by_construction   # arms differ only in presentation; the presentation is the label
+      - arm_author_assessor_conflict_open     # Clarence authors P0/P1/P2 and assesses all three constructs; C6 at risk if recused
 
   H-E:
     status: readiness_gated
@@ -446,21 +506,18 @@ declared_out_of_scope:
     reason: >
       No recommender was built. The acquisition stream delivered harvest
       and snapshot functionality only; there is no production EVOI
-      recommender artefact to review.
+      recommender artefact to review. Confirmed by Michael on 2026-08-29:
+      no recommender exists in any branch, so no superiority comparator is
+      available and the evaluation is an evidence-communication comparison
+      across presentation conditions plus a baseline.
     consequence: >
       No claim is made about recommender quality, calibration or behaviour.
       The evaluation-side recommender estimands remain defined but unused.
 
-  clean_room_reproduction:
-    declared: 2026-08-19
-    scope: >
-      Independent clean-room reproduction of the analysis by a non-author is
-      not performed. The run registry and claim-linkage matrix are retained.
-    reason: >
-      Clean-room reproduction requires a named non-author reproducer. The
-      assessor-eligibility matrix that would make that assignment was raised
-      but never ratified, so no eligible reproducer was ever assigned.
-    consequence: >
-      Reproducibility is evidenced by the retained run registry, seeds,
-      hashes and claim-linkage matrix rather than by an executed independent
-      reproduction. No claim of independent reproduction is made.
+# clean_room_reproduction: DELETED 2026-08-29.
+#   The entry claimed no eligible reproducer was ever assigned because the
+#   assessor-eligibility matrix was never ratified. That reason was false:
+#   the matrix was ratified on 19 Aug 2026 (RATIFY-19-03 / RATIFY-19-07).
+#   Michael accepted the non-author reproducer role on 29 Aug 2026
+#   (mechanical re-execution on frozen inputs plus hash comparison, by
+#   17 Sep). The deliverable is revived and is no longer out of scope.
