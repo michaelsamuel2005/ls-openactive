@@ -47,3 +47,14 @@
 * **Not covered:** Clarence still assesses relevance and evidence-support while authoring the arms; and Michael now holds five roles.
 * **Reference:** RATIFY-19-07
 * **Signed:** Fahmi Alshahabi · 2026-08-29
+
+### SIGN-OFF — C6 consequence on the usefulness construct
+
+* **Claim ID:** C6-usefulness
+* **Artefacts checked:** this file's assignments table, standing constraint C6 — branch `fahmi/proposal-v2-sections-6-7`, commit `4605587`
+* **Method:** checked the assignments table against C6 (two eligible assessors plus an adjudication route per locked construct) and found usefulness satisfies the first half and not the second.
+* **Outcome:** REVIEWED — declared weakness, not a ruling
+* **Conditions:** usefulness has two assessors, Wesley and Michael, and no arbiter, because Michael can't arbitrate what he assesses and everyone else is recused. Adjudication is deferral only, per 2a.
+* **Not covered:** whether a confirmatory primary can rest on a construct with no adjudication route. Note the F-06 result of 29 Aug bears on this and isn't actioned yet.
+* **Reference:** RATIFY-19-07
+* **Signed:** Fahmi Alshahabi · 2026-08-29
