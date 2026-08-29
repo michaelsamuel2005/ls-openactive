@@ -45,7 +45,7 @@
     },
     "split": {
       "type": "string",
-      "enum": ["DEV", "CAL_MODEL", "CAL_RISK", "LOCKED", "ROBUST"],
+      "enum": ["DEV", "CAL_MODEL", "CAL_RISK", "LOCKED"],
       "description": "Partition assignment (F-07 §5). Assigned by grouped random assignment on task_template_id, seeded, before freeze."
     },
     "query_text": {
@@ -95,18 +95,13 @@
     "origin": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["lsoa_code", "deprivation_tertile"],
+      "required": ["borough"],
       "properties": {
-        "lsoa_code": {
+        "borough": {
           "type": "string",
-          "pattern": "^E[0-9]{8}$",
-          "description": "2021 LSOA code for the sampled origin."
-        },
-        "deprivation_tertile": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 3,
-          "description": "London-specific deprivation tertile. Ecological context only; never an individual-level claim."
+          "minLength": 3,
+          "maxLength": 60,
+          "description": "London borough of the sampled origin, spelled exactly as in the frozen geo reference. Amended from LSOA/IMD origin 2026-08-29: no LSOA or IMD file exists on any branch, and deprivation_tertile fed only F-12 equity analysis, which is out of scope."
         }
       }
     },
