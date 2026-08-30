@@ -1,7 +1,19 @@
 {
   "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md §13 (C-17) resolving C-BLOCK-06. NOT authorship evidence. Fahmi owns estimands/analysis; Clarence supplies the frozen builds/manifests. Every condition in a family shares the SAME terminal DecisionEnvelope per task — only the interface differs — so an interface effect is not confounded with a backend difference; L_reliance binds to that shared decision (CA-1 / C-BLOCK-15).",
-  "version": "0.1.0-PROPOSED",
+  "version": "0.2.0-PROPOSED",
   "status": "PROPOSED",
+  "judgment_units": {
+    "_note": "C-17 successor (2026-08-30). Records as a MANIFEST FACT what was previously only a design intention, so Fahmi can size the benchmark against it (Michael, 30 Aug). Confirmed by Clarence: a P2 judgment unit is the multi-turn EPISODE.",
+    "P0": "single_response",
+    "P1": "single_response",
+    "P2": "episode",
+    "episode_definition": "One P2 item is the whole interaction from opening query to terminal decision, including any clarification or query-repair turns. The assessor judges FINAL-STATE usefulness given the conversation — not per-turn scoring.",
+    "rationale": "P2 exists to test clarification and query repair. Judging it per response would remove the only thing that distinguishes it from P1, so the P2-vs-P1 contrast would stop measuring what it is for.",
+    "sizing_consequence": "Episode items read at roughly 5-8 minutes versus 2-3 for a single response, so P2 dominates judging cost. This supports cutting template count rather than rushing judgments.",
+    "codebook_requirement": "F-05 must define usefulness at the EPISODE level (final-state usefulness given the conversation). Confirm the codebook covers this before the pilot, or amend it.",
+    "confirmed_by": "Clarence (applications stream), 2026-08-30",
+    "supersedes": "0.1.0-PROPOSED (no judgment-unit field; unit was unrecorded)"
+  },
   "principle": "Within a surface family, all conditions resolve the identical terminal DecisionEnvelope per task; only presentation/interaction differs (C-BLOCK-06). validate_conditions.py checks projected-digest equality across the family.",
 
   "public_conditions": [
