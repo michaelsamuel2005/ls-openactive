@@ -1,6 +1,6 @@
 {
   "_comment": "AI-ASSISTED SCAFFOLD from CLARENCE_ZHEN_JIN_TAN_SPECIALISED_WORK_PACKAGE.md §13 (C-17) resolving C-BLOCK-06. NOT authorship evidence. Fahmi owns estimands/analysis; Clarence supplies the frozen builds/manifests. Every condition in a family shares the SAME terminal DecisionEnvelope per task — only the interface differs — so an interface effect is not confounded with a backend difference; L_reliance binds to that shared decision (CA-1 / C-BLOCK-15).",
-  "version": "0.2.0-PROPOSED",
+  "version": "0.2.1-PROPOSED",
   "status": "PROPOSED",
   "judgment_units": {
     "_note": "C-17 successor (2026-08-30). Records as a MANIFEST FACT what was previously only a design intention, so Fahmi can size the benchmark against it (Michael, 30 Aug). Confirmed by Clarence: a P2 judgment unit is the multi-turn EPISODE.",
@@ -57,7 +57,8 @@
   "families": { "public": ["P0", "P1", "P2"], "staff": ["W0", "W1", "W1-NA"] },
 
   "frozen_vintage": "2026-06-30",
-  "vintage_note": "All conditions and tasks run at this single frozen vintage; validate_conditions.py fails if any task resolves an envelope at a different vintage. Nothing may run two conditions at different vintages (Fahmi review, 2026-08).",
+  "frozen_vintage_role": "DEMONSTRATION VALUE — NOT AN OPERATIVE FREEZE. v0.2.1 successor (Michael byte-check, 2026-09-01): 2026-06-30 predates every real harvest and belongs to the demonstration fixtures, like task_set_role and the origin/publisher placeholders. It RE-FREEZES to the ratified evaluation vintage when the >=20-task benchmark set is minted; until then no vintage-dependent result may be reported from it.",
+  "vintage_note": "All conditions and tasks run at this single frozen vintage; validate_conditions.py fails if any task resolves an envelope at a different vintage. Nothing may run two conditions at different vintages (Fahmi review, 2026-08). The mechanism is operative; the VALUE is a demonstration placeholder — see frozen_vintage_role.",
   "origin_publisher_note": "origin + publisher are recorded per task so leakage-safe splits (PD-6) and CAL-RISK clustering can be built over them (Fahmi review). Values here are DEMONSTRATION placeholders; real feed origins/publishers attach when the benchmark set is minted.",
 
   "task_set_role": "demonstration",
