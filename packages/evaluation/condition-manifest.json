@@ -14,6 +14,18 @@
     "confirmed_by": "Clarence (applications stream), 2026-08-30",
     "supersedes": "0.1.0-PROPOSED (no judgment-unit field; unit was unrecorded)"
   },
+  "first_screen_depth": {
+    "_note": "Read off the interface, not chosen (Michael, 1 Sep: judged depth equals experienced depth, so the number comes from the interface). Measured on branch clarence/c-block-05.",
+    "value": "full_certified_slate",
+    "cap": null,
+    "pagination": false,
+    "identical_across_arms": true,
+    "method": "results.html iterates the whole candidate list ({% for c in v.candidates %}) with no slice or limit; render.build_view applies no truncation; rendered count equals certified slate length in every scenario; no next-page / show-more / load-more control exists in the served HTML.",
+    "measured": { "supported": 2, "indeterminate": 0, "no_match": 0, "note": "current demonstration fixtures; the slate length is whatever the engine certifies per task" },
+    "consequence_for_judging": "Experienced depth = slate length N, unbounded. So judged depth must be the full slate per task, not a fixed top-k. Judging cost therefore varies with slate length once the >=20-task benchmark is minted with realistic slates.",
+    "if_a_cap_is_wanted": "A fixed top-N would have to be implemented in the interface first (it does not exist today) and must be IDENTICAL across P0/P1/P2 to preserve the C-BLOCK-06 confound-proof. That would be a design change, not a reporting choice.",
+    "recorded_by": "Clarence (applications stream), 2026-09-01"
+  },
   "principle": "Within a surface family, all conditions resolve the identical terminal DecisionEnvelope per task; only presentation/interaction differs (C-BLOCK-06). validate_conditions.py checks projected-digest equality across the family.",
 
   "public_conditions": [
