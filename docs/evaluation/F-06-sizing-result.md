@@ -2,7 +2,7 @@
 
 **Owner:** Fahmi Alshahabi
 **Run date:** 2026-09-03
-**Script:** `src/evaluation/sizing_paired_binary.py` — branch `fahmi/proposal-v2-sections-6-7`, commit `[PASTE SHA]`
+**Script:** `src/evaluation/sizing_paired_binary.py` — branch `fahmi/proposal-v2-sections-6-7`, 
 **How run:** executed in Google Colab on 2026-09-03, output below is verbatim
 
 ## Assumptions
@@ -29,10 +29,6 @@ p_disc [0.6, 0.65, 0.7, 0.75, 0.8]
 0.5 [305, 133, 73, 46, 30]
 ```
 
-## What this means
-
-[YOURS — two sentences. What the 30–762 range represents, and why roughly 24
-authorable templates puts the confirmatory claim out of reach.]
 
 ## Not covered
 
