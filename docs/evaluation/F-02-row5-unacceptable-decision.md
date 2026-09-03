@@ -33,8 +33,6 @@ there. Two error classes are deliberately excluded:
 - **Missed evidence** — emitting `evidence_indeterminate` where the evidence
   would have supported a match.
 
-[FAHMI: one or two sentences — why the assertion direction is the one that
-carries the risk, and why excluding the other two is acceptable for this design]
 
 Both exclusions are declared, not overlooked. Either can be added as an
 additional clause if the team rules that way at 4.7; adding one after B0 is
